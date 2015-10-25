@@ -12,15 +12,16 @@ html {
 body {
     margin: 0;
 }
+
 .letra{
-    font-family: "Coustard",sans-serif;
+    font-family: "Architects",sans-serif;
 }
 .letra2{
-    font-family: "Coustard",sans-serif;
+    font-family: "Architects",sans-serif;
     font-size: larger;
 }
 .letra3{
-    font-family: "Coustard",sans-serif;
+    font-family: "Architects",sans-serif;
 }
 
 article,
@@ -284,7 +285,7 @@ th {
 
 @font-face{
     font-family: 'Architects';
-    src: url('../fonts/Architects');
+    src: url('../css/fonts/Architects');
 }
 .glyphicon {
     position: relative;

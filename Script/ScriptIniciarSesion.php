@@ -1,5 +1,4 @@
 <?php
-
 require '../Controlador/ControlManejoInicioSesion.php';
 
 $controlador = new ControlManejoInicioSesion();
@@ -34,10 +33,11 @@ if (empty($_SESSION)) {
         }
         if ($_GET['action'] == 'home') {
 
-            ;
+            echo"a";
             //  return $controlador->Home();
         }
     }
-    //   return $controlador->Home();
+    echo"b";
+       return $controlador->Home();
 }
 ?>
