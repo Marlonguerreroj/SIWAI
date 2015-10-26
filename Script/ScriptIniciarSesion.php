@@ -15,6 +15,7 @@ if (empty($_SESSION)) {
         $valor = $controlador->IniciarSesion($user, $contraseña);
 
         if ($valor == true) {
+            $_SESSION['usuario']=$user;
             return $controlador->Home();
         } else {
             $controlador->Principal();
@@ -28,16 +29,15 @@ if (empty($_SESSION)) {
 
             unset($_SESSION['usuario']);
             unset($_SESSION['contraseña']);
+            
             session_destroy();
-            //return $controlador->Principal();
+            return $controlador->Principal();
         }
         if ($_GET['action'] == 'home') {
 
-            echo"a";
-            //  return $controlador->Home();
+            return $controlador->Home();
         }
     }
-    echo"b";
        return $controlador->Home();
 }
 ?>
