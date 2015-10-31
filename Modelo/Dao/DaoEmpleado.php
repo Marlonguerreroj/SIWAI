@@ -37,21 +37,26 @@ class DaoEmpleado extends Dao {
     public function IniciarSesion($DTOEmpleado) {
         try {
             $this->DTOEmpleado = $DTOEmpleado;
-            $id = $this->DTOEmpleado->getId();
-            $contraseña = $this->DTOEmpleado->getContraseña();
+            $id = $this->DTOEmpleado->getCod_Empleado();
+            $contraseña = $this->DTOEmpleado->getContra_Empleado();
             $this->conexion = $this->dao->conectar();
-            $stmt = $this->conexion->prepare("SELECT * FROM Empleado WHERE id=? and contra=?");
+            $stmt = $this->conexion->prepare("SELECT Tipo_Empleado FROM Empleado WHERE Cod_Empleado =? "
+                    . "and Contra_Empleado =?");
             $stmt->bind_param("ss", $id, $contraseña);
             $stmt->execute();
             $stmt->store_result();
-            $num_of_rows = $stmt->num_rows;
-            if ($num_of_rows > 0) {
-                return true;
-            } else {
+            $num = $stmt->num_rows;
+            if ($num == 0) {
                 return false;
+            } else {
+                $stmt->bind_result($col1);
+                while ($stmt->fetch()) {
+                    $result = $col1;
+                }
+                $stmt->close();
+                $this->conexion = null;
+                return $result;
             }
-            $this->conexion = null;
-            return true;
         } catch (PDOException $e) {
             echo $e->getMessage();
         }

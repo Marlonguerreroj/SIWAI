@@ -1,28 +1,37 @@
 <?php
 
 class EmpleadoDTO{
-    private $id;
-    private $contraseña;
+    private $Cod_Empleado;
+    private $Contra_Empleado;
+    private $Tipo_Empleado;
     
     
     public function __construct(){
     }
-    
-    public function getId() {
-        return $this->id;
+    function getTipo_Empleado() {
+        return $this->Tipo_Empleado;
     }
 
-    public function getContraseña() {
-        return $this->contraseña;
+    function setTipo_Empleado($Tipo_Empleado) {
+        $this->Tipo_Empleado = $Tipo_Empleado;
     }
 
-    public function setId($id) {
-        $this->id = $id;
+        function getCod_Empleado() {
+        return $this->Cod_Empleado;
     }
 
-    public function setContraseña($contraseña) {
-        $this->contraseña = $contraseña;
+    function getContra_Empleado() {
+        return $this->Contra_Empleado;
     }
+
+    function setCod_Empleado($Cod_Empleado) {
+        $this->Cod_Empleado = $Cod_Empleado;
+    }
+
+    function setContra_Empleado($Contra_Empleado) {
+        $this->Contra_Empleado = $Contra_Empleado;
+    }
+
 
 
 }

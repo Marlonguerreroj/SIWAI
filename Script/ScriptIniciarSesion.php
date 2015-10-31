@@ -1,4 +1,5 @@
 <?php
+
 require '../Controlador/ControlManejoInicioSesion.php';
 
 $controlador = new ControlManejoInicioSesion();
@@ -15,7 +16,7 @@ if (empty($_SESSION)) {
         $valor = $controlador->IniciarSesion($user, $contraseña);
 
         if ($valor == true) {
-            $_SESSION['usuario']=$user;
+            $_SESSION['usuario'] = $valor;
             return $controlador->Home();
         } else {
             $controlador->Principal();
@@ -29,7 +30,7 @@ if (empty($_SESSION)) {
 
             unset($_SESSION['usuario']);
             unset($_SESSION['contraseña']);
-            
+
             session_destroy();
             return $controlador->Principal();
         }
@@ -38,6 +39,6 @@ if (empty($_SESSION)) {
             return $controlador->Home();
         }
     }
-       return $controlador->Home();
+    return $controlador->Home();
 }
 ?>

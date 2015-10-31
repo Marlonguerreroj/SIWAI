@@ -9,8 +9,8 @@ class Fachada{
     
     public function IniciarSesion($id,$contraseña){
         $DTOEmpleado = new EmpleadoDTO();
-        $DTOEmpleado->setId($id);
-        $DTOEmpleado->setContraseña($contraseña);
+        $DTOEmpleado->setCod_Empleado($id);
+        $DTOEmpleado->setContra_Empleado($contraseña);
         $valor = $this->DaoEmpleado->IniciarSesion($DTOEmpleado);
         return $valor;
     }
