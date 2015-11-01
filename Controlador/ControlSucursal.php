@@ -12,7 +12,7 @@ class ControlSucursal extends Control {
     }
 
     public function GuiRegistrarSucursal() {
-        
+        ob_start();
         $pagina = $this->load_template("Registrar Sucursal");
         include "../Vista/Seccion/Sucursal/RSucursal.html";
         $section = ob_get_clean();
@@ -22,6 +22,7 @@ class ControlSucursal extends Control {
     }
     
     public function GuiConsultarSucursal(){
+        ob_start();
         $pagina = $this->load_template("Consultar Sucursal");
         include "../Vista/Seccion/Sucursal/CSucursal.html";
         $section = ob_get_clean();
