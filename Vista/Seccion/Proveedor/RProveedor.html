@@ -1,11 +1,11 @@
 
-        <br>
-        <br>
-    <center>   
-        <h1 class="letra3">Registro del proveedor</h1>
-    </center>
-    <br>
-
+<br>
+<br>
+<center>   
+    <h1 class="letra3">Registro del proveedor</h1>
+</center>
+<br>
+<form  action="../Script/ScriptProveedor.php" method="post">
     <div class="container">
         <div class="row">
             <div class="col-md-1"></div>
@@ -13,14 +13,14 @@
                 <p class="letra2">Codigo:  
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control ">
+                <input name="codigo" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
                 <p class="letra2">NIT: 
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control ">
+                <input name="nit" type="text" class="form-control ">
             </div>
             <div class="col-md-1"></div>
         </div>
@@ -31,14 +31,14 @@
                 <p class="letra2">Nombre:  
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control ">
+                <input name="nombre" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
                 <p class="letra2">Pagina web: 
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control ">
+                <input name="pagina" type="text" class="form-control ">
             </div>
             <div class="col-md-1"></div>
         </div>
@@ -49,14 +49,14 @@
                 <p class="letra2">Telefono:  
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control ">
+                <input name="telefono" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
                 <p class="letra2">Cuenta bancaria: 
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control ">
+                <input name="cuentaBancaria" type="text" class="form-control ">
             </div>
             <div class="col-md-1"></div>
         </div>
@@ -68,7 +68,7 @@
             </div>
             <div class="col-md-3">
                 <br>
-                <input type="text" class="form-control ">
+                <input name="nCuentaBancaria" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
@@ -76,25 +76,41 @@
             </div>
             <div class="col-md-3">
                 <br>
-                <input type="text" class="form-control ">
+                <input name="nombreContacto" type="text" class="form-control ">
             </div>
             <div class="col-md-1"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-1">
+                <p class="letra2">E-Mail:  
+            </div>
+            <div class="col-md-3">
+                <input name="email" type="text" class="form-control ">
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-3">
 
+            </div>
+            <div class="col-md-1"></div>
         </div>
         <br>
         <br>
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-2">
-                <a class="btn btn-success btn-lg letra">Registrar
-                </a>
+                <button name="enviar" type="submit" class="btn btn-success btn-lg letra">Registrar
+                </button>
             </div>
             <div class="col-md-2">
-                <a href="../public_html/Menu.html" class="btn btn-primary btn-lg letra">Cancelar
+                <a href="../Script/ScriptIniciarSesion.php?action=home" class="btn btn-primary btn-lg letra">Cancelar
                 </a>
             </div>
             <div class="col-md-4"></div>
 
         </div>
     </div>
-
+</form>

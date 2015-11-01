@@ -1,6 +1,6 @@
 <?php
-require '../Controlador/Control.php';
-require '../Modelo/Fachada.php';
+require_once '../Controlador/Control.php';
+require_once '../Modelo/Fachada.php';
 
 class ControlManejoInicioSesion extends Control {
     var $Fachada;

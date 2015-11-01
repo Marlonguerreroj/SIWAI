@@ -1,38 +1,89 @@
 <?php
 
-class EmpleadoDTO{
-    private $Cod_Empleado;
-    private $Contra_Empleado;
-    private $Tipo_Empleado;
+class EmpleadoDTO {
+
+    private $codigo;
+    private $dni;
+    private $sucursal;
+    private $tipoEmpleado;
+    private $contraseña;
+    private $fIngreso;
+    private $fSalida;
+    private $celular;
+    private $nSegSocial;
     
+    function getCodigo() {
+        return $this->codigo;
+    }
+
+    function getDni() {
+        return $this->dni;
+    }
+
+    function getSucursal() {
+        return $this->sucursal;
+    }
+
+    function getTipoEmpleado() {
+        return $this->tipoEmpleado;
+    }
+
+    function getContraseña() {
+        return $this->contraseña;
+    }
+
+    function getFIngreso() {
+        return $this->fIngreso;
+    }
+
+    function getFSalida() {
+        return $this->fSalida;
+    }
+
+    function getCelular() {
+        return $this->celular;
+    }
+
+    function getNSegSocial() {
+        return $this->nSegSocial;
+    }
+
+    function setCodigo($codigo) {
+        $this->codigo = $codigo;
+    }
+
+    function setDni($dni) {
+        $this->dni = $dni;
+    }
+
+    function setSucursal($sucursal) {
+        $this->sucursal = $sucursal;
+    }
+
+    function setTipoEmpleado($tipoEmpleado) {
+        $this->tipoEmpleado = $tipoEmpleado;
+    }
+
+    function setContraseña($contraseña) {
+        $this->contraseña = $contraseña;
+    }
+
+    function setFIngreso($fIngreso) {
+        $this->fIngreso = $fIngreso;
+    }
+
+    function setFSalida($fSalida) {
+        $this->fSalida = $fSalida;
+    }
+
+    function setCelular($celular) {
+        $this->celular = $celular;
+    }
+
+    function setNSegSocial($nSegSocial) {
+        $this->nSegSocial = $nSegSocial;
+    }
+
+
     
-    public function __construct(){
-    }
-    function getTipo_Empleado() {
-        return $this->Tipo_Empleado;
-    }
-
-    function setTipo_Empleado($Tipo_Empleado) {
-        $this->Tipo_Empleado = $Tipo_Empleado;
-    }
-
-        function getCod_Empleado() {
-        return $this->Cod_Empleado;
-    }
-
-    function getContra_Empleado() {
-        return $this->Contra_Empleado;
-    }
-
-    function setCod_Empleado($Cod_Empleado) {
-        $this->Cod_Empleado = $Cod_Empleado;
-    }
-
-    function setContra_Empleado($Contra_Empleado) {
-        $this->Contra_Empleado = $Contra_Empleado;
-    }
-
-
-
 }
-

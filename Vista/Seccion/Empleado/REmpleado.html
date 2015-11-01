@@ -1,26 +1,48 @@
 
-        <br>
-        <br>
-    <center>   
-        <h1 class="letra3">Registro de empleado</h1>
-    </center>
-    <br>
+<br>
+<br>
+<center>   
+    <h1 class="letra3">Registro de empleado</h1>
+</center>
+<br>
+<form  action="../Script/ScriptEmpleado.php" method="post">
+    <div class="container"> 
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-4">
+                <select name="sel1"class="form-control" id="sel1">
+                    <option>El Timbal</option>
+                    <option>Wave Sound</option>
+                    <option>Musicalizate</option>
+                </select>
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-4">
+                <select name="sel2" class="form-control" id="sel2">
+                    <option>Jefe de operaciones</option>
+                    <option>Cajero</option>
+                    <option>Administrador</option>
+                    <option>Vendedor</option>
 
-    <div class="container">
+                </select>    
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <br>
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-1">
                 <p class="letra2">Codigo:  
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control ">
+                <input name ="codigo" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
                 <p class="letra2">DNI: 
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control ">
+                <input name="dni" type="text" class="form-control ">
             </div>
             <div class="col-md-1"></div>
         </div>
@@ -31,14 +53,14 @@
                 <p class="letra2">Nombre:  
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control ">
+                <input name="nombre" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
-                <p class="letra2">E-Mail: 
+                <p class="letra2">Apellido: 
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control ">
+                <input name="apellido" type="text" class="form-control ">
             </div>
             <div class="col-md-1"></div>
         </div>
@@ -49,14 +71,14 @@
                 <p class="letra2">Telefono:  
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control ">
+                <input name="telefono" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
                 <p class="letra2">Celular: 
             </div>
             <div class="col-md-3">
-                <input type="text" class="form-control ">
+                <input name="celular" type="text" class="form-control ">
             </div>
             <div class="col-md-1"></div>
         </div>
@@ -68,7 +90,7 @@
             </div>
             <div class="col-md-3">
                 <br>
-                <input type="text" class="form-control ">
+                <input name="nSeguridad" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
@@ -76,7 +98,43 @@
             </div>
             <div class="col-md-3">
                 <br>
-                <input type="text" class="form-control ">
+                <input name="fIngreso" type="text" class="form-control ">
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-1">
+                <p class="letra2">Direccion:  
+            </div>
+            <div class="col-md-3">
+
+                <input name="direccion" type="text" class="form-control ">
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-1">
+                <p class="letra2">E-Mail: 
+            </div>
+            <div class="col-md-3">
+                <input name="email" type="text" class="form-control ">
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-1">
+                <p class="letra2">Contraseña:  
+            </div>
+            <div class="col-md-3">
+
+                <input name="contraseña" type="text" class="form-control ">
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-1">
+            </div>
+            <div class="col-md-3">
             </div>
             <div class="col-md-1"></div>
         </div>
@@ -85,14 +143,15 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-2">
-                <a class="btn btn-success btn-lg letra">Registrar
-                </a>
+                <button  name="enviar" type="submit" class="btn btn-success btn-lg letra">Registrar
+                </button>
             </div>
             <div class="col-md-2">
-                <a href="../public_html/Menu.html" class="btn btn-primary btn-lg letra">Cancelar
+                <a href="../Script/ScriptIniciarSesion.php?action=home" class="btn btn-primary btn-lg letra">Cancelar
                 </a>
             </div>
             <div class="col-md-4"></div>
 
         </div>
     </div>
+</form>

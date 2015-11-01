@@ -1,17 +1,18 @@
 <?php
-
-require 'Control.php';
-require '../Modelo/Fachada.php';
+require_once 'Control.php';
+require_once '../Modelo/Fachada.php';
 
 class ControlCliente extends Control {
 
-    var $Fachada;
-
-    function __construct() {
+   
+    public function  registrarCliente($dni,$nombre,$apellido,$direccion,$telefono,$email){
+        $Fachada = new Fachada();
+        $valor = $Fachada->registrarCliente($dni,$nombre,$apellido,$direccion,$telefono,$email);
+        return $valor;
     }
 
     public function GuiRegistrarCliente() {
-        
+
         $pagina = $this->load_template("Registrar Cliente");
         include "../Vista/Seccion/Cliente/RCliente.html";
         $section = ob_get_clean();
@@ -21,4 +22,3 @@ class ControlCliente extends Control {
     }
 
 }
-

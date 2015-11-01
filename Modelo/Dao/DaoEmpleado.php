@@ -1,60 +1,66 @@
 <?php
 
-require '../Modelo/Dao/dao.php';
-require '../Modelo/Dto/EmpleadoDTO.php';
+require_once 'Dao.php';
 
 class DaoEmpleado extends Dao {
 
-    var $DTOEmpleado;
-    var $dao;
-    var $conexion;
 
-    public function __construct() {
-        $this->dao = new Dao();
-        $this->conexion = null;
-        $this->DTOEmpleado = null;
-    }
 
     public function RegistrarEmpleado($DTOEmpleado) {
         try {
-            $this->DTOEmpleado = $DTOEmpleado;
-            $id = $this->DTOEmpleado->getId();
-            $contraseña = $this->DTOEmpleado->getContraseña;
-            $this->conexion = $this->dao->conectar();
-            $stmt = $this->conexion->prepare("INSERT INTO Empleado (id, contra) 
-            VALUES (?, ?)");
-            $stmt->bind_Param('ss', $id, $contraseña);
+            $Dao = new Dao();
+            $codigo = $DTOEmpleado->getCodigo();
+            $dni = $DTOEmpleado->getDni();
+            $sucursal = 1;
+            $tipoEmpleado = $DTOEmpleado->getTipoEmpleado();
+            $contraseña = $DTOEmpleado->getContraseña();
+            $fIngreso = $DTOEmpleado->getfIngreso();
+            $fSalida = null;
+            $celular = $DTOEmpleado->getCelular();
+            $nSegSocial = $DTOEmpleado->getNSegSocial();
+
+            $conexion = $Dao->conectar();
+            $stmt = $conexion->prepare("INSERT INTO Empleado (cod_empleado, dni_cli_empleado,
+                cod_sucur_empleado,tipo_empleado,contra_empleado,ingreso_empleado,salida_empleado,
+                celular_empleado,seg_social_empleado) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_Param('ssissssis', $codigo, $dni, $sucursal, $tipoEmpleado, $contraseña, $fIngreso, $fSalida, $celular, $nSegSocial);
             $stmt->execute();
-            $this->conexion = null;
-            $this->DTOEmpleado = null;
-            return true;
+            $num = $stmt->affected_rows;
+            $stmt->close();
+            if ($num < 0) {
+                return false;
+            } else {
+                return true;
+            }
         } catch (PDOException $e) {
             echo $e->getMessage();
-            echo "aa";
         }
     }
 
     public function IniciarSesion($DTOEmpleado) {
         try {
-            $this->DTOEmpleado = $DTOEmpleado;
-            $id = $this->DTOEmpleado->getCod_Empleado();
-            $contraseña = $this->DTOEmpleado->getContra_Empleado();
-            $this->conexion = $this->dao->conectar();
-            $stmt = $this->conexion->prepare("SELECT Tipo_Empleado FROM Empleado WHERE Cod_Empleado =? "
-                    . "and Contra_Empleado =?");
+            $Dao = new Dao();
+            $id = $DTOEmpleado->getCodigo();
+            $contraseña = $DTOEmpleado->getContraseña();
+            $conexion = $Dao->conectar();
+            $stmt = $conexion->prepare("SELECT tipo_empleado FROM Empleado WHERE cod_empleado =? "
+                    . "and contra_empleado =?");
             $stmt->bind_param("ss", $id, $contraseña);
             $stmt->execute();
             $stmt->store_result();
             $num = $stmt->num_rows;
+            
             if ($num == 0) {
                 return false;
+                $stmt->close();
             } else {
+                echo 1;
                 $stmt->bind_result($col1);
                 while ($stmt->fetch()) {
                     $result = $col1;
-                }
-                $stmt->close();
-                $this->conexion = null;
+                    
+                }$stmt->close();
                 return $result;
             }
         } catch (PDOException $e) {
