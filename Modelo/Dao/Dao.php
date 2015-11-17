@@ -19,10 +19,10 @@ class Dao {
             if ($conn->connect_error) {
                 die("Connection failed: " . $conn->connect_error);
             }
-            echo "Connected successfully";
+          //  echo "Connected successfully";
 
         } catch (PDOException $e) {
-           echo "Connection failed: " . $e->getMessage();
+           //echo "Connection failed: " . $e->getMessage();
         }
 
         return $conn;

@@ -1,23 +1,21 @@
 <br>
 <br>
 <center>   
-    <h1 class="letra3">Consultar sucursal</h1>
+    <h1 class="letra3">Consultar Proveedor</h1>
 </center>
 <br>
-<form action="../Script/ScriptSucursal.php" method="post">
+<form action="../Script/ScriptProveedor.php" method="post">
     <div class="container">
         <div class="row">
             <div class="col-md-2">
                 <p class="letra2">Tipo de dato:  
             </div>
             <div class="col-md-2">
-                <select  name="sel" id="sucursal" class="form-control" id="sel2">
-                    <option value="Seleccione" >Seleccione</option>
-                    <option value="Todos" >Todos</option>
-                    <option value="Codigo" >Codigo</option>
-                    <option value="Nombre" >Nombre</option>
+                <select name="sel" class="form-control" id="sel2">
+                    <option>Codigo</option>
+                    <option>Nit</option>
+                    <option>Nombre</option>
                 </select>
-
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-2">
@@ -38,26 +36,24 @@
 </form>
 <br>
 <br>
-
 <?php if( $valor !=null): ?>
-
-
 <div class="container">
     <div class="row">
-        <div class="col-md-1"></div>
-        <div class="col-md-10">
+        <!--<div class="col-md-1"></div>-->
+        <div class="col-md-12">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
                         <tr>
                             <th>Codigo</th>
-                            <th>Nombre</th>
-                            <th>Telefono</th>
-                            <th>Email</th>
+                            <th>Nit</th>
+                            <th>Nombre</th> 
+                            <th>N&ordm; Cuenta Bancaria</th>
+                            <th>Cuenta Bancaria</th>
                             <th>Pagina Web</th>
-                            <th>Direccion</th>
-                            <th>Ciudad</th>
-                            <th>Pais</th>
+                            <th>Nombre del Contacto</th>
+                            <th>Telefono</th>
+                            <th>E-Mail</th>
                         </tr>
                     </thead>
                     <?php for($a=0;$a<count($valor);$a++): ?>
@@ -71,6 +67,8 @@
                         <th><?php echo  $valor[$a][5] ?></th>
                         <th><?php echo  $valor[$a][6] ?></th>
                         <th><?php echo  $valor[$a][7] ?></th>
+                        <th><?php echo  $valor[$a][8] ?></th>
+
 
                     </tr>
                     <?php endfor; ?>
@@ -78,7 +76,7 @@
                 </table>
             </div>
         </div>
-        <div class="col-md-1"></div>
+     <!--<div class="col-md-1"></div>-->
     </div>
 </div>
 <?php endif; ?>

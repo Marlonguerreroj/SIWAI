@@ -11,7 +11,25 @@ class EmpleadoDTO {
     private $fSalida;
     private $celular;
     private $nSegSocial;
-    
+    private $tipo;
+    private $informacion;
+
+    function getTipo() {
+        return $this->tipo;
+    }
+
+    function getInformacion() {
+        return $this->informacion;
+    }
+
+    function setTipo($tipo) {
+        $this->tipo = $tipo;
+    }
+
+    function setInformacion($informacion) {
+        $this->informacion = $informacion;
+    }
+
     function getCodigo() {
         return $this->codigo;
     }
@@ -84,6 +102,4 @@ class EmpleadoDTO {
         $this->nSegSocial = $nSegSocial;
     }
 
-
-    
 }

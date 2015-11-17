@@ -1,23 +1,21 @@
 <br>
 <br>
 <center>   
-    <h1 class="letra3">Consultar sucursal</h1>
+    <h1 class="letra3">Consultar Cliente</h1>
 </center>
 <br>
-<form action="../Script/ScriptSucursal.php" method="post">
+<form action="../Script/ScriptCliente.php" method="post">
     <div class="container">
         <div class="row">
             <div class="col-md-2">
                 <p class="letra2">Tipo de dato:  
             </div>
             <div class="col-md-2">
-                <select  name="sel" id="sucursal" class="form-control" id="sel2">
-                    <option value="Seleccione" >Seleccione</option>
-                    <option value="Todos" >Todos</option>
-                    <option value="Codigo" >Codigo</option>
-                    <option value="Nombre" >Nombre</option>
+                <select name="sel" class="form-control" id="sel2">
+                    <option>Nombre</option>
+                    <option>Apellido</option>
+                    <option>Dni</option>
                 </select>
-
             </div>
             <div class="col-md-1"></div>
             <div class="col-md-2">
@@ -38,10 +36,7 @@
 </form>
 <br>
 <br>
-
 <?php if( $valor !=null): ?>
-
-
 <div class="container">
     <div class="row">
         <div class="col-md-1"></div>
@@ -50,27 +45,24 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Codigo</th>
                             <th>Nombre</th>
+                            <th>Apellido</th>
+                            <th>Dni</th>
                             <th>Telefono</th>
-                            <th>Email</th>
-                            <th>Pagina Web</th>
                             <th>Direccion</th>
-                            <th>Ciudad</th>
-                            <th>Pais</th>
+                            <th>E-mail</th>
                         </tr>
                     </thead>
                     <?php for($a=0;$a<count($valor);$a++): ?>
 
                     <tr>
+                        <th><?php echo  $valor[$a][1] ?></th>
+                        <th><?php echo  $valor[$a][2]?></th>
                         <th><?php echo  $valor[$a][0] ?></th>
-                        <th><?php echo  $valor[$a][1]?></th>
-                        <th><?php echo  $valor[$a][2] ?></th>
-                        <th><?php echo  $valor[$a][3] ?></th>
                         <th><?php echo  $valor[$a][4] ?></th>
+                        <th><?php echo  $valor[$a][3] ?></th>
                         <th><?php echo  $valor[$a][5] ?></th>
-                        <th><?php echo  $valor[$a][6] ?></th>
-                        <th><?php echo  $valor[$a][7] ?></th>
+
 
                     </tr>
                     <?php endfor; ?>
@@ -82,3 +74,4 @@
     </div>
 </div>
 <?php endif; ?>
+

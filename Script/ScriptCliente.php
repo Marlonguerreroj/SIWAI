@@ -5,6 +5,35 @@ $controlador = new ControlCliente();
 session_start();
 
 if (!empty($_SESSION)) {
+    if (isset($_POST['buscar'])) {
+        if (!empty($_POST['informacion'])) {
+            $tipo = $_POST['sel'];
+            $informacion = $_POST['informacion'];
+            $valor = $controlador->buscarCliente($tipo, $informacion);
+            if ($valor) {
+               return $controlador->GuiConsultarCliente($valor);
+            } else {
+                echo '<script language="javascript">alert("No encontro datos");</script>';
+            }
+        } else {
+            echo '<script language="javascript">alert("Llene los campos");</script>';
+        }
+    }
+    if (isset($_POST['buscar2'])) {
+        if (!empty($_POST['informacion'])) {
+            $tipo = $_POST['sel'];
+            $informacion = $_POST['informacion'];
+            $valor = $controlador->buscarCliente($tipo, $informacion);
+            if ($valor) {
+               return $controlador->GuiActualizarCliente($valor);
+            } else {
+                echo '<script language="javascript">alert("No encontro datos");</script>';
+            }
+        } else {
+            echo '<script language="javascript">alert("Llene los campos");</script>';
+        }
+    }
+    
     if (isset($_POST['enviar'])) {
         $nombre = $_POST['nombre'];
         $apellido = $_POST['apellido'];
@@ -23,15 +52,20 @@ if (!empty($_SESSION)) {
             . ' dni");</script>';
             return $controlador->GuiRegistrarCliente();
         }
-    } else {
-        return $controlador->GuiRegistrarCliente();
     }
 
     if ($_GET) {
         if ($_GET['action'] == 'registrar') {
             return $controlador->GuiRegistrarCliente();
         }
+        if ($_GET['action'] == 'consultar') {
+            return $controlador->GuiConsultarCliente(null);
+        }
+        if ($_GET['action'] == 'actualizar') {
+            return $controlador->GuiActualizarCliente(null);
+        }
     }
+    return $controlador->Home();
 } else {
     return $controlador->Principal();
 }

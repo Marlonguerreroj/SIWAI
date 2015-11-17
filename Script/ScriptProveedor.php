@@ -5,6 +5,21 @@ $controlador = new ControlProveedor();
 session_start();
 
 if (!empty($_SESSION)) {
+    if (isset($_POST['buscar'])) {
+        if (!empty($_POST['informacion'])) {
+            $tipo = $_POST['sel'];
+            $informacion = $_POST['informacion'];
+            $valor = $controlador->buscarProveedor($tipo, $informacion);
+            if ($valor) {
+               return $controlador->GuiConsultarProveedor($valor);
+            } else {
+                echo '<script language="javascript">alert("No encontro datos");</script>';
+            }
+        } else {
+            echo '<script language="javascript">alert("Llene los campos");</script>';
+        }
+    }
+    
     if (isset($_POST['enviar'])) {
         $codigo = $_POST['codigo'];
         $nit = $_POST['nit'];
@@ -26,15 +41,16 @@ if (!empty($_SESSION)) {
             . ' codigo");</script>';
             return $controlador->GuiRegistrarProveedor();
         }
-    } else {
-     return $controlador->GuiRegistrarProveedor();   
     }
     if ($_GET) {
-
         if ($_GET['action'] == 'registrar') {
             return $controlador->GuiRegistrarProveedor();
         }
+        if ($_GET['action'] == 'consultar') {
+            return $controlador->GuiConsultarProveedor(null);
+        }
     }
+    return $controlador->Home();
 } else {
     return $controlador->Principal();
 }

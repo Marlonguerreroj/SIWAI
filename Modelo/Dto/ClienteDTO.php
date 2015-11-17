@@ -8,6 +8,24 @@ class ClienteDTO {
     private $direccion;
     private $telefono;
     private $email;
+    private $tipo;
+    private $informacion;
+
+    function getTipo() {
+        return $this->tipo;
+    }
+
+    function getInformacion() {
+        return $this->informacion;
+    }
+
+    function setTipo($tipo) {
+        $this->tipo = $tipo;
+    }
+
+    function setInformacion($informacion) {
+        $this->informacion = $informacion;
+    }
 
     function getDni() {
         return $this->dni;

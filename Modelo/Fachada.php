@@ -77,5 +77,53 @@ class Fachada {
         $valor = $DaoProveedor->registrarProveedor($DTOProveedor);
         return $valor;
     }
-
+    
+    public function buscarSucursal($tipo,$informacion){
+        $DaoSucursal = new DaoSucursal();
+        $DTOSucursal = new SucursalDTO();
+        $DTOSucursal->setTipo($tipo);
+        $DTOSucursal->setInformacion($informacion);
+        $valor = $DaoSucursal->buscarSucursal($DTOSucursal);
+        return $valor;
+    }
+    public function buscarCliente($tipo,$informacion){
+        $DaoCliente = new DaoCliente();
+        $DTOCliente = new ClienteDTO();
+        $DTOCliente->setTipo($tipo);
+        $DTOCliente->setInformacion($informacion);
+        $valor = $DaoCliente->buscarCliente($DTOCliente);
+        return $valor;
+    }
+    public function buscarProveedor($tipo,$informacion){
+        $DaoProveedor = new DaoProveedor();
+        $DTOProveedor = new ProveedorDTO();
+        $DTOProveedor->setTipo($tipo);
+        $DTOProveedor->setInformacion($informacion);
+        $valor = $DaoProveedor->buscarProveedor($DTOProveedor);
+        return $valor;
+    }
+    public function buscarEmpleado($tipo,$informacion){
+        $DaoEmpleado = new DaoEmpleado();
+        $DTOEmpleado = new EmpleadoDTO();
+        $DTOEmpleado->setTipo($tipo);
+        $DTOEmpleado->setInformacion($informacion);
+        $valor = $DaoEmpleado->buscarEmpleado($DTOEmpleado);
+        return $valor;
+    }
+    
+    public function actualizarSucursal($codigo,$nombre,$telefono,$email,$pagina,$direccion,$ciudad,$pais){
+        $DaoSucursal = new DaoSucursal();
+        $DTOSucursal = new SucursalDTO();
+        $DTOSucursal->setCodigo($codigo);
+        $DTOSucursal->setNombre($nombre);
+        $DTOSucursal->setTelefono($telefono);
+        $DTOSucursal->setEmail($email);
+        $DTOSucursal->setPagina($pagina);
+        $DTOSucursal->setDireccion($direccion);
+        $DTOSucursal->setCiudad($ciudad);
+        $DTOSucursal->setPais($pais);
+        $valor = $DaoSucursal->actualizarSucursal($DTOSucursal);
+        return $valor;
+    }
+    
 }
