@@ -4,15 +4,29 @@
     <h1 class="letra3">Consultar sucursal</h1>
 </center>
 <br>
-<form action="../Script/ScriptSucursal.php" method="post">
+<script>
+    function capturar() {
+        var posicion = document.getElementById("sucursal").options.selectedIndex;
+        var valor = document.getElementById("sucursal").options[posicion].text;
+        if (valor == "Todos") {
+            document.form.informacion.disabled = true;
+        } else {
+            document.form.informacion.disabled = false;
+
+        }
+    }
+
+
+</script>
+<form name="form" action="../Script/ScriptSucursal.php" method="post">
     <div class="container">
         <div class="row">
             <div class="col-md-2">
                 <p class="letra2">Tipo de dato:  
             </div>
             <div class="col-md-2">
-                <select  name="sel" id="sucursal" class="form-control" id="sel2">
-                    <option value="Seleccione" >Seleccione</option>
+                <select  name="sel" id="sucursal" class="form-control"  onchange="capturar()" >
+                    <option selected value="Seleccione" >Seleccione</option>
                     <option value="Todos" >Todos</option>
                     <option value="Codigo" >Codigo</option>
                     <option value="Nombre" >Nombre</option>
@@ -62,15 +76,15 @@
                     </thead>
                     <?php for($a=0;$a<count($valor);$a++): ?>
 
-                    <tr>
-                        <th><?php echo  $valor[$a][0] ?></th>
-                        <th><?php echo  $valor[$a][1]?></th>
-                        <th><?php echo  $valor[$a][2] ?></th>
-                        <th><?php echo  $valor[$a][3] ?></th>
-                        <th><?php echo  $valor[$a][4] ?></th>
-                        <th><?php echo  $valor[$a][5] ?></th>
-                        <th><?php echo  $valor[$a][6] ?></th>
-                        <th><?php echo  $valor[$a][7] ?></th>
+                    <tr style='cursor:pointer' >
+                        <td><?php echo  $valor[$a][0] ?></td>
+                        <td><?php echo  $valor[$a][1]?></td>
+                        <td><?php echo  $valor[$a][2] ?></td>
+                        <td><?php echo  $valor[$a][3] ?></td>
+                        <td><?php echo  $valor[$a][4] ?></td>
+                        <td><?php echo  $valor[$a][5] ?></td>
+                        <td><?php echo  $valor[$a][6] ?></td>
+                        <td><?php echo  $valor[$a][7] ?></td>
 
                     </tr>
                     <?php endfor; ?>

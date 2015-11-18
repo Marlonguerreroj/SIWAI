@@ -6,12 +6,12 @@ session_start();
 
 if (!empty($_SESSION)) {
     if (isset($_POST['buscar'])) {
-        if (!empty($_POST['informacion']) && !(($_POST['informacion'])=='Seleccione')) {
+        if ((!empty($_POST['informacion']) && (($_POST['sel']) != 'Seleccione')) || (($_POST['sel'] == 'Todos') && (empty($_POST['informacion'])))) {
             $tipo = $_POST['sel'];
             $informacion = $_POST['informacion'];
             $valor = $controlador->buscarSucursal($tipo, $informacion);
             if ($valor) {
-               return $controlador->GuiConsultarSucursal($valor);
+                return $controlador->GuiConsultarSucursal($valor);
             } else {
                 echo '<script language="javascript">alert("No encontro datos");</script>';
             }
@@ -25,7 +25,7 @@ if (!empty($_SESSION)) {
             $informacion = $_POST['informacion'];
             $valor = $controlador->buscarSucursal($tipo, $informacion);
             if ($valor) {
-               return $controlador->GuiActualizarSucursal($valor);
+                return $controlador->GuiActualizarSucursal($valor);
             } else {
                 echo '<script language="javascript">alert("No encontro datos");</script>';
             }
@@ -83,7 +83,7 @@ if (!empty($_SESSION)) {
         if ($_GET['action'] == 'consultar') {
             return $controlador->GuiConsultarSucursal(null);
         }
-        if($_GET['action']== 'actualizar'){
+        if ($_GET['action'] == 'actualizar') {
             return $controlador->GuiActualizarSucursal(null);
         }
     }
