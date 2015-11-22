@@ -6,31 +6,13 @@ session_start();
 
 if (!empty($_SESSION)) {
     if (isset($_POST['buscar'])) {
-        if ((!empty($_POST['informacion']) && (($_POST['sel']) != 'Seleccione')) || (($_POST['sel'] == 'Todos') && (empty($_POST['informacion'])))) {
-            $tipo = $_POST['sel'];
-            $informacion = $_POST['informacion'];
-            $valor = $controlador->buscarSucursal($tipo, $informacion);
-            if ($valor) {
-                return $controlador->GuiConsultarSucursal($valor);
-            } else {
-                echo '<script language="javascript">alert("No encontro datos");</script>';
-            }
+        $tipo = $_POST['sel'];
+        $informacion = $_POST['informacion'];
+        $valor = $controlador->buscarSucursal($tipo, $informacion);
+        if ($valor) {
+            return $controlador->GuiConsultarSucursal($valor);
         } else {
-            echo '<script language="javascript">alert("Verifique los datos");</script>';
-        }
-    }
-    if (isset($_POST['buscar2'])) {
-        if (!empty($_POST['informacion'])) {
-            $tipo = $_POST['sel'];
-            $informacion = $_POST['informacion'];
-            $valor = $controlador->buscarSucursal($tipo, $informacion);
-            if ($valor) {
-                return $controlador->GuiActualizarSucursal($valor);
-            } else {
-                echo '<script language="javascript">alert("No encontro datos");</script>';
-            }
-        } else {
-            echo '<script language="javascript">alert("Llene los campos");</script>';
+            echo '<script language="javascript">alert("No encontro datos");</script>';
         }
     }
 
@@ -43,7 +25,6 @@ if (!empty($_SESSION)) {
         $direccion = $_POST['direccion'];
         $ciudad = $_POST['ciudad'];
         $pais = $_POST['pais'];
-
         $valor = $controlador->registrarSucursal($codigo, $nombre, $telefono, $email, $pagina, $direccion, $ciudad, $pais);
         if ($valor) {
             echo '<script language="javascript">alert("La sucursal se registro '
@@ -77,12 +58,22 @@ if (!empty($_SESSION)) {
         }
     }
     if ($_GET) {
+        if (isset($_GET['codigo'])) {
+            $tipo = "Codigo";
+            $codigo = $_GET['codigo'];
+            $valor = $controlador->buscarSucursal($tipo, $codigo);
+            if ($valor) {
+                return $controlador->GuiActualizarSucursal($valor);
+            } else {
+                echo '<script language="javascript">alert("No pudo realizar la accion");</script>';
+            }
+        } else
         if ($_GET['action'] == 'registrar') {
             return $controlador->guiRegistrarSucursal();
-        }
+        } else
         if ($_GET['action'] == 'consultar') {
             return $controlador->GuiConsultarSucursal(null);
-        }
+        } else
         if ($_GET['action'] == 'actualizar') {
             return $controlador->GuiActualizarSucursal(null);
         }

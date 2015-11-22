@@ -13,6 +13,15 @@ class ProveedorDTO {
     private $email;
     private $tipo;
     private $informacion;
+    private $tipoCuenta;
+
+    function getTipoCuenta() {
+        return $this->tipoCuenta;
+    }
+
+    function setTipoCuenta($tipoCuenta) {
+        $this->tipoCuenta = $tipoCuenta;
+    }
 
     function getTipo() {
         return $this->tipo;

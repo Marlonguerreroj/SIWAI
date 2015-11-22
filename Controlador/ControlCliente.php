@@ -16,6 +16,11 @@ class ControlCliente extends Control {
         $valor = $Fachada->registrarCliente($dni, $nombre, $apellido, $direccion, $telefono, $email);
         return $valor;
     }
+    public function actualizarCliente($dni, $nombre, $apellido, $direccion, $telefono, $email){
+        $Fachada = new Fachada();
+        $valor = $Fachada->actualizarCliente($dni, $nombre, $apellido, $direccion, $telefono, $email);
+        return $valor;
+    }
 
     public function GuiRegistrarCliente() {
         $pagina = $this->load_template("Registrar Cliente");

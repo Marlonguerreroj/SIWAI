@@ -29,15 +29,15 @@ if (!empty($_SESSION)) {
         $apellido = $_POST['apellido'];
         $telefono = $_POST['telefono'];
         $celular = $_POST['celular'];
-        $nSegSocial = $_POST['nSeguridad'];
+        $sucursal = $_POST['sel1'];
         $fIngreso = $_POST['fIngreso'];
         $direccion = $_POST['direccion'];
         $email = $_POST['email'];
         $contraseña = $_POST['contraseña'];
         $tipoEmpleado = $_POST['sel2'];
 
-        $valor1 = $controlador2->registrarCliente($dni, $nombre, $apellido, $direccion, $telefono, $email);
-        $valor = $controlador->registrarEmpleado($codigo, $dni, $celular, $nSegSocial, $fIngreso, $contraseña, $tipoEmpleado);
+        $controlador2->registrarCliente($dni, $nombre, $apellido, $direccion, $telefono, $email);
+        $valor = $controlador->registrarEmpleado($codigo, $dni, $celular, $sucursal, $fIngreso, $contraseña, $tipoEmpleado);
         if ($valor) {
             echo '<script language="javascript">alert("El empleado se registro '
             . 'satisfactoriamente");</script>';

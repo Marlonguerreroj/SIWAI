@@ -1,13 +1,12 @@
 <br>
 <br>
 <center>   
-    <h1 class="letra3">Actualizar sucursal</h1>
+    <h1 class="letra3">Actualizar Proveedor</h1>
 </center>
 <br>
 <br>
 <?php if( $valor !=null): ?>
-<form action="../Script/ScriptSucursal.php" method="post">
-
+<form action="../Script/ScriptProveedor.php" method="post">
     <div class="container">
         <div class="row">
             <div class="col-md-1"></div>
@@ -15,14 +14,32 @@
                 <p class="letra2">Codigo:  
             </div>
             <div class="col-md-3">
-                <input readonly name="codigo" value="<?php echo  $valor[0][0] ?>" type="text" class="form-control"  >
+                <input required readOnly name="codigo" value="<?php echo  $valor[0][0] ?>" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
-                <p class="letra2">Nombre: 
+                <p class="letra2">NIT: 
             </div>
             <div class="col-md-3">
-                <input name="nombre" value="<?php echo  $valor[0][1] ?>" type="text" class="form-control ">
+                <input required name="nit" value="<?php echo  $valor[0][1] ?>" type="text" class="form-control ">
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+        <br>
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-1">
+                <p class="letra2">Nombre:  
+            </div>
+            <div class="col-md-3">
+                <input required value="<?php echo  $valor[0][2] ?>" name="nombre" type="text" class="form-control ">
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-1">
+                <p class="letra2">Pagina web: 
+            </div>
+            <div class="col-md-3">
+                <input name="pagina" value="<?php echo  $valor[0][5] ?>" type="text" class="form-control ">
             </div>
             <div class="col-md-1"></div>
         </div>
@@ -33,14 +50,14 @@
                 <p class="letra2">Telefono:  
             </div>
             <div class="col-md-3">
-                <input name="telefono" value="<?php echo  $valor[0][2] ?>" type="text" class="form-control ">
+                <input required value="<?php echo  $valor[0][7] ?>" name="telefono" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
                 <p class="letra2">E-mail: 
             </div>
             <div class="col-md-3">
-                <input name="email" value="<?php echo  $valor[0][3] ?>" type="text" class="form-control ">
+                <input required value="<?php echo  $valor[0][8] ?>" name="email" type="text" class="form-control ">
             </div>
             <div class="col-md-1"></div>
         </div>
@@ -48,17 +65,19 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-1">
-                <p class="letra2">Pagina web:  
+                <p class="letra2">Tipo cuenta bancaria:  
             </div>
             <div class="col-md-3">
-                <input name="pagina" value="<?php echo  $valor[0][4] ?>" type="text" class="form-control ">
+                <br>
+                <input required value="<?php echo  $valor[0][9] ?>" name="tipoCuentaBancaria" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
-                <p class="letra2">Direccion: 
+                <p class="letra2">N&ordm; cuenta bancaria: 
             </div>
             <div class="col-md-3">
-                <input name="direccion" value="<?php echo  $valor[0][5] ?>" type="text" class="form-control ">
+                <br>
+                <input required value="<?php echo  $valor[0][3] ?>" name="nCuentaBancaria" type="text" class="form-control ">
             </div>
             <div class="col-md-1"></div>
         </div>
@@ -66,17 +85,17 @@
         <div class="row">
             <div class="col-md-1"></div>
             <div class="col-md-1">
-                <p class="letra2">Ciudad:  
+                <p class="letra2">Cuenta Bancaria:  
             </div>
             <div class="col-md-3">
-                <input name="ciudad" value="<?php echo  $valor[0][6] ?>" type="text" class="form-control ">
+                <input required value="<?php echo  $valor[0][4] ?>" name="cuentaBancaria" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
-                <p class="letra2">Pais: 
+                <p class="letra2">Nombre contacto: 
             </div>
             <div class="col-md-3">
-                <input name="pais" value="<?php echo  $valor[0][7] ?>" type="text" class="form-control ">
+                <input required value="<?php echo  $valor[0][6] ?>" name="nombreContacto" type="text" class="form-control ">
             </div>
             <div class="col-md-1"></div>
         </div>

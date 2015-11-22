@@ -19,7 +19,7 @@ class DaoSucursal extends Dao {
             $stmt = $conexion->prepare("INSERT INTO Sucursal (cod_sucursal,nom_sucursal,tel_sucursal,
                 email_sucursal,web_sucursal,dir_sucursal,ciudad_sucursal,pais_sucursal) 
             VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_Param('isisssss', $codigo, $nombre, $telefono, $email, $pagina, $direccion, $ciudad, $pais);
+            $stmt->bind_Param('ssisssss', $codigo, $nombre, $telefono, $email, $pagina, $direccion, $ciudad, $pais);
             $stmt->execute();
             $num = $stmt->affected_rows;
             $stmt->close();

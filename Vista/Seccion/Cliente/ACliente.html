@@ -4,35 +4,6 @@
     <h1 class="letra3">Actualizar cliente</h1>
 </center>
 <br>
-<form action="../Script/ScriptCliente.php" method="post">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2">
-                <p class="letra2">Tipo de dato:  
-            </div>
-            <div class="col-md-2">
-                <select name="sel" class="form-control" id="sel2">
-                    <option>Dni</option>
-                </select>
-            </div>
-            <div class="col-md-1"></div>
-            <div class="col-md-2">
-                <p class="letra2">Informacion:  
-            </div>
-            <div class="col-md-2">
-                <input name="informacion" type="text" class="form-control ">
-            </div>
-            <div class="col-md-2">
-                <button name="buscar2" type="submit" class="btn btn-success  letra">
-                    <span class="glyphicon glyphicons glyphicon-search"></span>
-                </button>
-            </div>
-            <div class="col-md-1">
-            </div>
-        </div>
-    </div>
-</form>
-<br>
 <br>
 <?php if( $valor !=null): ?>
 <form action="../Script/ScriptCliente.php" method="post">
@@ -61,7 +32,7 @@
                 <p class="letra2">Dni:  
             </div>
             <div class="col-md-3">
-                <input name="dni" value="<?php echo  $valor[0][0] ?>" type="text" class="form-control ">
+                <input name="dni" readonly value="<?php echo  $valor[0][0] ?>" type="text" class="form-control ">
             </div>
             <div class="col-md-2"></div>
             <div class="col-md-1">
@@ -95,7 +66,7 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="col-md-2">
-                <button name="enviar2" type="submit" class="btn btn-success btn-lg letra">Registrar
+                <button name="enviar2" type="submit" class="btn btn-success btn-lg letra">Actualizar
                 </button>
             </div>
             <div class="col-md-2">

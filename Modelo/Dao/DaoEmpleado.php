@@ -8,20 +8,19 @@ class DaoEmpleado extends Dao {
         try {
             $codigo = $DTOEmpleado->getCodigo();
             $dni = $DTOEmpleado->getDni();
-            $sucursal = 1;
+            $sucursal = $DTOEmpleado->getSucursal();
             $tipoEmpleado = $DTOEmpleado->getTipoEmpleado();
             $contraseña = $DTOEmpleado->getContraseña();
             $fIngreso = $DTOEmpleado->getfIngreso();
             $fSalida = null;
             $celular = $DTOEmpleado->getCelular();
-            $nSegSocial = $DTOEmpleado->getNSegSocial();
 
             $conexion = $this->conectar();
             $stmt = $conexion->prepare("INSERT INTO Empleado (cod_empleado, dni_cli_empleado,
                 cod_sucur_empleado,tipo_empleado,contra_empleado,ingreso_empleado,salida_empleado,
-                celular_empleado,seg_social_empleado) 
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_Param('ssissssis', $codigo, $dni, $sucursal, $tipoEmpleado, $contraseña, $fIngreso, $fSalida, $celular, $nSegSocial);
+                celular_empleado) 
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_Param('ssissssi', $codigo, $dni, $sucursal, $tipoEmpleado, $contraseña, $fIngreso, $fSalida, $celular);
             $stmt->execute();
             $num = $stmt->affected_rows;
             $stmt->close();
@@ -85,11 +84,11 @@ class DaoEmpleado extends Dao {
                 //echo '<script language="javascript">alert("' . $num . '");</script>';
                 $resultado = array();
                 $i = 0;
-                $stmt->bind_result($col1, $col2, $col3, $col4, $col5, $col6, $col7, $col8, $col9);
+                $stmt->bind_result($col1, $col2, $col3, $col4, $col5, $col6, $col7, $col8);
                 while ($stmt->fetch()) {
                     $result = $col1 . "-" . $col2 . "-" . $col3 . "-" . $col4 . "-" .
-                            $col5 . "-" . $col6 . "-" . $col7 . "-" . $col8 . "-" . $col9;
-                    $resultado[$i] = array($col1, $col2, $col3, $col4, $col5, $col6, $col7, $col8, $col9);
+                            $col5 . "-" . $col6 . "-" . $col7 . "-" . $col8;
+                    $resultado[$i] = array($col1, $col2, $col3, $col4, $col5, $col6, $col7, $col8);
                     $i++;
                     //   echo '<script language="javascript">alert("' . $result . '");</script>';
                 }

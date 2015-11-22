@@ -11,11 +11,18 @@ class ControlProveedor extends Control {
         return $valor;
     }
 
-    public function registrarProveedor($codigo, $nit, $nombre, $pagina, $telefono, $cuentaBancaria, $nCuentaBancaria, $nombreContacto, $email) {
+    public function registrarProveedor($codigo, $nit, $nombre, $pagina, $telefono, $cuentaBancaria, $nCuentaBancaria, $nombreContacto, $email, $tipoCuenta) {
         $fachada = new Fachada();
-        $valor = $fachada->registrarProveedor($codigo, $nit, $nombre, $pagina, $telefono, $cuentaBancaria, $nCuentaBancaria, $nombreContacto, $email);
+        $valor = $fachada->registrarProveedor($codigo, $nit, $nombre, $pagina, $telefono, $cuentaBancaria, $nCuentaBancaria, $nombreContacto, $email, $tipoCuenta);
         return $valor;
     }
+    public function actualizarProveedor($codigo, $nit, $nombre, $pagina, $telefono, $cuentaBancaria, $nCuentaBancaria, $nombreContacto, $email, $tipoCuenta) {
+        $fachada = new Fachada();
+        $valor = $fachada->actualizarProveedor($codigo, $nit, $nombre, $pagina, $telefono, $cuentaBancaria, $nCuentaBancaria, $nombreContacto, $email, $tipoCuenta);
+        return $valor;
+    }
+    
+    
 
     public function GuiRegistrarProveedor() {
 
@@ -26,13 +33,25 @@ class ControlProveedor extends Control {
         $pagina = $this->replace_content('/\#section\#/ms', $section, $pagina);
         $this->view_page($pagina);
     }
-      public function GuiConsultarProveedor($valor){
+
+    public function GuiConsultarProveedor($valor) {
         $resultados = $valor;
         ob_start();
         $pagina = $this->load_template("Consultar Proveedor");
         include "../Vista/Seccion/Proveedor/CProveedor.html";
         $section = ob_get_clean();
-        $pagina = $this->replace_content('/\#section\#/ms',$section,$pagina);
+        $pagina = $this->replace_content('/\#section\#/ms', $section, $pagina);
         $this->view_page($pagina);
     }
+
+    public function GuiActualizarProveedor($valor) {
+        $resultados = $valor;
+        ob_start();
+        $pagina = $this->load_template("Actualizar Proveedor");
+        include "../Vista/Seccion/Proveedor/AProveedor.html";
+        $section = ob_get_clean();
+        $pagina = $this->replace_content('/\#section\#/ms', $section, $pagina);
+        $this->view_page($pagina);
+    }
+
 }

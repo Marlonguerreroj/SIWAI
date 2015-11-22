@@ -4,17 +4,19 @@
     <h1 class="letra3">Consultar Proveedor</h1>
 </center>
 <br>
-<form action="../Script/ScriptProveedor.php" method="post">
+<form action="../Script/ScriptProveedor.php" method="post" name="form">
     <div class="container">
         <div class="row">
             <div class="col-md-2">
                 <p class="letra2">Tipo de dato:  
             </div>
             <div class="col-md-2">
-                <select name="sel" class="form-control" id="sel2">
-                    <option>Codigo</option>
-                    <option>Nit</option>
-                    <option>Nombre</option>
+                <select name="sel" class="form-control" id="sel" required onchange="capturar()">
+                    <option value="">Seleccione</option>
+                    <option value="Todos">Todos</option>
+                    <option value="Codigo">Codigo</option>
+                    <option value="Nit">Nit</option>
+                    <option value="Nombre">Nombre</option>
                 </select>
             </div>
             <div class="col-md-1"></div>
@@ -22,7 +24,7 @@
                 <p class="letra2">Informacion:  
             </div>
             <div class="col-md-2">
-                <input name="informacion" type="text" class="form-control ">
+                <input required name="informacion" type="text" class="form-control ">
             </div>
             <div class="col-md-2">
                 <button name="buscar" type="submit" class="btn btn-success  letra">
@@ -39,8 +41,8 @@
 <?php if( $valor !=null): ?>
 <div class="container">
     <div class="row">
-        <!--<div class="col-md-1"></div>-->
-        <div class="col-md-12">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
             <div class="table-responsive">
                 <table class="table">
                     <thead>
@@ -48,35 +50,35 @@
                             <th>Codigo</th>
                             <th>Nit</th>
                             <th>Nombre</th> 
-                            <th>N&ordm; Cuenta Bancaria</th>
-                            <th>Cuenta Bancaria</th>
                             <th>Pagina Web</th>
                             <th>Nombre del Contacto</th>
                             <th>Telefono</th>
                             <th>E-Mail</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <?php for($a=0;$a<count($valor);$a++): ?>
 
                     <tr>
-                        <th><?php echo  $valor[$a][0] ?></th>
-                        <th><?php echo  $valor[$a][1]?></th>
-                        <th><?php echo  $valor[$a][2] ?></th>
-                        <th><?php echo  $valor[$a][3] ?></th>
-                        <th><?php echo  $valor[$a][4] ?></th>
-                        <th><?php echo  $valor[$a][5] ?></th>
-                        <th><?php echo  $valor[$a][6] ?></th>
-                        <th><?php echo  $valor[$a][7] ?></th>
-                        <th><?php echo  $valor[$a][8] ?></th>
-
-
+                        <td><?php echo  $valor[$a][0] ?></td>
+                        <td><?php echo  $valor[$a][1]?></td>
+                        <td><?php echo  $valor[$a][2] ?></td>
+                        <td><?php echo  $valor[$a][5] ?></td>
+                        <td><?php echo  $valor[$a][6] ?></td>
+                        <td><?php echo  $valor[$a][7] ?></td>
+                        <td><?php echo  $valor[$a][8] ?></td>
+                        <td>
+                            <a onclick="window.location = '../Script/ScriptProveedor.php?codigo='+'<?php echo  $valor[$a][0] ?>'" style="cursor:pointer;">
+                                <span class="glyphicon glyphicon-pencil asd "></span>
+                            </a>
+                        </td>
                     </tr>
                     <?php endfor; ?>
 
                 </table>
             </div>
         </div>
-     <!--<div class="col-md-1"></div>-->
+        <div class="col-md-1"></div>
     </div>
 </div>
 <?php endif; ?>

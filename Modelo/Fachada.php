@@ -20,13 +20,13 @@ class Fachada {
         return $valor;
     }
 
-    public function registrarEmpleado($codigo, $dni, $celular, $nSegSocial, $fIngreso, $contraseña, $tipoEmpleado) {
+    public function registrarEmpleado($codigo, $dni, $celular, $sucursal, $fIngreso, $contraseña, $tipoEmpleado) {
         $DaoEmpleado = new DaoEmpleado();
         $DTOEmpleado = new EmpleadoDTO();
         $DTOEmpleado->setCodigo($codigo);
         $DTOEmpleado->setDni($dni);
         $DTOEmpleado->setCelular($celular);
-        $DTOEmpleado->setNSegSocial($nSegSocial);
+        $DTOEmpleado->setSucursal($sucursal);
         $DTOEmpleado->setFIngreso($fIngreso);
         $DTOEmpleado->setContraseña($contraseña);
         $DTOEmpleado->setTipoEmpleado($tipoEmpleado);
@@ -62,7 +62,7 @@ class Fachada {
         return $valor;
     }
 
-    public function registrarProveedor($codigo, $nit, $nombre, $pagina, $telefono, $cuentaBancaria, $nCuentaBancaria, $nombreContacto, $email) {
+    public function registrarProveedor($codigo, $nit, $nombre, $pagina, $telefono, $cuentaBancaria, $nCuentaBancaria, $nombreContacto, $email,$tipoCuenta) {
         $DaoProveedor = new DaoProveedor();
         $DTOProveedor = new ProveedorDTO();
         $DTOProveedor->setCodigo($codigo);
@@ -74,11 +74,12 @@ class Fachada {
         $DTOProveedor->setNCuentaBancaria($nCuentaBancaria);
         $DTOProveedor->setNombreContacto($nombreContacto);
         $DTOProveedor->setEmail($email);
+        $DTOProveedor->setTipoCuenta($tipoCuenta);
         $valor = $DaoProveedor->registrarProveedor($DTOProveedor);
         return $valor;
     }
-    
-    public function buscarSucursal($tipo,$informacion){
+
+    public function buscarSucursal($tipo, $informacion) {
         $DaoSucursal = new DaoSucursal();
         $DTOSucursal = new SucursalDTO();
         $DTOSucursal->setTipo($tipo);
@@ -86,7 +87,8 @@ class Fachada {
         $valor = $DaoSucursal->buscarSucursal($DTOSucursal);
         return $valor;
     }
-    public function buscarCliente($tipo,$informacion){
+
+    public function buscarCliente($tipo, $informacion) {
         $DaoCliente = new DaoCliente();
         $DTOCliente = new ClienteDTO();
         $DTOCliente->setTipo($tipo);
@@ -94,7 +96,8 @@ class Fachada {
         $valor = $DaoCliente->buscarCliente($DTOCliente);
         return $valor;
     }
-    public function buscarProveedor($tipo,$informacion){
+
+    public function buscarProveedor($tipo, $informacion) {
         $DaoProveedor = new DaoProveedor();
         $DTOProveedor = new ProveedorDTO();
         $DTOProveedor->setTipo($tipo);
@@ -102,7 +105,8 @@ class Fachada {
         $valor = $DaoProveedor->buscarProveedor($DTOProveedor);
         return $valor;
     }
-    public function buscarEmpleado($tipo,$informacion){
+
+    public function buscarEmpleado($tipo, $informacion) {
         $DaoEmpleado = new DaoEmpleado();
         $DTOEmpleado = new EmpleadoDTO();
         $DTOEmpleado->setTipo($tipo);
@@ -110,8 +114,8 @@ class Fachada {
         $valor = $DaoEmpleado->buscarEmpleado($DTOEmpleado);
         return $valor;
     }
-    
-    public function actualizarSucursal($codigo,$nombre,$telefono,$email,$pagina,$direccion,$ciudad,$pais){
+
+    public function actualizarSucursal($codigo, $nombre, $telefono, $email, $pagina, $direccion, $ciudad, $pais) {
         $DaoSucursal = new DaoSucursal();
         $DTOSucursal = new SucursalDTO();
         $DTOSucursal->setCodigo($codigo);
@@ -125,5 +129,35 @@ class Fachada {
         $valor = $DaoSucursal->actualizarSucursal($DTOSucursal);
         return $valor;
     }
+
+    public function actualizarCliente($dni, $nombre, $apellido, $direccion, $telefono, $email) {
+        $DaoCliente = new DaoCliente();
+        $DTOCliente = new ClienteDTO();
+        $DTOCliente->setDni($dni);
+        $DTOCliente->setNombre($nombre);
+        $DTOCliente->setApellido($apellido);
+        $DTOCliente->setDireccion($direccion);
+        $DTOCliente->setTelefono($telefono);
+        $DTOCliente->setEmail($email);
+        $valor = $DaoCliente->actualizarCliente($DTOCliente);
+        return $valor;
+    }
+    public function actualizarProveedor($codigo, $nit, $nombre, $pagina, $telefono, $cuentaBancaria, $nCuentaBancaria, $nombreContacto, $email,$tipoCuenta) {
+        $DaoProveedor = new DaoProveedor();
+        $DTOProveedor = new ProveedorDTO();
+        $DTOProveedor->setCodigo($codigo);
+        $DTOProveedor->setNit($nit);
+        $DTOProveedor->setNombre($nombre);
+        $DTOProveedor->setPagina($pagina);
+        $DTOProveedor->setTelefono($telefono);
+        $DTOProveedor->setCuentaBancaria($cuentaBancaria);
+        $DTOProveedor->setNCuentaBancaria($nCuentaBancaria);
+        $DTOProveedor->setNombreContacto($nombreContacto);
+        $DTOProveedor->setEmail($email);
+        $DTOProveedor->setTipoCuenta($tipoCuenta);
+        $valor = $DaoProveedor->actualizarProveedor($DTOProveedor);
+        return $valor;
+    }
     
+
 }

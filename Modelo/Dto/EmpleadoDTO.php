@@ -10,7 +10,6 @@ class EmpleadoDTO {
     private $fIngreso;
     private $fSalida;
     private $celular;
-    private $nSegSocial;
     private $tipo;
     private $informacion;
 
@@ -62,10 +61,6 @@ class EmpleadoDTO {
         return $this->celular;
     }
 
-    function getNSegSocial() {
-        return $this->nSegSocial;
-    }
-
     function setCodigo($codigo) {
         $this->codigo = $codigo;
     }
@@ -96,10 +91,6 @@ class EmpleadoDTO {
 
     function setCelular($celular) {
         $this->celular = $celular;
-    }
-
-    function setNSegSocial($nSegSocial) {
-        $this->nSegSocial = $nSegSocial;
     }
 
 }

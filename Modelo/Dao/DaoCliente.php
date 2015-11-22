@@ -38,12 +38,16 @@ class DaoCliente extends Dao {
             $conexion = $this->conectar();
             if ($tipo == 'Nombre') {
                 $stmt = $conexion->prepare("SELECT * FROM Cliente WHERE nom_cliente = ?");
+                $stmt->bind_param("s", $informacion);
             } else if ($tipo == 'Apellido') {
                 $stmt = $conexion->prepare("SELECT * FROM Cliente WHERE ape_cliente = ?");
+                $stmt->bind_param("s", $informacion);
             } else if ($tipo == 'Dni') {
                 $stmt = $conexion->prepare("SELECT * FROM Cliente WHERE dni_cliente = ?");
+                $stmt->bind_param("s", $informacion);
+            } else if ($tipo == 'Todos') {
+                $stmt = $conexion->prepare("SELECT * FROM Cliente");
             }
-            $stmt->bind_param("s", $informacion);
             $stmt->execute();
             $stmt->store_result();
             $num = $stmt->num_rows;
@@ -65,6 +69,35 @@ class DaoCliente extends Dao {
 
                 $stmt->close();
                 return $resultado;
+            }
+        } catch (PDOException $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function actualizarCliente($DTOCliente) {
+        try {
+            $dni = $DTOCliente->getDni();
+            $nombre = $DTOCliente->getNombre();
+            $apellido= $DTOCliente->getApellido();
+            $direccion = $DTOCliente->getDireccion();
+            $telefono = $DTOCliente->getTelefono();
+            $email = $DTOCliente->getEmail();
+
+
+            $conexion = $this->conectar();
+            $stmt = $conexion->prepare("UPDATE Cliente SET  nom_cliente= ? , ape_cliente= ?,
+                dir_cliente= ?,tel_cliente= ?, email_cliente= ?
+                where dni_cliente = ?;
+            ");
+            $stmt->bind_Param('sssisi', $nombre, $apellido, $direccion, $telefono, $email,$dni);
+            $stmt->execute();
+            $num = $stmt->affected_rows;
+            $stmt->close();
+            if ($num < 0) {
+                return false;
+            } else {
+                return true;
             }
         } catch (PDOException $e) {
             echo $e->getMessage();

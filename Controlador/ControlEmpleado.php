@@ -11,9 +11,9 @@ class ControlEmpleado extends Control {
         return $valor;
     }
     
-    public function RegistrarEmpleado($codigo, $dni, $celular, $nSegSocial, $fIngreso, $contraseña, $tipoEmpleado) {
+    public function RegistrarEmpleado($codigo, $dni, $celular, $sucursal, $fIngreso, $contraseña, $tipoEmpleado) {
         $Fachada = new Fachada();
-        $valor = $Fachada->registrarEmpleado($codigo, $dni, $celular, $nSegSocial, $fIngreso, $contraseña, $tipoEmpleado);
+        $valor = $Fachada->registrarEmpleado($codigo, $dni, $celular, $sucursal, $fIngreso, $contraseña, $tipoEmpleado);
         return $valor;
     }
 

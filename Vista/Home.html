@@ -6,7 +6,9 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title></title>
+        <title>
+            #title#
+        </title>
         <link  rel="stylesheet" type="text/css" href="../Vista/css/bootstrap.css">
         <style>
             .glyphicone{
@@ -15,7 +17,34 @@ and open the template in the editor.
             .glyphicons{
                 font-size: 1.2em;
             }
+            .asd{
+                color:#5cb85c;
+            }
+
         </style>
+        <script>
+            function capturar() {
+                var posicion = document.getElementById("sel").options.selectedIndex;
+                var valor = document.getElementById("sel").options[posicion].text;
+                if (valor == "Todos") {
+                    document.form.informacion.readOnly = true;
+                    document.form.informacion.value = " ";
+                } else {
+                    document.form.informacion.readOnly = false;
+                }
+            }
+            
+            function habilitar(){
+                var posicion = document.getElementById("sel2").options.selectedIndex;
+                var valor = document.getElementById("sel2").options[posicion].text;
+                if (valor == "Vendedor") {
+                    document.form2.contraseña.readOnly = true;
+                    document.form2.contraseña.value = "";
+                } else {
+                    document.form2.contraseña.readOnly = false;
+                }
+            }
+        </script>
     </head>
     <body>
         <header>

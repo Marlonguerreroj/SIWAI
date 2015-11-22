@@ -11,7 +11,7 @@ abstract class Control {
         $pagina = $this->load_page('../Vista/Home.html');
         $header = $this->load_page('../Vista/Header.html');
         $pagina = $this->replace_content('/\#header\#/ms', $header, $pagina);
-        $pagina = $this->replace_content('/\#TITLE\#/ms', $title, $pagina);
+        $pagina = $this->replace_content('/\#title\#/ms', $title, $pagina);
         
 
         return $pagina;
