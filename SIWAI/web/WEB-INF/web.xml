@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <servlet>
+        <servlet-name>ControladorCliente</servlet-name>
+        <servlet-class>co.edu.ufps.siwai.controlador.servlet.ControladorCliente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorProveedor</servlet-name>
+        <servlet-class>co.edu.ufps.siwai.controlador.servlet.ControladorProveedor</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorEmpleado</servlet-name>
+        <servlet-class>co.edu.ufps.siwai.controlador.servlet.ControladorEmpleado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorSucursal</servlet-name>
+        <servlet-class>co.edu.ufps.siwai.controlador.servlet.ControladorSucursal</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ControladorCliente</servlet-name>
+        <url-pattern>/ControladorCliente</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorProveedor</servlet-name>
+        <url-pattern>/ControladorProveedor</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorEmpleado</servlet-name>
+        <url-pattern>/ControladorEmpleado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorSucursal</servlet-name>
+        <url-pattern>/ControladorSucursal</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+</web-app>

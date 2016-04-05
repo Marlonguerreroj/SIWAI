@@ -1,0 +1,44 @@
+/* Espacio entre el tope y el cuerpo */
+body{
+    padding-top: 50px;
+}
+/* Espaciado Utilizados en el login */
+.espaciado{
+    margin-top: 10px;
+}
+/* Div que contiene el formulario para el inicio de sesion */
+.centrarLogin{
+    margin-top: 3%;
+    text-align: center;
+
+}
+/* Modifica la imagen corporativa en el login */
+.imagen{
+    width: 19%;
+    height: 19%;
+}
+/*Modifica el Div que contiene la imagen corporativa*/
+.centrarDiv{
+    text-align: center;
+}
+/* Tamaño de la imagen del footer */
+.footerImagen{
+    width: 3%;
+    height: 3%;
+}
+/* Centra el div que centra el texto */
+.centrar-texto{
+    text-align: center;
+}
+/* Ajusta el tamaño del logo a la barra de navegación */
+.logoBarraNav{
+    max-width: 35px;
+    margin-top: -10px;
+}
+.jumbotron{
+    background-color: white;
+}
+.imagenMenu{
+    width: 34%;
+    height: 34%;
+}
