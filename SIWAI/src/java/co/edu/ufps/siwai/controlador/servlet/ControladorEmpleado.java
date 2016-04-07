@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -8,6 +8,7 @@ package co.edu.ufps.siwai.controlador.servlet;
 import co.edu.ufps.siwai.modelo.fachada.Fachada;
 import co.edu.ufps.siwai.modelo.mysql.dto.EmpleadoDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -104,16 +105,19 @@ public class ControladorEmpleado extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected boolean iniciarSesion(HttpServletRequest request, HttpServletResponse response)
+    protected void iniciarSesion(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String usuario = request.getParameter("usuario");
         String contraseña = request.getParameter("contra");
         Fachada fachada = new Fachada();
-        boolean ingreso = fachada.iniciarSesion(usuario, contraseña);
-        
-        return ingreso;
+        String ingreso = fachada.iniciarSesion(usuario, contraseña);
+        if (!ingreso.equalsIgnoreCase("NULL")) {
+            request.getSession().setAttribute("usuario", ingreso);
+        }
+        PrintWriter out = response.getWriter();
+        out.print(ingreso);
 
     }
 
@@ -151,6 +155,7 @@ public class ControladorEmpleado extends HttpServlet {
         if (request.getParameter("iniciarSesion") != null) {
             iniciarSesion(request, response);
         }
+
     }
 
     /**

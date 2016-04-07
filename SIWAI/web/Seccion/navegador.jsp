@@ -92,7 +92,7 @@
                 </ul>
                 <!-- Mensaje de Bienvenida y Boton para cerrar Sesion -->
                 <ul class="nav navbar-nav navbar-right">
-                    <li><p class="navbar-text">Bienvenido</p></li>
+                    <li><p class="navbar-text">Bienvenido <%=request.getSession().getAttribute("usuario") %></p></li>
                     <li><a href="../../index.jsp">
                             <span class="glyphicon glyphicone glyphicon-off"></span>
                         </a></li>

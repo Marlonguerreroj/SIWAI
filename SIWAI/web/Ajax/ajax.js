@@ -6,45 +6,31 @@
 
 /* Crea el objeto AJAX. Esta funcion es generica para cualquier utilidad de este tipo, por
  lo que se puede copiar tal como esta aqui */
-function nuevoAjax()
-{
-    var xmlhttp = false;
-    try {
-        // Creacion del objeto AJAX para navegadores no IE Ejemplo:Mozilla, Safari 
-        xmlhttp = new ActiveXObject("Msxml2.XMLHTTP");
-    } catch (e) {
-        try {
-            // Creacion del objet AJAX para IE
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-        } catch (E) {
-            if (!xmlhttp && typeof XMLHttpRequest != 'undefined')
-                xmlhttp = new XMLHttpRequest();
-        }
-    }
-    return xmlhttp;
-}
 
 function iniciarSesion(campo1, campo2) {
-    ajax = nuevoAjax();
+
     usuario = campo1.value;
     contra = campo2.value;
-    parametros = "usuario=" + usuario;
-    +"&contra=" + contra;
-    url = "/SIWAI/ControladorEmpleado";
-    ajax.open("POST", url, true);
-    ajax.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-    ajax.send(parametros);
-    ajax.onreadystatechange = function () {
-        if (ajax.readyState == 4) {
-            if (ajax.status == 200) {
-                var rta = ajax.responseText;
-                if (rta == true) {
-                    
-                }else{
-                 campo1   
-                }
+    iniciar = true;
+    var text = "/SIWAI/ControladorEmpleado?usuario=" + usuario + "&contra=" + contra + "&iniciarSesion=" + iniciar;
+    xhttp.open("post", text, true);
+    xhttp.send();
+    var xhttp = new XMLHttpRequest();
+    
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            alert("1");
+            if (sub.indexOf('NULL') > -1) {
+                
+                campo1.parentNode.className = " form-group has-error has-feedback";
+                campo2.parentNode.className = "form-group espaciado has-error has-feedback";
+                $("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(campo1);
+                $("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(campo2);
+            } else {
+                window.location.href = 'Seccion/Menu/menu.jsp';
+               
             }
         }
     }
-
 }

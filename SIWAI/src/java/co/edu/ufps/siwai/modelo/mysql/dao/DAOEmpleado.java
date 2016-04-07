@@ -129,8 +129,8 @@ public class DAOEmpleado {
         return lista;
     }
 
-    public int iniciarSesion(String usuario, String contraseña) {
-        int resultado = 0;
+    public String iniciarSesion(String usuario, String contraseña) {
+        String resultado = "NULL";
         try {
             conn = Conexion.generarConexion();
             CallableStatement stmt = conn.prepareCall("{?=call iniciarSesion(?, ?)}");
@@ -138,7 +138,7 @@ public class DAOEmpleado {
             stmt.setString(2, usuario);
             stmt.setString(3, contraseña);
             stmt.execute();
-            resultado = stmt.getInt(1);
+            resultado = stmt.getString(1);
             stmt.close();
         } catch (Exception e) {
         } finally {

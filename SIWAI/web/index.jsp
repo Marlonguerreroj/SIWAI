@@ -13,8 +13,9 @@
         <!-- Procurar llamar los archivos .min porque pesan menos -->
         <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="Css/estilos.css">
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <link rel="shortcut icon" type="image/x-icon" href="Imagenes/icono.ico">
-        <script src="../../Ajax/ajax.js"></script>
+        <script src="Ajax/ajax.js"></script>
     </head>
     <body>
         <!--Inicio - Div que contiene la imagen corporativa-->
@@ -24,17 +25,17 @@
         <!--Fin - Div que contiene la imagen corporativa-->
         <!--Inicio - Div que contiene el formulario para iniciar sesion-->
         <div class="centrarLogin well">
-            <form  class="form-inline" action="/SIWAI/ControladorEmpleado" method="post">
+            <div  class="form-inline">
                 <div id="dv1" class="form-group">
-                    <a class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-user"></span></a>
-                    <input required type="text" class="form-control" name="usuario" placeholder="Usuario">
-                </div>
-                <div id="dv2" class="form-inline espaciado">
-                    <a class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-lock"></span></a>
-                    <input required type="password" class="form-control" name="contra" placeholder="Contraseña">
-                </div>
-                <button class="btn btn-danger espaciado" onclick="iniciarSesion(document)">Ingresar</button>
-            </form>
+                    <label class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-user"></span></label>
+                    <input required type="text" class="form-control" id="usuario" placeholder="Usuario">
+                </div><br>
+                <div id="dv2" class=" form-group espaciado ">
+                    <label class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-lock"></span></label>
+                    <input required type="password" class="form-control" id="contra" placeholder="Contraseña">
+                </div><br>
+                <button class="btn btn-danger espaciado" onclick="iniciarSesion(document.getElementById('usuario'), document.getElementById('contra'))" >Ingresar</button>
+            </div>
         </div>
         <!-- Pie, no se incluye pie.jsp por diferencia de rutas en la imagen.-->
         <footer class="centrar-texto">

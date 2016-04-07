@@ -97,14 +97,9 @@ public class Fachada {
         return dao.consultarEmpleado(buscarPor, informacion);
     }
     
-    public boolean iniciarSesion(String usuario,String contraseña){
-        boolean ingreso = false;
+    public String iniciarSesion(String usuario,String contraseña){
         DAOEmpleado dao = new DAOEmpleado();
-        int resultado = dao.iniciarSesion(usuario, contraseña);
-            if(resultado == 1){
-                ingreso = true;
-            }
-        return ingreso;
+        return dao.iniciarSesion(usuario, contraseña) ;
     }
     
     /**
