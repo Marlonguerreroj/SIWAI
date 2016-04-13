@@ -7,6 +7,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="co.edu.ufps.siwai.modelo.mysql.dto.EmpleadoDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("../../index.jsp");
+    }%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -35,11 +38,10 @@
             <form action="/SIWAI/ControladorEmpleado" method="post" name="form">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-2">
-                            <p>Buscar por:</p>  
-                        </div>
-                        <div class="col-md-2">
-                            <select name="sel" class="form-control" id="sel" required onchange="capturar()" >
+                        <div class="col-md-1"></div>
+                        <div class="col-md-4">
+                            <label for="sel" >Buscar por: </label>
+                            <select name="sel" class="tamañoConsultar" id="sel" required onchange="capturar()" >
                                 <option value="">Seleccione</option>
                                 <option value="Todos">Todos</option>
                                 <option value="Sucursal">Sucursal</option>
@@ -49,13 +51,11 @@
                             </select>
                         </div>
                         <div class="col-md-1"></div>
-                        <div class="col-md-2">
-                            <p>Informacion:</p>  
+                        <div class="col-md-4">
+                            <label for="informacion">Informacion: </label>
+                            <input required name="informacion" type="text" class="tamañoConsultar">
                         </div>
-                        <div class="col-md-2">
-                            <input required name="informacion" type="text" class="form-control ">
-                        </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <button name="consultarEmpleado" type="submit" class="btn btn-success  letra">
                                 <span class="glyphicon glyphicons glyphicon-search"></span>
                             </button>

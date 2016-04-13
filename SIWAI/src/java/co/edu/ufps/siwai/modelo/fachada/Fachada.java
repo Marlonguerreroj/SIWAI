@@ -97,7 +97,7 @@ public class Fachada {
         return dao.consultarEmpleado(buscarPor, informacion);
     }
     
-    public String iniciarSesion(String usuario,String contraseña){
+    public String iniciarSesion(String usuario,String contraseña) throws Exception{
         DAOEmpleado dao = new DAOEmpleado();
         return dao.iniciarSesion(usuario, contraseña) ;
     }

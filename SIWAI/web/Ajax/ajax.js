@@ -8,28 +8,26 @@
  lo que se puede copiar tal como esta aqui */
 
 function iniciarSesion(campo1, campo2) {
-
     usuario = campo1.value;
     contra = campo2.value;
     iniciar = true;
-    var text = "/SIWAI/ControladorEmpleado?usuario=" + usuario + "&contra=" + contra + "&iniciarSesion=" + iniciar;
-    xhttp.open("post", text, true);
-    xhttp.send();
+
     var xhttp = new XMLHttpRequest();
-    
+    var text = "/SIWAI/ControladorEmpleado?usuario=" + usuario + "&contra=" + contra + "&iniciarSesion=" + iniciar;
+    xhttp.open("POST", text, true);
+    xhttp.send();
+
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
-            alert("1");
-            if (sub.indexOf('NULL') > -1) {
-                
+            if (sub.indexOf('null') >= 0) {
                 campo1.parentNode.className = " form-group has-error has-feedback";
                 campo2.parentNode.className = "form-group espaciado has-error has-feedback";
                 $("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(campo1);
                 $("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(campo2);
             } else {
                 window.location.href = 'Seccion/Menu/menu.jsp';
-               
+
             }
         }
     }

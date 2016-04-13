@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% if (session.getAttribute("usuario") != null) {
+        response.sendRedirect("Seccion/Menu/menu.jsp");
+    }%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -14,6 +17,7 @@
         <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="Css/estilos.css">
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <link rel="shortcut icon" type="image/x-icon" href="Imagenes/icono.ico">
         <script src="Ajax/ajax.js"></script>
     </head>

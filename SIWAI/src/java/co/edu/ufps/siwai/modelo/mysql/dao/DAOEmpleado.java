@@ -129,8 +129,8 @@ public class DAOEmpleado {
         return lista;
     }
 
-    public String iniciarSesion(String usuario, String contraseña) {
-        String resultado = "NULL";
+    public String iniciarSesion(String usuario, String contraseña) throws Exception {
+        String resultado = "";
         try {
             conn = Conexion.generarConexion();
             CallableStatement stmt = conn.prepareCall("{?=call iniciarSesion(?, ?)}");
@@ -141,11 +141,11 @@ public class DAOEmpleado {
             resultado = stmt.getString(1);
             stmt.close();
         } catch (Exception e) {
+            
         } finally {
             try {
                 conn.close();
             } catch (SQLException ex) {
-
             }
         }
         return resultado;

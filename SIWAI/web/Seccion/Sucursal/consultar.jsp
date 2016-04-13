@@ -7,6 +7,9 @@
 <%@page import="co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("../../index.jsp");
+    }%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -34,12 +37,12 @@
             <!-- Formulario para consultar la sucursal -->
             <form name="form" action="/SIWAI/ControladorSucursal" method="post">
                 <div class="container">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <p>Buscar por:</p>  
-                        </div>
-                        <div class="col-md-2">
-                            <select name="sel" id="sel" class="form-control"  onchange="capturar()" required>
+                    <div class="row ">
+                        <div class="col-md-1"></div>
+
+                        <div class="col-md-4">
+                            <label for="sel" >Buscar por: </label>
+                            <select name="sel" id="sel" class="tamañoConsultar"  onchange="capturar()" required>
                                 <option value="" >Seleccione</option>
                                 <option value="Todos" >Todos</option>
                                 <option value="Codigo" >Codigo</option>
@@ -47,14 +50,12 @@
                             </select>
                         </div>
                         <div class="col-md-1"></div>
-                        <div class="col-md-2">
-                            <p>Informacion:</p>  
+                        <div class="col-md-4">  
+                            <label for="informacion">Informacion: </label>
+                            <input required id="informacion" name="informacion" type="text" class="tamañoConsultar">
                         </div>
-                        <div class="col-md-2">
-                            <input required id="informacion" name="informacion" type="text" class="form-control ">
-                        </div>
-                        <div class="col-md-2">
-                            <button name="consultarSucursal" type="submit" class="btn btn-success  letra">
+                        <div class="col-md-1">
+                            <button id="consultar" name="consultarSucursal" type="submit" class="btn btn-success  letra">
                                 <span class="glyphicon glyphicons glyphicon-search"></span>
                             </button>
                         </div>
@@ -67,7 +68,7 @@
             </form>
             <!-- Finalizacion del formulario para consultar -->
             <%
-            if(session.getAttribute("sucursales")!=null){    
+                if (session.getAttribute("sucursales") != null) {
             %>
             <!-- Div que contiene la tabla de sucursales -->
             <div class="container">
@@ -104,7 +105,7 @@
                                     <td><%= lista.get(i).getCiudad()%></td>
                                     <td><%= lista.get(i).getPais()%></td>                          
                                     <td>
-                                        <a href="actualizar.jsp?codigo=<%=i %>" style="cursor:pointer;">
+                                        <a href="actualizar.jsp?codigo=<%=i%>" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-edit asd "></span>
                                         </a>
                                     </td>
@@ -112,7 +113,7 @@
                                 <% }
                                         session.setAttribute("sucursales", null);
                                     }
-                                    
+
                                 %>
                             </table>
                         </div>
@@ -120,7 +121,7 @@
                     <div class="col-md-1"></div>
                 </div>
                 <!-- Fin del div que contiene la tabla de sucursales -->
-                <% } %>
+                <% }%>
             </div>
             <!-- Fin del contenido principal-->
         </section>

@@ -144,6 +144,7 @@ function capturar() {
     if (valor == "Todos") {
         document.form.informacion.readOnly = true;
         document.form.informacion.required = false;
+        document.form.informacion.value = "";
     } else {
         document.form.informacion.readOnly = false;
         document.form.informacion.required = true;
