@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.ufps.siwai.controlador.servlet;
+package co.edu.ufps.siwai.controlador;
 
 import co.edu.ufps.siwai.modelo.fachada.Fachada;
 import co.edu.ufps.siwai.modelo.mysql.dto.ProveedorDTO;
