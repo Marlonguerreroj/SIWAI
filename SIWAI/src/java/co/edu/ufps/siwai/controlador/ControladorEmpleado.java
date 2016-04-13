@@ -112,12 +112,20 @@ public class ControladorEmpleado extends HttpServlet {
         String usuario = request.getParameter("usuario");
         String contraseña = request.getParameter("contra");
         Fachada fachada = new Fachada();
-        String ingreso = fachada.iniciarSesion(usuario, contraseña);
-        if (!ingreso.equalsIgnoreCase("NULL")) {
-            request.getSession().setAttribute("usuario", ingreso);
-        }
+        request.getSession().setAttribute("fachada", fachada);
+        String ingreso;
         PrintWriter out = response.getWriter();
-        out.print(ingreso);
+        try {
+            ingreso = fachada.iniciarSesion(usuario, contraseña);
+            out.print(ingreso);
+            if (!ingreso.equalsIgnoreCase("null")) {
+                String[] ingreso2 = ingreso.split("-");
+                request.getSession().setAttribute("usuario", ingreso2[0]);
+                request.getSession().setAttribute("cargo", ingreso2[1]);
+            }
+        } catch (Exception e) {
+
+        }
 
     }
 
