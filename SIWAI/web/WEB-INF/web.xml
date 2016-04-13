@@ -2,19 +2,19 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <servlet>
         <servlet-name>ControladorCliente</servlet-name>
-        <servlet-class>co.edu.ufps.siwai.controlador.servlet.ControladorCliente</servlet-class>
+        <servlet-class>co.edu.ufps.siwai.controlador.ControladorCliente</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ControladorProveedor</servlet-name>
-        <servlet-class>co.edu.ufps.siwai.controlador.servlet.ControladorProveedor</servlet-class>
+        <servlet-class>co.edu.ufps.siwai.controlador.ControladorProveedor</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ControladorEmpleado</servlet-name>
-        <servlet-class>co.edu.ufps.siwai.controlador.servlet.ControladorEmpleado</servlet-class>
+        <servlet-class>co.edu.ufps.siwai.controlador.ControladorEmpleado</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ControladorSucursal</servlet-name>
-        <servlet-class>co.edu.ufps.siwai.controlador.servlet.ControladorSucursal</servlet-class>
+        <servlet-class>co.edu.ufps.siwai.controlador.ControladorSucursal</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ControladorCliente</servlet-name>
