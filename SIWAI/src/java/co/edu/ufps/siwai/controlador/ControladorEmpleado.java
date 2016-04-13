@@ -126,7 +126,14 @@ public class ControladorEmpleado extends HttpServlet {
         } catch (Exception e) {
 
         }
+    }
 
+    protected void cerrarSesion(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        request.getSession().invalidate();
+        response.sendRedirect("/SIWAI/index.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -141,6 +148,9 @@ public class ControladorEmpleado extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getParameter("cerrarSesion") != null) {
+            cerrarSesion(request, response);
+        }
     }
 
     /**
