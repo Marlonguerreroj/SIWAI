@@ -113,18 +113,19 @@ public class ControladorEmpleado extends HttpServlet {
         String contraseña = request.getParameter("contra");
         Fachada fachada = new Fachada();
         request.getSession().setAttribute("fachada", fachada);
-        String ingreso;
+        String ingreso = "";
         PrintWriter out = response.getWriter();
         try {
             ingreso = fachada.iniciarSesion(usuario, contraseña);
             out.print(ingreso);
-            if (!ingreso.equalsIgnoreCase("null")) {
+            if (!ingreso.equals("nulo") || (ingreso.isEmpty())) {
                 String[] ingreso2 = ingreso.split("-");
                 request.getSession().setAttribute("usuario", ingreso2[0]);
                 request.getSession().setAttribute("cargo", ingreso2[1]);
             }
-        } catch (Exception e) {
 
+        } catch (Exception e) {
+            out.print("Error en la base de datos");
         }
     }
 

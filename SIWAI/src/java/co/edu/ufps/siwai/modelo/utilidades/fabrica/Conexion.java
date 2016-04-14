@@ -15,7 +15,7 @@ import java.sql.DriverManager;
 public class Conexion {
     
     private static final String DRIVER = "org.gjt.mm.mysql.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost/UFPS_45";
+    private static final String DATABASE_URL = "jdbc:mysql://localhost/ufps_45";
     private static final String USER = "root";
     private static final String PASSWORD = "";
     

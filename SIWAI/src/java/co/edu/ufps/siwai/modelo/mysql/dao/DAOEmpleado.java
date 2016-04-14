@@ -141,7 +141,6 @@ public class DAOEmpleado {
             resultado = stmt.getString(1);
             stmt.close();
         } catch (Exception e) {
-            
         } finally {
             try {
                 conn.close();
