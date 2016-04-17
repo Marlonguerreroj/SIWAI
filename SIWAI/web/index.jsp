@@ -30,6 +30,7 @@
         <!--Inicio - Div que contiene el formulario para iniciar sesion-->
         <div class="centrarLogin well">
             <div  class="form-inline">
+                <form onSubmit="iniciarSesion(document.getElementById('usuario'), document.getElementById('contra'));return false">
                 <div id="dv1" class="form-group">
                     <label class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-user"></span></label>
                     <input required type="text" class="form-control" id="usuario" placeholder="Usuario">
@@ -38,7 +39,8 @@
                     <label class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-lock"></span></label>
                     <input required type="password" class="form-control" id="contra" placeholder="Contraseña">
                 </div><br>
-                <button class="btn btn-danger espaciado" onclick="iniciarSesion(document.getElementById('usuario'), document.getElementById('contra'))" >Ingresar</button>
+                <button class="btn btn-danger espaciado" onclick="" >Ingresar</button>
+                </form>
             </div>
         </div>
         <!-- Pie, no se incluye pie.jsp por diferencia de rutas en la imagen.-->

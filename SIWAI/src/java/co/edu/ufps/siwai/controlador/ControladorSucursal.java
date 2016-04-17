@@ -8,6 +8,7 @@ package co.edu.ufps.siwai.controlador;
 import co.edu.ufps.siwai.modelo.fachada.Fachada;
 import co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,20 +45,22 @@ public class ControladorSucursal extends HttpServlet {
         String ciudad = request.getParameter("ciudad");
         String pais = request.getParameter("pais");
         Fachada fachada = new Fachada();
-        String mensaje;
         boolean exito = false;
+        String mensaje;
+        PrintWriter out = response.getWriter();
+
         try {
             exito = fachada.registrarSucursal(codigo, nombre, telefono, email, paginaWeb, direccion, ciudad, pais);
+            if (exito) {
+                mensaje = "Sucursal registrada exitosamente";
+                request.getSession().setAttribute("msjRS", mensaje);
+            }
+            out.print(exito);
+
         } catch (Exception ex) {
-            mensaje = "Error en la conexion a la base de datos";
+            out.print("Error en la base de datos");
         }
-        if (exito) {
-            mensaje = "Sucursal registrada exitosamente";
-        } else {
-            mensaje = "Existe otra sucursal con el codigo ingresado";
-        }
-        request.getSession().setAttribute("msjRS", mensaje);
-        response.sendRedirect("/SIWAI/Seccion/Sucursal/registrar.jsp");
+
     }
 
     /**

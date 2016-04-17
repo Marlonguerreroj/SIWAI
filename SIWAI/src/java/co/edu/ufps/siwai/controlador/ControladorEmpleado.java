@@ -113,7 +113,7 @@ public class ControladorEmpleado extends HttpServlet {
         String contraseña = request.getParameter("contra");
         Fachada fachada = new Fachada();
         request.getSession().setAttribute("fachada", fachada);
-        String ingreso = "";
+        String ingreso;
         PrintWriter out = response.getWriter();
         try {
             ingreso = fachada.iniciarSesion(usuario, contraseña);
