@@ -95,7 +95,7 @@
                     <div class="row centrar-texto">
                         <div class="col-md-4"></div>
                         <div class="col-md-2">
-                            <button name="registrarCliente" type="submit" class="btn btn-success btn-lg letra">
+                            <button class="btn btn-success btn-lg letra">
                                 Registrar
                             </button>
                         </div>
