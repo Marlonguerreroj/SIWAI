@@ -46,23 +46,25 @@ public class ControladorEmpleado extends HttpServlet {
         String email = request.getParameter("email");
         String direccion = request.getParameter("direccion");
         String fIngreso = request.getParameter("fIngreso");
-        String cargo = request.getParameter("sel2");
-        String sucursal = request.getParameter("sel1");
-        Fachada fachada = new Fachada();
+        String cargo = request.getParameter("cargo");
+        String sucursal = request.getParameter("sucursal");
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         String mensaje;
-        boolean exito = false;
+        boolean exito;
+        PrintWriter out = response.getWriter();
         try {
             exito = fachada.registrarEmpleado(codigo, dni, nombre, apellido, telefono, celular, contrasena, email, direccion, fIngreso, cargo, sucursal);
+            if (exito) {
+                mensaje = "Empleado registrado exitosamente";
+                request.getSession().setAttribute("msjRE", mensaje);
+            }
+            out.print(exito);
         } catch (Exception ex) {
-            mensaje = "Error en la conexion a la base de datos";
+            ex.printStackTrace();
+            out.print("Error en la conexion a la base de datos");
         }
-        if (exito) {
-            mensaje = "Empleado registrado exitosamente";
-        } else {
-            mensaje = "Existe otro empleado con el DNI ingresado";
-        }
-        request.getSession().setAttribute("msjRE", mensaje);
-        response.sendRedirect("/SIWAI/Seccion/Empleado/registrar.jsp");
+
+        
     }
 
     /**
@@ -80,7 +82,7 @@ public class ControladorEmpleado extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String buscarPor = request.getParameter("sel");
         String informacion = request.getParameter("informacion");
-        Fachada fachada = new Fachada();
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         ArrayList<EmpleadoDTO> lista = null;
         try {
             lista = fachada.consultarEmpleado(buscarPor, informacion);

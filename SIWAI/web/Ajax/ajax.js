@@ -71,3 +71,42 @@ function registrarSucursal(document) {
         }
     }
 }
+
+function registrarEmpleado(document) {
+    sucursal = document.elements[0].value;
+    cargo = document.elements[1].value;
+    codigo = document.elements[2].value;
+    dni = document.elements[3].value;
+    nombre = document.elements[4].value;
+    apellido = document.elements[5].value;
+    telefono = document.elements[6].value;
+    celular = document.elements[7].value;
+    contrasena = document.elements[8].value;
+    email = document.elements[9].value;
+    direccion = document.elements[10].value;
+    fIngreso = document.elements[11].value;
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorEmpleado?registrarEmpleado=true&sucursal=" + sucursal + "&cargo=" + cargo +
+            "&codigo=" + codigo + "&dni=" + dni + "&nombre=" + nombre + "&apellido=" + apellido + "&telefono=" + telefono +
+            "&celular=" + celular + "&contrasena=" + contrasena + "&email=" + email + "&direccion=" + direccion +
+            "&fIngreso=" + fIngreso;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            if (sub.indexOf("false") >= 0) {
+                $("div").remove("#alert");
+                $("body").prepend("<div id='alert' class='alert alert-warning centrarDiv'>Existe otro empleado registrado con el DNI ingresado</div>");
+                codigo.parentNode.className = " col-md-3 has-error has-feedback";
+                $("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(codigo);
+            } else if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("body").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" + sub + "</div>");
+            } else if (sub.indexOf("true") >= 0) {
+                window.location.reload();
+            }
+        }
+    }
+}

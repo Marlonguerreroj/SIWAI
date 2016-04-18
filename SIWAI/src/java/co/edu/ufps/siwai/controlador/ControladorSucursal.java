@@ -44,11 +44,10 @@ public class ControladorSucursal extends HttpServlet {
         String direccion = request.getParameter("direccion");
         String ciudad = request.getParameter("ciudad");
         String pais = request.getParameter("pais");
-        Fachada fachada = new Fachada();
-        boolean exito = false;
+        Fachada fachada = (Fachada)request.getSession().getAttribute("fachada");
+        boolean exito;
         String mensaje;
         PrintWriter out = response.getWriter();
-
         try {
             exito = fachada.registrarSucursal(codigo, nombre, telefono, email, paginaWeb, direccion, ciudad, pais);
             if (exito) {
@@ -58,7 +57,7 @@ public class ControladorSucursal extends HttpServlet {
             out.print(exito);
 
         } catch (Exception ex) {
-            out.print("Error en la base de datos");
+            out.print("Error en la conexion a la base de datos");
         }
 
     }
@@ -78,7 +77,7 @@ public class ControladorSucursal extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String buscarPor = request.getParameter("sel");
         String informacion = request.getParameter("informacion");
-        Fachada fachada = new Fachada();
+        Fachada fachada = (Fachada)request.getSession().getAttribute("fachada");
         ArrayList<SucursalDTO> lista = null;
         try {
             lista = fachada.consultarSucursal(buscarPor, informacion);
