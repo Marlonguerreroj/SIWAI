@@ -5,6 +5,9 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("../../index.jsp");
+    }%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -18,44 +21,21 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <!-- Script del Ajax-->   
+        <script src="../../Ajax/ajax.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
         <section>
-            <%
-                String mensaje = session.getAttribute("msjRC") + "";
-                if (!mensaje.equalsIgnoreCase("null")) {
-            %>
-            <div class="row">
-                <% if (mensaje.contains("registrado")) {%>
-                <div class="alert alert-success centrar-texto" role="alert" arial >
-                    <%=mensaje%>
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                </div>
-                <% } else if (mensaje.contains("Existe")) {%>
-                <div class="alert alert-warning centrar-texto" role="alert">
-                    <%=mensaje%>
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                </div>
-                <% } else {%>
-                <div class="alert alert-danger centrar-texto" role="alert">
-                    <%=mensaje%>
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                </div>
-                <% } %>
-            </div>
-            <%
-                    session.removeAttribute("msjRC");
-                }
-            %>
             <div>
                 <h1 class="centrar-texto">Registrar Cliente</h1>
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form action="/SIWAI/ControladorCliente" method="post">
+            <form onSubmit="registrarCliente(document.forms[0]);
+                    return false" id="form">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>

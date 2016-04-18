@@ -71,3 +71,37 @@ function registrarSucursal(document) {
         }
     }
 }
+
+function registrarCliente(document){
+    nombres = document.elements[0].value;
+    apellidos = document.elements[1].value;
+    dni = document.elements[2];
+    telefono = document.elements[3].value;
+    direccion = document.elements[4].value;
+    email = document.elements[5].value;
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorCliente?registrarCliente=true&dni=" + dni.value + "&nombre=" +
+            nombres + "&apellido=" + apellidos + "&telefono=" + telefono + "&email=" + email;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            if (sub.indexOf("Fallo") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>Existe otro cliente registrado con el DNI: " + dni + "</div>");
+                dni.parentNode.className = " col-md-3 has-error has-feedback";
+                $("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(dni);
+            } else if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" + sub + "</div>");
+            } else if (sub.indexOf("Exito") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-success centrarDiv'>Cliente registrado exitosamente</div>");
+                dni.parentNode.className = " col-md-3 has-error has-feedback";
+                $("<span class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(dni);
+                window.location.reload();
+            }
+        }
+    }
+}

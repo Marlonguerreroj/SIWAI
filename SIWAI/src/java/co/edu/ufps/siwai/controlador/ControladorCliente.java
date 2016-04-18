@@ -8,6 +8,7 @@ package co.edu.ufps.siwai.controlador;
 import co.edu.ufps.siwai.modelo.fachada.Fachada;
 import co.edu.ufps.siwai.modelo.mysql.dto.ClienteDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -42,18 +43,15 @@ public class ControladorCliente extends HttpServlet {
         String direccion = request.getParameter("direccion");
         String email = request.getParameter("email");
         Fachada fachada = new Fachada();
-        String mensaje = "";
+        PrintWriter out = response.getWriter();
         try {
             if (fachada.registrarCliente(dni, nombre, apellido, direccion, email, telefono)) {
-                mensaje = "Cliente registrado exitosamente";
+               out.print("Exito");
             } else {
-                mensaje = "Existe otro cliente con el DNI: " + dni;
+                out.print("Fallo");
             }
         } catch (Exception ex) {
-            mensaje = "Error en la conexion a la base de datos";
-        } finally {
-            request.getSession().setAttribute("msjRC", mensaje);
-            response.sendRedirect("/SIWAI/Seccion/Cliente/registrar.jsp");
+            out.print("Error en la conexion a la base de datos");
         }
     }
 

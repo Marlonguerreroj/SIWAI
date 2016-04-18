@@ -25,9 +25,13 @@ public class Conexion {
      * @throws java.lang.Exception Exception originada por fallo en la conexion.
      */
     public static Connection generarConexion() throws Exception{
-        Connection conexion;
+        Connection conexion = null;
+        try {
         Class.forName(DRIVER).newInstance();
         conexion = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
+        } catch (Exception ex) {
+            System.out.println(ex.toString());
+        }
         return conexion;
     }
 }
