@@ -120,7 +120,8 @@ public class ControladorEmpleado extends HttpServlet {
         try {
             ingreso = fachada.iniciarSesion(usuario, contraseña);
             out.print(ingreso);
-            if (!ingreso.equals("nulo") || (ingreso.isEmpty())) {
+            System.out.println("Ingreso:"+ingreso);
+            if (!ingreso.equals("nulo")) {
                 String[] ingreso2 = ingreso.split("-");
                 request.getSession().setAttribute("usuario", ingreso2[0]);
                 request.getSession().setAttribute("cargo", ingreso2[1]);
