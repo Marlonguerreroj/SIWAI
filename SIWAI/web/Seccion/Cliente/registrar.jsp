@@ -65,7 +65,7 @@
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Telefono:</p>
+                            <p>Teléfono:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="telefono" type="number" class="form-control ">
@@ -76,7 +76,7 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Direccion:</p>
+                            <p>Dirección:</p>
                         </div>
                         <div class="col-md-3">
                             <input name="direccion" type="text" class="form-control ">

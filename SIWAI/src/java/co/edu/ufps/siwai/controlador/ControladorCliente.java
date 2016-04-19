@@ -51,7 +51,7 @@ public class ControladorCliente extends HttpServlet {
                 out.print("Fallo");
             }
         } catch (Exception ex) {
-            out.print("Error en la conexion a la base de datos");
+            out.print("Error");
         }
     }
 
