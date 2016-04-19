@@ -29,7 +29,7 @@ public class DAOProveedor {
      * @param dto ProveedorDTO con los datos a registrar.
      * @return Cadena de texto, Exito si registro o la excepcion generada.
      * @throws Exception si existe un error en la conexion a la base de datos.
-     * @throws java.sql.SQLException
+     * @throws java.sql.SQLException El nit y/o el codigo del proveedor son duplicados.
      */
     public String registrarProveedor(ProveedorDTO dto) throws Exception, SQLException {
         String mensaje = "";
@@ -102,6 +102,9 @@ public class DAOProveedor {
                 dto.setEmailContacto(rs.getString(10));
                 dtos.add(dto);
             }
+            rs.close();
+            stmt.close();
+            conn.close();
         }
         return dtos;
     }

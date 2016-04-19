@@ -135,7 +135,7 @@ function registrarCliente(document){
             if (sub.indexOf("Fallo") >= 0) {
                 $("div").remove("#alert");
                 dni.parentNode.className = " col-md-3 has-error has-feedback";
-                $("<span id='campoRojo' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(codigo);
+                $("<span id='campoRojo' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(dni);
                 $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>"+
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
                         "Existe otro cliente registrado con el DNI: " + dni + "</div>");

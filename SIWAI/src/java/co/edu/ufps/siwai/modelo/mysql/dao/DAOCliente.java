@@ -102,8 +102,9 @@ public class DAOCliente {
                 dto.setEmail(rs.getString(6));
                 dtos.add(dto);
             }
-            conn.close();
             stmt.close();
+            rs.close();
+            conn.close();
         }
         return dtos;
     }

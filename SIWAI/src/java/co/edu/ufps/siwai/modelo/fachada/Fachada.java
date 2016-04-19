@@ -117,7 +117,7 @@ public class Fachada {
      * @param telContacto Telefono del contacto.
      * @return Cadena de texto, Exito si registro o la excepcion generada.
      * @throws java.lang.Exception Si existe error en la conexion a la base de datos.
-     * @throws java.sql.SQLException
+     * @throws java.sql.SQLException El nit y/o el codigo del proveedor son duplicados.
      */
     public String registrarProveedor(String codigo, String nit, String nombre, 
             String cuenta, String tipoCuenta, String sitioWeb, String nombreContacto, 

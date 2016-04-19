@@ -48,16 +48,18 @@ public class ControladorProveedor extends HttpServlet {
         String nombreContacto = request.getParameter("nombreContacto");
         Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         PrintWriter out = response.getWriter();
-        String mensaje = "";
         try {
-            mensaje = fachada.registrarProveedor(codigo, nit, nombre, cuenta, 
+            String mensaje = fachada.registrarProveedor(codigo, nit, nombre, cuenta, 
                     tipoCuenta, web, nombreContacto, email, numeroCuenta, telefono);
-        } catch(SQLException ex){
-            mensaje = ex.toString();
-        } catch (Exception ex) {
-            mensaje = "Error";
-        }finally {
             out.print(mensaje);
+        } catch(SQLException ex){
+            String mensaje = ex.toString();
+            if(mensaje.contains("PRIMARY"))
+                out.print("Fallo codigo");
+            else if (mensaje.contains("nit_proveedor"))
+                out.print("Fallo nit");
+        } catch (Exception ex) {
+            out.print("Error");
         }
     }
     
