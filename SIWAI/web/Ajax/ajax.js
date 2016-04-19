@@ -134,23 +134,20 @@ function registrarCliente(document){
             var sub = xhttp.responseText;
             if (sub.indexOf("Fallo") >= 0) {
                 $("div").remove("#alert");
-                dni.parentNode.className = " col-md-3 has-error has-feedback";
-                $("<span id='campoRojo' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(dni);
                 $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>"+
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
                         "Existe otro cliente registrado con el DNI: " + dni + "</div>");
             } else if (sub.indexOf("Error") >= 0) {
                 $("div").remove("#alert");
-                $("span").remove("#campoRojo");
                 $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>"+
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
                         "Error en la conexion a la base de datos</div>");
             } else if (sub.indexOf("Exito") >= 0) {
-                window.location.reload();
                 $("div").remove("#alert");
                 $("section").prepend("<div id='alert' class='alert alert-success centrarDiv'>"+
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
                         "Cliente registrado exitosamente</div>");
+                $("#form")[0].reset();
             }
         }
     }
@@ -182,38 +179,27 @@ function registrarProveedor(document){
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
-            if (sub.indexOf("exceptions") >= 0) {
-                nit.parentNode.className = "col-md-3";
-                codigo.parentNode.className = "col-md-3";
-                $("span").remove("#campoRojo");
+            if (sub.indexOf("Fallo") >= 0) {
                 mensaje = "Existe otro proveedor con el ";
-                if(sub.indexOf("PRIMARY") >= 0) {
-                    mensaje = " codigo: " + codigo;
-                    codigo.parentNode.className = " col-md-3 has-error has-feedback";
-                    $("<span id='campoRojo' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(codigo);
-                } else if (sub.indexOf("proveedor") >= 0) {
-                    mensaje = "NIT: " + nit;
-                    nit.parentNode.className = " col-md-3 has-error has-feedback";
-                    $("<span id='campoRojo' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(dni);
-                }
+                if(sub.indexOf("codigo") >= 0)
+                    mensaje += " codigo: " + codigo;
+                else if (sub.indexOf("nit") >= 0)
+                    mensaje += "NIT: " + nit;
                 $("div").remove("#alert");
                 $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>"+
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
                         + mensaje + "</div>");
             } else if (sub.indexOf("Error") >= 0) {
                 $("div").remove("#alert");
-                nit.parentNode.className = "col-md-3";
-                codigo.parentNode.className = "col-md-3";
-                $("span").remove("#campoRojo");
                 $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>"+
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
                         "Error en la conexion a la base de datos</div>");
             } else if (sub.indexOf("Exito") >= 0) {
-                window.location.reload();
                 $("div").remove("#alert");
                 $("section").prepend("<div id='alert' class='alert alert-success centrarDiv'>"+
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
                         "Proveedor registrado exitosamente</div>");
+                $("#form")[0].reset();
             }
         }
     }

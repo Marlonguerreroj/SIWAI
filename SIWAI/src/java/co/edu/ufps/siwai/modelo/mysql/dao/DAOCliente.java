@@ -47,7 +47,6 @@ public class DAOCliente {
             try {
                 exito = stmt.executeUpdate() > 0;
             } catch (SQLException ex) {
-                return false;
             } finally {
                 conn.close();
                 stmt.close();

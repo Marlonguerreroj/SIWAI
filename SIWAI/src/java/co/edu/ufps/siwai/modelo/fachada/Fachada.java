@@ -115,13 +115,12 @@ public class Fachada {
      * @param emailContacto Email del contacto.
      * @param numCuenta Numero de cuenta del proveedor.
      * @param telContacto Telefono del contacto.
-     * @return Cadena de texto, Exito si registro o la excepcion generada.
+     * @return Cadena de texto, Exito si registro o la exception nula.
      * @throws java.lang.Exception Si existe error en la conexion a la base de datos.
-     * @throws java.sql.SQLException El nit y/o el codigo del proveedor son duplicados.
      */
     public String registrarProveedor(String codigo, String nit, String nombre, 
             String cuenta, String tipoCuenta, String sitioWeb, String nombreContacto, 
-            String emailContacto, int numCuenta, int telContacto) throws Exception, SQLException {
+            String emailContacto, int numCuenta, int telContacto) throws Exception {
         ProveedorDTO dto = new ProveedorDTO(codigo, nit, nombre, cuenta, 
                 tipoCuenta, sitioWeb, nombreContacto, emailContacto, numCuenta, telContacto);
         DAOProveedor dao = new DAOProveedor();

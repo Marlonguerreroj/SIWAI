@@ -29,9 +29,8 @@ public class DAOProveedor {
      * @param dto ProveedorDTO con los datos a registrar.
      * @return Cadena de texto, Exito si registro o la excepcion generada.
      * @throws Exception si existe un error en la conexion a la base de datos.
-     * @throws java.sql.SQLException El nit y/o el codigo del proveedor son duplicados.
      */
-    public String registrarProveedor(ProveedorDTO dto) throws Exception, SQLException {
+    public String registrarProveedor(ProveedorDTO dto) throws Exception {
         String mensaje = "";
         conn = Conexion.generarConexion();
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO tbl_proveedor "
@@ -49,8 +48,12 @@ public class DAOProveedor {
         stmt.setString(8, dto.getNombreContacto());
         stmt.setInt(9, dto.getTelContacto());
         stmt.setString(10, dto.getEmailContacto());
-        if(stmt.executeUpdate() > 0)
-            mensaje = "Exito";
+        try{
+            if(stmt.executeUpdate() > 0)
+                mensaje = "Exito";
+        } catch (SQLException ex) {
+            mensaje = ex.toString();
+        }
         stmt.close();
         conn.close();
         return mensaje;

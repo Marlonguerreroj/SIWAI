@@ -51,13 +51,16 @@ public class ControladorProveedor extends HttpServlet {
         try {
             String mensaje = fachada.registrarProveedor(codigo, nit, nombre, cuenta, 
                     tipoCuenta, web, nombreContacto, email, numeroCuenta, telefono);
-            out.print(mensaje);
-        } catch(SQLException ex){
-            String mensaje = ex.toString();
-            if(mensaje.contains("PRIMARY"))
+            if(mensaje.contains("PRIMARY")) {
                 out.print("Fallo codigo");
-            else if (mensaje.contains("nit_proveedor"))
+                System.out.println("primaria");
+            } else if (mensaje.contains("nit_proveedor")) {
                 out.print("Fallo nit");
+                System.out.println("nit");
+            } else {
+                out.print(mensaje);
+            }
+            System.out.println("Mensaje controlador: " + mensaje);
         } catch (Exception ex) {
             out.print("Error");
         }
