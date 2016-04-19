@@ -5,11 +5,13 @@
  */
 package co.edu.ufps.siwai.modelo.mysql.dto;
 
+import java.io.Serializable;
+
 /**
  * Clase DTO que tiene la estructura de un cliente de la tienda.
  * @author Alejandro Ramírez
  */
-public class ClienteDTO {
+public class ClienteDTO implements Serializable{
     
     private String dni, nombre, apellido, direccion, email;
     private int telefono;

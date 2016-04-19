@@ -134,11 +134,14 @@ function registrarCliente(document){
             var sub = xhttp.responseText;
             if (sub.indexOf("Fallo") >= 0) {
                 $("div").remove("#alert");
+                dni.parentNode.className = " col-md-3 has-error has-feedback";
+                $("<span id='campoRojo' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(codigo);
                 $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>"+
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
                         "Existe otro cliente registrado con el DNI: " + dni + "</div>");
             } else if (sub.indexOf("Error") >= 0) {
                 $("div").remove("#alert");
+                $("span").remove("#campoRojo");
                 $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>"+
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
                         "Error en la conexion a la base de datos</div>");
@@ -148,6 +151,66 @@ function registrarCliente(document){
                 $("section").prepend("<div id='alert' class='alert alert-success centrarDiv'>"+
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
                         "Cliente registrado exitosamente</div>");
+            }
+        }
+    }
+}
+
+/**
+ * Metodo que recibe la peticion de registro de un proveedor y la envia a ControladorPrveedor.
+ * @param {type} document Formulario con los datos del proveedor.
+ * @returns {undefined}
+ */
+function registrarProveedor(document){
+    codigo = document.elements[0].value;
+    nit = document.elements[1].value;
+    nombre = document.elements[2].value;
+    web = document.elements[3].value;
+    telefono = document.elements[4].value;
+    email = document.elements[5].value;
+    tipoCuentaBancaria = document.elements[6].value;
+    nCuentaBancaria = document.elements[7].value;
+    cuentaBancaria = document.elements[8].value;
+    nombreContacto = document.elements[9].value;
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorProveedor?registrarProveedor=true&codigo=" + codigo + "&nit=" +
+            nit + "&nombre=" + nombre + "&web=" + web + "&telefono=" + telefono +
+            "&email=" + email + "&tipoCuentaBancaria=" + tipoCuentaBancaria + "&nCuentaBancaria=" + nCuentaBancaria
+            + "&cuentaBancaria=" + cuentaBancaria + "&nombreContacto=" + nombreContacto;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            if (sub.indexOf("Fallo") >= 0) {
+                mensaje = "Existe otro proveedor con el ";
+                if(sub.indexOf("Codigo") >= 0) {
+                    mensaje = " codigo: " + codigo;
+                    codigo.parentNode.className = " col-md-3 has-error has-feedback";
+                    $("<span id='campoRojo' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(codigo);
+                } else if (sub.indexOf("NIT") >= 0) {
+                    mensaje = "NIT: " + nit;
+                    nit.parentNode.className = " col-md-3 has-error has-feedback";
+                    $("<span id='campoRojo' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(dni);
+                }
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>"+
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+                        + mensaje + "</div>");
+            } else if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                nit.parentNode.className = "col-md-3";
+                codigo.parentNode.className = "col-md-3";
+                $("span").remove("#campoRojo");
+                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>"+
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
+                        "Error en la conexion a la base de datos</div>");
+            } else if (sub.indexOf("Exito") >= 0) {
+                window.location.reload();
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-success centrarDiv'>"+
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
+                        "Proveedor registrado exitosamente</div>");
             }
         }
     }

@@ -7,6 +7,9 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="co.edu.ufps.siwai.modelo.mysql.dto.ProveedorDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("../../index.jsp");
+    }%>
 <!DOCTYPE html>
 <html lang="es">
     <head>

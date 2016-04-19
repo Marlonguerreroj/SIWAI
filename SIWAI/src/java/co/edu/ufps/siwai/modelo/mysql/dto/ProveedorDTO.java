@@ -5,11 +5,13 @@
  */
 package co.edu.ufps.siwai.modelo.mysql.dto;
 
+import java.io.Serializable;
+
 /**
  * Clase DTO que tiene la estrucutra de un proveedor de la tienda.
  * @author Alejandro Ramirez
  */
-public class ProveedorDTO {
+public class ProveedorDTO implements Serializable{
     
     private String codigo, nit, nombre, cuenta, tipoCuenta, 
             sitioWeb, nombreContacto, emailContacto;
