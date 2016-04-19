@@ -182,13 +182,16 @@ function registrarProveedor(document){
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
-            if (sub.indexOf("Fallo") >= 0) {
+            if (sub.indexOf("exceptions") >= 0) {
+                nit.parentNode.className = "col-md-3";
+                codigo.parentNode.className = "col-md-3";
+                $("span").remove("#campoRojo");
                 mensaje = "Existe otro proveedor con el ";
-                if(sub.indexOf("Codigo") >= 0) {
+                if(sub.indexOf("PRIMARY") >= 0) {
                     mensaje = " codigo: " + codigo;
                     codigo.parentNode.className = " col-md-3 has-error has-feedback";
                     $("<span id='campoRojo' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(codigo);
-                } else if (sub.indexOf("NIT") >= 0) {
+                } else if (sub.indexOf("proveedor") >= 0) {
                     mensaje = "NIT: " + nit;
                     nit.parentNode.className = " col-md-3 has-error has-feedback";
                     $("<span id='campoRojo' class='glyphicon glyphicon-remove form-control-feedback'></span>").insertAfter(dni);

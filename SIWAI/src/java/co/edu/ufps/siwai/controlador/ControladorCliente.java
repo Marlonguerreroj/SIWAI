@@ -42,7 +42,7 @@ public class ControladorCliente extends HttpServlet {
         int telefono = Integer.parseInt("" + request.getParameter("telefono"));
         String direccion = request.getParameter("direccion");
         String email = request.getParameter("email");
-        Fachada fachada = new Fachada();
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         PrintWriter out = response.getWriter();
         try {
             if (fachada.registrarCliente(dni, nombre, apellido, direccion, email, telefono)) {

@@ -8,6 +8,8 @@ package co.edu.ufps.siwai.controlador;
 import co.edu.ufps.siwai.modelo.fachada.Fachada;
 import co.edu.ufps.siwai.modelo.mysql.dto.ProveedorDTO;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -44,19 +46,18 @@ public class ControladorProveedor extends HttpServlet {
         int numeroCuenta = Integer.parseInt("" + request.getParameter("nCuentaBancaria"));
         String cuenta = request.getParameter("cuentaBancaria");
         String nombreContacto = request.getParameter("nombreContacto");
-        Fachada fachada = new Fachada();
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        PrintWriter out = response.getWriter();
         String mensaje = "";
         try {
-            if (fachada.registrarProveedor(codigo, nit, nombre, cuenta, tipoCuenta, web, nombreContacto, email, numeroCuenta, telefono)) {
-                mensaje = "Proveedor registrado exitosamente";
-            } else {
-                mensaje = "Existe otro proveedor con el codigo: " + codigo;
-            }
+            mensaje = fachada.registrarProveedor(codigo, nit, nombre, cuenta, 
+                    tipoCuenta, web, nombreContacto, email, numeroCuenta, telefono);
+        } catch(SQLException ex){
+            mensaje = ex.toString();
         } catch (Exception ex) {
-            mensaje = "Error en la conexion a la base de datos";
-        } finally {
-            request.getSession().setAttribute("msjRP", mensaje);
-            response.sendRedirect("/SIWAI/Seccion/Proveedor/registrar.jsp");
+            mensaje = "Error";
+        }finally {
+            out.print(mensaje);
         }
     }
     

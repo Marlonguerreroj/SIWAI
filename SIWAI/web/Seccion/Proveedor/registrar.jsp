@@ -33,7 +33,7 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form  action="/SIWAI/ControladorProveedor" method="post">
+            <form onSubmit="registrarProveedor(document.forms[0]); return false" id="form">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>
