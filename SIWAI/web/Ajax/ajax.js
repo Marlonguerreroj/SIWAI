@@ -116,7 +116,7 @@ function registrarEmpleado(document) {
  * @param {type} document Formulario con los datosdel cliente.
  * @returns {undefined}
  */
-function registrarCliente(document){
+function registrarCliente(document) {
     nombres = document.elements[0].value;
     apellidos = document.elements[1].value;
     dni = document.elements[2].value;
@@ -125,7 +125,7 @@ function registrarCliente(document){
     email = document.elements[5].value;
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorCliente?registrarCliente=true&dni=" + dni + "&nombre=" +
-            nombres + "&apellido=" + apellidos + "&telefono=" + telefono + 
+            nombres + "&apellido=" + apellidos + "&telefono=" + telefono +
             "&email=" + email + "&direccion=" + direccion;
     xhttp.open("POST", url, true);
     xhttp.send();
@@ -134,19 +134,19 @@ function registrarCliente(document){
             var sub = xhttp.responseText;
             if (sub.indexOf("Fallo") >= 0) {
                 $("div").remove("#alert");
-                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>"+
-                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                         "Existe otro cliente registrado con el DNI: " + dni + "</div>");
             } else if (sub.indexOf("Error") >= 0) {
                 $("div").remove("#alert");
-                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>"+
-                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
+                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                         "Error en la conexion a la base de datos</div>");
             } else if (sub.indexOf("Exito") >= 0) {
                 window.location.reload();
                 $("div").remove("#alert");
-                $("section").prepend("<div id='alert' class='alert alert-success centrarDiv'>"+
-                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
+                $("section").prepend("<div id='alert' class='alert alert-success centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                         "Cliente registrado exitosamente</div>");
             }
         }

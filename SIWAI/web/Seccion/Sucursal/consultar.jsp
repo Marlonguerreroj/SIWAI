@@ -105,7 +105,7 @@
                                     <td><%= lista.get(i).getCiudad()%></td>
                                     <td><%= lista.get(i).getPais()%></td>                          
                                     <td>
-                                        <a href="actualizar.jsp?codigo=<%=i%>" style="cursor:pointer;">
+                                        <a href="actualizar.jsp?codigo=<%=lista.get(i).getCodigo()%>&nombre=<%=lista.get(i).getNombre()%>&telefono=<%=lista.get(i).getTelefono()%>&email=<%=lista.get(i).getEmail()%>&paginaWeb=<%=lista.get(i).getPaginaWeb()%>&direccion=<%=lista.get(i).getDireccion()%>&ciudad=<%=lista.get(i).getCiudad()%>&pais=<%=lista.get(i).getPais()%>" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-edit asd "></span>
                                         </a>
                                     </td>

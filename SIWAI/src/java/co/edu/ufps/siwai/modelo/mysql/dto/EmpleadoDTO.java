@@ -5,12 +5,14 @@
  */
 package co.edu.ufps.siwai.modelo.mysql.dto;
 
+import java.io.Serializable;
+
 
 /**
  *
  * @author MarlonGuerrero
  */
-public class EmpleadoDTO {
+public class EmpleadoDTO implements Serializable {
 
     private String codigo, dni, nombre, apellido, contraseña, email, direccion, cargo, sucursal;
     private String telefono;

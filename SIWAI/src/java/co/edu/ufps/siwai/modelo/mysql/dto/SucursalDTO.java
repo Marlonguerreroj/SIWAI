@@ -5,11 +5,13 @@
  */
 package co.edu.ufps.siwai.modelo.mysql.dto;
 
+import java.io.Serializable;
+
 /**
  *
  * @author MarlonGuerrero
  */
-public class SucursalDTO {
+public class SucursalDTO implements Serializable{
 
     public SucursalDTO() {
     }

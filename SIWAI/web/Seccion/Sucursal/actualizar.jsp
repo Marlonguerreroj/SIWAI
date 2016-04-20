@@ -41,14 +41,14 @@
                             <p>Codigo:</p>  
                         </div>
                         <div class="col-md-3">
-                            <input required readOnly name="codigo" type="text" class="form-control">
+                            <input required readOnly value="<%=request.getParameter("codigo")%>" name="codigo" type="text" class="form-control">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
                             <p>Nombre:</p> 
                         </div>
                         <div class="col-md-3">
-                            <input  required name="nombre" type="text" class="form-control " >
+                            <input  required value="<%=request.getParameter("nombre")%>" name="nombre" type="text" class="form-control " >
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -59,14 +59,14 @@
                             <p>Telefono:</p>  
                         </div>
                         <div class="col-md-3">
-                            <input name="telefono"  type="number" class="form-control " >
+                            <input name="telefono" value="<%=request.getParameter("telefono")%>" type="number" class="form-control " >
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
                             <p>E-mail:</p> 
                         </div>
                         <div class="col-md-3">
-                            <input name="email" type="email" class="form-control "  >
+                            <input name="email" value="<%=request.getParameter("email")%>" type="email" class="form-control "  >
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -77,14 +77,14 @@
                             <p>Pagina web:</p>  
                         </div>
                         <div class="col-md-3">
-                            <input name="pagina" type="text" class="form-control "  >
+                            <input name="pagina" value="<%=request.getParameter("paginaWeb")%>" type="text" class="form-control "  >
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
                             <p>Direccion:</p> 
                         </div>
                         <div class="col-md-3">
-                            <input required name="direccion" type="text" class="form-control " >
+                            <input required name="direccion" value="<%=request.getParameter("direccion")%>" type="text" class="form-control " >
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -95,14 +95,14 @@
                             <p>Ciudad:</p>  
                         </div>
                         <div class="col-md-3">
-                            <input required name="ciudad" type="text" class="form-control " >
+                            <input required name="ciudad" value="<%=request.getParameter("ciudad")%>" type="text" class="form-control " >
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
                             <p>Pais:</p> 
                         </div>
                         <div class="col-md-3">
-                            <input required name="pais" type="text" class="form-control ">
+                            <input required name="pais" value="<%=request.getParameter("pais")%>" type="text" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -111,7 +111,7 @@
                     <div class="row centrar-texto">
                         <div class="col-md-4"></div>
                         <div class="col-md-2">
-                            <button name="enviar" type="submit" class="btn btn-success btn-lg letra">Actualizar
+                            <button class="btn btn-success btn-lg letra">Actualizar
                             </button>
                         </div>
                         <div class="col-md-2">
