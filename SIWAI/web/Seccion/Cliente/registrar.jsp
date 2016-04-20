@@ -4,6 +4,9 @@
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
 
+<%@page import="co.edu.ufps.siwai.modelo.mysql.dto.UbicacionDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="co.edu.ufps.siwai.modelo.fachada.Fachada"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% if (session.getAttribute("usuario") == null) {
         response.sendRedirect("../../index.jsp");
@@ -58,7 +61,7 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Dni:</p>
+                            <p>DNI:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="dni" type="number" class="form-control ">
@@ -68,7 +71,7 @@
                             <p>Teléfono:</p>
                         </div>
                         <div class="col-md-3">
-                            <input required name="telefono" type="number" class="form-control ">
+                            <input name="telefono" type="number" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -86,7 +89,7 @@
                             <p>E-mail:</p>
                         </div>
                         <div class="col-md-3">
-                            <input name="email" type="text" class="form-control ">
+                            <input name="email" type="email" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>

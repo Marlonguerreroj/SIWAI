@@ -10,10 +10,11 @@ import co.edu.ufps.siwai.modelo.mysql.dao.DAOCliente;
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOEmpleado;
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOProveedor;
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOSucursal;
+import co.edu.ufps.siwai.modelo.mysql.dao.DAOUbicacion;
 import co.edu.ufps.siwai.modelo.mysql.dto.EmpleadoDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.ProveedorDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO;
-import java.sql.SQLException;
+import co.edu.ufps.siwai.modelo.mysql.dto.UbicacionDTO;
 import java.util.ArrayList;
 
 /**
@@ -36,7 +37,7 @@ public class Fachada {
      * @throws java.lang.Exception Excepcion en la conexion a la base de datos.
      */
     public boolean registrarCliente(String dni, String nombre, String apellido,
-            String direccion, String email, int telefono) throws Exception {
+            String direccion, String email, String telefono) throws Exception {
         ClienteDTO dto = new ClienteDTO(dni, nombre, apellido, direccion, email, telefono);
         DAOCliente dao = new DAOCliente();
         return dao.registrarCliente(dto);
@@ -138,5 +139,26 @@ public class Fachada {
         DAOProveedor dao = new DAOProveedor();
         return dao.consultarProveedores(columna, info);
     }
-}
+    
+    /**
+     * Metodo que obtiene los datos de los paises.
+     * @return ArrayList de UbicacionDTO
+     * @throws java.lang.Exception Si existe un error en la conexion.
+     */
+    public ArrayList<UbicacionDTO> obtenerPaises() throws Exception{
+        DAOUbicacion dao = new DAOUbicacion();
+        return dao.obtenerPaises();
+    }
+    
+    /**
+     * Metodo que obtiene los datos de las ciudades de un pais.
+     * @param pais String con el codigo del pais a las que pertenecen las ciudades.
+     * @return ArrayList de UbicacionDTO
+     * @throws java.lang.Exception Si existe un error en la conexion.
+     */
+    public ArrayList<UbicacionDTO> obtenerCiudades(String pais) throws Exception{
+        DAOUbicacion dao = new DAOUbicacion();
+        return dao.obtenerCiudades(pais);
+    }
 
+}

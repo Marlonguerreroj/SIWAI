@@ -13,9 +13,8 @@ import java.io.Serializable;
  */
 public class ClienteDTO implements Serializable{
     
-    private String dni, nombre, apellido, direccion, email;
-    private int telefono;
-
+    private String dni, nombre, apellido, direccion, email, telefono;
+    
     /**
      * Constructor sin parametros.
      */
@@ -32,7 +31,7 @@ public class ClienteDTO implements Serializable{
      * @param telefono Telefono o celular del cliente.
      */
     public ClienteDTO(String dni, String nombre, String apellido, 
-            String direccion, String email, int telefono) {
+            String direccion, String email, String telefono) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -123,9 +122,9 @@ public class ClienteDTO implements Serializable{
 
     /**
      * Metodo que retorna el numero telefonico del cliente.
-     * @return Int con el numero telefonico del cliente.
+     * @return String con el numero telefonico del cliente.
      */
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
@@ -133,7 +132,7 @@ public class ClienteDTO implements Serializable{
      * Metodo que establece el telefono del cliente.
      * @param telefono Nuevo telefono del cliente.
      */
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
     

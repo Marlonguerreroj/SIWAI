@@ -148,6 +148,11 @@ function registrarCliente(document){
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"+
                         "Cliente registrado exitosamente</div>");
                 $("#form")[0].reset();
+            } else {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>"+
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+                        + sub + "</div>");
             }
         }
     }

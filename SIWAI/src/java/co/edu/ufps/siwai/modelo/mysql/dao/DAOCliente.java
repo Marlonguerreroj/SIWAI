@@ -42,7 +42,7 @@ public class DAOCliente {
             stmt.setString(2, dto.getNombre());
             stmt.setString(3, dto.getApellido());
             stmt.setString(4, dto.getDireccion());
-            stmt.setInt(5, dto.getTelefono());
+            stmt.setString(5, dto.getTelefono());
             stmt.setString(6, dto.getEmail());
             try {
                 exito = stmt.executeUpdate() > 0;
@@ -97,7 +97,7 @@ public class DAOCliente {
                 dto.setNombre(rs.getString(2));
                 dto.setApellido(rs.getString(3));
                 dto.setDireccion(rs.getString(4));
-                dto.setTelefono(rs.getInt(5));
+                dto.setTelefono(rs.getString(5));
                 dto.setEmail(rs.getString(6));
                 dtos.add(dto);
             }
