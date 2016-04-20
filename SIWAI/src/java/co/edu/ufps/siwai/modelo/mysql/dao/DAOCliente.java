@@ -47,7 +47,6 @@ public class DAOCliente {
             try {
                 exito = stmt.executeUpdate() > 0;
             } catch (SQLException ex) {
-                return false;
             } finally {
                 conn.close();
                 stmt.close();
@@ -102,8 +101,9 @@ public class DAOCliente {
                 dto.setEmail(rs.getString(6));
                 dtos.add(dto);
             }
-            conn.close();
             stmt.close();
+            rs.close();
+            conn.close();
         }
         return dtos;
     }

@@ -42,17 +42,18 @@ public class ControladorCliente extends HttpServlet {
         int telefono = Integer.parseInt("" + request.getParameter("telefono"));
         String direccion = request.getParameter("direccion");
         String email = request.getParameter("email");
-        Fachada fachada = new Fachada();
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         PrintWriter out = response.getWriter();
+        String mensaje;
         try {
-            if (fachada.registrarCliente(dni, nombre, apellido, direccion, email, telefono)) {
-               out.print("Exito");
-            } else {
-                out.print("Fallo");
-            }
+            if (fachada.registrarCliente(dni, nombre, apellido, direccion, email, telefono))
+               mensaje = "Exito";
+            else
+                mensaje = "Fallo";
         } catch (Exception ex) {
-            out.print("Error");
+            mensaje =  "Error";
         }
+            out.print(mensaje);
     }
 
     /**

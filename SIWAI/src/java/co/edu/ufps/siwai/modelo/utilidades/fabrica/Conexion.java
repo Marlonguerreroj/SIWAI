@@ -26,12 +26,8 @@ public class Conexion {
      */
     public static Connection generarConexion() throws Exception{
         Connection conexion = null;
-        try {
         Class.forName(DRIVER).newInstance();
         conexion = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }
         return conexion;
     }
 }

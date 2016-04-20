@@ -27,12 +27,11 @@ public class DAOProveedor {
      * Metodo que registra los datos de un proveedor en la base de datos.
      *
      * @param dto ProveedorDTO con los datos a registrar.
-     * @return True si registro, False si existe un provedor con el codigo a
-     * registrar.
+     * @return Cadena de texto, Exito si registro o la excepcion generada.
      * @throws Exception si existe un error en la conexion a la base de datos.
      */
-    public boolean registrarProveedor(ProveedorDTO dto) throws Exception {
-        boolean exito;
+    public String registrarProveedor(ProveedorDTO dto) throws Exception {
+        String mensaje = "";
         conn = Conexion.generarConexion();
         PreparedStatement stmt = conn.prepareStatement("INSERT INTO tbl_proveedor "
                 + "(cod_proveedor, nit_proveedor, nom_proveedor, "
@@ -49,15 +48,15 @@ public class DAOProveedor {
         stmt.setString(8, dto.getNombreContacto());
         stmt.setInt(9, dto.getTelContacto());
         stmt.setString(10, dto.getEmailContacto());
-        try {
-            exito = stmt.executeUpdate() > 0;
+        try{
+            if(stmt.executeUpdate() > 0)
+                mensaje = "Exito";
         } catch (SQLException ex) {
-            return false;
-        } finally {
-            stmt.close();
-            conn.close();
+            mensaje = ex.toString();
         }
-        return exito;
+        stmt.close();
+        conn.close();
+        return mensaje;
     }
 
     /**
@@ -106,6 +105,9 @@ public class DAOProveedor {
                 dto.setEmailContacto(rs.getString(10));
                 dtos.add(dto);
             }
+            rs.close();
+            stmt.close();
+            conn.close();
         }
         return dtos;
     }
