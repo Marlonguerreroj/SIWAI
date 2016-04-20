@@ -29,12 +29,12 @@ public class DAOUbicacion {
         conn = Conexion.generarConexion();
         ArrayList<UbicacionDTO> dtos = new ArrayList<>();
         PreparedStatement stmt = conn.prepareStatement("SELECT cod_pais, nom_pais"
-                + " FROM tbl_pais");
+                + " FROM tbl_pais ORDER BY nom_pais");
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){
             UbicacionDTO dto = new UbicacionDTO();
             dto.setCodPais(rs.getString(1));
-            dto.setNomPais(rs.getString(1));
+            dto.setNomPais(rs.getString(2));
             dtos.add(dto);
         }
         return dtos;
@@ -50,14 +50,14 @@ public class DAOUbicacion {
         conn = Conexion.generarConexion();
         ArrayList<UbicacionDTO> dtos = new ArrayList<>();
         PreparedStatement stmt = conn.prepareStatement("SELECT id_ciudad, nom_ciudad,"
-                + " cod_ciudad FROM tbl_ciudad WHERE cod_pais = ?");
+                + " cod_pais FROM tbl_ciudad WHERE cod_pais = ? ORDER BY nom_ciudad");
         stmt.setString(1, pais);
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){
             UbicacionDTO dto = new UbicacionDTO();
             dto.setIdCiudad(rs.getInt(1));
             dto.setNomCiudad(rs.getString(2));
-            dto.setCodCiudad(rs.getString(3));
+            dto.setCodPais(rs.getString(3));
             dtos.add(dto);
         }
         return dtos;

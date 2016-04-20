@@ -117,21 +117,27 @@ function registrarEmpleado(document) {
  * @returns {undefined}
  */
 function registrarCliente(document){
-    nombres = document.elements[0].value;
-    apellidos = document.elements[1].value;
-    dni = document.elements[2].value;
-    telefono = document.elements[3].value;
-    direccion = document.elements[4].value;
-    email = document.elements[5].value;
+    
+    dni = document.elements[0].value;
+    nombres = document.elements[1].value;
+    apellidos = document.elements[2].value;
+    ciudad = document.elements[4].value;
+    direccion = document.elements[5].value;
+    telefono = document.elements[6].value;
+    email = document.elements[7].value;
+    alert("/SIWAI/ControladorCliente?registrarCliente=true&dni=" + dni + "&nombre=" +
+            nombres + "&apellido=" + apellidos + "&telefono=" + telefono + 
+            "&email=" + email + "&direccion=" + direccion + "&ciudad=" + ciudad)
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorCliente?registrarCliente=true&dni=" + dni + "&nombre=" +
             nombres + "&apellido=" + apellidos + "&telefono=" + telefono + 
-            "&email=" + email + "&direccion=" + direccion;
+            "&email=" + email + "&direccion=" + direccion + "&ciudad=" + ciudad;
     xhttp.open("POST", url, true);
     xhttp.send();
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
+            alert(sub);
             if (sub.indexOf("Fallo") >= 0) {
                 $("div").remove("#alert");
                 $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>"+
@@ -208,4 +214,5 @@ function registrarProveedor(document){
             }
         }
     }
+    
 }

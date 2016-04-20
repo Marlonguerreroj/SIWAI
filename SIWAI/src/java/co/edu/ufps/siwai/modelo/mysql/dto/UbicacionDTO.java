@@ -11,21 +11,19 @@ package co.edu.ufps.siwai.modelo.mysql.dto;
  */
 public class UbicacionDTO {
     
-    private String codPais, nomPais, codCiudad, nomCiudad;
+    private String codPais, nomPais, nomCiudad;
     private int idCiudad;
 
     /**
      * Constructor.
      * @param codPais Código del País.
      * @param nomPais Nombre del País.
-     * @param codCiudad Código de la ciudad.
      * @param nomCiudad Nombre de la ciudad.
      * @param idCiudad Id de la ciudad.
      */
-    public UbicacionDTO(String codPais, String nomPais, String codCiudad, String nomCiudad, int idCiudad) {
+    public UbicacionDTO(String codPais, String nomPais, String nomCiudad, int idCiudad) {
         this.codPais = codPais;
         this.nomPais = nomPais;
-        this.codCiudad = codCiudad;
         this.nomCiudad = nomCiudad;
         this.idCiudad = idCiudad;
     }
@@ -66,22 +64,6 @@ public class UbicacionDTO {
      */
     public void setNomPais(String nomPais) {
         this.nomPais = nomPais;
-    }
-
-    /**
-     * Metodo que obtiene el código de la ciudad.
-     * @return String con el código de la ciudad.
-     */
-    public String getCodCiudad() {
-        return codCiudad;
-    }
-
-    /**
-     * Metodo que establece el código de la ciudad.
-     * @param codCiudad String con el código de la ciudad.
-     */
-    public void setCodCiudad(String codCiudad) {
-        this.codCiudad = codCiudad;
     }
 
     /**

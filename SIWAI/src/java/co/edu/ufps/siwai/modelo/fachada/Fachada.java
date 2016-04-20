@@ -15,6 +15,7 @@ import co.edu.ufps.siwai.modelo.mysql.dto.EmpleadoDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.ProveedorDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.UbicacionDTO;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -22,7 +23,7 @@ import java.util.ArrayList;
  *
  * @author Alejandro Ramírez
  */
-public class Fachada {
+public class Fachada implements Serializable{
 
     /**
      * Metodo que envia los datos del cliente a DAOCliente para que sean registrados
@@ -37,8 +38,8 @@ public class Fachada {
      * @throws java.lang.Exception Excepcion en la conexion a la base de datos.
      */
     public boolean registrarCliente(String dni, String nombre, String apellido,
-            String direccion, String email, String telefono) throws Exception {
-        ClienteDTO dto = new ClienteDTO(dni, nombre, apellido, direccion, email, telefono);
+            String direccion, String email, String telefono, int ciudad) throws Exception {
+        ClienteDTO dto = new ClienteDTO(dni, nombre, apellido, direccion, email, telefono, ciudad);
         DAOCliente dao = new DAOCliente();
         return dao.registrarCliente(dto);
     }

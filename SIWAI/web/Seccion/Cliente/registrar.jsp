@@ -26,6 +26,8 @@
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <!-- Script del Ajax-->   
         <script src="../../Ajax/ajax.js"></script>
+        <!-- Script para que se carguen los paises y las ciudades-->
+        <script src="../../Js/ubicacion.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -43,24 +45,6 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Nombres:</p>
-                        </div>
-                        <div class="col-md-3">
-                            <input required name="nombre" type="text" class="form-control ">
-                        </div>
-                        <div class="col-md-2"></div>
-                        <div class="col-md-1">
-                            <p>Apellidos:</p>
-                        </div>
-                        <div class="col-md-3">
-                            <input required name="apellido" type="text" class="form-control ">
-                        </div>
-                        <div class="col-md-1"></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-1">
                             <p>DNI:</p>
                         </div>
                         <div class="col-md-3">
@@ -68,10 +52,10 @@
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Teléfono:</p>
+                            <p>Nombres:</p>
                         </div>
                         <div class="col-md-3">
-                            <input name="telefono" type="number" class="form-control ">
+                            <input required name="nombre" type="text" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -79,17 +63,55 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
+                            <p>Apellidos:</p>
+                        </div>
+                        <div class="col-md-3">
+                            <input required name="apellido" type="text" class="form-control ">
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-1">
+                            <p>País:</p>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="sel1" class="form-control" id="selPais" required onchange="cargarCiudades()">
+                            </select>
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-1">
+                            <p>Ciudad:</p>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="sel2" class="form-control" id="selCiudad" required>
+                            </select>
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-1">
                             <p>Dirección:</p>
                         </div>
                         <div class="col-md-3">
                             <input name="direccion" type="text" class="form-control ">
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-1">
+                            <p>Teléfono:</p>
+                        </div>
+                        <div class="col-md-3">
+                            <input required name="telefono" type="number" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
                             <p>E-mail:</p>
                         </div>
                         <div class="col-md-3">
-                            <input name="email" type="email" class="form-control ">
+                            <input required name="email" type="email" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -118,3 +140,4 @@
         <jsp:include page="../pie.jsp" />
     </body>
 </html>
+                  

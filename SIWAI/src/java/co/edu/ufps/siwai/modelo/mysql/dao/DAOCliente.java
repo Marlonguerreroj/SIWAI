@@ -37,16 +37,18 @@ public class DAOCliente {
         if (conn != null) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO tbl_cliente "
                     + "(dni_cliente, nom_cliente, ape_cliente, dir_cliente, "
-                    + "tel_cliente, email_cliente) values (?, ?, ?, ?, ?, ?)");
+                    + "tel_cliente, email_cliente, id_ciudad) values (?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, dto.getDni());
             stmt.setString(2, dto.getNombre());
             stmt.setString(3, dto.getApellido());
             stmt.setString(4, dto.getDireccion());
             stmt.setString(5, dto.getTelefono());
             stmt.setString(6, dto.getEmail());
+            stmt.setInt(7, dto.getCiudad());
             try {
                 exito = stmt.executeUpdate() > 0;
             } catch (SQLException ex) {
+                System.out.println("Error: " + ex.toString());
             } finally {
                 conn.close();
                 stmt.close();

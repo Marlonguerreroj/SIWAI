@@ -16,6 +16,10 @@
         <servlet-name>ControladorSucursal</servlet-name>
         <servlet-class>co.edu.ufps.siwai.controlador.ControladorSucursal</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorUbicacion</servlet-name>
+        <servlet-class>co.edu.ufps.siwai.controlador.ControladorUbicacion</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorCliente</servlet-name>
         <url-pattern>/ControladorCliente</url-pattern>
@@ -31,6 +35,10 @@
     <servlet-mapping>
         <servlet-name>ControladorSucursal</servlet-name>
         <url-pattern>/ControladorSucursal</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorUbicacion</servlet-name>
+        <url-pattern>/ControladorUbicacion</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
