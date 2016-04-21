@@ -89,6 +89,7 @@ public class ControladorCliente extends HttpServlet {
             else
                 request.getSession().setAttribute("clientes", dtos);
         } catch (Exception ex) {
+            System.out.println("Error: " + ex.toString());
             request.getSession().setAttribute("msjCC", "Error en la conexion a la base de datos");
         } finally {
             response.sendRedirect("/SIWAI/Seccion/Cliente/consultar.jsp");

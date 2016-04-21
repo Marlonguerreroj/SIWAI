@@ -14,12 +14,13 @@ import java.io.Serializable;
 public class ClienteDTO implements Serializable{
     
     private String dni, nombre, apellido, direccion, email, telefono;
-    private int ciudad;
+    private UbicacionDTO ubicacion;
     
     /**
      * Constructor sin parametros.
      */
     public ClienteDTO() {
+        ubicacion = new UbicacionDTO();
     }
 
     /**
@@ -40,7 +41,8 @@ public class ClienteDTO implements Serializable{
         this.direccion = direccion;
         this.email = email;
         this.telefono = telefono;
-        this.ciudad = ciudad;
+        ubicacion = new UbicacionDTO();
+        ubicacion.setIdCiudad(ciudad);
     }
     
     /**
@@ -140,19 +142,19 @@ public class ClienteDTO implements Serializable{
     }
 
     /**
-     * Metodo que obtiene la id de la ciudad en donde vive el cliente.
-     * @return Int con la id.
+     * Metodo que obtiene el objeto UbicacionDTO del cliente.
+     * @return UbicacionDTO.
      */
-    public int getCiudad() {
-        return ciudad;
+    public UbicacionDTO getUbicacion() {
+        return ubicacion;
     }
 
     /**
-     * Metodo que obtiene la id de la ciudad en donde vive el cliente.
-     * @param ciudad Int con la id.
+     * Metodo que establece el objeto UbicacionDTO del cliente.
+     * @param dto UbicacionDTO.
      */
-    public void setCiudad(int ciudad) {
-        this.ciudad = ciudad;
+    public void setUbicacion(UbicacionDTO dto) {
+        this.ubicacion = dto;
     }
-    
+
 }
