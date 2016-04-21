@@ -117,7 +117,6 @@ function registrarEmpleado(document) {
  * @returns {undefined}
  */
 function registrarCliente(document){
-    
     dni = document.elements[0].value;
     nombres = document.elements[1].value;
     apellidos = document.elements[2].value;
@@ -125,9 +124,6 @@ function registrarCliente(document){
     direccion = document.elements[5].value;
     telefono = document.elements[6].value;
     email = document.elements[7].value;
-    alert("/SIWAI/ControladorCliente?registrarCliente=true&dni=" + dni + "&nombre=" +
-            nombres + "&apellido=" + apellidos + "&telefono=" + telefono + 
-            "&email=" + email + "&direccion=" + direccion + "&ciudad=" + ciudad)
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorCliente?registrarCliente=true&dni=" + dni + "&nombre=" +
             nombres + "&apellido=" + apellidos + "&telefono=" + telefono + 
@@ -137,7 +133,6 @@ function registrarCliente(document){
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
-            alert(sub);
             if (sub.indexOf("Fallo") >= 0) {
                 $("div").remove("#alert");
                 $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>"+

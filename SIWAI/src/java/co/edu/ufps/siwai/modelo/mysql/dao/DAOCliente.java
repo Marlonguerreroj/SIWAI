@@ -48,7 +48,6 @@ public class DAOCliente {
             try {
                 exito = stmt.executeUpdate() > 0;
             } catch (SQLException ex) {
-                System.out.println("Error: " + ex.toString());
             } finally {
                 conn.close();
                 stmt.close();
