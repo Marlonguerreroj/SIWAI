@@ -30,6 +30,20 @@
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
         <section>
+            <!-- Inicio del Alert  -->
+            <%
+                if (session.getAttribute("msjAS") != null) {
+                    String mensaje = "" + session.getAttribute("msjAS");
+            %> 
+            <div id="alert" class="alert alert-success centrarDiv">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <%=mensaje%>
+            </div>
+            <%
+                    session.setAttribute("msjAS", null);
+                }
+            %>
+            <!-- Fin del Alert -->
             <div>
                 <h1 class="centrar-texto">Consultar Sucursal</h1>
             </div>

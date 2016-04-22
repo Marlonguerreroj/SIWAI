@@ -22,6 +22,7 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Ajax/ajax.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -33,7 +34,7 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form action="" method="post">
+            <form onSubmit="actualizarSucursal(document.forms[0]);return false" id="formulario">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>

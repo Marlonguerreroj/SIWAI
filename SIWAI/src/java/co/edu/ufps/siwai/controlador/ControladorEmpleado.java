@@ -49,15 +49,10 @@ public class ControladorEmpleado extends HttpServlet {
         String cargo = request.getParameter("cargo");
         String sucursal = request.getParameter("sucursal");
         Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
-        String mensaje;
         boolean exito;
         PrintWriter out = response.getWriter();
         try {
             exito = fachada.registrarEmpleado(codigo, dni, nombre, apellido, telefono, celular, contrasena, email, direccion, fIngreso, cargo, sucursal);
-            if (exito) {
-                mensaje = "Empleado registrado exitosamente";
-                request.getSession().setAttribute("msjRE", mensaje);
-            }
             out.print(exito);
         } catch (Exception ex) {
             ex.printStackTrace();

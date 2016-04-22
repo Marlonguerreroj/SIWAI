@@ -110,7 +110,7 @@ public class DAOSucursal {
     public boolean actualizarSucursal(SucursalDTO dto) throws Exception {
         boolean exito = false;
         conn = Conexion.generarConexion();
-        PreparedStatement stmt = null;
+        PreparedStatement stmt;
         try {
             String update = "UPDATE tbl_sucursal set nom_sucursal = ?, "
                     + "tel_sucursal = ?, email_sucursal = ?, pag_sucursal = ?, dir_sucursal = ?,"

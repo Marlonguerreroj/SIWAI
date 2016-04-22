@@ -15,9 +15,9 @@ import java.sql.DriverManager;
 public class Conexion {
     
     private static final String DRIVER = "org.gjt.mm.mysql.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://localhost/ufps_45";
-    private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String DATABASE_URL = "jdbc:mysql://sandbox2.ufps.edu.co/ufps_45";
+    private static final String USER = "ufps_45";
+    private static final String PASSWORD = "ufps_07";
     
     /**
      * Metodo que genera la conexion a la base de datos.

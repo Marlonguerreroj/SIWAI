@@ -32,6 +32,7 @@
         <servlet-name>ControladorSucursal</servlet-name>
         <url-pattern>/ControladorSucursal</url-pattern>
     </servlet-mapping>
+    
     <session-config>
         <session-timeout>
             30

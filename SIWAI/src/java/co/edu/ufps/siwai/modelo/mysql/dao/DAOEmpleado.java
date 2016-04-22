@@ -130,7 +130,7 @@ public class DAOEmpleado {
     }
 
     public String iniciarSesion(String usuario, String contraseña) throws Exception {
-        String resultado = "nulo";
+        String resultado = "nul";
         try {
             conn = Conexion.generarConexion();
             CallableStatement stmt = conn.prepareCall("{?=call iniciarSesion(?, ?)}");

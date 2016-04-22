@@ -150,3 +150,4 @@ function capturar() {
         document.form.informacion.required = true;
     }
 }
+

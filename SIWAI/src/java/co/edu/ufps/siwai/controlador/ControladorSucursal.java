@@ -44,16 +44,11 @@ public class ControladorSucursal extends HttpServlet {
         String direccion = request.getParameter("direccion");
         String ciudad = request.getParameter("ciudad");
         String pais = request.getParameter("pais");
-        Fachada fachada = (Fachada)request.getSession().getAttribute("fachada");
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         boolean exito;
-        String mensaje;
         PrintWriter out = response.getWriter();
         try {
             exito = fachada.registrarSucursal(codigo, nombre, telefono, email, paginaWeb, direccion, ciudad, pais);
-            if (exito) {
-                mensaje = "Sucursal registrada exitosamente";
-                request.getSession().setAttribute("msjRS", mensaje);
-            }
             out.print(exito);
 
         } catch (Exception ex) {
@@ -71,13 +66,47 @@ public class ControladorSucursal extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    protected void actualizarSucursal(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String codigo = request.getParameter("codigo");
+        String nombre = request.getParameter("nombre");
+        int telefono = Integer.valueOf(request.getParameter("telefono"));
+        String email = request.getParameter("email");
+        String paginaWeb = request.getParameter("paginaWeb");
+        String direccion = request.getParameter("direccion");
+        String ciudad = request.getParameter("ciudad");
+        String pais = request.getParameter("pais");
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        boolean exito;
+        PrintWriter out = response.getWriter();
+        try {
+            exito = fachada.actualizarSucursal(codigo, nombre, telefono, email,
+                    paginaWeb, direccion, ciudad, pais);
+            if(exito){
+               request.getSession().setAttribute("msjAS", "La sucursal se actualizó satisfactoriamente");
+            }
+            out.print(exito);
+        } catch (Exception e) {
+            out.print("Error en la conexion a la base de datos");
+        }
+    }
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void consultarSucursal(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String buscarPor = request.getParameter("sel");
         String informacion = request.getParameter("informacion");
-        Fachada fachada = (Fachada)request.getSession().getAttribute("fachada");
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         ArrayList<SucursalDTO> lista = null;
         try {
             lista = fachada.consultarSucursal(buscarPor, informacion);
@@ -123,6 +152,9 @@ public class ControladorSucursal extends HttpServlet {
         }
         if (request.getParameter("registrarSucursal") != null) {
             registrarSucursal(request, response);
+        }
+        if (request.getParameter("actualizarSucursal") != null) {
+            actualizarSucursal(request, response);
         }
     }
 

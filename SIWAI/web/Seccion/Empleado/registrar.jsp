@@ -35,27 +35,13 @@
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
         <section>
-            <!-- Inicio del Alert  -->
-            <%
-                if (session.getAttribute("msjRE") != null) {
-                    String mensaje = "" + session.getAttribute("msjRE");
-            %> 
-            <div id="alert" class="alert alert-success centrarDiv">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <%=mensaje%>
-            </div>
-            <%
-                    session.setAttribute("msjRE", null);
-                }
-            %>
-            <!-- Fin del Alert -->
             <div>
                 <h1 class="centrar-texto">Registrar Empleado</h1>
             </div>
             <br>
             <!-- Inicio del formulario -->
             <form onSubmit="registrarEmpleado(document.forms[0]);
-                    return false">
+                    return false" id="form">
                 <div class="container"> 
                     <div class="row">
                         <div class="col-md-1"></div>
