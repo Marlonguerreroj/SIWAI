@@ -57,11 +57,10 @@
             <form action="/SIWAI/ControladorCliente" method="post" name="form">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-2">
-                            <p>Buscar por:</p>  
-                        </div>
-                        <div class="col-md-2">
-                            <select name="sel" class="form-control" id="sel" required onchange="capturar()" >
+                        <div class="col-md-1"></div>
+                        <div class="col-md-4">
+                           <label for="sel" >Buscar por:</label>  
+                            <select name="sel" class="tamañoConsultar" id="sel" required onchange="capturar()" >
                                 <option value="" >Seleccione</option>
                                 <option value="Todos" >Todos</option>
                                 <option value="nom" >Nombre</option>
@@ -69,13 +68,11 @@
                             </select>
                         </div>
                         <div class="col-md-1"></div>
-                        <div class="col-md-2">
-                            <p>Informacion:</p>  
+                        <div class="col-md-4">
+                            <label for="informacion" >Información:</label> 
+                            <input required name="informacion" type="text" class="tamañoConsultar">
                         </div>
-                        <div class="col-md-2">
-                            <input required name="informacion" type="text" class="form-control">
-                        </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <button name="consultarCliente" type="submit" class="btn btn-success  letra">
                                 <span class="glyphicon glyphicons glyphicon-search"></span>
                             </button>
@@ -96,12 +93,13 @@
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
                                         <th>Dni</th>
+                                        <th>Nombre</th>
                                         <th>Telefono</th>
                                         <th>Direccion</th>
                                         <th>E-mail</th>
+                                        <th>País</th>
+                                        <th>Ciudad</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -110,12 +108,13 @@
                                     for (int i = 0; i < dtos.size(); i++) {
                                 %>
                                 <tr>
-                                    <td><%=dtos.get(i).getNombre()%></td>
-                                    <td><%=dtos.get(i).getApellido()%></td>
                                     <td><%=dtos.get(i).getDni()%></td>
+                                    <td><%=dtos.get(i).getNombre() + " " + dtos.get(i).getApellido()%></td>
                                     <td><%=dtos.get(i).getTelefono()%></td>
                                     <td><%=dtos.get(i).getDireccion()%></td>
                                     <td><%=dtos.get(i).getEmail()%></td>
+                                    <td><%=dtos.get(i).getUbicacion().getNomPais()%></td>
+                                    <td><%=dtos.get(i).getUbicacion().getNomCiudad()%></td>
                                     <td>
                                         <a href="actualizar.jsp" style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-edit asd "></span>

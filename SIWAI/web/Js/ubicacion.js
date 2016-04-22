@@ -1,0 +1,50 @@
+/* 
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/**
+ * Carga los paises en el combo selPais al cargar el documento.
+ * @param {type} param
+ */
+$(document).ready(function() {
+    $.ajax({
+        url: '/SIWAI/ControladorUbicacion?cargarPaises=true',
+        type: 'post',
+        datatype: 'json',
+        success: function(paises) {
+            var json = eval('(' + paises + ')');
+            var combo = document.getElementById("selPais");
+            combo.options[0] = new Option('Seleccione', '');
+            for (var i = 0; i < json.length; i++) {
+                combo.options[combo.length] = new Option(json[i].nomPais, json[i].codPais);
+            }
+        }
+    });
+});
+
+/**
+ * Metodo que cargar en el combo selCiudad las ciudades del pais que se selecciona
+ * @returns {undefined}
+ */
+function cargarCiudades(){
+    var posicion = document.getElementById("selPais").options.selectedIndex;
+    var valor = document.getElementById("selPais").options[posicion].value;
+    $.ajax({
+        url: '/SIWAI/ControladorUbicacion?cargarCiudades=true&pais=' + valor,
+        type: 'post',
+        datatype: 'json',
+        success: function(ciudades) {
+            var json = eval('(' + ciudades + ')');
+            var combo = document.getElementById("selCiudad");
+            while(combo.length > 0){
+                combo.remove(combo.length-1);
+            }
+            combo.options[0] = new Option('Seleccione', '');
+            for (var i = 0; i < json.length; i++) {
+                combo.options[combo.length] = new Option(json[i].nomCiudad, json[i].idCiudad);
+            }
+        }
+    });
+}

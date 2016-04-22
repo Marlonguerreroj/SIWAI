@@ -15,9 +15,9 @@ import java.sql.DriverManager;
 public class Conexion {
     
     private static final String DRIVER = "org.gjt.mm.mysql.Driver";
-    private static final String DATABASE_URL = "jdbc:mysql://sandbox2.ufps.edu.co/ufps_45";
+    private static final String DATABASE_URL = "jdbc:mysql://sandbox2.ufps.edu.co/ufps_45?noAccessToProcedureBodies=true";
     private static final String USER = "ufps_45";
-    private static final String PASSWORD = "ufps_07";
+    private static final String PASSWORD = "ufps_11";
     
     /**
      * Metodo que genera la conexion a la base de datos.
@@ -25,7 +25,7 @@ public class Conexion {
      * @throws java.lang.Exception Exception originada por fallo en la conexion.
      */
     public static Connection generarConexion() throws Exception{
-        Connection conexion = null;
+        Connection conexion;
         Class.forName(DRIVER).newInstance();
         conexion = DriverManager.getConnection(DATABASE_URL, USER, PASSWORD);
         return conexion;

@@ -37,13 +37,14 @@ public class DAOCliente {
         if (conn != null) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO tbl_cliente "
                     + "(dni_cliente, nom_cliente, ape_cliente, dir_cliente, "
-                    + "tel_cliente, email_cliente) values (?, ?, ?, ?, ?, ?)");
+                    + "tel_cliente, email_cliente, id_ciudad) values (?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, dto.getDni());
             stmt.setString(2, dto.getNombre());
             stmt.setString(3, dto.getApellido());
             stmt.setString(4, dto.getDireccion());
-            stmt.setInt(5, dto.getTelefono());
+            stmt.setString(5, dto.getTelefono());
             stmt.setString(6, dto.getEmail());
+            stmt.setInt(7, dto.getUbicacion().getIdCiudad());
             try {
                 exito = stmt.executeUpdate() > 0;
             } catch (SQLException ex) {
@@ -79,9 +80,11 @@ public class DAOCliente {
         else if (columna.equals("dni"))
             sql = " WHERE dni_cliente = ? ";
         if (conn != null) {
-            PreparedStatement stmt = conn.prepareStatement("SELECT dni_cliente,"
-                    + " nom_cliente, ape_cliente, dir_cliente, tel_cliente, "
-                    + "email_cliente FROM tbl_cliente" + sql);
+            PreparedStatement stmt = conn.prepareStatement("SELECT `tbl_cliente`.*, "
+                    + "`tbl_ciudad`.`nom_ciudad`, `tbl_pais`.`nom_pais`, `tbl_pais`.`cod_pais` "
+                    + "FROM `tbl_cliente` JOIN `tbl_ciudad` ON `tbl_cliente`.`id_ciudad` "
+                    + "= `tbl_ciudad`.`id_ciudad` JOIN `tbl_pais` ON `tbl_ciudad`.`cod_pais` "
+                    + "= `tbl_pais`.`cod_pais`" + sql);
             if (columna.equals("dni")) {
                 stmt.setString(1, informacion);
             } else if (columna.equals("nom")) {
@@ -97,8 +100,12 @@ public class DAOCliente {
                 dto.setNombre(rs.getString(2));
                 dto.setApellido(rs.getString(3));
                 dto.setDireccion(rs.getString(4));
-                dto.setTelefono(rs.getInt(5));
+                dto.setTelefono(rs.getString(5));
                 dto.setEmail(rs.getString(6));
+                dto.getUbicacion().setIdCiudad(rs.getInt(7));
+                dto.getUbicacion().setNomCiudad(rs.getString(8));
+                dto.getUbicacion().setNomPais(rs.getString(9));
+                dto.getUbicacion().setCodPais(rs.getString(10));
                 dtos.add(dto);
             }
             stmt.close();

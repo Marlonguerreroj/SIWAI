@@ -39,21 +39,28 @@ public class ControladorCliente extends HttpServlet {
         String dni = request.getParameter("dni");
         String nombre = request.getParameter("nombre");
         String apellido = request.getParameter("apellido");
-        int telefono = Integer.parseInt("" + request.getParameter("telefono"));
+        String ciudadSt = request.getParameter("ciudad");
+        String telefono = request.getParameter("telefono");
         String direccion = request.getParameter("direccion");
         String email = request.getParameter("email");
-        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        String validacion = validarCampos(nombre, apellido, dni, telefono, email, ciudadSt);
         PrintWriter out = response.getWriter();
-        String mensaje;
+        if(!validacion.contains("Exito")) {
+            out.print(validacion);
+            return;
+        }
+        int ciudad = Integer.parseInt(ciudadSt);
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        String mensaje = "";
         try {
-            if (fachada.registrarCliente(dni, nombre, apellido, direccion, email, telefono))
+            if (fachada.registrarCliente(dni, nombre, apellido, direccion, email, telefono, ciudad))
                mensaje = "Exito";
             else
                 mensaje = "Fallo";
         } catch (Exception ex) {
-            mensaje =  "Error";
+            out.print("Error");
         }
-            out.print(mensaje);
+        out.print(mensaje);
     }
 
     /**
@@ -86,6 +93,37 @@ public class ControladorCliente extends HttpServlet {
         } finally {
             response.sendRedirect("/SIWAI/Seccion/Cliente/consultar.jsp");
         }
+    }
+    
+    private String validarCampos(String nombre, String apellidos, String dni,
+            String telefono, String email, String ciudad){
+        String msj = "Exito";
+        if(nombre.trim().isEmpty() || apellidos.trim().isEmpty() || dni.trim().isEmpty() || ciudad == null)
+            msj = "El nombre, apellido, DNI y ciudad de residencia son obligatorios.";                
+        else if(!telefono.isEmpty()) {
+            if(telefono.length() < 7)
+                msj = "El teléfono debe tener al menos 7 digitos.";
+            else {
+                try {
+                    if(Long.parseLong(telefono) < 0)
+                        msj = "El teléfono no puede ser negativo.";
+                } catch (NumberFormatException ex) {
+                    msj = "El campo teléfono solo admite números.";
+                }
+            }
+        } else if (!email.isEmpty() && !email.contains("@") && !email.contains(".")) {
+            msj = "El email no es correcto.";
+        } else if (ciudad.isEmpty()) {
+            msj = "La ciudad es un campo obligatorio.";
+        }else {
+            try {
+                if(Long.parseLong(dni) < 0)
+                    msj = "El DNI no puede ser negativo.";
+            } catch (NumberFormatException ex){
+                msj = "El DNI solo admite números.";
+            }
+        }
+        return msj;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

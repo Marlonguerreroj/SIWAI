@@ -119,17 +119,18 @@ function registrarEmpleado(document) {
  * @param {type} document Formulario con los datosdel cliente.
  * @returns {undefined}
  */
-function registrarCliente(document) {
-    nombres = document.elements[0].value;
-    apellidos = document.elements[1].value;
-    dni = document.elements[2].value;
-    telefono = document.elements[3].value;
-    direccion = document.elements[4].value;
-    email = document.elements[5].value;
+function registrarCliente(document){
+    dni = document.elements[0].value;
+    nombres = document.elements[1].value;
+    apellidos = document.elements[2].value;
+    ciudad = document.elements[4].value;
+    direccion = document.elements[5].value;
+    telefono = document.elements[6].value;
+    email = document.elements[7].value;
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorCliente?registrarCliente=true&dni=" + dni + "&nombre=" +
-            nombres + "&apellido=" + apellidos + "&telefono=" + telefono +
-            "&email=" + email + "&direccion=" + direccion;
+            nombres + "&apellido=" + apellidos + "&telefono=" + telefono + 
+            "&email=" + email + "&direccion=" + direccion + "&ciudad=" + ciudad;
     xhttp.open("POST", url, true);
     xhttp.send();
     xhttp.onreadystatechange = function () {
@@ -151,6 +152,11 @@ function registrarCliente(document) {
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                         "Cliente registrado exitosamente</div>");
                 $("#form")[0].reset();
+            } else {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>"+
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+                        + sub + "</div>");
             }
         }
     }
@@ -207,6 +213,7 @@ function registrarProveedor(document) {
         }
     }
 }
+}
 
 function actualizarSucursal(documento) {
     codigo = documento.elements[0].value;
@@ -235,4 +242,3 @@ function actualizarSucursal(documento) {
             }
         }
     }
-}

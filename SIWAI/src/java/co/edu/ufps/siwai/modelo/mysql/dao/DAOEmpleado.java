@@ -134,13 +134,14 @@ public class DAOEmpleado {
         try {
             conn = Conexion.generarConexion();
             CallableStatement stmt = conn.prepareCall("{?=call iniciarSesion(?, ?)}");
-            stmt.registerOutParameter(1, Types.NUMERIC);
+            stmt.registerOutParameter(1, Types.VARCHAR);
             stmt.setString(2, usuario);
             stmt.setString(3, contraseña);
             stmt.execute();
             resultado = stmt.getString(1);
             stmt.close();
         } catch (Exception e) {
+            System.out.println("Error: " + e.toString());
         } finally {
             try {
                 conn.close();

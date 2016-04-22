@@ -13,13 +13,14 @@ import java.io.Serializable;
  */
 public class ClienteDTO implements Serializable{
     
-    private String dni, nombre, apellido, direccion, email;
-    private int telefono;
-
+    private String dni, nombre, apellido, direccion, email, telefono;
+    private UbicacionDTO ubicacion;
+    
     /**
      * Constructor sin parametros.
      */
     public ClienteDTO() {
+        ubicacion = new UbicacionDTO();
     }
 
     /**
@@ -30,15 +31,18 @@ public class ClienteDTO implements Serializable{
      * @param direccion Direccion de residencia del cliente.
      * @param email Correo electronico del cliente.
      * @param telefono Telefono o celular del cliente.
+     * @param ciudad Id de la ciudad en donde vive el cliente.
      */
     public ClienteDTO(String dni, String nombre, String apellido, 
-            String direccion, String email, int telefono) {
+            String direccion, String email, String telefono, int ciudad) {
         this.dni = dni;
         this.nombre = nombre;
         this.apellido = apellido;
         this.direccion = direccion;
         this.email = email;
         this.telefono = telefono;
+        ubicacion = new UbicacionDTO();
+        ubicacion.setIdCiudad(ciudad);
     }
     
     /**
@@ -123,9 +127,9 @@ public class ClienteDTO implements Serializable{
 
     /**
      * Metodo que retorna el numero telefonico del cliente.
-     * @return Int con el numero telefonico del cliente.
+     * @return String con el numero telefonico del cliente.
      */
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
@@ -133,8 +137,24 @@ public class ClienteDTO implements Serializable{
      * Metodo que establece el telefono del cliente.
      * @param telefono Nuevo telefono del cliente.
      */
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
-    
+
+    /**
+     * Metodo que obtiene el objeto UbicacionDTO del cliente.
+     * @return UbicacionDTO.
+     */
+    public UbicacionDTO getUbicacion() {
+        return ubicacion;
+    }
+
+    /**
+     * Metodo que establece el objeto UbicacionDTO del cliente.
+     * @param dto UbicacionDTO.
+     */
+    public void setUbicacion(UbicacionDTO dto) {
+        this.ubicacion = dto;
+    }
+
 }
