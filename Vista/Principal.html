@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Sistema de Informacion</title>
+        <link  rel="stylesheet" type="text/css" href="../Vista/css/bootstrap.css">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!-- This style make bigger the font of the glyphicon-->
+        <style>
+            .glyphicon{
+                font-size: 1.5em;
+            }
+            .c{
+                margin: 0.5% auto;
+            }
+            .i{
+                margin: 4%;
+                width: 30%;
+                height: 30%;
+            }
+        </style>
+    <body>
+    <center>
+        <div>
+            <img class="i" src="../Vista/img/logo.jpg" class="" />
+        </div>
+        
+        <div  class="c well">
+            <br>
+            <form class="form-inline" action="../Script/ScriptIniciarSesion.php" method="post">
+                <div class="form-group">
+                    <a class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-user"></span></a>
+                    <input name="usuario" type="text" id="element-3" class="form-control" placeholder="Usuario">
+                </div>
+                <br>
+                <br>
+                <div >
+                    <a class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-lock"></span></a>
+                    <input name="contraseña" type="password" id="element-4" class="form-control" placeholder="Contraseña">
+                </div>
+                <br>
+                <br>
+                <button name="enviar" type="submit" class="btn btn-primary" >Iniciar Sesion</button>
+            </form>  
+        </div>
+ 
+</center>
+</body>
+</html>
+

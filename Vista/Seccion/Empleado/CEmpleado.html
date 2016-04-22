@@ -1,0 +1,81 @@
+<br>
+<br>
+<center>   
+    <h1 class="letra3">Consultar Empleado</h1>
+</center>
+<br>
+<form action="../Script/ScriptEmpleado.php" method="post">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <p class="letra2">Tipo de dato:  
+            </div>
+            <div class="col-md-2">
+                <select name="sel" class="form-control" id="sel2">
+                    <option>Sucursal</option>
+                    <option>Codigo</option>
+                    <option>Dni</option>
+                </select>
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2">
+                <p class="letra2">Informacion:  
+            </div>
+            <div class="col-md-2">
+                <input name="informacion" type="text" class="form-control ">
+            </div>
+            <div class="col-md-2">
+                <button name="buscar" type="submit" class="btn btn-success  letra">
+                    <span class="glyphicon glyphicons glyphicon-search"></span>
+                </button>
+            </div>
+            <div class="col-md-1">
+            </div>
+        </div>
+    </div>
+</form>
+<br>
+<br>
+<?php if( $valor !=null): ?>
+<div class="container">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Codigo</th>
+                            <th>Dni</th>
+                            <th>Sucursal</th>
+                            <th>Tipo Empleado</th>
+                            <th>Contraseña</th>
+                            <th>Fecha Ingreso</th>
+                            <th>Fecha Salida</th>
+                            <th>Celular</th>
+                        </tr>
+                    </thead>
+                    <?php for($a=0;$a<count($valor);$a++): ?>
+
+                    <tr>
+                        <td><?php echo  $valor[$a][0] ?></td>
+                        <td><?php echo  $valor[$a][1]?></td>
+                        <td><?php echo  $valor[$a][2] ?></td>
+                        <td><?php echo  $valor[$a][3] ?></td>
+                        <td><?php echo  $valor[$a][4] ?></td>
+                        <td><?php echo  $valor[$a][5] ?></td>
+                        <td><?php echo  $valor[$a][6] ?></td>
+                        <td><?php echo  $valor[$a][7] ?></td>
+
+
+                    </tr>
+                    <?php endfor; ?>
+
+                </table>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+
+    </div>
+</div>
+<?php endif; ?>
