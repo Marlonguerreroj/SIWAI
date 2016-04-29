@@ -37,13 +37,13 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-4">
                         <select name="sel1" class="form-control" id="sel1" required disabled>
-                            <option value="">Seleccione</option>
+                            <option value=""><%=request.getParameter("sucursal")%></option>
                         </select>
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-4">
                         <select name="sel2" class="form-control" id="sel2" required onchange="habilitar()" disabled>
-                            <option value="">Seleccione</option>
+                            <option value=""><%=request.getParameter("cargo")%></option>
                         </select>    
                     </div>
                     <div class="col-md-1"></div>
@@ -55,14 +55,14 @@
                         <p>DNI:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value="" required  type="text" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("dni")%>" required  type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
                         <p>Nombre:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value="" required type="text" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("nombre")%>" required type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -73,14 +73,14 @@
                         <p>Apellido:</p>
                     </div>
                     <div class="col-md-3">
-                        <input  readOnly value="" required  type="text" class="form-control ">
+                        <input  readOnly value="<%=request.getParameter("apellido")%>" required  type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
                         <p>Telefono:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value="" required  type="text" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("telefono")%>" required  type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -91,14 +91,14 @@
                         <p>Celular:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value=""  type="number" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("celular")%>"  type="number" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
                         <p>E-mail:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value="" required  type="text" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("email")%>" required  type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -109,14 +109,14 @@
                         <p>Direccion:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value="" required  type="text" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("direccion")%>" required  type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
                         <p>Fecha Ingreso:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value=""  type="text" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("fIngreso")%>"  type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -128,18 +128,18 @@
                         <p>Fecha salida:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly  value=""  type="date" class="form-control ">
+                        <input readOnly  value="fSalida"  type="date" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-2">
                         <div class="radio">
 
-                            <label><input readOnly disabled value ="0" type="radio" name="radio">Habilitado</label>
+                            <label><input readOnly <% if (request.getParameter("habilitado").equals("1")) {%>checked <%} %> disabled value ="0" type="radio" name="radio">Habilitado</label>
                         </div>
                     </div>
                     <div class="col-md-2">
                         <div class="radio">
-                            <label><input readOnly disabled value="1" type="radio" name="radio">Deshabilitado</label>
+                            <label><input readOnly <% if (request.getParameter("habilitado").equals("0")) {%>checked <%} %> disabled value="1" type="radio" name="radio">Deshabilitado</label>
                         </div>
                     </div>
                     <div class="col-md-1"></div>

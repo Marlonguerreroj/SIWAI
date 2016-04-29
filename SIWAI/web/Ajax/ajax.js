@@ -20,7 +20,6 @@ function iniciarSesion(campo1, campo2) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
-            alert(sub);
             if ((sub.indexOf('nulo') >= 0)) {
                 campo1.parentNode.className = " form-group has-error has-feedback";
                 campo2.parentNode.className = "form-group espaciado has-error has-feedback";
@@ -36,7 +35,7 @@ function iniciarSesion(campo1, campo2) {
 
             }
         }
-    }
+    };
 }
 
 function registrarSucursal(document) {
@@ -46,8 +45,8 @@ function registrarSucursal(document) {
     email = document.elements[3].value;
     paginaWeb = document.elements[4].value;
     direccion = document.elements[5].value;
-    ciudad = document.elements[6].value;
-    pais = document.elements[7].value;
+    pais = document.elements[6].value;
+    ciudad = document.elements[7].value;
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorSucursal?registrarSucursal=true&codigo=" + codigo.value + "&nombre=" +
             nombre + "&telefono=" + telefono + "&email=" + email + "&paginaWeb=" + paginaWeb +
@@ -67,11 +66,12 @@ function registrarSucursal(document) {
                 $("div").remove("#alert");
                 $("body").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" + sub + "</div>");
             } else if (sub.indexOf("true") >= 0) {
+                $("div").remove("#alert");
                 $("body").prepend("<div id='alert' class='alert alert-success centrarDiv'>Sucursal registrada exitosamente</div>");
                 $("#form")[0].reset();
             }
         }
-    }
+    };
 }
 
 function registrarEmpleado(document) {
@@ -107,11 +107,12 @@ function registrarEmpleado(document) {
                 $("div").remove("#alert");
                 $("body").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" + sub + "</div>");
             } else if (sub.indexOf("true") >= 0) {
+                $("div").remove("#alert");
                 $("body").prepend("<div id='alert' class='alert alert-success centrarDiv'>Sucursal registrada exitosamente</div>");
                 $("#form")[0].reset();
             }
         }
-    }
+    };
 }
 
 /**
@@ -159,7 +160,7 @@ function registrarCliente(document) {
                         + sub + "</div>");
             }
         }
-    }
+    };
 }
 
 /**
@@ -211,7 +212,7 @@ function registrarProveedor(document) {
                 $("#form")[0].reset();
             }
         }
-    }
+    };
 }
 
 function actualizarSucursal(documento) {
@@ -221,8 +222,8 @@ function actualizarSucursal(documento) {
     email = documento.elements[3].value;
     paginaWeb = documento.elements[4].value;
     direccion = documento.elements[5].value;
-    ciudad = documento.elements[6].value;
-    pais = documento.elements[7].value;
+    pais = documento.elements[6].value;
+    ciudad = documento.elements[7].value;
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorSucursal?actualizarSucursal=true&codigo=" + codigo + "&nombre=" + nombre +
             "&telefono=" + telefono + "&email=" + email + "&paginaWeb=" + paginaWeb + "&direccion=" + direccion + "&ciudad=" + ciudad +
@@ -240,5 +241,5 @@ function actualizarSucursal(documento) {
                 window.location = 'consultar.jsp';
             }
         }
-    }
+    };
 }

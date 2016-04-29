@@ -1,3 +1,70 @@
+function enviarFormOcultoSucursal(document, i) {
+    codigo = document.getElementById("tablaS").rows[i + 1].cells[0].innerHTML;
+    nombre = document.getElementById("tablaS").rows[i + 1].cells[1].innerHTML;
+    telefono = document.getElementById("tablaS").rows[i + 1].cells[2].innerHTML;
+    email = document.getElementById("tablaS").rows[i + 1].cells[3].innerHTML;
+    paginaWeb = document.getElementById("tablaS").rows[i + 1].cells[4].innerHTML;
+    direccion = document.getElementById("tablaS").rows[i + 1].cells[5].innerHTML;
+    ciudad = document.getElementById("tablaS").rows[i + 1].cells[6].innerHTML;
+    pais = document.getElementById("tablaS").rows[i + 1].cells[7].innerHTML;
+    document.getElementById("codigo").value = codigo;
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("telefono").value = telefono;
+    document.getElementById("email").value = email;
+    document.getElementById("paginaWeb").value = paginaWeb;
+    document.getElementById("direccion").value = direccion;
+    document.getElementById("ciudad").value = ciudad;
+    document.getElementById("pais").value = pais;
+    document.getElementById("formOculto").submit();
+}
+
+function enviarFormOcultoEmpleadoMas(document, i, apellido, telefono, email, direccion, habilitado) {
+    sucursal = document.getElementById("tablaE").rows[i + 1].cells[2].innerHTML;
+    cargo = document.getElementById("tablaE").rows[i + 1].cells[3].innerHTML;
+    dni = document.getElementById("tablaE").rows[i + 1].cells[0].innerHTML;
+    nombre = document.getElementById("tablaE").rows[i + 1].cells[1].innerHTML;
+    celular = document.getElementById("tablaE").rows[i + 1].cells[6].innerHTML;
+    fIngreso = document.getElementById("tablaE").rows[i + 1].cells[4].innerHTML;
+    fSalida = document.getElementById("tablaE").rows[i + 1].cells[5].innerHTML;
+    document.getElementById("formOculto").action="mas.jsp";
+    document.getElementById("sucursal").value = sucursal;
+    document.getElementById("cargo").value = cargo;
+    document.getElementById("dni").value = dni;
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("apellido").value = apellido;
+    document.getElementById("telefono").value = telefono;
+    document.getElementById("celular").value = celular;
+    document.getElementById("email").value = email;
+    document.getElementById("direccion").value = direccion;
+    document.getElementById("fIngreso").value = fIngreso;
+    document.getElementById("fSalida").value = fSalida;
+    document.getElementById("habilitado").value = habilitado;
+    document.getElementById("formOculto").submit();
+}
+
+function enviarFormOcultoEmpleadoActualizar(document, i, apellido, telefono, email, direccion, habilitado, contraseña) {
+    sucursal = document.getElementById("tablaE").rows[i + 1].cells[2].innerHTML;
+    cargo = document.getElementById("tablaE").rows[i + 1].cells[3].innerHTML;
+    dni = document.getElementById("tablaE").rows[i + 1].cells[0].innerHTML;
+    nombre = document.getElementById("tablaE").rows[i + 1].cells[1].innerHTML;
+    celular = document.getElementById("tablaE").rows[i + 1].cells[6].innerHTML;
+    fIngreso = document.getElementById("tablaE").rows[i + 1].cells[4].innerHTML;
+    document.getElementById("formOculto").action="actualizar.jsp";
+    document.getElementById("sucursal").value = sucursal;
+    document.getElementById("cargo").value = cargo;
+    document.getElementById("dni").value = dni;
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("apellido").value = apellido;
+    document.getElementById("telefono").value = telefono;
+    document.getElementById("celular").value = celular;
+    document.getElementById("email").value = email;
+    document.getElementById("direccion").value = direccion;
+    document.getElementById("fIngreso").value = fIngreso;
+    document.getElementById("contraseña").value = contraseña;
+    document.getElementById("habilitado").value = habilitado;
+    document.getElementById("formOculto").submit();
+}
+
 /** Metodo para verificar que se oprimio la tecla enter y invoca al metodo para añadir una fila */
 function chequearEnter(event) {
     if (event.keyCode === 13) {

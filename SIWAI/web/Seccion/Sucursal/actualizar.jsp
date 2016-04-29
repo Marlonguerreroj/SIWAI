@@ -23,8 +23,10 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Ajax/ajax.js"></script>
+        <script src="../../Js/ubicacion.js"></script>
+        
     </head>
-    <body>
+    <body >
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
@@ -34,7 +36,8 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form onSubmit="actualizarSucursal(document.forms[0]);return false" id="formulario">
+            <form onSubmit="actualizarSucursal(document.forms[0]);
+                    return false" id="formulario">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>
@@ -93,18 +96,19 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Ciudad:</p>  
+                            <p>Pais:</p>  
                         </div>
                         <div class="col-md-3">
-                            <input required name="ciudad" value="<%=request.getParameter("ciudad")%>" type="text" class="form-control " >
+                            <select name="sel1" class="form-control" id="selPais" required onchange="cargarCiudades()">
+                            </select>
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Pais:</p> 
+                            <p>Ciudad:</p> 
                         </div>
                         <div class="col-md-3">
-                            <input required name="pais" value="<%=request.getParameter("pais")%>" type="text" class="form-control ">
-                        </div>
+                            <select name="sel2" class="form-control" id="selCiudad" required>
+                            </select>                        </div>
                         <div class="col-md-1"></div>
                     </div>
                     <br>

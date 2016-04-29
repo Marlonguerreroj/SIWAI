@@ -23,6 +23,7 @@
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <!-- Script del Ajax-->   
         <script src="../../Ajax/ajax.js"></script>
+        <script src="../../Js/ubicacion.js"></script>
 
     </head>
     <body>
@@ -95,17 +96,19 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Ciudad:</p>  
+                            <p>Pais: </p>  
                         </div>
                         <div class="col-md-3">
-                            <input required id="ciudad" type="text" class="form-control " >
+                            <select name="sel1" class="form-control" id="selPais" required onchange="cargarCiudades()">
+                            </select>
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Pais:</p> 
+                            <p>Ciudad: </p> 
                         </div>
                         <div class="col-md-3">
-                            <input required id="pais" type="text" class="form-control ">
+                            <select name="sel2" class="form-control" id="selCiudad" required>
+                            </select>
                         </div>
                         <div class="col-md-1"></div>
                     </div>

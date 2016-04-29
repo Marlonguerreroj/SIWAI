@@ -30,7 +30,7 @@
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
         <section>
-            <!-- Inicio del Alert  -->
+            <!-- Inicio del Alert (Notificacion de actualizar) -->
             <%
                 if (session.getAttribute("msjAS") != null) {
                     String mensaje = "" + session.getAttribute("msjAS");
@@ -44,6 +44,27 @@
                 }
             %>
             <!-- Fin del Alert -->
+            <!-- Inicio del alert -->
+            <%
+                String mensaje = session.getAttribute("msjCS") + "";
+                if (!mensaje.equals("null")) {
+                    if (mensaje.contains("Error")) {
+            %>
+            <div class="alert alert-danger centrar-texto" role="alert" arial >
+                <%=mensaje%>
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>
+            <%
+            } else {%>
+            <div class="alert alert-warning centrar-texto" role="alert" arial >
+                <%=mensaje%>
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>            
+            <%      }
+                    session.removeAttribute("msjCS");
+                }
+            %>
+            <!-- Fin del alert-->
             <div>
                 <h1 class="centrar-texto">Consultar Sucursal</h1>
             </div>
@@ -83,6 +104,8 @@
             <!-- Finalizacion del formulario para consultar -->
             <%
                 if (session.getAttribute("sucursales") != null) {
+                    ArrayList<SucursalDTO> lista = (ArrayList) session.getAttribute("sucursales");
+                    if (!lista.isEmpty()) {
             %>
             <!-- Div que contiene la tabla de sucursales -->
             <div class="container">
@@ -90,7 +113,7 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
                         <div class="table-responsive">
-                            <table  class="table table-hover">
+                            <table id="tablaS" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>Codigo</th>
@@ -105,9 +128,7 @@
                                     </tr>
                                 </thead>
                                 <%
-                                    ArrayList<SucursalDTO> lista = (ArrayList) session.getAttribute("sucursales");
-                                    if (lista != null) {
-                                        for (int i = 0; i < lista.size(); i++) {
+                                    for (int i = 0; i < lista.size(); i++) {
                                 %> 
                                 <tr>
                                     <td><%= lista.get(i).getCodigo()%></td>
@@ -119,15 +140,13 @@
                                     <td><%= lista.get(i).getCiudad()%></td>
                                     <td><%= lista.get(i).getPais()%></td>                          
                                     <td>
-                                        <a href="actualizar.jsp?codigo=<%=lista.get(i).getCodigo()%>&nombre=<%=lista.get(i).getNombre()%>&telefono=<%=lista.get(i).getTelefono()%>&email=<%=lista.get(i).getEmail()%>&paginaWeb=<%=lista.get(i).getPaginaWeb()%>&direccion=<%=lista.get(i).getDireccion()%>&ciudad=<%=lista.get(i).getCiudad()%>&pais=<%=lista.get(i).getPais()%>" style="cursor:pointer;">
+                                        <a onclick="enviarFormOcultoSucursal(document,<%=i%>)" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-edit asd "></span>
                                         </a>
                                     </td>
                                 </tr> 
                                 <% }
-                                        session.setAttribute("sucursales", null);
-                                    }
-
+                                    session.setAttribute("sucursales", null);
                                 %>
                             </table>
                         </div>
@@ -135,9 +154,21 @@
                     <div class="col-md-1"></div>
                 </div>
                 <!-- Fin del div que contiene la tabla de sucursales -->
-                <% }%>
+                <% }
+                    }%>
             </div>
             <!-- Fin del contenido principal-->
+            <form id="formOculto" method="post" action="actualizar.jsp">
+                <input type="hidden" name="codigo" id="codigo">
+                <input type="hidden" name="nombre" id="nombre">
+                <input type="hidden" name="telefono" id="telefono">
+                <input type="hidden" name="email" id="email">
+                <input type="hidden" name="paginaWeb" id="paginaWeb">
+                <input type="hidden" name="direccion" id="direccion">
+                <input type="hidden" name="ciudad" id="ciudad">
+                <input type="hidden" name="pais" id="pais">
+
+            </form>
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->
         <jsp:include page="../pie.jsp" />

@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : consultar
     Created on : 17-mar-2016, 14:37:57
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -30,6 +30,42 @@
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
         <section>
+
+            <!-- Inicio del Alert (Notificacion de actualizar) -->
+            <%
+                if (session.getAttribute("msjAE") != null) {
+                    String mensaje = "" + session.getAttribute("msjAE");
+            %>
+            <div id="alert" class="alert alert-success centrarDiv">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <%=mensaje%>
+            </div>
+            <%
+                    session.setAttribute("msjAE", null);
+                }
+            %>
+            <!-- Fin del Alert -->
+            <!-- Inicio del alert -->
+            <%
+                String mensaje = session.getAttribute("msjCE") + "";
+                if (!mensaje.equals("null")) {
+                    if (mensaje.contains("Error")) {
+            %>
+            <div class="alert alert-danger centrar-texto" role="alert" arial >
+                <%=mensaje%>
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>
+            <%
+            } else {%>
+            <div class="alert alert-warning centrar-texto" role="alert" arial >
+                <%=mensaje%>
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>
+            <%      }
+                    session.removeAttribute("msjCE");
+                }
+            %>
+            <!-- Fin del alert-->
             <div>
                 <h1 class="centrar-texto">Consultar Empleado</h1>
             </div>
@@ -69,13 +105,15 @@
             <br>
             <%
                 if (session.getAttribute("empleados") != null) {
+                    ArrayList<EmpleadoDTO> lista = (ArrayList) session.getAttribute("empleados");
+                    if (!lista.isEmpty()) {
             %>
             <div class="container">
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="tablaE">
                                 <thead>
                                     <tr>
                                         <th>Dni</th>
@@ -89,7 +127,6 @@
                                     </tr>
                                 </thead>
                                 <%
-                                    ArrayList<EmpleadoDTO> lista = (ArrayList) session.getAttribute("empleados");
                                     for (int i = 0; i < lista.size(); i++) {
                                 %>
                                 <tr>
@@ -100,12 +137,15 @@
                                     <td><%=lista.get(i).getfIngreso()%></td>
                                     <td><%=lista.get(i).getfSalida()%></td>
                                     <td><%=lista.get(i).getCelular()%></td>
-
                                     <td>
-                                        <a href="actualizar.jsp">
+                                        <a onclick="enviarFormOcultoEmpleadoActualizar(document,<%=i %>,'<%=lista.get(i).getApellido() %>','<%=lista.get(i).getTelefono()%>',
+                                                    '<%=lista.get(i).getEmail() %>','<%=lista.get(i).getDireccion() %>',
+                                                    '<%=lista.get(i).getHabilitado() %>','<%=lista.get(i).getContraseña() %>')" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-edit asd "></span>
                                         </a>
-                                        <a href="mas.jsp">
+                                        <a onclick="enviarFormOcultoEmpleadoMas(document,<%=i %>,'<%=lista.get(i).getApellido() %>','<%=lista.get(i).getTelefono()%>',
+                                                    '<%=lista.get(i).getEmail() %>','<%=lista.get(i).getDireccion() %>',
+                                                    '<%=lista.get(i).getHabilitado() %>')" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-info-sign asd "></span>
                                         </a>
                                     </td>
@@ -119,8 +159,25 @@
                     <div class="col-md-1"></div>
                 </div>
             </div>
-            <%}%>
+            <%}
+                }%>
             <!-- Fin del contenido principal-->
+
+            <form id="formOculto" method="post">
+                <input type="hidden" id="sucursal" name="sucursal">
+                <input type="hidden" id="cargo" name="cargo">
+                <input type="hidden" id="dni" name="dni">
+                <input type="hidden" id="nombre" name="nombre">
+                <input type="hidden" id="apellido" name="apellido">
+                <input type="hidden" id="telefono" name="telefono">
+                <input type="hidden" id="celular" name="celular">
+                <input type="hidden" id="email" name="email">
+                <input type="hidden" id="direccion" name="direccion">
+                <input type="hidden" id="fIngreso" name="fIngreso">
+                <input type="hidden" id="fSalida" name="fSalida">
+                <input type="hidden" id="habilitado" name="habilitado">
+                <input type="hidden" id="contraseña" name="contraseña">   
+            </form>
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->
         <jsp:include page="../pie.jsp" />

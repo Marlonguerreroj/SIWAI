@@ -4,6 +4,9 @@
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
 
+<%@page import="co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="co.edu.ufps.siwai.modelo.fachada.Fachada"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% if (session.getAttribute("usuario") == null) {
         response.sendRedirect("../../index.jsp");
@@ -21,8 +24,18 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Js/javascript.js"></script>
+        <script>
+            window.onload = function () {
+                document.getElementById("sel2").options.namedItem("<%=request.getParameter("cargo")%>").selected = true;
+            }
+        </script>
     </head>
     <body>
+        <%
+            Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+            ArrayList<SucursalDTO> lista = fachada.consultarSucursal("Todos", "");
+        %>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
@@ -39,12 +52,21 @@
                         <div class="col-md-4">
                             <select name="sel1" class="form-control" id="sel1" required>
                                 <option value="">Seleccione</option>
+                                <% for (int i = 0; i < lista.size(); i++) {%>
+                                <option <% if (request.getParameter("sucursal").equals(lista.get(i).getNombre())) { %> selected<%}%> >
+                                    <%=lista.get(i).getNombre()%></option>
+                                    <% }
+                                    %>
                             </select>
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-4">
                             <select name="sel2" class="form-control" id="sel2" required onchange="habilitar()">
                                 <option value="">Seleccione</option>
+                                <option id="Jefe de Operaciones" value="Jefe de Operaciones">Jefe de Operaciones</option>
+                                <option id="Cajero" value="Cajero">Cajero</option>
+                                <option id="Administrador" value="Administrador">Administrador</option>
+                                <option id="Vendedor" value="Vendedor">Vendedor</option>
                             </select>
                         </div>
                         <div class="col-md-1"></div>
@@ -56,14 +78,14 @@
                             <p>DNI:</p>
                         </div>
                         <div class="col-md-3">
-                            <input readOnly value="" required name="dni" type="number" class="form-control ">
+                            <input readOnly value="<%=request.getParameter("dni")%>" required name="dni" type="number" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
                             <p>Nombre:</p>
                         </div>
                         <div class="col-md-3">
-                            <input value="" required name="nombre" type="text" class="form-control ">
+                            <input value="<%=request.getParameter("nombre")%>" required name="nombre" type="text" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
 
@@ -75,14 +97,14 @@
                             <p>Apellido:</p>
                         </div>
                         <div class="col-md-3">
-                            <input value="" required name="apellido" type="text" class="form-control ">
+                            <input value="<%=request.getParameter("apellido")%>" required name="apellido" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
                             <p>Telefono:</p>
                         </div>
                         <div class="col-md-3">
-                            <input value="" name="telefono" type="number" class="form-control ">
+                            <input value="<%=request.getParameter("telefono")%>" name="telefono" type="number" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -93,7 +115,7 @@
                             <p>Celular:</p>
                         </div>
                         <div class="col-md-3">
-                            <input value="" required name="celular" type="number" class="form-control ">
+                            <input value="<%=request.getParameter("celular")%>" required name="celular" type="number" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
@@ -111,14 +133,14 @@
                             <p>E-mail:</p>
                         </div>
                         <div class="col-md-3">
-                            <input value="" name="email" type="text" class="form-control ">
+                            <input value="<%=request.getParameter("email")%>" name="email" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
                             <p>Direccion:</p>
                         </div>
                         <div class="col-md-3">
-                            <input  value="" name="direccion" type="text" class="form-control ">
+                            <input  value="<%=request.getParameter("direccion")%>" name="direccion" type="text" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -129,17 +151,17 @@
                             <p>Fecha ingreso:</p>
                         </div>
                         <div class="col-md-3">
-                            <input value="" required  name="fIngreso" type="date" class="form-control">
+                            <input value="<%=request.getParameter("fIngreso")%>" required  name="fIngreso" type="date" class="form-control">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-2">
                             <div class="radio">
-                                <label><input value ="0" type="radio" name="radio">Habilitado</label>
+                                <label><input value ="1"  <% if (request.getParameter("habilitado").equals("1")) {%>checked <%} %> type="radio" name="radio">Habilitado</label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="radio">
-                                <label><input value="1" type="radio" name="radio">Deshabilitado</label>
+                                <label><input value="0"  <% if (request.getParameter("habilitado").equals("0")) {%>checked <%}%> type="radio" name="radio">Deshabilitado</label>
                             </div>
                         </div>
                         <div class="col-md-1"></div>

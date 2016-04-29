@@ -17,7 +17,7 @@ public class SucursalDTO implements Serializable{
     }
     
     private String codigo,nombre,email,paginaWeb,direccion,ciudad,pais;
-    private int telefono;
+    private String telefono;
     /**
      * Constructor que pide como parametros todos los atributos de la sucursal.
      * @param codigo Codigo de la sucursal 
@@ -29,7 +29,7 @@ public class SucursalDTO implements Serializable{
      * @param pais Pais donde se encuentra la sucursal
      * @param telefono Telefono de la sucursal
      */
-    public SucursalDTO(String codigo, String nombre, String email, String paginaWeb, String direccion, String ciudad, String pais, int telefono) {
+    public SucursalDTO(String codigo, String nombre, String email, String paginaWeb, String direccion, String ciudad, String pais, String telefono) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.email = email;
@@ -141,14 +141,14 @@ public class SucursalDTO implements Serializable{
      * Metodo que retorna el telefono de la sucursal
      * @return String con el telefono de la surcursal
      */
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
     /**
      * Metodo que establece el telefono de la sucursal
      * @param telefono Telefono de la sucursal
      */
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
     

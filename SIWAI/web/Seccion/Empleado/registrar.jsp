@@ -28,7 +28,7 @@
     </head>
     <body>
         <%
-            Fachada fachada = new Fachada();
+            Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
             ArrayList<SucursalDTO> lista = fachada.consultarSucursal("Todos", "");
         %>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->

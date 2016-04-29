@@ -61,7 +61,7 @@ public class Fachada implements Serializable{
         return dao.consultarClientes(columna, informacion);
     }
 
-    public boolean registrarSucursal(String codigo, String nombre, int telefono, String email,
+    public boolean registrarSucursal(String codigo, String nombre, String telefono, String email,
             String paginaWeb, String direccion, String ciudad, String pais) throws Exception {
         SucursalDTO dto = new SucursalDTO(codigo, nombre, email, paginaWeb, direccion, ciudad,
                 pais, telefono);
@@ -74,7 +74,7 @@ public class Fachada implements Serializable{
         return dao.consultarSucursal(buscarPor, informacion);
     }
 
-    public boolean actualizarSucursal(String codigo, String nombre, int telefono, String email,
+    public boolean actualizarSucursal(String codigo, String nombre, String telefono, String email,
             String paginaWeb, String direccion, String ciudad, String pais) throws Exception {
         SucursalDTO dto = new SucursalDTO(codigo, nombre, email, paginaWeb, direccion,
                 ciudad, pais, telefono);

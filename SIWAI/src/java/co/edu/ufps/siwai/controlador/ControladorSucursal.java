@@ -38,7 +38,7 @@ public class ControladorSucursal extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String codigo = request.getParameter("codigo");
         String nombre = request.getParameter("nombre");
-        int telefono = Integer.valueOf(request.getParameter("telefono"));
+        String telefono = request.getParameter("telefono");
         String email = request.getParameter("email");
         String paginaWeb = request.getParameter("paginaWeb");
         String direccion = request.getParameter("direccion");
@@ -49,6 +49,7 @@ public class ControladorSucursal extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             exito = fachada.registrarSucursal(codigo, nombre, telefono, email, paginaWeb, direccion, ciudad, pais);
+            System.out.println(exito);
             out.print(exito);
 
         } catch (Exception ex) {
@@ -70,7 +71,7 @@ public class ControladorSucursal extends HttpServlet {
             throws ServletException, IOException {
         String codigo = request.getParameter("codigo");
         String nombre = request.getParameter("nombre");
-        int telefono = Integer.valueOf(request.getParameter("telefono"));
+        String telefono = request.getParameter("telefono");
         String email = request.getParameter("email");
         String paginaWeb = request.getParameter("paginaWeb");
         String direccion = request.getParameter("direccion");
@@ -82,8 +83,8 @@ public class ControladorSucursal extends HttpServlet {
         try {
             exito = fachada.actualizarSucursal(codigo, nombre, telefono, email,
                     paginaWeb, direccion, ciudad, pais);
-            if(exito){
-               request.getSession().setAttribute("msjAS", "La sucursal se actualizó satisfactoriamente");
+            if (exito) {
+                request.getSession().setAttribute("msjAS", "La sucursal se actualizó satisfactoriamente");
             }
             out.print(exito);
         } catch (Exception e) {
@@ -107,7 +108,7 @@ public class ControladorSucursal extends HttpServlet {
         String buscarPor = request.getParameter("sel");
         String informacion = request.getParameter("informacion");
         Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
-        ArrayList<SucursalDTO> lista = null;
+        ArrayList<SucursalDTO> lista = new ArrayList<>();
         try {
             lista = fachada.consultarSucursal(buscarPor, informacion);
         } catch (Exception e) {
