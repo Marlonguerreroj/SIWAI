@@ -173,12 +173,12 @@ function registrarProveedor(document) {
     nit = document.elements[1].value;
     nombre = document.elements[2].value;
     web = document.elements[3].value;
-    telefono = document.elements[4].value;
-    email = document.elements[5].value;
-    tipoCuentaBancaria = document.elements[6].value;
-    nCuentaBancaria = document.elements[7].value;
-    cuentaBancaria = document.elements[8].value;
-    nombreContacto = document.elements[9].value;
+    tipoCuentaBancaria = document.elements[4].value;
+    nCuentaBancaria = document.elements[5].value;
+    cuentaBancaria = document.elements[6].value;
+    nombreContacto = document.elements[7].value;
+    telefono = document.elements[8].value;
+    email = document.elements[9].value;
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorProveedor?registrarProveedor=true&codigo=" + codigo + "&nit=" +
             nit + "&nombre=" + nombre + "&web=" + web + "&telefono=" + telefono +

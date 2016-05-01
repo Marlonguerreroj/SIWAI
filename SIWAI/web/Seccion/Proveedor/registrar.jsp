@@ -74,24 +74,6 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Teléfono:</p>  
-                        </div>
-                        <div class="col-md-3">
-                            <input required name="telefono" type="number" class="form-control ">
-                        </div>
-                        <div class="col-md-2"></div>
-                        <div class="col-md-1">
-                            <p>E-mail:</p> 
-                        </div>
-                        <div class="col-md-3">
-                            <input required name="email" type="email" class="form-control ">
-                        </div>
-                        <div class="col-md-1"></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-1">
                             <p>Tipo cuenta bancaria:</p>  
                         </div>
                         <div class="col-md-3">
@@ -123,6 +105,24 @@
                         </div>
                         <div class="col-md-3">
                             <input required name="nombreContacto" type="text" class="form-control ">
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-1">
+                            <p>Teléfono:</p>  
+                        </div>
+                        <div class="col-md-3">
+                            <input required name="telefono" type="number" class="form-control ">
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-1">
+                            <p>E-mail:</p> 
+                        </div>
+                        <div class="col-md-3">
+                            <input required name="email" type="email" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
