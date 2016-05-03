@@ -114,4 +114,38 @@ public class DAOCliente {
         }
         return dtos;
     }
+    
+    /**
+     * Metodo que se conecta a la base de datos y actualizar los datos de un
+     * cliente.
+     * @param dto ClienteDTO con los datos del cliente.
+     * @return true si se registro, false si no lo hizo.
+     * @throws java.lang.Exception Exception originada por fallo en la conexion
+     * o error al actualizar el cliente.
+     */
+    public boolean actualizarCliente(ClienteDTO dto) throws Exception {
+        boolean exito = false;
+        conn = Conexion.generarConexion();
+        if (conn != null) {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE tbl_cliente "
+                    + "SET nom_cliente = ?, ape_cliente = ?, dir_cliente = ?, "
+                    + "tel_cliente = ?, email_cliente = ?, id_ciudad = ? WHERE dni_cliente = ?");
+            stmt.setString(1, dto.getNombre());
+            stmt.setString(2, dto.getApellido());
+            stmt.setString(3, dto.getDireccion());
+            stmt.setString(4, dto.getTelefono());
+            stmt.setString(5, dto.getEmail());
+            stmt.setInt(6, dto.getUbicacion().getIdCiudad());
+            stmt.setString(7, dto.getDni());
+            try {
+                exito = stmt.executeUpdate() > 0;
+            } catch (SQLException ex) {
+            } finally {
+                conn.close();
+                stmt.close();
+            }
+        }
+        return exito;
+    }
+    
 }

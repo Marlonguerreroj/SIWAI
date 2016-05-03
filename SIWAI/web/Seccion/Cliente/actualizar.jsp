@@ -18,6 +18,7 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Js/ubicacion.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -34,17 +35,17 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Nombre:</p>  
+                            <p>DNI:</p>
                         </div>
                         <div class="col-md-3">
-                            <input name="nombre" value="" type="text" class="form-control ">
+                            <input required readonly name="dni" value="<%=request.getParameter("dni")%>" type="number" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Apellido:</p> 
+                            <p>Nombres:</p>
                         </div>
                         <div class="col-md-3">
-                            <input name="apellido" value="" type="text" class="form-control ">
+                            <input required name="nombre" value="<%=request.getParameter("nombre")%>" type="text" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -52,17 +53,18 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Dni:</p>  
+                            <p>Apellidos:</p>
                         </div>
                         <div class="col-md-3">
-                            <input name="dni" readonly value="" type="text" class="form-control ">
+                            <input required name="apellido" value="<%=request.getParameter("apellido")%>" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Telefono:</p> 
+                            <p>País:</p>
                         </div>
                         <div class="col-md-3">
-                            <input name="telefono" value="" type="text" class="form-control ">
+                            <select name="sel1" class="form-control" id="selPais" required onchange="cargarCiudades()">
+                            </select>
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -70,17 +72,36 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Direccion:</p>  
+                            <p>Ciudad:</p>
                         </div>
                         <div class="col-md-3">
-                            <input name="direccion" value="" type="text" class="form-control ">
+                            <select name="sel2" class="form-control" id="selCiudad" required>
+                            </select>
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>E-mail:</p> 
+                            <p>Dirección:</p>
                         </div>
                         <div class="col-md-3">
-                            <input name="email" value="" type="text" class="form-control ">
+                            <input name="direccion" value="<%=request.getParameter("direccion")%>" type="text" class="form-control ">
+                        </div>
+                        <div class="col-md-1"></div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-1"></div>
+                        <div class="col-md-1">
+                            <p>Teléfono:</p>
+                        </div>
+                        <div class="col-md-3">
+                            <input name="telefono" type="number" value="<%=request.getParameter("telefono")%>" class="form-control ">
+                        </div>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-1">
+                            <p>E-mail:</p>
+                        </div>
+                        <div class="col-md-3">
+                            <input name="email" type="email" value="<%=request.getParameter("email")%>" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -89,7 +110,8 @@
                     <div class="row centrar-texto">
                         <div class="col-md-4"></div>
                         <div class="col-md-2">
-                            <button name="enviar2" type="submit" class="btn btn-success btn-lg letra">Actualizar
+                            <button class="btn btn-success btn-lg letra">
+                                Registrar
                             </button>
                         </div>
                         <div class="col-md-2">

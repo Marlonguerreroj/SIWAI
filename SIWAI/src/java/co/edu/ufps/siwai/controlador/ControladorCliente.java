@@ -95,6 +95,46 @@ public class ControladorCliente extends HttpServlet {
         }
     }
     
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void actualizarCliente(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        /* TODO output your page here. You may use following sample code. */
+        String dni = request.getParameter("dni");
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String ciudadSt = request.getParameter("ciudad");
+        String telefono = request.getParameter("telefono");
+        String direccion = request.getParameter("direccion");
+        String email = request.getParameter("email");
+        String validacion = validarCampos(nombre, apellido, dni, telefono, email, ciudadSt);
+        PrintWriter out = response.getWriter();
+        if(!validacion.contains("Exito")) {
+            out.print(validacion);
+            return;
+        }
+        int ciudad = Integer.parseInt(ciudadSt);
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        String mensaje = "";
+        try {
+            if (fachada.actualizarCliente(dni, nombre, apellido, direccion, email, telefono, ciudad))
+               request.getSession().setAttribute("msjCC", "Exito");
+            else
+                mensaje = "Fallo";
+        } catch (Exception ex) {
+            out.print("Error");
+        }
+        out.print(mensaje);
+    }
+    
     private String validarCampos(String nombre, String apellidos, String dni,
             String telefono, String email, String ciudad){
         String msj = "Exito";
@@ -156,6 +196,8 @@ public class ControladorCliente extends HttpServlet {
             registrarCliente(request, response);
         } else if (request.getParameter("consultarCliente") != null) {
             consultarCliente(request, response);
+        } else if (request.getParameter("actualizarCliente") != null) {
+            actualizarCliente(request, response);
         }
     }
 

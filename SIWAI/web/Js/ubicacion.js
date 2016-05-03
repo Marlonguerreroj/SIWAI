@@ -4,10 +4,6 @@
  * and open the template in the editor.
  */
 
-/**
- * Carga los paises en el combo selPais al cargar el documento.
- * @param {type} param
- */
 $(document).ready(function() {
     $.ajax({
         url: '/SIWAI/ControladorUbicacion?cargarPaises=true',

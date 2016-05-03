@@ -162,5 +162,25 @@ public class Fachada implements Serializable{
         DAOUbicacion dao = new DAOUbicacion();
         return dao.obtenerCiudades(pais);
     }
+    
+    /**
+     * Metodo que envia los datos del cliente a DAOCliente para que sean
+     * actualizados en la base de datos.
+     *
+     * @param dni Documento nacional de identificación del cliente.
+     * @param nombre Nombres del cliente.
+     * @param apellido Apellidos del cliente.
+     * @param direccion Direccion de residencia del cliente.
+     * @param email Correo electronico del cliente.
+     * @param telefono Telefono o celular del cliente.
+     * @return True si el cliente fue actualziado, false si no se actualizo.
+     * @throws java.lang.Exception Excepcion en la conexion a la base de datos.
+     */
+    public boolean actualizarCliente(String dni, String nombre, String apellido,
+            String direccion, String email, String telefono, int ciudad) throws Exception {
+        ClienteDTO dto = new ClienteDTO(dni, nombre, apellido, direccion, email, telefono, ciudad);
+        DAOCliente dao = new DAOCliente();
+        return dao.actualizarCliente(dto);
+    }
 
 }

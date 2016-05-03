@@ -65,6 +65,23 @@ function enviarFormOcultoEmpleadoActualizar(document, i, apellido, telefono, ema
     document.getElementById("formOculto").submit();
 }
 
+function enviarFormOcultoCliente(document, i, pais) {
+    dni = document.getElementById("tabla-cliente").rows[i + 1].cells[0].innerHTML;
+    nombre = document.getElementById("tabla-cliente").rows[i + 1].cells[1].innerHTML;
+    apellido = document.getElementById("tabla-cliente").rows[i + 1].cells[2].innerHTML;
+    telefono = document.getElementById("tabla-cliente").rows[i + 1].cells[3].innerHTML;
+    email = document.getElementById("tabla-cliente").rows[i + 1].cells[4].innerHTML;
+    direccion = document.getElementById("tabla-cliente").rows[i + 1].cells[7].innerHTML;
+    document.getElementById("dni").value = dni;
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("apellido").value = apellido;
+    document.getElementById("telefono").value = telefono;
+    document.getElementById("email").value = email;
+    document.getElementById("direccion").value = direccion;
+    document.getElementById("pais").value = pais;
+    document.getElementById("form-oculto").submit();
+}
+
 /** Metodo para verificar que se oprimio la tecla enter y invoca al metodo para añadir una fila */
 function chequearEnter(event) {
     if (event.keyCode === 13) {

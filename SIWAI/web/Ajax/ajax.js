@@ -243,3 +243,45 @@ function actualizarSucursal(documento) {
         }
     };
 }
+
+/**
+ * Metodo que recibe la peticion de actualizacion de un cliente y la envia a ControladorCliente.
+ * @param {type} document Formulario con los datos del cliente.
+ * @returns {undefined}
+ */
+function registrarCliente(document) {
+    dni = document.elements[0].value;
+    nombres = document.elements[1].value;
+    apellidos = document.elements[2].value;
+    ciudad = document.elements[4].value;
+    direccion = document.elements[5].value;
+    telefono = document.elements[6].value;
+    email = document.elements[7].value;
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorCliente?actualizarCliente=true&dni=" + dni + "&nombre=" +
+            nombres + "&apellido=" + apellidos + "&telefono=" + telefono +
+            "&email=" + email + "&direccion=" + direccion + "&ciudad=" + ciudad;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            if (sub.indexOf("Fallo") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "No se encontro el cliente registrado con el DNI: " + dni + "</div>");
+            } else if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Error en la conexion a la base de datos</div>");
+            } else {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+                        + sub + "</div>");
+            }
+        }
+    };
+}
