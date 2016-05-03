@@ -98,15 +98,14 @@
                             <table class="table" id="tabla-cliente">
                                 <thead>
                                     <tr>
-                                        <th>Dni</th>
-                                        <th>Nombres</th>
-                                        <th>Apellidos</th>
-                                        <th>Telefono</th>
-                                        <th>E-mail</th>
-                                        <th>País</th>
-                                        <th>Ciudad</th>
-                                        <th>Direccion</th>
-                                        <th></th>
+                                        <th class="centrar-texto">Dni</th>
+                                        <th class="centrar-texto">Nombre</th>
+                                        <th class="centrar-texto">Telefono</th>
+                                        <th class="centrar-texto">E-mail</th>
+                                        <th class="centrar-texto">País</th>
+                                        <th class="centrar-texto">Ciudad</th>
+                                        <th class="centrar-texto">Direccion</th>
+                                        <th class="centrar-texto"></th>
                                     </tr>
                                 </thead>
                                 <%
@@ -114,16 +113,19 @@
                                     for (int i = 0; i < dtos.size(); i++) {
                                 %>
                                 <tr>
-                                    <td><%=dtos.get(i).getDni()%></td>
-                                    <td><%=dtos.get(i).getNombre()%></td>
-                                    <td><%=dtos.get(i).getApellido()%></td>
-                                    <td><%=dtos.get(i).getTelefono()%></td>
-                                    <td><%=dtos.get(i).getEmail()%></td>
-                                    <td><%=dtos.get(i).getUbicacion().getNomPais()%></td>
-                                    <td><%=dtos.get(i).getUbicacion().getNomCiudad()%></td>
-                                    <td><%=dtos.get(i).getDireccion()%></td>
-                                    <td>
-                                        <a onclick="enviarFormOcultoCliente(document,<%=i%>, '<%=dtos.get(i).getUbicacion().getCodPais()%>')" style="cursor:pointer;">
+                                    <td class="centrar-texto"><%=dtos.get(i).getDni()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getNombre() + " " + dtos.get(i).getApellido()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getTelefono()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getEmail()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getUbicacion().getNomPais()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getUbicacion().getNomCiudad()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getDireccion()%></td>
+                                    <td class="centrar-texto">
+                                        <a onclick="enviarFormOcultoCliente('<%=dtos.get(i).getDni()%>', 
+                                                    '<%=dtos.get(i).getNombre()%>', '<%=dtos.get(i).getApellido()%>',  
+                                                    '<%=dtos.get(i).getTelefono()%>', '<%=dtos.get(i).getEmail()%>', 
+                                                    '<%=dtos.get(i).getDireccion()%>', '<%=dtos.get(i).getUbicacion().getCodPais()%>',
+                                                    <%=dtos.get(i).getUbicacion().getIdCiudad()%>)" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-edit asd"></span>
                                         </a>
                                     </td>

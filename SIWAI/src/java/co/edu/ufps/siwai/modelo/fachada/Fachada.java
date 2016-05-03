@@ -122,7 +122,7 @@ public class Fachada implements Serializable{
      */
     public String registrarProveedor(String codigo, String nit, String nombre,
             String cuenta, String tipoCuenta, String sitioWeb, String nombreContacto,
-            String emailContacto, int numCuenta, int telContacto) throws Exception {
+            String emailContacto, String numCuenta, String telContacto) throws Exception {
         ProveedorDTO dto = new ProveedorDTO(codigo, nit, nombre, cuenta,
                 tipoCuenta, sitioWeb, nombreContacto, emailContacto, numCuenta, telContacto);
         DAOProveedor dao = new DAOProveedor();
@@ -181,6 +181,33 @@ public class Fachada implements Serializable{
         ClienteDTO dto = new ClienteDTO(dni, nombre, apellido, direccion, email, telefono, ciudad);
         DAOCliente dao = new DAOCliente();
         return dao.actualizarCliente(dto);
+    }
+    
+    /**
+     * Metodo que envia la peticion a DAOProveedor para actualizar un proveedor.
+     *
+     * @param codigo Codigo del proveedor.
+     * @param nit Nit del proveedor.
+     * @param nombre Nombre del proveedor.
+     * @param cuenta Cuenta del proveedor.
+     * @param tipoCuenta Tipo de cuenta del proveedor.
+     * @param sitioWeb URL del Sito Web del proveedor.
+     * @param nombreContacto Nombre de la persona que sirve de intermediario con
+     * el proveedor.
+     * @param emailContacto Email del contacto.
+     * @param numCuenta Numero de cuenta del proveedor.
+     * @param telContacto Telefono del contacto.
+     * @return Cadena de texto, Exito si actualizo o la exception nula.
+     * @throws java.lang.Exception Si existe error en la conexion a la base de
+     * datos.
+     */
+    public String actualizarProveedor(String codigo, String nit, String nombre,
+            String cuenta, String tipoCuenta, String sitioWeb, String nombreContacto,
+            String emailContacto, String numCuenta, String telContacto) throws Exception {
+        ProveedorDTO dto = new ProveedorDTO(codigo, nit, nombre, cuenta,
+                tipoCuenta, sitioWeb, nombreContacto, emailContacto, numCuenta, telContacto);
+        DAOProveedor dao = new DAOProveedor();
+        return dao.actualizarProveedor(dto);
     }
 
 }

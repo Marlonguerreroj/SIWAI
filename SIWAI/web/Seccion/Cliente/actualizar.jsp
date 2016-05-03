@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -19,6 +20,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/ubicacion.js"></script>
+        <script src="../../Ajax/ajax.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -30,7 +32,8 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form action="" method="post">
+            <form onSubmit="actualizarCliente(document.forms[0]);
+                    return false" id="form">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>
@@ -111,7 +114,7 @@
                         <div class="col-md-4"></div>
                         <div class="col-md-2">
                             <button class="btn btn-success btn-lg letra">
-                                Registrar
+                                Actualizar
                             </button>
                         </div>
                         <div class="col-md-2">

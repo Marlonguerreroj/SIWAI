@@ -40,7 +40,12 @@
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
             <%
-                    } else { %>
+                    } else if (mensaje.contains("Exito")) { %> 
+            <div class="alert alert-success centrar-texto" role="alert" arial >
+                Cliente actualizado exitosamente
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>              
+            <% } else { %>
             <div class="alert alert-warning centrar-texto" role="alert" arial >
                 <%=mensaje%>
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -56,25 +61,22 @@
             <form name="form" action="/SIWAI/ControladorProveedor" method="post">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-2">
-                            <p>Buscar por:</p>  
-                        </div>
-                        <div class="col-md-2">
-                            <select name="sel" class="form-control" id="sel" required onchange="capturar()" >
+                        <div class="col-md-1"></div>
+                        <div class="col-md-4">
+                            <label for="sel" >Buscar por:</label>  
+                            <select name="sel" class="tamañoConsultar" id="sel" required onchange="capturar()" >
                                 <option value="" >Seleccione</option>
                                 <option value="Todos" >Todos</option>
-                                <option value="cod" >Código</option>
                                 <option value="nom" >Nombre</option>
+                                <option value="cod">Código</option>
                             </select>
                         </div>
                         <div class="col-md-1"></div>
-                        <div class="col-md-2">
-                            <p>Información:</p>  
+                        <div class="col-md-4">
+                            <label for="informacion" >Información:</label> 
+                            <input required name="informacion" type="text" class="tamañoConsultar">
                         </div>
-                        <div class="col-md-2">
-                            <input required id="informacion" name="informacion" type="text" class="form-control ">
-                        </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1">
                             <button name="consultarProveedor" type="submit" class="btn btn-success  letra">
                                 <span class="glyphicon glyphicons glyphicon-search"></span>
                             </button>
@@ -95,15 +97,13 @@
                             <table  class="table table-hover">
                                 <thead>
                                     <tr>
-                                        <th>Codigo</th>
-                                        <th>Nombre</th>
-                                        <th>Teléfono</th>
-                                        <th>Email</th>
-                                        <th>Pagina Web</th>
-                                        <th>Cuenta</th>
-                                        <th>Tipo de Cuenta</th>
-                                        <th>Número de Cuenta</th>
-                                        <th></th>
+                                        <th class="centrar-texto">Codigo</th>
+                                        <th class="centrar-texto">NIT</th>
+                                        <th class="centrar-texto">Nombre</th>
+                                        <th class="centrar-texto">Contacto</th>
+                                        <th class="centrar-texto">Telefono</th>
+                                        <th class="centrar-texto">E-mail</th>
+                                        <th  class="centrar-texto"></th>
                                     </tr>
                                 </thead>
                                 <%
@@ -111,19 +111,27 @@
                                     for (int i = 0; i < dtos.size(); i++) {
                                 %>
                                 <tr>
-                                    <td><%=dtos.get(i).getCodigo()%></td>
-                                    <td><%=dtos.get(i).getNombre()%></td>
-                                    <td><%=dtos.get(i).getTelContacto()%></td>
-                                    <td><%=dtos.get(i).getEmailContacto()%></td>
-                                    <td><%=dtos.get(i).getSitioWeb()%></td>
-                                    <td><%=dtos.get(i).getCuenta()%></td>
-                                    <td><%=dtos.get(i).getTipoCuenta()%></td>
-                                    <td><%=dtos.get(i).getNumCuenta()%></td>
-                                    <td>
-                                        <a href="actualizar.jsp" style="cursor:pointer;">
+                                    <td class="centrar-texto"><%=dtos.get(i).getCodigo()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getNit() %></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getNombre()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getNombreContacto()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getTelContacto()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getEmailContacto()%></td>
+                                    <td class="centrar-texto">
+                                        <a onclick="enviarFormOcultoProveedorActualizar('<%=dtos.get(i).getCodigo()%>', 
+                                                    '<%=dtos.get(i).getNit()%>', '<%=dtos.get(i).getNombre()%>',  
+                                                    '<%=dtos.get(i).getNombreContacto()%>', '<%=dtos.get(i).getTelContacto()%>', 
+                                                    '<%=dtos.get(i).getEmailContacto()%>', '<%=dtos.get(i).getSitioWeb()%>',
+                                                    '<%=dtos.get(i).getCuenta()%>', '<%=dtos.get(i).getTipoCuenta()%>', 
+                                                    '<%=dtos.get(i).getNumCuenta()%>')" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>
-                                        <a href="mas.jsp" style="cursor:pointer;">
+                                        <a onclick="enviarFormOcultoProveedorMas('<%=dtos.get(i).getCodigo()%>', 
+                                                    '<%=dtos.get(i).getNit()%>', '<%=dtos.get(i).getNombre()%>',  
+                                                    '<%=dtos.get(i).getNombreContacto()%>', '<%=dtos.get(i).getTelContacto()%>', 
+                                                    '<%=dtos.get(i).getEmailContacto()%>', '<%=dtos.get(i).getSitioWeb()%>',
+                                                    '<%=dtos.get(i).getCuenta()%>', '<%=dtos.get(i).getTipoCuenta()%>', 
+                                                    '<%=dtos.get(i).getNumCuenta()%>')" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-info-sign"></span>
                                         </a>
                                     </td>
@@ -137,6 +145,18 @@
             </div>
             <%  session.removeAttribute("proveedores");
                 } %>
+            <form id="form-oculto" method="post">
+                <input type="hidden" name="codigo" id="codigo">
+                <input type="hidden" name="nit" id="nit">
+                <input type="hidden" name="nombre" id="nombre">
+                <input type="hidden" name="cuenta" id="cuenta">
+                <input type="hidden" name="tipo" id="tipo">
+                <input type="hidden" name="numero" id="numero">
+                <input type="hidden" name="contacto" id="contacto">
+                <input type="hidden" name="telefono" id="telefono">
+                <input type="hidden" name="email" id="email">
+                <input type="hidden" name="web" id="web">
+            </form>
             <!-- Fin del contenido principal-->
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->

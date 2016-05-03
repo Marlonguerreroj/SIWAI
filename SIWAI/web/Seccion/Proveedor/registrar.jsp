@@ -78,7 +78,7 @@
                         </div>
                         <div class="col-md-3">
                             <br>
-                            <input required name="tipoCuentaBancaria" type="text" class="form-control ">
+                            <input name="tipoCuentaBancaria" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
@@ -86,7 +86,7 @@
                         </div>
                         <div class="col-md-3">
                             <br>
-                            <input required name="nCuentaBancaria" type="number" class="form-control ">
+                            <input name="nCuentaBancaria" type="number" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -97,7 +97,7 @@
                             <p>Cuenta Bancaria:</p>  
                         </div>
                         <div class="col-md-3">
-                            <input required name="cuentaBancaria" type="text" class="form-control ">
+                            <input name="cuentaBancaria" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
@@ -122,7 +122,7 @@
                             <p>E-mail:</p> 
                         </div>
                         <div class="col-md-3">
-                            <input required name="email" type="email" class="form-control ">
+                            <input name="email" type="email" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
