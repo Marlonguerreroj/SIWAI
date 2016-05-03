@@ -83,13 +83,13 @@ public class ControladorEmpleado extends HttpServlet {
             lista = fachada.consultarEmpleado(buscarPor, informacion);
         } catch (Exception e) {
             request.getSession().setAttribute("msjCE", "Error en la conexion a la base de datos");
-            response.sendRedirect("/SIWAI/Seccion/Empleado/consultar.jsp");
+            response.sendRedirect("/ufps_45-SIWAI/Seccion/Empleado/consultar.jsp");
         }
         if (lista.isEmpty()) {
             request.getSession().setAttribute("msjCE", "No se encontro ningún Empleado");
         }
         request.getSession().setAttribute("empleados", lista);
-        response.sendRedirect("/SIWAI/Seccion/Empleado/consultar.jsp");
+        response.sendRedirect("/ufps_45-SIWAI/Seccion/Empleado/consultar.jsp");
 
     }
 
@@ -132,7 +132,7 @@ public class ControladorEmpleado extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         request.getSession().invalidate();
-        response.sendRedirect("/SIWAI/index.jsp");
+        response.sendRedirect("/ufps_45-SIWAI/index.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

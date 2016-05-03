@@ -6,7 +6,7 @@
 
 $(document).ready(function() {
     $.ajax({
-        url: '/SIWAI/ControladorUbicacion?cargarPaises=true',
+        url: '/ufps_45-SIWAI/ControladorUbicacion?cargarPaises=true',
         type: 'post',
         datatype: 'json',
         success: function(paises) {
@@ -28,7 +28,7 @@ function cargarCiudades(){
     var posicion = document.getElementById("selPais").options.selectedIndex;
     var valor = document.getElementById("selPais").options[posicion].value;
     $.ajax({
-        url: '/SIWAI/ControladorUbicacion?cargarCiudades=true&pais=' + valor,
+        url: '/ufps_45-SIWAI/ControladorUbicacion?cargarCiudades=true&pais=' + valor,
         type: 'post',
         datatype: 'json',
         success: function(ciudades) {

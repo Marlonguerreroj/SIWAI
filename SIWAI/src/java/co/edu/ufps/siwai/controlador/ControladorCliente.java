@@ -91,7 +91,7 @@ public class ControladorCliente extends HttpServlet {
         } catch (Exception ex) {
             request.getSession().setAttribute("msjCC", "Error en la conexion a la base de datos");
         } finally {
-            response.sendRedirect("/SIWAI/Seccion/Cliente/consultar.jsp");
+            response.sendRedirect("/ufps_45-SIWAI/Seccion/Cliente/consultar.jsp");
         }
     }
     

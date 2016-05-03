@@ -58,7 +58,7 @@
                 <h1 class="centrar-texto">Consultar Proveedor</h1>
             </div>
             <br>
-            <form name="form" action="/SIWAI/ControladorProveedor" method="post">
+            <form name="form" action="/ufps_45-SIWAI/ControladorProveedor" method="post">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>
