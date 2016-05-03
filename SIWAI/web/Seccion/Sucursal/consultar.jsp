@@ -137,8 +137,8 @@
                                     <td><%= lista.get(i).getEmail()%></td>
                                     <td><%= lista.get(i).getPaginaWeb()%></td>
                                     <td><%= lista.get(i).getDireccion()%></td>
-                                    <td><%= lista.get(i).getCiudad()%></td>
-                                    <td><%= lista.get(i).getPais()%></td>                          
+                                    <td><%= lista.get(i).getUbicacion().getNomCiudad() %></td>
+                                    <td><%= lista.get(i).getUbicacion().getNomPais() %></td>                          
                                     <td>
                                         <a onclick="enviarFormOcultoSucursal(document,<%=i%>)" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-edit asd "></span>

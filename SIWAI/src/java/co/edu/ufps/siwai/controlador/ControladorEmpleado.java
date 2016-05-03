@@ -32,6 +32,47 @@ public class ControladorEmpleado extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    protected void actualizarEmpleado(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String sucursal = request.getParameter("sucursal");
+        String cargo = request.getParameter("cargo");
+        String dni = request.getParameter("dni");
+        String nombre = request.getParameter("nombre");
+        String apellido = request.getParameter("apellido");
+        String codigo = request.getParameter("codigo");
+        String celular = request.getParameter("celular");
+        String telefono = request.getParameter("telefono");
+        String email = request.getParameter("email");
+        String direccion = request.getParameter("direccion");
+        String fIngreso = request.getParameter("fIngreso");
+        short habilitado = Short.parseShort(request.getParameter("habilitado"));
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        boolean exito;
+        PrintWriter out = response.getWriter();
+        try {
+            exito = fachada.actualizarEmpleado(sucursal, cargo, dni, nombre, apellido, telefono, celular, email, direccion, fIngreso, habilitado, codigo);
+            if (exito) {
+                request.getSession().setAttribute("msjAE", "El empleado se actualizó satisfactoriamente");
+            }
+            out.print(exito);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            out.print("Error en la conexion a la base de datos");
+        }
+
+    }
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     protected void registrarEmpleado(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -59,7 +100,6 @@ public class ControladorEmpleado extends HttpServlet {
             out.print("Error en la conexion a la base de datos");
         }
 
-        
     }
 
     /**
@@ -115,7 +155,7 @@ public class ControladorEmpleado extends HttpServlet {
         try {
             ingreso = fachada.iniciarSesion(usuario, contraseña);
             out.print(ingreso);
-            System.out.println("Ingreso:"+ingreso);
+            System.out.println("Ingreso:" + ingreso);
             if (!ingreso.equals("nulo")) {
                 String[] ingreso2 = ingreso.split("-");
                 request.getSession().setAttribute("usuario", ingreso2[0]);
@@ -171,6 +211,9 @@ public class ControladorEmpleado extends HttpServlet {
         }
         if (request.getParameter("iniciarSesion") != null) {
             iniciarSesion(request, response);
+        }
+        if (request.getParameter("actualizarEmpleado") != null) {
+            actualizarEmpleado(request, response);
         }
 
     }

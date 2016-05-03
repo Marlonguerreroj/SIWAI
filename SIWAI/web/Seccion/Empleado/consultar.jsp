@@ -138,7 +138,7 @@
                                     <td><%=lista.get(i).getfSalida()%></td>
                                     <td><%=lista.get(i).getCelular()%></td>
                                     <td>
-                                        <a onclick="enviarFormOcultoEmpleadoActualizar(document,<%=i %>,'<%=lista.get(i).getApellido() %>','<%=lista.get(i).getTelefono()%>',
+                                        <a onclick="enviarFormOcultoEmpleadoActualizar(document,<%=i %>,'<%=lista.get(i).getCodigo()%>','<%=lista.get(i).getApellido() %>','<%=lista.get(i).getTelefono()%>',
                                                     '<%=lista.get(i).getEmail() %>','<%=lista.get(i).getDireccion() %>',
                                                     '<%=lista.get(i).getHabilitado() %>','<%=lista.get(i).getContraseña() %>')" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-edit asd "></span>
@@ -165,6 +165,7 @@
 
             <form id="formOculto" method="post">
                 <input type="hidden" id="sucursal" name="sucursal">
+                <input type="hidden" id="codigo" name="codigo">
                 <input type="hidden" id="cargo" name="cargo">
                 <input type="hidden" id="dni" name="dni">
                 <input type="hidden" id="nombre" name="nombre">

@@ -40,12 +40,12 @@ public class DAOSucursal {
                     + " values (?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, dto.getCodigo());
             stmt.setString(2, dto.getNombre());
-            stmt.setString(3, dto.getTelefono());
+            stmt.setInt(3, dto.getTelefono());
             stmt.setString(4, dto.getEmail());
             stmt.setString(5, dto.getPaginaWeb());
             stmt.setString(6, dto.getDireccion());
-            stmt.setString(7, dto.getCiudad());
-            stmt.setString(8, dto.getPais());
+            stmt.setInt(7, dto.getUbicacion().getIdCiudad());
+            stmt.setString(8, dto.getUbicacion().getCodPais());
 
             try {
                 exito = stmt.executeUpdate() > 0;
@@ -69,13 +69,13 @@ public class DAOSucursal {
                     + "tbl_sucursal.pag_sucursal,tbl_sucursal.dir_sucursal,tbl_ciudad.nom_ciudad,"
                     + "tbl_pais.nom_pais from tbl_sucursal inner join tbl_ciudad on "
                     + "tbl_sucursal.ciudad_sucursal = tbl_ciudad.id_ciudad inner join tbl_pais on "
-                    + "tbl_sucursal.pais_sucursal = tbl_pais.cod_pais";
+                    + "tbl_pais.cod_pais = tbl_ciudad.cod_pais";
             if (buscarPor.equalsIgnoreCase("Codigo")) {
-                sql+= " WHERE cod_sucursal = ?";
+                sql += " WHERE cod_sucursal = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, informacion);
             } else if (buscarPor.equalsIgnoreCase("Nombre")) {
-                sql+=" WHERE nom_sucursal = ?";
+                sql += " WHERE nom_sucursal = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, informacion);
             } else if (buscarPor.equalsIgnoreCase("Todos")) {
@@ -89,18 +89,22 @@ public class DAOSucursal {
                     SucursalDTO dto = new SucursalDTO();
                     dto.setCodigo(rs.getString(1));
                     dto.setNombre(rs.getString(2));
-                    dto.setTelefono(rs.getString (3));
+                    dto.setTelefono(rs.getInt(3));
                     dto.setEmail(rs.getString(4));
                     dto.setPaginaWeb(rs.getString(5));
                     dto.setDireccion(rs.getString(6));
-                    dto.setCiudad(rs.getString(7));
-                    dto.setPais(rs.getString(8));
+                    System.out.println(rs.getString(7));
+                    System.out.println(rs.getString(8));
+                    dto.getUbicacion().setNomCiudad(rs.getString(7));
+                    dto.getUbicacion().setNomPais(rs.getString(8));
+                    System.out.println("2");
                     lista.add(dto);
+
                 }
                 stmt.close();
 
             } catch (SQLException ex) {
-
+                ex.printStackTrace();
             } finally {
                 try {
                     conn.close();
@@ -122,12 +126,12 @@ public class DAOSucursal {
                     + "ciudad_sucursal = ?, pais_sucursal = ? where cod_sucursal = ?";
             stmt = conn.prepareStatement(update);
             stmt.setString(1, dto.getNombre());
-            stmt.setString(2, dto.getTelefono());
+            stmt.setInt(2, dto.getTelefono());
             stmt.setString(3, dto.getEmail());
             stmt.setString(4, dto.getPaginaWeb());
             stmt.setString(5, dto.getDireccion());
-            stmt.setString(6, dto.getCiudad());
-            stmt.setString(7, dto.getPais());
+            stmt.setInt(6, dto.getUbicacion().getIdCiudad());
+            stmt.setString(7, dto.getUbicacion().getCodPais());
             stmt.setString(8, dto.getCodigo());
             int total = stmt.executeUpdate();
             if (total > 0) {

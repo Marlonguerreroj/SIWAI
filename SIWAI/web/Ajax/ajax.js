@@ -69,6 +69,9 @@ function registrarSucursal(document) {
                 $("div").remove("#alert");
                 $("body").prepend("<div id='alert' class='alert alert-success centrarDiv'>Sucursal registrada exitosamente</div>");
                 $("#form")[0].reset();
+            } else if (sub.indexOf("Por favor") >= 0) {
+                $("div").remove("#alert");
+                $("body").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" + sub + "</div>");
             }
         }
     };
@@ -108,7 +111,7 @@ function registrarEmpleado(document) {
                 $("body").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" + sub + "</div>");
             } else if (sub.indexOf("true") >= 0) {
                 $("div").remove("#alert");
-                $("body").prepend("<div id='alert' class='alert alert-success centrarDiv'>Sucursal registrada exitosamente</div>");
+                $("body").prepend("<div id='alert' class='alert alert-success centrarDiv'>Empleado registrado exitosamente</div>");
                 $("#form")[0].reset();
             }
         }
@@ -231,6 +234,43 @@ function actualizarSucursal(documento) {
     xhttp.open("POST", url, true);
     xhttp.send();
 
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("body").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" + sub + "</div>");
+            } else if (sub.indexOf("true") >= 0) {
+                window.location = 'consultar.jsp';
+            }
+        }
+    };
+}
+
+function actualizarEmpleado(document) {
+    sucursal = document.getElementById("sel1").value;
+    cargo = document.getElementById("sel2").value;
+    dni = document.getElementById("dni").value;
+    nombre = document.getElementById("nombre").value;
+    apellido = document.getElementById("apellido").value;
+    codigo = document.getElementById("codigo").value;
+    celular = document.getElementById("celular").value;
+    telefono = document.getElementById("telefono").value;
+    email = document.getElementById("email").value;
+    direccion = document.getElementById("direccion").value;
+    fIngreso = document.getElementById("fIngreso").value;
+    if (document.getElementById('r1').checked == true) {
+        habilitado = document.getElementById("r1").value;
+    } else {
+        habilitado = document.getElementById("r2").value;
+    }
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorEmpleado?actualizarEmpleado=true&sucursal=" + sucursal + "&cargo=" + cargo +
+            "&dni=" + dni + "&nombre=" + nombre + "&apellido=" + apellido + "&codigo=" + codigo + "&celular=" + celular +
+            "&telefono=" + telefono + "&email=" + email + "&direccion=" + direccion + "&fIngreso=" + fIngreso +
+            "&habilitado=" + habilitado;
+    xhttp.open("POST", url, true);
+    xhttp.send();
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;

@@ -15,15 +15,18 @@ import co.edu.ufps.siwai.modelo.mysql.dto.EmpleadoDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.ProveedorDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.UbicacionDTO;
+import co.edu.ufps.siwai.modelo.utilidades.seguridad.MD5;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.TimeZone;
 
 /**
  * Clase que sirve como fachada del negocio.
  *
  * @author Alejandro Ramírez
  */
-public class Fachada implements Serializable{
+public class Fachada implements Serializable {
 
     /**
      * Metodo que envia los datos del cliente a DAOCliente para que sean
@@ -61,7 +64,7 @@ public class Fachada implements Serializable{
         return dao.consultarClientes(columna, informacion);
     }
 
-    public boolean registrarSucursal(String codigo, String nombre, String telefono, String email,
+    public boolean registrarSucursal(String codigo, String nombre, int telefono, String email,
             String paginaWeb, String direccion, String ciudad, String pais) throws Exception {
         SucursalDTO dto = new SucursalDTO(codigo, nombre, email, paginaWeb, direccion, ciudad,
                 pais, telefono);
@@ -74,7 +77,7 @@ public class Fachada implements Serializable{
         return dao.consultarSucursal(buscarPor, informacion);
     }
 
-    public boolean actualizarSucursal(String codigo, String nombre, String telefono, String email,
+    public boolean actualizarSucursal(String codigo, String nombre, int telefono, String email,
             String paginaWeb, String direccion, String ciudad, String pais) throws Exception {
         SucursalDTO dto = new SucursalDTO(codigo, nombre, email, paginaWeb, direccion,
                 ciudad, pais, telefono);
@@ -83,10 +86,37 @@ public class Fachada implements Serializable{
 
     }
 
+    public boolean actualizarEmpleado(String sucursal, String cargo, String dni, String nombre,
+            String apellido, String telefono, String celular, String email, String direccion, String fIngreso, short habilitado, String codigo) throws Exception {
+        Calendar c = Calendar.getInstance();
+        c.setTimeZone(TimeZone.getTimeZone("GMT-5"));
+        EmpleadoDTO dto = new EmpleadoDTO();
+        dto.setSucursal(sucursal);
+        dto.setCargo(cargo);
+        dto.setDni(dni);
+        dto.setNombre(nombre);
+        dto.setApellido(apellido);
+        dto.setTelefono(telefono);
+        dto.setCelular(celular);
+        dto.setEmail(email);
+        dto.setDireccion(direccion);
+        dto.setfIngreso(fIngreso);
+        dto.setHabilitado(habilitado);
+        dto.setCodigo(codigo);
+        if (habilitado == 1) {
+            dto.setfSalida("NULL");
+        } else {
+            dto.setfSalida(c.get(Calendar.YEAR) + "-" + (c.get(Calendar.MONTH) + 1) + "-" + c.get(Calendar.DAY_OF_MONTH));
+        }
+        DAOEmpleado dao = new DAOEmpleado();
+        return dao.actualizarEmpleado(dto);
+    }
+
     public boolean registrarEmpleado(String codigo, String dni, String nombre, String apellido,
             String telefono, String celular, String contraseña, String email, String direccion,
             String fIngreso, String cargo, String sucursal) throws Exception {
-        EmpleadoDTO dto = new EmpleadoDTO(codigo, dni, nombre, apellido, contraseña, email,
+        String contraseñaE = MD5.encriptar(contraseña);
+        EmpleadoDTO dto = new EmpleadoDTO(codigo, dni, nombre, apellido, contraseñaE, email,
                 direccion, cargo, sucursal, telefono, celular, fIngreso);
         DAOEmpleado dao = new DAOEmpleado();
         return dao.registrarEmpleado(dto);
@@ -99,7 +129,8 @@ public class Fachada implements Serializable{
 
     public String iniciarSesion(String usuario, String contraseña) throws Exception {
         DAOEmpleado dao = new DAOEmpleado();
-        return dao.iniciarSesion(usuario, contraseña);
+        String contraseñaE = MD5.encriptar(contraseña);
+        return dao.iniciarSesion(usuario, contraseñaE);
     }
 
     /**
@@ -141,24 +172,27 @@ public class Fachada implements Serializable{
         DAOProveedor dao = new DAOProveedor();
         return dao.consultarProveedores(columna, info);
     }
-    
+
     /**
      * Metodo que obtiene los datos de los paises.
+     *
      * @return ArrayList de UbicacionDTO
      * @throws java.lang.Exception Si existe un error en la conexion.
      */
-    public ArrayList<UbicacionDTO> obtenerPaises() throws Exception{
+    public ArrayList<UbicacionDTO> obtenerPaises() throws Exception {
         DAOUbicacion dao = new DAOUbicacion();
         return dao.obtenerPaises();
     }
-    
+
     /**
      * Metodo que obtiene los datos de las ciudades de un pais.
-     * @param pais String con el codigo del pais a las que pertenecen las ciudades.
+     *
+     * @param pais String con el codigo del pais a las que pertenecen las
+     * ciudades.
      * @return ArrayList de UbicacionDTO
      * @throws java.lang.Exception Si existe un error en la conexion.
      */
-    public ArrayList<UbicacionDTO> obtenerCiudades(String pais) throws Exception{
+    public ArrayList<UbicacionDTO> obtenerCiudades(String pais) throws Exception {
         DAOUbicacion dao = new DAOUbicacion();
         return dao.obtenerCiudades(pais);
     }

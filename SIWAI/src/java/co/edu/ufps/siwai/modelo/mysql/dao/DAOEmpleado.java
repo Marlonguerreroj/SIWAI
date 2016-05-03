@@ -150,4 +150,48 @@ public class DAOEmpleado {
         }
         return resultado;
     }
+
+    public boolean actualizarEmpleado(EmpleadoDTO dto) throws Exception {
+        boolean exito = false;
+        conn = Conexion.generarConexion();
+        PreparedStatement stmt;
+        try {
+            String update = "UPDATE tbl_empleado set suc_empleado = ?, "
+                    + "cargo_empleado = ?, nom_empleado = ?, ape_empleado = ?,"
+                    + "cod_empleado = ?, cel_empleado = ?,tel_empleado = ?,email_empleado = ?,"
+                    + "dir_empleado = ?, fIngreso_empleado = ?,fSalida_empleado = ?,hab_empleado = ? where dni_empleado = ?";
+            stmt = conn.prepareStatement(update);
+            System.out.println(dto.getSucursal()+dto.getCargo()+dto.getNombre()+dto.getApellido()
+            +dto.getCodigo()+dto.getCelular()+dto.getTelefono()+dto.getEmail()+dto.getDireccion()
+            +dto.getfIngreso()+dto.getfSalida()+dto.getHabilitado());
+            stmt.setString(1, dto.getSucursal());
+            stmt.setString(2, dto.getCargo());
+            stmt.setString(3, dto.getNombre());
+            stmt.setString(4, dto.getApellido());
+            stmt.setString(5, dto.getCodigo());
+            stmt.setString(6, dto.getCelular());
+            stmt.setString(7, dto.getTelefono());
+            stmt.setString(8, dto.getEmail());
+            stmt.setString(9, dto.getDireccion());
+            stmt.setString(10, dto.getfIngreso());
+            stmt.setString(11, dto.getfSalida());
+            stmt.setShort(12, dto.getHabilitado());
+            stmt.setString(13, dto.getDni());
+
+            int total = stmt.executeUpdate();
+            if (total > 0) {
+                exito = true;
+            }
+            stmt.close();
+
+        } catch (Exception e) {
+
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception ex) {
+            }
+        }
+        return exito;
+    }
 }

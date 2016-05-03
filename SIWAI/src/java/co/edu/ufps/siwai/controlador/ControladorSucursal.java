@@ -23,6 +23,35 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "ControladorSucursal", urlPatterns = {"/ControladorSucursal"})
 public class ControladorSucursal extends HttpServlet {
 
+    private String validarCampos(String codigo, String nombre, int telefono, String email, String paginaWeb, String direccion, String ciudad, String pais) {
+        String mensaje = "Ninguno";
+        if (codigo.isEmpty()) {
+            mensaje = "Por favor verifique el campo del codigo";
+        }
+        if (nombre.isEmpty()) {
+            mensaje = "Por favor verifique el campo del nombre";
+        }
+        if (telefono <= 0) {
+            mensaje = "Por favor verifique el campo del telefono";
+        }
+        if (!email.contains("@") || !email.endsWith(".com")) {
+            mensaje = "Por favor verifique el campo del email";
+        }
+        if (paginaWeb.isEmpty() || !paginaWeb.endsWith(".com")) {
+            mensaje = "Por favor verifique el campo de la paginaWeb";
+        }
+        if (direccion.isEmpty()) {
+            mensaje = "Por favor verifique el campo de la direccion";
+        }
+        if (ciudad.isEmpty()) {
+            mensaje = "Por favor verifique el campo de la ciudad";
+        }
+        if (pais.isEmpty()) {
+            mensaje = "Por favor verifique el campo del pais";
+        }
+        return mensaje;
+    }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -38,22 +67,27 @@ public class ControladorSucursal extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String codigo = request.getParameter("codigo");
         String nombre = request.getParameter("nombre");
-        String telefono = request.getParameter("telefono");
+        int telefono = Integer.parseInt(request.getParameter("telefono"));
         String email = request.getParameter("email");
         String paginaWeb = request.getParameter("paginaWeb");
         String direccion = request.getParameter("direccion");
         String ciudad = request.getParameter("ciudad");
         String pais = request.getParameter("pais");
-        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
-        boolean exito;
+        String validacion = validarCampos(codigo, nombre, telefono, email, paginaWeb, direccion, ciudad, pais);
         PrintWriter out = response.getWriter();
-        try {
-            exito = fachada.registrarSucursal(codigo, nombre, telefono, email, paginaWeb, direccion, ciudad, pais);
-            System.out.println(exito);
-            out.print(exito);
+        if (validacion.equalsIgnoreCase("Ninguno")) {
+            Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+            boolean exito;
+            try {
+                exito = fachada.registrarSucursal(codigo, nombre, telefono, email, paginaWeb, direccion, ciudad, pais);
+                System.out.println(exito);
+                out.print(exito);
 
-        } catch (Exception ex) {
-            out.print("Error en la conexion a la base de datos");
+            } catch (Exception ex) {
+                out.print("Error en la conexion a la base de datos");
+            }
+        } else {
+            out.print(validacion);
         }
 
     }
@@ -71,7 +105,7 @@ public class ControladorSucursal extends HttpServlet {
             throws ServletException, IOException {
         String codigo = request.getParameter("codigo");
         String nombre = request.getParameter("nombre");
-        String telefono = request.getParameter("telefono");
+        int telefono = Integer.parseInt(request.getParameter("telefono"));
         String email = request.getParameter("email");
         String paginaWeb = request.getParameter("paginaWeb");
         String direccion = request.getParameter("direccion");
@@ -110,6 +144,7 @@ public class ControladorSucursal extends HttpServlet {
         Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         ArrayList<SucursalDTO> lista = new ArrayList<>();
         try {
+            System.out.println(buscarPor+informacion);
             lista = fachada.consultarSucursal(buscarPor, informacion);
         } catch (Exception e) {
             request.getSession().setAttribute("msjCS", "Error en la conexion a la base de datos");

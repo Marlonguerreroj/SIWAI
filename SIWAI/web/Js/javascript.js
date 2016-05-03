@@ -42,7 +42,7 @@ function enviarFormOcultoEmpleadoMas(document, i, apellido, telefono, email, dir
     document.getElementById("formOculto").submit();
 }
 
-function enviarFormOcultoEmpleadoActualizar(document, i, apellido, telefono, email, direccion, habilitado, contraseña) {
+function enviarFormOcultoEmpleadoActualizar(document, i, codigo,apellido, telefono, email, direccion, habilitado, contraseña) {
     sucursal = document.getElementById("tablaE").rows[i + 1].cells[2].innerHTML;
     cargo = document.getElementById("tablaE").rows[i + 1].cells[3].innerHTML;
     dni = document.getElementById("tablaE").rows[i + 1].cells[0].innerHTML;
@@ -52,6 +52,7 @@ function enviarFormOcultoEmpleadoActualizar(document, i, apellido, telefono, ema
     document.getElementById("formOculto").action="actualizar.jsp";
     document.getElementById("sucursal").value = sucursal;
     document.getElementById("cargo").value = cargo;
+    document.getElementById("codigo").value = codigo;
     document.getElementById("dni").value = dni;
     document.getElementById("nombre").value = nombre;
     document.getElementById("apellido").value = apellido;

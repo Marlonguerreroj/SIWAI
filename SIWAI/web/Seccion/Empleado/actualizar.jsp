@@ -25,6 +25,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/javascript.js"></script>
+        <script src="../../Ajax/ajax.js"></script>
         <script>
             window.onload = function () {
                 document.getElementById("sel2").options.namedItem("<%=request.getParameter("cargo")%>").selected = true;
@@ -45,7 +46,8 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form  action="" method="post" name="form2">
+            <form  onSubmit="actualizarEmpleado(document);
+                    return false" name="form2">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>
@@ -78,14 +80,14 @@
                             <p>DNI:</p>
                         </div>
                         <div class="col-md-3">
-                            <input readOnly value="<%=request.getParameter("dni")%>" required name="dni" type="number" class="form-control ">
+                            <input readOnly value="<%=request.getParameter("dni")%>" required name="dni" id="dni" type="number" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
                             <p>Nombre:</p>
                         </div>
                         <div class="col-md-3">
-                            <input value="<%=request.getParameter("nombre")%>" required name="nombre" type="text" class="form-control ">
+                            <input value="<%=request.getParameter("nombre")%>" required name="nombre" id="nombre" type="text" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
 
@@ -97,14 +99,14 @@
                             <p>Apellido:</p>
                         </div>
                         <div class="col-md-3">
-                            <input value="<%=request.getParameter("apellido")%>" required name="apellido" type="text" class="form-control ">
+                            <input value="<%=request.getParameter("apellido")%>" required name="apellido" id="apellido" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Telefono:</p>
+                            <p>Codigo:</p>
                         </div>
                         <div class="col-md-3">
-                            <input value="<%=request.getParameter("telefono")%>" name="telefono" type="number" class="form-control ">
+                            <input value="<%=request.getParameter("codigo")%>" name="codigo" id="codigo" type="text" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -115,14 +117,14 @@
                             <p>Celular:</p>
                         </div>
                         <div class="col-md-3">
-                            <input value="<%=request.getParameter("celular")%>" required name="celular" type="number" class="form-control ">
+                            <input value="<%=request.getParameter("celular")%>" required name="celular" id="celular" type="number" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Contraseña:</p>
+                            <p>Telefono:</p>
                         </div>
                         <div class="col-md-3">
-                            <input id="contraseña" name="contraseña" type="text" class="form-control ">
+                            <input value="<%=request.getParameter("telefono")%>" name="telefono" id="telefono"  type="number" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -133,14 +135,14 @@
                             <p>E-mail:</p>
                         </div>
                         <div class="col-md-3">
-                            <input value="<%=request.getParameter("email")%>" name="email" type="text" class="form-control ">
+                            <input value="<%=request.getParameter("email")%>" name="email" id="email" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
                             <p>Direccion:</p>
                         </div>
                         <div class="col-md-3">
-                            <input  value="<%=request.getParameter("direccion")%>" name="direccion" type="text" class="form-control ">
+                            <input  value="<%=request.getParameter("direccion")%>" name="direccion" id="direccion" type="text" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -151,17 +153,17 @@
                             <p>Fecha ingreso:</p>
                         </div>
                         <div class="col-md-3">
-                            <input value="<%=request.getParameter("fIngreso")%>" required  name="fIngreso" type="date" class="form-control">
+                            <input value="<%=request.getParameter("fIngreso")%>" required  name="fIngreso" id="fIngreso" type="date" class="form-control">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-2">
                             <div class="radio">
-                                <label><input value ="1"  <% if (request.getParameter("habilitado").equals("1")) {%>checked <%} %> type="radio" name="radio">Habilitado</label>
+                                <label><input value ="1"  <% if (request.getParameter("habilitado").equals("1")) {%>checked <%} %> type="radio" name="habilitado" id="r1">Habilitado</label>
                             </div>
                         </div>
                         <div class="col-md-2">
                             <div class="radio">
-                                <label><input value="0"  <% if (request.getParameter("habilitado").equals("0")) {%>checked <%}%> type="radio" name="radio">Deshabilitado</label>
+                                <label><input value="0"  <% if (request.getParameter("habilitado").equals("0")) {%>checked <%}%> type="radio" name="habilitado" id="r2">Deshabilitado</label>
                             </div>
                         </div>
                         <div class="col-md-1"></div>
@@ -172,7 +174,7 @@
                     <div class="row centrar-texto">
                         <div class="col-md-4"></div>
                         <div class="col-md-2">
-                            <button  name="enviar2" type="submit" class="btn btn-success btn-lg letra">Actualizar
+                            <button class="btn btn-success btn-lg letra">Actualizar
                             </button>
                         </div>
                         <div class="col-md-2">
