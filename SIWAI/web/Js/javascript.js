@@ -66,6 +66,46 @@ function enviarFormOcultoEmpleadoActualizar(document, i, codigo,apellido, telefo
     document.getElementById("formOculto").submit();
 }
 
+function enviarFormOcultoCliente(dni, nombre, apellido, telefono, email, direccion, pais, ciudad) {
+    document.getElementById("dni").value = dni;
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("apellido").value = apellido;
+    document.getElementById("telefono").value = telefono;
+    document.getElementById("email").value = email;
+    document.getElementById("direccion").value = direccion;
+    document.getElementById("form-oculto").submit();
+}
+
+function enviarFormOcultoProveedorMas(codigo, nit, nombre, contacto, telefono, email, web, cuenta, tipo, numero) {
+    document.getElementById("form-oculto").action="mas.jsp";
+    document.getElementById("codigo").value = codigo;
+    document.getElementById("nit").value = nit;
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("contacto").value = contacto;
+    document.getElementById("telefono").value = telefono;
+    document.getElementById("email").value = email;
+    document.getElementById("web").value = web;
+    document.getElementById("cuenta").value = cuenta;
+    document.getElementById("tipo").value = tipo;
+    document.getElementById("numero").value = numero;
+    document.getElementById("form-oculto").submit();
+}
+
+function enviarFormOcultoProveedorActualizar(codigo, nit, nombre, contacto, telefono, email, web, cuenta, tipo, numero) {
+    document.getElementById("form-oculto").action="actualizar.jsp";
+    document.getElementById("codigo").value = codigo;
+    document.getElementById("nit").value = nit;
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("contacto").value = contacto;
+    document.getElementById("telefono").value = telefono;
+    document.getElementById("email").value = email;
+    document.getElementById("web").value = web;
+    document.getElementById("cuenta").value = cuenta;
+    document.getElementById("tipo").value = tipo;
+    document.getElementById("numero").value = numero;
+    document.getElementById("form-oculto").submit();
+}
+
 /** Metodo para verificar que se oprimio la tecla enter y invoca al metodo para añadir una fila */
 function chequearEnter(event) {
     if (event.keyCode === 13) {

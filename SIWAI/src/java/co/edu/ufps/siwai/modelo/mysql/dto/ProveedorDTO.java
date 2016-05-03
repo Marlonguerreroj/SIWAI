@@ -14,8 +14,7 @@ import java.io.Serializable;
 public class ProveedorDTO implements Serializable{
     
     private String codigo, nit, nombre, cuenta, tipoCuenta, 
-            sitioWeb, nombreContacto, emailContacto;
-    private int numCuenta, telContacto;
+            sitioWeb, nombreContacto, emailContacto, numCuenta, telContacto;
     
     /**
      * Coonstructor vacio.
@@ -38,7 +37,7 @@ public class ProveedorDTO implements Serializable{
      */
     public ProveedorDTO(String codigo, String nit, String nombre, String cuenta, 
             String tipoCuenta, String sitioWeb, String nombreContacto, 
-            String emailContacto, int numCuenta, int telContacto) {
+            String emailContacto, String numCuenta, String telContacto) {
         this.codigo = codigo;
         this.nit = nit;
         this.nombre = nombre;
@@ -181,33 +180,33 @@ public class ProveedorDTO implements Serializable{
 
     /**
      * Metodo que obtiene el numero de cuenta del proveedor.
-     * @return Integer con el numero de cuenta del proveedor.
+     * @return String con el numero de cuenta del proveedor.
      */
-    public int getNumCuenta() {
+    public String getNumCuenta() {
         return numCuenta;
     }
 
     /**
      * Metodo que establece el numero de cuenta del proveedor.
-     * @param numCuenta Integer con el numero de cuenta del proveedor.
+     * @param numCuenta String con el numero de cuenta del proveedor.
      */
-    public void setNumCuenta(int numCuenta) {
+    public void setNumCuenta(String numCuenta) {
         this.numCuenta = numCuenta;
     }
 
     /**
      * Metodo que obtiene el telefono del contacto.
-     * @return Integer con el telefono del contacto.
+     * @return String con el telefono del contacto.
      */
-    public int getTelContacto() {
+    public String getTelContacto() {
         return telContacto;
     }
 
     /**
      * Metodo que establece el telefono del contacto.
-     * @param telContacto Integer con el telefono del contacto.
+     * @param telContacto String con el telefono del contacto.
      */
-    public void setTelContacto(int telContacto) {
+    public void setTelContacto(String telContacto) {
         this.telContacto = telContacto;
     }
     

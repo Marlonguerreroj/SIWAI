@@ -40,27 +40,74 @@ public class ControladorProveedor extends HttpServlet {
         String nit = request.getParameter("nit");
         String nombre = request.getParameter("nombre");
         String web = request.getParameter("web");
-        int telefono = Integer.parseInt("" + request.getParameter("telefono"));
+        String telefono = request.getParameter("telefono");
         String tipoCuenta = request.getParameter("tipoCuentaBancaria");
         String email = request.getParameter("email");
-        int numeroCuenta = Integer.parseInt("" + request.getParameter("nCuentaBancaria"));
+        String numeroCuenta = request.getParameter("nCuentaBancaria");
         String cuenta = request.getParameter("cuentaBancaria");
         String nombreContacto = request.getParameter("nombreContacto");
-        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        String validacion = validarCampos(codigo, nit, nombre, telefono, email,
+                nombreContacto, numeroCuenta);
         PrintWriter out = response.getWriter();
+        if(!validacion.contains("Exito")) {
+            out.print(validacion);
+            return;
+        }
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         try {
             String mensaje = fachada.registrarProveedor(codigo, nit, nombre, cuenta, 
                     tipoCuenta, web, nombreContacto, email, numeroCuenta, telefono);
             if(mensaje.contains("PRIMARY")) {
                 out.print("Fallo codigo");
-                System.out.println("primaria");
             } else if (mensaje.contains("nit_proveedor")) {
                 out.print("Fallo nit");
-                System.out.println("nit");
             } else {
                 out.print(mensaje);
             }
-            System.out.println("Mensaje controlador: " + mensaje);
+        } catch (Exception ex) {
+            out.print("Error");
+        }
+    }
+    
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void actualizarProveedor(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        String codigo = request.getParameter("codigo");
+        String nit = request.getParameter("nit");
+        String nombre = request.getParameter("nombre");
+        String web = request.getParameter("web");
+        String telefono = request.getParameter("telefono");
+        String tipoCuenta = request.getParameter("tipoCuentaBancaria");
+        String email = request.getParameter("email");
+        String numeroCuenta = request.getParameter("nCuentaBancaria");
+        String cuenta = request.getParameter("cuentaBancaria");
+        String nombreContacto = request.getParameter("nombreContacto");
+        String validacion = validarCampos(codigo, nit, nombre, telefono, email, 
+                nombreContacto, numeroCuenta);
+        PrintWriter out = response.getWriter();
+        if(!validacion.contains("Exito")) {
+            out.print(validacion);
+            return;
+        }
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        try {
+            String mensaje = fachada.actualizarProveedor(codigo, nit, nombre, cuenta, 
+                    tipoCuenta, web, nombreContacto, email, numeroCuenta, telefono);
+            if(mensaje.contains("PRIMARY")) {
+                out.print("Fallo codigo");
+            } else {
+                request.getSession().setAttribute("msjCP", "Exito");
+                out.print("");
+            }
         } catch (Exception ex) {
             out.print("Error");
         }
@@ -93,8 +140,35 @@ public class ControladorProveedor extends HttpServlet {
         } catch (Exception ex) {
             request.getSession().setAttribute("msjCP", "Error en la conexion a la base de datos");
         } finally {
-            response.sendRedirect("/SIWAI/Seccion/Proveedor/consultar.jsp");
+            response.sendRedirect("/ufps_45-SIWAI/Seccion/Proveedor/consultar.jsp");
         }
+    }
+    
+    private String validarCampos(String codigo, String nit, String nombre,
+            String telefono, String email, String nomContacto, String numCuenta){
+        String msj = "Exito";
+        if(nombre.trim().isEmpty() || codigo.trim().isEmpty() || nit.trim().isEmpty() ||
+                nomContacto.trim().isEmpty() || telefono.trim().isEmpty())
+            msj = "Por favor diligencie todos los campos obligatorios.";                
+        else if(telefono.length() < 7) {
+            msj = "El teléfono debe tener al menos 7 digitos.";
+            try {
+                if(Long.parseLong(telefono) < 0)
+                msj = "El teléfono no puede ser negativo.";
+            } catch (NumberFormatException ex) {
+                msj = "El campo teléfono solo admite números.";
+            }
+        } else if (!email.isEmpty() && !email.contains("@") && !email.contains(".")) {
+            msj = "El email no es correcto.";
+        } else if (!numCuenta.isEmpty()) {
+            try {
+                if(Long.parseLong(telefono) < 0)
+                msj = "El numero de cuenta no puede ser negativo.";
+            } catch (NumberFormatException ex) {
+                msj = "El campo numero de cuenta solo admite números.";
+            }
+        }
+        return msj;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -127,6 +201,8 @@ public class ControladorProveedor extends HttpServlet {
             registrarProveedor(request, response);
         } else if (request.getParameter("consultarProveedor") != null) {
             consultarProveedor(request, response);
+        } else if (request.getParameter("actualizarProveedor") != null) {
+            actualizarProveedor(request, response);
         }
     }
 

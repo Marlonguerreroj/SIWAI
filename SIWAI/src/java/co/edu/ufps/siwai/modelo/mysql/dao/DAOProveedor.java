@@ -41,12 +41,12 @@ public class DAOProveedor {
         stmt.setString(1, dto.getCodigo());
         stmt.setString(2, dto.getNit());
         stmt.setString(3, dto.getNombre());
-        stmt.setInt(4, dto.getNumCuenta());
+        stmt.setString(4, dto.getNumCuenta());
         stmt.setString(5, dto.getCuenta());
         stmt.setString(6, dto.getTipoCuenta());
         stmt.setString(7, dto.getSitioWeb());
         stmt.setString(8, dto.getNombreContacto());
-        stmt.setInt(9, dto.getTelContacto());
+        stmt.setString(9, dto.getTelContacto());
         stmt.setString(10, dto.getEmailContacto());
         try{
             if(stmt.executeUpdate() > 0)
@@ -96,12 +96,12 @@ public class DAOProveedor {
                 dto.setCodigo(rs.getString(1));
                 dto.setNit(rs.getString(2));
                 dto.setNombre(rs.getString(3));
-                dto.setNumCuenta(rs.getInt(4));
+                dto.setNumCuenta(rs.getString(4));
                 dto.setCuenta(rs.getString(5));
                 dto.setTipoCuenta(rs.getString(6));
                 dto.setSitioWeb(rs.getString(7));
                 dto.setNombreContacto(rs.getString(8));
-                dto.setTelContacto(rs.getInt(9));
+                dto.setTelContacto(rs.getString(9));
                 dto.setEmailContacto(rs.getString(10));
                 dtos.add(dto);
             }
@@ -110,6 +110,41 @@ public class DAOProveedor {
             conn.close();
         }
         return dtos;
+    }
+    
+    /**
+     * Metodo que actualiza los datos de un proveedor en la base de datos.
+     *
+     * @param dto ProveedorDTO con los datos a actualizar.
+     * @return Cadena de texto, Exito si actualizo o la excepcion generada.
+     * @throws Exception si existe un error en la conexion a la base de datos.
+     */
+    public String actualizarProveedor(ProveedorDTO dto) throws Exception {
+        String mensaje = "";
+        conn = Conexion.generarConexion();
+        PreparedStatement stmt = conn.prepareStatement("UPDATE tbl_proveedor "
+                + "SET nom_proveedor = ?, num_cuenta_proveedor = ?, cuenta_proveedor = ?,"
+                + " tipo_cuenta_proveedor  = ?, sitio_web_proveedor = ?,"
+                + " nom_contacto_proveedor = ?, tel_contacto_proveedor = ?,"
+                + " email_contacto_proveedor = ? WHERE cod_proveedor = ?");
+        stmt.setString(1, dto.getNombre());
+        stmt.setString(2, dto.getNumCuenta());
+        stmt.setString(3, dto.getCuenta());
+        stmt.setString(4, dto.getTipoCuenta());
+        stmt.setString(5, dto.getSitioWeb());
+        stmt.setString(6, dto.getNombreContacto());
+        stmt.setString(7, dto.getTelContacto());
+        stmt.setString(8, dto.getEmailContacto());
+        stmt.setString(9, dto.getCodigo());
+        try{
+            if(stmt.executeUpdate() > 0)
+                mensaje = "Exito";
+        } catch (SQLException ex) {
+            mensaje = ex.toString();
+        }
+        stmt.close();
+        conn.close();
+        return mensaje;
     }
     
 }

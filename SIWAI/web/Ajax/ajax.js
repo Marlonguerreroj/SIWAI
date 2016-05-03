@@ -13,7 +13,7 @@ function iniciarSesion(campo1, campo2) {
 
 
     var xhttp = new XMLHttpRequest();
-    var text = "/SIWAI/ControladorEmpleado?usuario=" + usuario + "&contra=" + contra + "&iniciarSesion=true";
+    var text = "/ufps_45-SIWAI/ControladorEmpleado?usuario=" + usuario + "&contra=" + contra + "&iniciarSesion=true";
     xhttp.open("POST", text, true);
     xhttp.send();
 
@@ -48,7 +48,7 @@ function registrarSucursal(document) {
     pais = document.elements[6].value;
     ciudad = document.elements[7].value;
     var xhttp = new XMLHttpRequest();
-    var url = "/SIWAI/ControladorSucursal?registrarSucursal=true&codigo=" + codigo.value + "&nombre=" +
+    var url = "/ufps_45-SIWAI/ControladorSucursal?registrarSucursal=true&codigo=" + codigo.value + "&nombre=" +
             nombre + "&telefono=" + telefono + "&email=" + email + "&paginaWeb=" + paginaWeb +
             "&direccion=" + direccion + "&ciudad=" + ciudad + "&pais=" + pais;
     xhttp.open("POST", url, true);
@@ -91,7 +91,7 @@ function registrarEmpleado(document) {
     direccion = document.elements[10].value;
     fIngreso = document.elements[11].value;
     var xhttp = new XMLHttpRequest();
-    var url = "/SIWAI/ControladorEmpleado?registrarEmpleado=true&sucursal=" + sucursal + "&cargo=" + cargo +
+    var url = "/ufps_45-SIWAI/ControladorEmpleado?registrarEmpleado=true&sucursal=" + sucursal + "&cargo=" + cargo +
             "&codigo=" + codigo + "&dni=" + dni + "&nombre=" + nombre + "&apellido=" + apellido + "&telefono=" + telefono +
             "&celular=" + celular + "&contrasena=" + contrasena + "&email=" + email + "&direccion=" + direccion +
             "&fIngreso=" + fIngreso;
@@ -132,7 +132,7 @@ function registrarCliente(document) {
     telefono = document.elements[6].value;
     email = document.elements[7].value;
     var xhttp = new XMLHttpRequest();
-    var url = "/SIWAI/ControladorCliente?registrarCliente=true&dni=" + dni + "&nombre=" +
+    var url = "/ufps_45-SIWAI/ControladorCliente?registrarCliente=true&dni=" + dni + "&nombre=" +
             nombres + "&apellido=" + apellidos + "&telefono=" + telefono +
             "&email=" + email + "&direccion=" + direccion + "&ciudad=" + ciudad;
     xhttp.open("POST", url, true);
@@ -183,7 +183,7 @@ function registrarProveedor(document) {
     telefono = document.elements[8].value;
     email = document.elements[9].value;
     var xhttp = new XMLHttpRequest();
-    var url = "/SIWAI/ControladorProveedor?registrarProveedor=true&codigo=" + codigo + "&nit=" +
+    var url = "/ufps_45-SIWAI/ControladorProveedor?registrarProveedor=true&codigo=" + codigo + "&nit=" +
             nit + "&nombre=" + nombre + "&web=" + web + "&telefono=" + telefono +
             "&email=" + email + "&tipoCuentaBancaria=" + tipoCuentaBancaria + "&nCuentaBancaria=" + nCuentaBancaria
             + "&cuentaBancaria=" + cuentaBancaria + "&nombreContacto=" + nombreContacto;
@@ -213,6 +213,11 @@ function registrarProveedor(document) {
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                         "Proveedor registrado exitosamente</div>");
                 $("#form")[0].reset();
+            } else {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+                        + sub + "</div>");
             }
         }
     };
@@ -228,7 +233,7 @@ function actualizarSucursal(documento) {
     pais = documento.elements[6].value;
     ciudad = documento.elements[7].value;
     var xhttp = new XMLHttpRequest();
-    var url = "/SIWAI/ControladorSucursal?actualizarSucursal=true&codigo=" + codigo + "&nombre=" + nombre +
+    var url = "/ufps_45-SIWAI/ControladorSucursal?actualizarSucursal=true&codigo=" + codigo + "&nombre=" + nombre +
             "&telefono=" + telefono + "&email=" + email + "&paginaWeb=" + paginaWeb + "&direccion=" + direccion + "&ciudad=" + ciudad +
             "&pais=" + pais;
     xhttp.open("POST", url, true);
@@ -247,38 +252,99 @@ function actualizarSucursal(documento) {
     };
 }
 
-function actualizarEmpleado(document) {
-    sucursal = document.getElementById("sel1").value;
-    cargo = document.getElementById("sel2").value;
-    dni = document.getElementById("dni").value;
-    nombre = document.getElementById("nombre").value;
-    apellido = document.getElementById("apellido").value;
-    codigo = document.getElementById("codigo").value;
-    celular = document.getElementById("celular").value;
-    telefono = document.getElementById("telefono").value;
-    email = document.getElementById("email").value;
-    direccion = document.getElementById("direccion").value;
-    fIngreso = document.getElementById("fIngreso").value;
-    if (document.getElementById('r1').checked == true) {
-        habilitado = document.getElementById("r1").value;
-    } else {
-        habilitado = document.getElementById("r2").value;
-    }
+/**
+ * Metodo que recibe la peticion de actualizacion de un cliente y la envia a ControladorCliente.
+ * @param {type} document Formulario con los datos del cliente.
+ * @returns {undefined}
+ */
+function actualizarCliente(document) {
+    dni = document.elements[0].value;
+    nombres = document.elements[1].value;
+    apellidos = document.elements[2].value;
+    ciudad = document.elements[4].value;
+    direccion = document.elements[5].value;
+    telefono = document.elements[6].value;
+    email = document.elements[7].value;
     var xhttp = new XMLHttpRequest();
-    var url = "/SIWAI/ControladorEmpleado?actualizarEmpleado=true&sucursal=" + sucursal + "&cargo=" + cargo +
-            "&dni=" + dni + "&nombre=" + nombre + "&apellido=" + apellido + "&codigo=" + codigo + "&celular=" + celular +
-            "&telefono=" + telefono + "&email=" + email + "&direccion=" + direccion + "&fIngreso=" + fIngreso +
-            "&habilitado=" + habilitado;
+    var url = "/ufps_45-SIWAI/ControladorCliente?actualizarCliente=true&dni=" + dni + "&nombre=" +
+            nombres + "&apellido=" + apellidos + "&telefono=" + telefono +
+            "&email=" + email + "&direccion=" + direccion + "&ciudad=" + ciudad;
     xhttp.open("POST", url, true);
     xhttp.send();
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
-            if (sub.indexOf("Error") >= 0) {
+            if (sub.indexOf("Fallo") >= 0) {
                 $("div").remove("#alert");
-                $("body").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" + sub + "</div>");
-            } else if (sub.indexOf("true") >= 0) {
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "No se encontro el cliente registrado con el DNI: " + dni + "</div>");
+            } else if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Error en la conexion a la base de datos</div>");
+            } else if (sub.length==0){
                 window.location = 'consultar.jsp';
+            } else {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+                        + sub + "</div>");
+            }
+        }
+    };
+}
+
+/**
+ * Metodo que recibe la peticion de actualizacion de un proveedor y la envia a ControladorPrveedor.
+ * @param {type} document Formulario con los datos del proveedor.
+ * @returns {undefined}
+ */
+function actualizarProveedor(document) {
+    codigo = document.elements[0].value;
+    nit = document.elements[1].value;
+    nombre = document.elements[2].value;
+    web = document.elements[3].value;
+    telefono = document.elements[4].value;
+    email = document.elements[5].value;
+    tipoCuentaBancaria = document.elements[6].value;
+    nCuentaBancaria = document.elements[7].value;
+    cuentaBancaria = document.elements[8].value;
+    nombreContacto = document.elements[9].value;
+    
+    var xhttp = new XMLHttpRequest();
+    var url = "/ufps_45-SIWAI/ControladorProveedor?actualizarProveedor=true&codigo=" + codigo + "&nit=" +
+            nit + "&nombre=" + nombre + "&web=" + web + "&telefono=" + telefono +
+            "&email=" + email + "&tipoCuentaBancaria=" + tipoCuentaBancaria + "&nCuentaBancaria=" + nCuentaBancaria
+            + "&cuentaBancaria=" + cuentaBancaria + "&nombreContacto=" + nombreContacto;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            if (sub.indexOf("Fallo") >= 0) {
+                mensaje = "Existe otro proveedor con el ";
+                if (sub.indexOf("codigo") >= 0)
+                    mensaje += " codigo: " + codigo;
+                else if (sub.indexOf("nit") >= 0)
+                    mensaje += "NIT: " + nit;
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+                        + mensaje + "</div>");
+            } else if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Error en la conexion a la base de datos</div>");
+            } else if (sub.length==0){
+                window.location = 'consultar.jsp';
+            } else {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+                        + sub + "</div>");
             }
         }
     };

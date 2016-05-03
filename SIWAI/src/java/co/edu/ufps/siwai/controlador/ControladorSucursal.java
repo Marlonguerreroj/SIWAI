@@ -148,13 +148,13 @@ public class ControladorSucursal extends HttpServlet {
             lista = fachada.consultarSucursal(buscarPor, informacion);
         } catch (Exception e) {
             request.getSession().setAttribute("msjCS", "Error en la conexion a la base de datos");
-            response.sendRedirect("/SIWAI/Seccion/Sucursal/consultar.jsp");
+            response.sendRedirect("/ufps_45-SIWAI/Seccion/Sucursal/consultar.jsp");
         }
         if (lista.isEmpty()) {
             request.getSession().setAttribute("msjCS", "No se encontro ningúna sucursal");
         }
         request.getSession().setAttribute("sucursales", lista);
-        response.sendRedirect("/SIWAI/Seccion/Sucursal/consultar.jsp");
+        response.sendRedirect("/ufps_45-SIWAI/Seccion/Sucursal/consultar.jsp");
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

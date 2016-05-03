@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% request.setCharacterEncoding("UTF-8"); %>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -37,14 +38,14 @@
                         <p>Codigo:</p>  
                     </div>
                     <div class="col-md-3">
-                        <input required readOnly name="codigo" value="" type="text" class="form-control ">
+                        <input required readOnly name="codigo" value="<%=request.getParameter("codigo")%>" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
                         <p>NIT:</p> 
                     </div>
                     <div class="col-md-3">
-                        <input required readOnly name="nit" value="" type="text" class="form-control ">
+                        <input required readOnly name="nit" value="<%=request.getParameter("nit")%>" type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -55,14 +56,14 @@
                         <p>Nombre:</p>  
                     </div>
                     <div class="col-md-3">
-                        <input required readOnly value="" name="nombre" type="text" class="form-control ">
+                        <input required readOnly value="<%=request.getParameter("nombre")%>" name="nombre" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
                         <p>Pagina web:</p> 
                     </div>
                     <div class="col-md-3">
-                        <input name="pagina" readOnly value="" type="text" class="form-control ">
+                        <input name="pagina" readOnly value="<%=request.getParameter("web")%>" type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -73,14 +74,14 @@
                         <p>Telefono:</p>  
                     </div>
                     <div class="col-md-3">
-                        <input required readOnly value="" name="telefono" type="text" class="form-control ">
+                        <input required readOnly value="<%=request.getParameter("telefono")%>" name="telefono" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
                         <p>E-mail:</p> 
                     </div>
                     <div class="col-md-3">
-                        <input required readOnly value="" name="email" type="text" class="form-control ">
+                        <input required readOnly value="<%=request.getParameter("email")%>" name="email" type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -92,7 +93,7 @@
                     </div>
                     <div class="col-md-3">
                         <br>
-                        <input required readOnly value="" name="tipoCuentaBancaria" type="text" class="form-control ">
+                        <input required readOnly value="<%=request.getParameter("tipo")%>" name="tipoCuentaBancaria" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
@@ -100,7 +101,7 @@
                     </div>
                     <div class="col-md-3">
                         <br>
-                        <input required readOnly value="" name="nCuentaBancaria" type="text" class="form-control ">
+                        <input required readOnly value="<%=request.getParameter("numero")%>" name="nCuentaBancaria" type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -111,14 +112,14 @@
                         <p>Cuenta Bancaria:</p>  
                     </div>
                     <div class="col-md-3">
-                        <input required readOnly value="" name="cuentaBancaria" type="text" class="form-control ">
+                        <input required readOnly value="<%=request.getParameter("cuenta")%>" name="cuentaBancaria" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
                         <p>Nombre contacto:</p> 
                     </div>
                     <div class="col-md-3">
-                        <input required readOnly value="" name="nombreContacto" type="text" class="form-control ">
+                        <input required readOnly value="<%=request.getParameter("contacto")%>" name="nombreContacto" type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
                 </div>     

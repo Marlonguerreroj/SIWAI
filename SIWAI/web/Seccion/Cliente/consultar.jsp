@@ -40,7 +40,12 @@
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
             <%
-                    } else { %>
+                    } else if (mensaje.contains("Exito")) { %> 
+            <div class="alert alert-success centrar-texto" role="alert" arial >
+                Cliente actualizado exitosamente
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>              
+            <% } else { %>
             <div class="alert alert-warning centrar-texto" role="alert" arial >
                 <%=mensaje%>
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -54,7 +59,7 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form action="/SIWAI/ControladorCliente" method="post" name="form">
+            <form action="/ufps_45-SIWAI/ControladorCliente" method="post" name="form">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>
@@ -90,17 +95,17 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
                         <div class="table-responsive">
-                            <table class="table">
+                            <table class="table" id="tabla-cliente">
                                 <thead>
                                     <tr>
-                                        <th>Dni</th>
-                                        <th>Nombre</th>
-                                        <th>Telefono</th>
-                                        <th>Direccion</th>
-                                        <th>E-mail</th>
-                                        <th>País</th>
-                                        <th>Ciudad</th>
-                                        <th></th>
+                                        <th class="centrar-texto">Dni</th>
+                                        <th class="centrar-texto">Nombre</th>
+                                        <th class="centrar-texto">Telefono</th>
+                                        <th class="centrar-texto">E-mail</th>
+                                        <th class="centrar-texto">País</th>
+                                        <th class="centrar-texto">Ciudad</th>
+                                        <th class="centrar-texto">Direccion</th>
+                                        <th class="centrar-texto"></th>
                                     </tr>
                                 </thead>
                                 <%
@@ -108,16 +113,20 @@
                                     for (int i = 0; i < dtos.size(); i++) {
                                 %>
                                 <tr>
-                                    <td><%=dtos.get(i).getDni()%></td>
-                                    <td><%=dtos.get(i).getNombre() + " " + dtos.get(i).getApellido()%></td>
-                                    <td><%=dtos.get(i).getTelefono()%></td>
-                                    <td><%=dtos.get(i).getDireccion()%></td>
-                                    <td><%=dtos.get(i).getEmail()%></td>
-                                    <td><%=dtos.get(i).getUbicacion().getNomPais()%></td>
-                                    <td><%=dtos.get(i).getUbicacion().getNomCiudad()%></td>
-                                    <td>
-                                        <a href="actualizar.jsp" style="cursor: pointer;">
-                                            <span class="glyphicon glyphicon-edit asd "></span>
+                                    <td class="centrar-texto"><%=dtos.get(i).getDni()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getNombre() + " " + dtos.get(i).getApellido()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getTelefono()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getEmail()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getUbicacion().getNomPais()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getUbicacion().getNomCiudad()%></td>
+                                    <td class="centrar-texto"><%=dtos.get(i).getDireccion()%></td>
+                                    <td class="centrar-texto">
+                                        <a onclick="enviarFormOcultoCliente('<%=dtos.get(i).getDni()%>', 
+                                                    '<%=dtos.get(i).getNombre()%>', '<%=dtos.get(i).getApellido()%>',  
+                                                    '<%=dtos.get(i).getTelefono()%>', '<%=dtos.get(i).getEmail()%>', 
+                                                    '<%=dtos.get(i).getDireccion()%>', '<%=dtos.get(i).getUbicacion().getCodPais()%>',
+                                                    <%=dtos.get(i).getUbicacion().getIdCiudad()%>)" style="cursor:pointer;">
+                                            <span class="glyphicon glyphicon-edit asd"></span>
                                         </a>
                                     </td>
                                 </tr>
@@ -130,6 +139,14 @@
             </div>
             <%  session.removeAttribute("clientes");
                 } %>                
+            <form id="form-oculto" method="post" action="actualizar.jsp">
+                <input type="hidden" name="dni" id="dni">
+                <input type="hidden" name="nombre" id="nombre">
+                <input type="hidden" name="apellido" id="apellido">
+                <input type="hidden" name="telefono" id="telefono">
+                <input type="hidden" name="email" id="email">
+                <input type="hidden" name="direccion" id="direccion">
+            </form>
             <!-- Fin del contenido principal-->
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->

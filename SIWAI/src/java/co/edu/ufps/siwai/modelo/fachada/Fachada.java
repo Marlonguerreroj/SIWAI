@@ -153,7 +153,7 @@ public class Fachada implements Serializable {
      */
     public String registrarProveedor(String codigo, String nit, String nombre,
             String cuenta, String tipoCuenta, String sitioWeb, String nombreContacto,
-            String emailContacto, int numCuenta, int telContacto) throws Exception {
+            String emailContacto, String numCuenta, String telContacto) throws Exception {
         ProveedorDTO dto = new ProveedorDTO(codigo, nit, nombre, cuenta,
                 tipoCuenta, sitioWeb, nombreContacto, emailContacto, numCuenta, telContacto);
         DAOProveedor dao = new DAOProveedor();
@@ -195,6 +195,53 @@ public class Fachada implements Serializable {
     public ArrayList<UbicacionDTO> obtenerCiudades(String pais) throws Exception {
         DAOUbicacion dao = new DAOUbicacion();
         return dao.obtenerCiudades(pais);
+    }
+    
+    /**
+     * Metodo que envia los datos del cliente a DAOCliente para que sean
+     * actualizados en la base de datos.
+     *
+     * @param dni Documento nacional de identificación del cliente.
+     * @param nombre Nombres del cliente.
+     * @param apellido Apellidos del cliente.
+     * @param direccion Direccion de residencia del cliente.
+     * @param email Correo electronico del cliente.
+     * @param telefono Telefono o celular del cliente.
+     * @return True si el cliente fue actualziado, false si no se actualizo.
+     * @throws java.lang.Exception Excepcion en la conexion a la base de datos.
+     */
+    public boolean actualizarCliente(String dni, String nombre, String apellido,
+            String direccion, String email, String telefono, int ciudad) throws Exception {
+        ClienteDTO dto = new ClienteDTO(dni, nombre, apellido, direccion, email, telefono, ciudad);
+        DAOCliente dao = new DAOCliente();
+        return dao.actualizarCliente(dto);
+    }
+    
+    /**
+     * Metodo que envia la peticion a DAOProveedor para actualizar un proveedor.
+     *
+     * @param codigo Codigo del proveedor.
+     * @param nit Nit del proveedor.
+     * @param nombre Nombre del proveedor.
+     * @param cuenta Cuenta del proveedor.
+     * @param tipoCuenta Tipo de cuenta del proveedor.
+     * @param sitioWeb URL del Sito Web del proveedor.
+     * @param nombreContacto Nombre de la persona que sirve de intermediario con
+     * el proveedor.
+     * @param emailContacto Email del contacto.
+     * @param numCuenta Numero de cuenta del proveedor.
+     * @param telContacto Telefono del contacto.
+     * @return Cadena de texto, Exito si actualizo o la exception nula.
+     * @throws java.lang.Exception Si existe error en la conexion a la base de
+     * datos.
+     */
+    public String actualizarProveedor(String codigo, String nit, String nombre,
+            String cuenta, String tipoCuenta, String sitioWeb, String nombreContacto,
+            String emailContacto, String numCuenta, String telContacto) throws Exception {
+        ProveedorDTO dto = new ProveedorDTO(codigo, nit, nombre, cuenta,
+                tipoCuenta, sitioWeb, nombreContacto, emailContacto, numCuenta, telContacto);
+        DAOProveedor dao = new DAOProveedor();
+        return dao.actualizarProveedor(dto);
     }
 
 }

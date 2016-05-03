@@ -93,7 +93,7 @@
                 <!-- Mensaje de Bienvenida y Boton para cerrar Sesion -->
                 <ul class="nav navbar-nav navbar-right">
                     <li><p class="navbar-text">Bienvenido <%=request.getSession().getAttribute("usuario") %></p></li>
-                    <li><a href="/SIWAI/ControladorEmpleado?cerrarSesion=true">
+                    <li><a href="/ufps_45-SIWAI/ControladorEmpleado?cerrarSesion=true">
                             <span class="glyphicon glyphicone glyphicon-off"></span>
                         </a></li>
                     <!-- Cierre del Mensaje de Bienvenida y Boton para cerrar Sesion -->
