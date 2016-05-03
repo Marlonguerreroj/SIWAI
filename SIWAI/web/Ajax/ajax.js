@@ -284,7 +284,7 @@ function actualizarCliente(document) {
                 $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                         "Error en la conexion a la base de datos</div>");
-            } else if (sub.length==0){
+            } else if (sub.length == 0) {
                 window.location = 'consultar.jsp';
             } else {
                 $("div").remove("#alert");
@@ -312,7 +312,7 @@ function actualizarProveedor(document) {
     nCuentaBancaria = document.elements[7].value;
     cuentaBancaria = document.elements[8].value;
     nombreContacto = document.elements[9].value;
-    
+
     var xhttp = new XMLHttpRequest();
     var url = "/ufps_45-SIWAI/ControladorProveedor?actualizarProveedor=true&codigo=" + codigo + "&nit=" +
             nit + "&nombre=" + nombre + "&web=" + web + "&telefono=" + telefono +
@@ -338,13 +338,51 @@ function actualizarProveedor(document) {
                 $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                         "Error en la conexion a la base de datos</div>");
-            } else if (sub.length==0){
+            } else if (sub.length == 0) {
                 window.location = 'consultar.jsp';
             } else {
                 $("div").remove("#alert");
                 $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
                         + sub + "</div>");
+            }
+        }
+    };
+}
+function actualizarEmpleado(document) {
+    sucursal = document.getElementById("sel1").value;
+    cargo = document.getElementById("sel2").value;
+    dni = document.getElementById("dni").value;
+    nombre = document.getElementById("nombre").value;
+    apellido = document.getElementById("apellido").value;
+    codigo = document.getElementById("codigo").value;
+    celular = document.getElementById("celular").value;
+    telefono = document.getElementById("telefono").value;
+    email = document.getElementById("email").value;
+    direccion = document.getElementById("direccion").value;
+    fIngreso = document.getElementById("fIngreso").value;
+    if (document.getElementById('r1').checked == true) {
+        habilitado = document.getElementById("r1").value;
+    } else {
+        habilitado = document.getElementById("r2").value;
+    }
+    alert(sucursal + cargo + dni + nombre + apellido + codigo + celular + telefono + email + direccion +
+            fIngreso + habilitado)
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorEmpleado?actualizarEmpleado=true&sucursal=" + sucursal + "&cargo=" + cargo +
+            "&dni=" + dni + "&nombre=" + nombre + "&apellido=" + apellido + "&codigo=" + codigo + "&celular=" + celular +
+            "&telefono=" + telefono + "&email=" + email + "&direccion=" + direccion + "&fIngreso=" + fIngreso +
+            "&habilitado=" + habilitado;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("body").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" + sub + "</div>");
+            } else if (sub.indexOf("true") >= 0) {
+                window.location = 'consultar.jsp';
             }
         }
     };
