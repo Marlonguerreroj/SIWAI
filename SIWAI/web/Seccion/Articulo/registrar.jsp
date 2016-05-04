@@ -5,6 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="co.edu.ufps.siwai.modelo.fachada.Fachada"%>
+<% if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("../../index.jsp");
+    }%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -18,6 +22,7 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Ajax/ajax.js"></script>
     </head>
     <body>
         <!-- Encabezado del cuerpo del documento -->
@@ -29,7 +34,8 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form action="" method="post">
+            <form onSubmit="registrarArticulo(document.forms[0]);
+                    return false" id="form">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>
@@ -70,7 +76,8 @@
                     <div class="row centrar-texto">
                         <div class="col-md-4"></div>
                         <div class="col-md-2">
-                            <button name="enviar" type="submit" class="btn btn-success btn-lg letra">Registrar
+                            <button class="btn btn-success btn-lg letra">
+                                Registrar
                             </button>
                         </div>
                         <div class="col-md-2">
