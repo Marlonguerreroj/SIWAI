@@ -13,7 +13,7 @@ function iniciarSesion(campo1, campo2) {
 
 
     var xhttp = new XMLHttpRequest();
-    var text = "/ufps_45-SIWAI/ControladorEmpleado?usuario=" + usuario + "&contra=" + contra + "&iniciarSesion=true";
+    var text = "/SIWAI/ControladorEmpleado?usuario=" + usuario + "&contra=" + contra + "&iniciarSesion=true";
     xhttp.open("POST", text, true);
     xhttp.send();
 
@@ -48,7 +48,7 @@ function registrarSucursal(document) {
     pais = document.elements[6].value;
     ciudad = document.elements[7].value;
     var xhttp = new XMLHttpRequest();
-    var url = "/ufps_45-SIWAI/ControladorSucursal?registrarSucursal=true&codigo=" + codigo.value + "&nombre=" +
+    var url = "/SIWAI/ControladorSucursal?registrarSucursal=true&codigo=" + codigo.value + "&nombre=" +
             nombre + "&telefono=" + telefono + "&email=" + email + "&paginaWeb=" + paginaWeb +
             "&direccion=" + direccion + "&ciudad=" + ciudad + "&pais=" + pais;
     xhttp.open("POST", url, true);
@@ -91,7 +91,7 @@ function registrarEmpleado(document) {
     direccion = document.elements[10].value;
     fIngreso = document.elements[11].value;
     var xhttp = new XMLHttpRequest();
-    var url = "/ufps_45-SIWAI/ControladorEmpleado?registrarEmpleado=true&sucursal=" + sucursal + "&cargo=" + cargo +
+    var url = "/SIWAI/ControladorEmpleado?registrarEmpleado=true&sucursal=" + sucursal + "&cargo=" + cargo +
             "&codigo=" + codigo + "&dni=" + dni + "&nombre=" + nombre + "&apellido=" + apellido + "&telefono=" + telefono +
             "&celular=" + celular + "&contrasena=" + contrasena + "&email=" + email + "&direccion=" + direccion +
             "&fIngreso=" + fIngreso;
@@ -132,7 +132,7 @@ function registrarCliente(document) {
     telefono = document.elements[6].value;
     email = document.elements[7].value;
     var xhttp = new XMLHttpRequest();
-    var url = "/ufps_45-SIWAI/ControladorCliente?registrarCliente=true&dni=" + dni + "&nombre=" +
+    var url = "/SIWAI/ControladorCliente?registrarCliente=true&dni=" + dni + "&nombre=" +
             nombres + "&apellido=" + apellidos + "&telefono=" + telefono +
             "&email=" + email + "&direccion=" + direccion + "&ciudad=" + ciudad;
     xhttp.open("POST", url, true);
@@ -183,7 +183,7 @@ function registrarProveedor(document) {
     telefono = document.elements[8].value;
     email = document.elements[9].value;
     var xhttp = new XMLHttpRequest();
-    var url = "/ufps_45-SIWAI/ControladorProveedor?registrarProveedor=true&codigo=" + codigo + "&nit=" +
+    var url = "/SIWAI/ControladorProveedor?registrarProveedor=true&codigo=" + codigo + "&nit=" +
             nit + "&nombre=" + nombre + "&web=" + web + "&telefono=" + telefono +
             "&email=" + email + "&tipoCuentaBancaria=" + tipoCuentaBancaria + "&nCuentaBancaria=" + nCuentaBancaria
             + "&cuentaBancaria=" + cuentaBancaria + "&nombreContacto=" + nombreContacto;
@@ -233,7 +233,7 @@ function actualizarSucursal(documento) {
     pais = documento.elements[6].value;
     ciudad = documento.elements[7].value;
     var xhttp = new XMLHttpRequest();
-    var url = "/ufps_45-SIWAI/ControladorSucursal?actualizarSucursal=true&codigo=" + codigo + "&nombre=" + nombre +
+    var url = "/SIWAI/ControladorSucursal?actualizarSucursal=true&codigo=" + codigo + "&nombre=" + nombre +
             "&telefono=" + telefono + "&email=" + email + "&paginaWeb=" + paginaWeb + "&direccion=" + direccion + "&ciudad=" + ciudad +
             "&pais=" + pais;
     xhttp.open("POST", url, true);
@@ -266,7 +266,7 @@ function actualizarCliente(document) {
     telefono = document.elements[6].value;
     email = document.elements[7].value;
     var xhttp = new XMLHttpRequest();
-    var url = "/ufps_45-SIWAI/ControladorCliente?actualizarCliente=true&dni=" + dni + "&nombre=" +
+    var url = "/SIWAI/ControladorCliente?actualizarCliente=true&dni=" + dni + "&nombre=" +
             nombres + "&apellido=" + apellidos + "&telefono=" + telefono +
             "&email=" + email + "&direccion=" + direccion + "&ciudad=" + ciudad;
     xhttp.open("POST", url, true);
@@ -314,7 +314,7 @@ function actualizarProveedor(document) {
     nombreContacto = document.elements[9].value;
 
     var xhttp = new XMLHttpRequest();
-    var url = "/ufps_45-SIWAI/ControladorProveedor?actualizarProveedor=true&codigo=" + codigo + "&nit=" +
+    var url = "/SIWAI/ControladorProveedor?actualizarProveedor=true&codigo=" + codigo + "&nit=" +
             nit + "&nombre=" + nombre + "&web=" + web + "&telefono=" + telefono +
             "&email=" + email + "&tipoCuentaBancaria=" + tipoCuentaBancaria + "&nCuentaBancaria=" + nCuentaBancaria
             + "&cuentaBancaria=" + cuentaBancaria + "&nombreContacto=" + nombreContacto;

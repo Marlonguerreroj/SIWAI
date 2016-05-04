@@ -71,7 +71,7 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form action="/ufps_45-SIWAI/ControladorEmpleado" method="post" name="form">
+            <form action="/SIWAI/ControladorEmpleado" method="post" name="form">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>

@@ -140,7 +140,7 @@ public class ControladorProveedor extends HttpServlet {
         } catch (Exception ex) {
             request.getSession().setAttribute("msjCP", "Error en la conexion a la base de datos");
         } finally {
-            response.sendRedirect("/ufps_45-SIWAI/Seccion/Proveedor/consultar.jsp");
+            response.sendRedirect("/SIWAI/Seccion/Proveedor/consultar.jsp");
         }
     }
     

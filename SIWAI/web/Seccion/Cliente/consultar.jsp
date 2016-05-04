@@ -59,7 +59,7 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form action="/ufps_45-SIWAI/ControladorCliente" method="post" name="form">
+            <form action="/SIWAI/ControladorCliente" method="post" name="form">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>

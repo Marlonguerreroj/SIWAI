@@ -70,7 +70,7 @@
             </div>
             <br>
             <!-- Formulario para consultar la sucursal -->
-            <form name="form" action="/ufps_45-SIWAI/ControladorSucursal" method="post">
+            <form name="form" action="/SIWAI/ControladorSucursal" method="post">
                 <div class="container">
                     <div class="row ">
                         <div class="col-md-1"></div>
