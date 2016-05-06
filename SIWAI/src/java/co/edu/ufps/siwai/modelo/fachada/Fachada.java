@@ -5,12 +5,14 @@
  */
 package co.edu.ufps.siwai.modelo.fachada;
 
+import co.edu.ufps.siwai.modelo.mysql.dao.DAOArticulo;
 import co.edu.ufps.siwai.modelo.mysql.dto.ClienteDTO;
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOCliente;
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOEmpleado;
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOProveedor;
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOSucursal;
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOUbicacion;
+import co.edu.ufps.siwai.modelo.mysql.dto.ArticuloDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.EmpleadoDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.ProveedorDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO;
@@ -243,5 +245,20 @@ public class Fachada implements Serializable {
         DAOProveedor dao = new DAOProveedor();
         return dao.actualizarProveedor(dto);
     }
-
+    
+    /**
+     * Este método llama crea un ArticuloDTO y llama al DAOArticulo para que él se encargue
+     * de guardar el articulo
+     * @param referencia referencia del articulo
+     * @param nombre nombre del articulo
+     * @param tipoArticulo tipo del articulo
+     * @return retorna lo que le retorne el método registrarArticulo de la clase DAOArticulo
+     */
+    public boolean registrarAriculo(String referencia, String nombre, String tipoArticulo) throws Exception
+    {
+        ArticuloDTO dto=new ArticuloDTO(referencia,nombre,tipoArticulo);
+        DAOArticulo dao=new DAOArticulo();
+        return dao.registrarArticulo(dto);
+                
+    }
 }

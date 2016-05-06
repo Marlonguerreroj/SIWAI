@@ -165,7 +165,48 @@ function registrarCliente(document) {
         }
     };
 }
-
+/**
+ * Metodo que se encarga de registrar articulo
+ * @param {type} document
+ * @returns {undefined}
+ */
+function registrarArticulo(document) {
+    ref = document.elements[0].value;
+    nombre = document.elements[1].value;
+    tipo = document.elements[2].value;
+    var xhttp = new XMLHttpRequest();   
+    var url = "/SIWAI/ControladorArticulo?registrarArticulo=true&referencia=" + ref + "&nombre=" +
+            nombre + "&tipo=" + tipo;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            if (sub.indexOf("Fallo") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Existe otro artículo registrado con la misma referencia: " + ref + "</div>");
+            } else if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Error en la conexion a la base de datos</div>");
+            } else if (sub.indexOf("Exito") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-success centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Articulo registrado exitosamente</div>");
+                $("#form")[0].reset();
+            } else {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>"
+                        + sub + "</div>");
+            }
+        }
+    };
+}
 /**
  * Metodo que recibe la peticion de registro de un proveedor y la envia a ControladorPrveedor.
  * @param {type} document Formulario con los datos del proveedor.
