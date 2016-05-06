@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ControladorSucursal", urlPatterns = {"/ControladorSucursal"})
 public class ControladorSucursal extends HttpServlet {
-
+    
     private String validarCampos(String codigo, String nombre, int telefono, String email, String paginaWeb, String direccion, String ciudad, String pais) {
         String mensaje = "Ninguno";
         if (codigo.isEmpty()) {
@@ -80,16 +80,15 @@ public class ControladorSucursal extends HttpServlet {
             boolean exito;
             try {
                 exito = fachada.registrarSucursal(codigo, nombre, telefono, email, paginaWeb, direccion, ciudad, pais);
-                System.out.println(exito);
                 out.print(exito);
-
+                
             } catch (Exception ex) {
                 out.print("Error en la conexion a la base de datos");
             }
         } else {
             out.print(validacion);
         }
-
+        
     }
 
     /**
@@ -113,16 +112,21 @@ public class ControladorSucursal extends HttpServlet {
         String pais = request.getParameter("pais");
         Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         boolean exito;
+        String validacion = validarCampos(codigo, nombre, telefono, email, paginaWeb, direccion, ciudad, pais);
         PrintWriter out = response.getWriter();
-        try {
-            exito = fachada.actualizarSucursal(codigo, nombre, telefono, email,
-                    paginaWeb, direccion, ciudad, pais);
-            if (exito) {
-                request.getSession().setAttribute("msjAS", "La sucursal se actualizó satisfactoriamente");
+        if (validacion.equalsIgnoreCase("Ninguno")) {
+            try {
+                exito = fachada.actualizarSucursal(codigo, nombre, telefono, email,
+                        paginaWeb, direccion, ciudad, pais);
+                if (exito) {
+                    request.getSession().setAttribute("msjAS", "La sucursal se actualizó satisfactoriamente");
+                }
+                out.print(exito);
+            } catch (Exception e) {
+                out.print("Error en la conexion a la base de datos");
             }
-            out.print(exito);
-        } catch (Exception e) {
-            out.print("Error en la conexion a la base de datos");
+        } else {
+            out.print(validacion);
         }
     }
 
@@ -144,7 +148,6 @@ public class ControladorSucursal extends HttpServlet {
         Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         ArrayList<SucursalDTO> lista = new ArrayList<>();
         try {
-            System.out.println(buscarPor+informacion);
             lista = fachada.consultarSucursal(buscarPor, informacion);
         } catch (Exception e) {
             request.getSession().setAttribute("msjCS", "Error en la conexion a la base de datos");
@@ -169,7 +172,7 @@ public class ControladorSucursal extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
     }
 
     /**

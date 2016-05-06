@@ -238,14 +238,17 @@ function actualizarSucursal(documento) {
             "&pais=" + pais;
     xhttp.open("POST", url, true);
     xhttp.send();
-
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
             if (sub.indexOf("Error") >= 0) {
                 $("div").remove("#alert");
                 $("body").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" + sub + "</div>");
-            } else if (sub.indexOf("true") >= 0) {
+            } else if (sub.indexOf("Por favor") >= 0) {
+                $("div").remove("#alert");
+                $("body").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" + sub + "</div>");
+            }
+            else if (sub.indexOf("true") >= 0) {
                 window.location = 'consultar.jsp';
             }
         }
@@ -366,8 +369,6 @@ function actualizarEmpleado(document) {
     } else {
         habilitado = document.getElementById("r2").value;
     }
-    alert(sucursal + cargo + dni + nombre + apellido + codigo + celular + telefono + email + direccion +
-            fIngreso + habilitado)
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorEmpleado?actualizarEmpleado=true&sucursal=" + sucursal + "&cargo=" + cargo +
             "&dni=" + dni + "&nombre=" + nombre + "&apellido=" + apellido + "&codigo=" + codigo + "&celular=" + celular +

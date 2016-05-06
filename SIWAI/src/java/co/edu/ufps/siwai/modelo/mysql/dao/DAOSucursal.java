@@ -36,7 +36,7 @@ public class DAOSucursal {
         if (conn != null) {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO tbl_sucursal "
                     + "(cod_sucursal, nom_sucursal, tel_sucursal, email_sucursal, "
-                    + "pag_sucursal, dir_sucursal, ciudad_sucursal, pais_sucursal)"
+                    + "pag_sucursal, dir_sucursal, ciudad_sucursal)"
                     + " values (?, ?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, dto.getCodigo());
             stmt.setString(2, dto.getNombre());
@@ -45,7 +45,6 @@ public class DAOSucursal {
             stmt.setString(5, dto.getPaginaWeb());
             stmt.setString(6, dto.getDireccion());
             stmt.setInt(7, dto.getUbicacion().getIdCiudad());
-            stmt.setString(8, dto.getUbicacion().getCodPais());
 
             try {
                 exito = stmt.executeUpdate() > 0;
@@ -93,11 +92,8 @@ public class DAOSucursal {
                     dto.setEmail(rs.getString(4));
                     dto.setPaginaWeb(rs.getString(5));
                     dto.setDireccion(rs.getString(6));
-                    System.out.println(rs.getString(7));
-                    System.out.println(rs.getString(8));
                     dto.getUbicacion().setNomCiudad(rs.getString(7));
                     dto.getUbicacion().setNomPais(rs.getString(8));
-                    System.out.println("2");
                     lista.add(dto);
 
                 }
@@ -123,7 +119,7 @@ public class DAOSucursal {
         try {
             String update = "UPDATE tbl_sucursal set nom_sucursal = ?, "
                     + "tel_sucursal = ?, email_sucursal = ?, pag_sucursal = ?, dir_sucursal = ?,"
-                    + "ciudad_sucursal = ?, pais_sucursal = ? where cod_sucursal = ?";
+                    + "ciudad_sucursal = ? where cod_sucursal = ?";
             stmt = conn.prepareStatement(update);
             stmt.setString(1, dto.getNombre());
             stmt.setInt(2, dto.getTelefono());
@@ -131,8 +127,7 @@ public class DAOSucursal {
             stmt.setString(4, dto.getPaginaWeb());
             stmt.setString(5, dto.getDireccion());
             stmt.setInt(6, dto.getUbicacion().getIdCiudad());
-            stmt.setString(7, dto.getUbicacion().getCodPais());
-            stmt.setString(8, dto.getCodigo());
+            stmt.setString(7, dto.getCodigo());
             int total = stmt.executeUpdate();
             if (total > 0) {
                 exito = true;

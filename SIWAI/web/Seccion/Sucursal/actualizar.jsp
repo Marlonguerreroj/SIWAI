@@ -26,7 +26,7 @@
         <script src="../../Js/ubicacion.js"></script>
         
     </head>
-    <body >
+    <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
@@ -63,7 +63,7 @@
                             <p>Telefono:</p>  
                         </div>
                         <div class="col-md-3">
-                            <input name="telefono" value="<%=request.getParameter("telefono")%>" type="number" class="form-control " >
+                            <input name="telefono" value="<%=Integer.parseInt(request.getParameter("telefono")) %>" type="number" class="form-control " >
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">

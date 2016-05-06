@@ -154,14 +154,16 @@ public class ControladorEmpleado extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             ingreso = fachada.iniciarSesion(usuario, contraseña);
-            out.print(ingreso);
-            System.out.println("Ingreso:" + ingreso);
             if (!ingreso.equals("nulo")) {
                 String[] ingreso2 = ingreso.split("-");
-                request.getSession().setAttribute("usuario", ingreso2[0]);
-                request.getSession().setAttribute("cargo", ingreso2[1]);
+                if (ingreso2[2].equals("1")) {
+                    request.getSession().setAttribute("usuario", ingreso2[0]);
+                    request.getSession().setAttribute("cargo", ingreso2[1]);
+                } else {
+                    ingreso = "nulo";
+                }
             }
-
+            out.print(ingreso);
         } catch (Exception e) {
             out.print("Error en la base de datos");
         }

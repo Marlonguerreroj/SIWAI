@@ -141,7 +141,6 @@ public class DAOEmpleado {
             resultado = stmt.getString(1);
             stmt.close();
         } catch (Exception e) {
-            System.out.println("Error: " + e.toString());
         } finally {
             try {
                 conn.close();
@@ -161,9 +160,6 @@ public class DAOEmpleado {
                     + "cod_empleado = ?, cel_empleado = ?,tel_empleado = ?,email_empleado = ?,"
                     + "dir_empleado = ?, fIngreso_empleado = ?,fSalida_empleado = ?,hab_empleado = ? where dni_empleado = ?";
             stmt = conn.prepareStatement(update);
-            System.out.println(dto.getSucursal()+dto.getCargo()+dto.getNombre()+dto.getApellido()
-            +dto.getCodigo()+dto.getCelular()+dto.getTelefono()+dto.getEmail()+dto.getDireccion()
-            +dto.getfIngreso()+dto.getfSalida()+dto.getHabilitado());
             stmt.setString(1, dto.getSucursal());
             stmt.setString(2, dto.getCargo());
             stmt.setString(3, dto.getNombre());

@@ -20,6 +20,10 @@ $(document).ready(function() {
     });
 });
 
+function seleccionarPais(){
+    alert("A");
+}
+
 /**
  * Metodo que cargar en el combo selCiudad las ciudades del pais que se selecciona
  * @returns {undefined}
