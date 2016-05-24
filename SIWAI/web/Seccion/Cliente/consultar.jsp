@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : consultar
     Created on : 17-mar-2016, 14:36:13
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -24,6 +24,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/javascript.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -40,16 +41,16 @@
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
             <%
-                    } else if (mensaje.contains("Exito")) { %> 
+                    } else if (mensaje.contains("Exito")) { %>
             <div class="alert alert-success centrar-texto" role="alert" arial >
                 Cliente actualizado exitosamente
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>              
+            </div>
             <% } else { %>
             <div class="alert alert-warning centrar-texto" role="alert" arial >
                 <%=mensaje%>
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>            
+            </div>
             <%      }
                     session.removeAttribute("msjCC");
                 }
@@ -64,7 +65,7 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
-                           <label for="sel" >Buscar por:</label>  
+                           <label for="sel" >Buscar por:</label>
                             <select name="sel" class="tamañoConsultar" id="sel" required onchange="capturar()" >
                                 <option value="" >Seleccione</option>
                                 <option value="Todos" >Todos</option>
@@ -74,7 +75,7 @@
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
-                            <label for="informacion" >Información:</label> 
+                            <label for="informacion" >Información:</label>
                             <input required name="informacion" type="text" class="tamañoConsultar">
                         </div>
                         <div class="col-md-1">
@@ -121,9 +122,9 @@
                                     <td class="centrar-texto"><%=dtos.get(i).getUbicacion().getNomCiudad()%></td>
                                     <td class="centrar-texto"><%=dtos.get(i).getDireccion()%></td>
                                     <td class="centrar-texto">
-                                        <a onclick="enviarFormOcultoCliente('<%=dtos.get(i).getDni()%>', 
-                                                    '<%=dtos.get(i).getNombre()%>', '<%=dtos.get(i).getApellido()%>',  
-                                                    '<%=dtos.get(i).getTelefono()%>', '<%=dtos.get(i).getEmail()%>', 
+                                        <a onclick="enviarFormOcultoCliente('<%=dtos.get(i).getDni()%>',
+                                                    '<%=dtos.get(i).getNombre()%>', '<%=dtos.get(i).getApellido()%>',
+                                                    '<%=dtos.get(i).getTelefono()%>', '<%=dtos.get(i).getEmail()%>',
                                                     '<%=dtos.get(i).getDireccion()%>', '<%=dtos.get(i).getUbicacion().getCodPais()%>',
                                                     <%=dtos.get(i).getUbicacion().getIdCiudad()%>)" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-edit asd"></span>
@@ -138,7 +139,7 @@
                 </div>
             </div>
             <%  session.removeAttribute("clientes");
-                } %>                
+                } %>
             <form id="form-oculto" method="post" action="actualizar.jsp">
                 <input type="hidden" name="dni" id="dni">
                 <input type="hidden" name="nombre" id="nombre">

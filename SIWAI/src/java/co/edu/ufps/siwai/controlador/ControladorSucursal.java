@@ -22,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "ControladorSucursal", urlPatterns = {"/ControladorSucursal"})
 public class ControladorSucursal extends HttpServlet {
-    
+
     private String validarCampos(String codigo, String nombre, int telefono, String email, String paginaWeb, String direccion, String ciudad, String pais) {
         String mensaje = "Ninguno";
         if (codigo.isEmpty()) {
@@ -34,7 +34,7 @@ public class ControladorSucursal extends HttpServlet {
         if (telefono <= 0) {
             mensaje = "Por favor verifique el campo del telefono";
         }
-        if (!email.contains("@") || !email.endsWith(".com")) {
+        if (!email.contains("@")) {
             mensaje = "Por favor verifique el campo del email";
         }
         if (paginaWeb.isEmpty() || !paginaWeb.endsWith(".com")) {
@@ -81,14 +81,14 @@ public class ControladorSucursal extends HttpServlet {
             try {
                 exito = fachada.registrarSucursal(codigo, nombre, telefono, email, paginaWeb, direccion, ciudad, pais);
                 out.print(exito);
-                
+
             } catch (Exception ex) {
                 out.print("Error en la conexion a la base de datos");
             }
         } else {
             out.print(validacion);
         }
-        
+
     }
 
     /**
@@ -172,7 +172,7 @@ public class ControladorSucursal extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
     }
 
     /**

@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : consultar
     Created on : 17-mar-2016, 14:29:27
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -22,6 +22,7 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -37,7 +38,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1">
-                            <p>Sucursal:</p>  
+                            <p>Sucursal:</p>
                         </div>
                         <div class="col-md-2">
                             <select required name="sel0" class="form-control" id="sel" onchange="capturar()">
@@ -50,7 +51,7 @@
                         </div>
 
                         <div class="col-md-2">
-                            <p>Buscar por:</p>  
+                            <p>Buscar por:</p>
                         </div>
                         <div class="col-md-2">
                             <select required name="sel" class="form-control" id="sel" onchange="capturar()">
@@ -61,7 +62,7 @@
                             </select>
                         </div>
                         <div class="col-md-1">
-                            <p>Informacion:</p>  
+                            <p>Informacion:</p>
                         </div>
                         <div class="col-md-2">
                             <input required id="informacion" name="informacion" type="text" class="form-control ">

@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : actualizar
     Created on : 17-mar-2016, 14:49:01
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -20,6 +20,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Ajax/ajax.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -37,14 +38,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Codigo:</p> 
+                            <p>Codigo:</p>
                         </div>
                         <div class="col-md-3">
                             <input required readOnly name="codigo" value="<%=request.getParameter("codigo")%>" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>NIT:</p> 
+                            <p>NIT:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="nit" value="<%=request.getParameter("nit")%>" type="number" class="form-control ">
@@ -55,14 +56,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Nombre:</p>  
+                            <p>Nombre:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="nombre" value="<%=request.getParameter("nombre")%>" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Pagina web:</p> 
+                            <p>Pagina web:</p>
                         </div>
                         <div class="col-md-3">
                             <input name="pagina" value="<%=request.getParameter("web")%>" type="text" class="form-control ">
@@ -73,14 +74,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Teléfono:</p>  
+                            <p>Teléfono:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="telefono" value="<%=request.getParameter("telefono")%>" type="number" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>E-mail:</p> 
+                            <p>E-mail:</p>
                         </div>
                         <div class="col-md-3">
                             <input name="email" value="<%=request.getParameter("email")%>" type="email" class="form-control ">
@@ -91,7 +92,7 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Tipo cuenta bancaria:</p>  
+                            <p>Tipo cuenta bancaria:</p>
                         </div>
                         <div class="col-md-3">
                             <br>
@@ -99,7 +100,7 @@
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>N&ordm; cuenta bancaria:</p> 
+                            <p>N&ordm; cuenta bancaria:</p>
                         </div>
                         <div class="col-md-3">
                             <br>
@@ -111,14 +112,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Cuenta Bancaria:</p>  
+                            <p>Cuenta Bancaria:</p>
                         </div>
                         <div class="col-md-3">
                             <input name="cuentaBancaria" value="<%=request.getParameter("cuenta")%>" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Nombre contacto:</p> 
+                            <p>Nombre contacto:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="nombreContacto" value="<%=request.getParameter("contacto")%>" type="text" class="form-control ">

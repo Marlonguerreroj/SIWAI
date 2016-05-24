@@ -1,6 +1,28 @@
+section{
+  padding-bottom: 2%;
+}
+html
+{
+    position: relative;
+    min-height: 100%;
+}
+  footer
+{
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+    height: 85px;
+}
+
 /* Espacio entre el tope y el cuerpo */
 body{
     padding-top: 50px;
+    margin: 0 0 65px;
+
+}
+
+.espacioEntreBoton{
+  margin-left: 2%;
 }
 /* Espaciado Utilizados en el login */
 .espaciado{
@@ -14,8 +36,8 @@ body{
 }
 /* Modifica la imagen corporativa en el login */
 .imagen{
-    width: 19%;
-    height: 19%;
+    width: 17%;
+    height: 17%;
 }
 /*Modifica el Div que contiene la imagen corporativa*/
 .centrarDiv{
@@ -23,8 +45,8 @@ body{
 }
 /* Tamaño de la imagen del footer */
 .footerImagen{
-    width: 3%;
-    height: 3%;
+  width: auto;
+  height: 40px;
 }
 /* Centra el div que centra el texto */
 .centrar-texto{

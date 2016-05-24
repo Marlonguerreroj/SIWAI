@@ -190,4 +190,59 @@ public class DAOEmpleado {
         }
         return exito;
     }
+
+    public boolean validarContraseña(EmpleadoDTO dto) throws Exception {
+        conn = Conexion.generarConexion();
+        boolean exito = false;
+        PreparedStatement stmt = null;
+        if (conn != null) {
+            stmt = conn.prepareStatement("SELECT nom_empleado FROM tbl_empleado "
+                    + "WHERE cod_empleado = ? and cont_empleado = ?");
+            stmt.setString(1, dto.getCodigo());
+            stmt.setString(2, dto.getContraseña());
+            try {
+                ResultSet rs = stmt.executeQuery();
+                if(rs.next()){
+                    exito = true;
+                }
+                stmt.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+
+                }
+            }
+        }
+        return exito;
+    }
+
+    public boolean cambiarContraseña(EmpleadoDTO dto) throws Exception {
+        boolean exito = false;
+        conn = Conexion.generarConexion();
+        PreparedStatement stmt;
+        try {
+            String update = "UPDATE tbl_empleado set cont_empleado = ? where cod_empleado = ?";
+            stmt = conn.prepareStatement(update);
+            stmt.setString(1, dto.getContraseña());
+            stmt.setString(2, dto.getCodigo());
+            int total = stmt.executeUpdate();
+            System.out.println(total);
+            if (total > 0) {
+                exito = true;
+            }
+            stmt.close();
+
+        } catch (Exception e) {
+        } finally {
+            try {
+                conn.close();
+            } catch (Exception ex) {
+            }
+        }
+        return exito;
+    }
 }

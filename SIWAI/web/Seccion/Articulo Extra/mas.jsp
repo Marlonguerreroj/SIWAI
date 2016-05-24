@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : mas
     Created on : 17-mar-2016, 14:35:04
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -18,6 +18,7 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -33,19 +34,19 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Codigo:</p>  
+                        <p>Codigo:</p>
                     </div>
                     <div class="col-md-3">
                         <input readOnly value="" name="codigo" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
-                        <p>Sucursal:</p> 
+                        <p>Sucursal:</p>
                     </div>
                     <div class="col-md-3">
                         <select name="sel1" class="form-control" id="sel1" required disabled>
                             <option value="">Seleccione</option>
-                        </select> 
+                        </select>
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -53,7 +54,7 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Nombre:</p>  
+                        <p>Nombre:</p>
                     </div>
                     <div class="col-md-3">
                         <input readOnly value="" name="nombre" type="text" class="form-control ">
@@ -71,7 +72,7 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Fecha de entrada:</p>  
+                        <p>Fecha de entrada:</p>
                     </div>
                     <div class="col-md-3">
                         <br>
@@ -91,7 +92,7 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Valor:</p>  
+                        <p>Valor:</p>
                     </div>
                     <div class="col-md-3">
                         <input readOnly value="" name="valor" type="text" class="form-control ">

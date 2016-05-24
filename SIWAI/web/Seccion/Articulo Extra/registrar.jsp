@@ -1,9 +1,11 @@
-<%-- 
+<%--
     Document   : registrar
     Created on : 17-mar-2016, 14:34:36
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
-
+<%@page import="co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="co.edu.ufps.siwai.modelo.fachada.Fachada"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,8 +20,13 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
+      <%
+          Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+          ArrayList<SucursalDTO> lista = fachada.consultarSucursal("Todos", "");
+      %>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
@@ -34,27 +41,31 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p class="letra2">Codigo:  
+                            <p class="letra2">Codigo:
                         </div>
                         <div class="col-md-3">
                             <input required name="codigo" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p class="letra2">Sucursal: 
+                            <p class="letra2">Sucursal:
                         </div>
                         <div class="col-md-3">
-                            <select name="sel1" class="form-control" id="sel1" required>
-                                <option value="">Seleccione</option>
-                                <option value="">Sucursal 1</option>
-                            </select>            </div>
+                          <select name="sel1" class="form-control" id="sel1" required>
+                              <option value="">Seleccione</option>
+                              <% for (int i = 0; i < lista.size(); i++) {%>
+                              <option><%=lista.get(i).getNombre()%></option>
+                              <% }
+                              %>
+                          </select>
+                        </div>
                         <div class="col-md-1"></div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p class="letra2">Nombre:  
+                            <p class="letra2">Nombre:
                         </div>
                         <div class="col-md-3">
                             <input required name="nombre" type="text" class="form-control ">
@@ -72,18 +83,16 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p class="letra2">Fecha de entrada:  
+                            <p class="letra2">Fecha de entrada:
                         </div>
                         <div class="col-md-3">
-                            <br>
                             <input required name="fEntrada" type="date" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p class="letra2">Costo por unidad:
+                            <p class="letra2">Costo:
                         </div>
                         <div class="col-md-3">
-                            <br>
                             <input required name="costo" type="number" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
@@ -92,7 +101,7 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p class="letra2">Valor:  
+                            <p class="letra2">Valor:
                         </div>
                         <div class="col-md-3">
                             <input required name="valor" type="number" class="form-control ">

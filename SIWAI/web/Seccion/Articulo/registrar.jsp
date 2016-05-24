@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : registrar
     Created on : 17-mar-2016, 14:28:55
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -23,6 +23,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Ajax/ajax.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Encabezado del cuerpo del documento -->
@@ -40,14 +41,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p >Referencia:</p>  
+                            <p >Referencia:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="referencia" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p >Nombre:</p> 
+                            <p >Nombre:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="nombre" type="text" class="form-control ">
@@ -58,14 +59,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p >Tipo:</p>  
+                            <p >Tipo:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="tipo" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p > 
+                            <p >
                         </div>
                         <div class="col-md-3">
                         </div>

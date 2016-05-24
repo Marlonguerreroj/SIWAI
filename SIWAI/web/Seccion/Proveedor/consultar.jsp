@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : consultar
     Created on : 17-mar-2016, 14:48:26
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -24,6 +24,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/javascript.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -40,16 +41,16 @@
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
             <%
-                    } else if (mensaje.contains("Exito")) { %> 
+                    } else if (mensaje.contains("Exito")) { %>
             <div class="alert alert-success centrar-texto" role="alert" arial >
                 Cliente actualizado exitosamente
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>              
+            </div>
             <% } else { %>
             <div class="alert alert-warning centrar-texto" role="alert" arial >
                 <%=mensaje%>
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>            
+            </div>
             <%      }
                     session.removeAttribute("msjCP");
                 }
@@ -63,7 +64,7 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
-                            <label for="sel" >Buscar por:</label>  
+                            <label for="sel" >Buscar por:</label>
                             <select name="sel" class="tamañoConsultar" id="sel" required onchange="capturar()" >
                                 <option value="" >Seleccione</option>
                                 <option value="Todos" >Todos</option>
@@ -73,7 +74,7 @@
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
-                            <label for="informacion" >Información:</label> 
+                            <label for="informacion" >Información:</label>
                             <input required name="informacion" type="text" class="tamañoConsultar">
                         </div>
                         <div class="col-md-1">
@@ -118,19 +119,19 @@
                                     <td class="centrar-texto"><%=dtos.get(i).getTelContacto()%></td>
                                     <td class="centrar-texto"><%=dtos.get(i).getEmailContacto()%></td>
                                     <td class="centrar-texto">
-                                        <a onclick="enviarFormOcultoProveedorActualizar('<%=dtos.get(i).getCodigo()%>', 
-                                                    '<%=dtos.get(i).getNit()%>', '<%=dtos.get(i).getNombre()%>',  
-                                                    '<%=dtos.get(i).getNombreContacto()%>', '<%=dtos.get(i).getTelContacto()%>', 
+                                        <a onclick="enviarFormOcultoProveedorActualizar('<%=dtos.get(i).getCodigo()%>',
+                                                    '<%=dtos.get(i).getNit()%>', '<%=dtos.get(i).getNombre()%>',
+                                                    '<%=dtos.get(i).getNombreContacto()%>', '<%=dtos.get(i).getTelContacto()%>',
                                                     '<%=dtos.get(i).getEmailContacto()%>', '<%=dtos.get(i).getSitioWeb()%>',
-                                                    '<%=dtos.get(i).getCuenta()%>', '<%=dtos.get(i).getTipoCuenta()%>', 
+                                                    '<%=dtos.get(i).getCuenta()%>', '<%=dtos.get(i).getTipoCuenta()%>',
                                                     '<%=dtos.get(i).getNumCuenta()%>')" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-edit"></span>
                                         </a>
-                                        <a onclick="enviarFormOcultoProveedorMas('<%=dtos.get(i).getCodigo()%>', 
-                                                    '<%=dtos.get(i).getNit()%>', '<%=dtos.get(i).getNombre()%>',  
-                                                    '<%=dtos.get(i).getNombreContacto()%>', '<%=dtos.get(i).getTelContacto()%>', 
+                                        <a onclick="enviarFormOcultoProveedorMas('<%=dtos.get(i).getCodigo()%>',
+                                                    '<%=dtos.get(i).getNit()%>', '<%=dtos.get(i).getNombre()%>',
+                                                    '<%=dtos.get(i).getNombreContacto()%>', '<%=dtos.get(i).getTelContacto()%>',
                                                     '<%=dtos.get(i).getEmailContacto()%>', '<%=dtos.get(i).getSitioWeb()%>',
-                                                    '<%=dtos.get(i).getCuenta()%>', '<%=dtos.get(i).getTipoCuenta()%>', 
+                                                    '<%=dtos.get(i).getCuenta()%>', '<%=dtos.get(i).getTipoCuenta()%>',
                                                     '<%=dtos.get(i).getNumCuenta()%>')" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-info-sign"></span>
                                         </a>

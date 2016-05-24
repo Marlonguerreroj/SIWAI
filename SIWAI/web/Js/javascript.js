@@ -243,7 +243,7 @@ function myDeleteFunction(element, c, num) {
     }
 }
 /**
- * Este metodo deshabilita la casilla informacion de las secciones de consultar 
+ * Este metodo deshabilita la casilla informacion de las secciones de consultar
  * @returns {undefined}
  */
 function capturar() {
@@ -258,4 +258,3 @@ function capturar() {
         document.form.informacion.required = true;
     }
 }
-

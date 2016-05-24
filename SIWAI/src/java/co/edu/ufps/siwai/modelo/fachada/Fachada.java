@@ -6,6 +6,7 @@
 package co.edu.ufps.siwai.modelo.fachada;
 
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOArticulo;
+import co.edu.ufps.siwai.modelo.mysql.dao.DAOArticuloExtra;
 import co.edu.ufps.siwai.modelo.mysql.dto.ClienteDTO;
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOCliente;
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOEmpleado;
@@ -13,6 +14,7 @@ import co.edu.ufps.siwai.modelo.mysql.dao.DAOProveedor;
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOSucursal;
 import co.edu.ufps.siwai.modelo.mysql.dao.DAOUbicacion;
 import co.edu.ufps.siwai.modelo.mysql.dto.ArticuloDTO;
+import co.edu.ufps.siwai.modelo.mysql.dto.ArticuloExtraDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.EmpleadoDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.ProveedorDTO;
 import co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO;
@@ -114,10 +116,31 @@ public class Fachada implements Serializable {
         return dao.actualizarEmpleado(dto);
     }
 
+    public boolean validarContraseña(String codigo,String contraseña) throws Exception{
+      EmpleadoDTO dto = new EmpleadoDTO();
+      dto.setCodigo(codigo);
+      contraseña = MD5.encriptar(contraseña);
+      dto.setContraseña(contraseña);
+      DAOEmpleado dao = new DAOEmpleado();
+      return dao.validarContraseña(dto);
+    }
+    public boolean cambiarContraseña(String codigo,String contraNueva)throws Exception{
+      EmpleadoDTO dto = new EmpleadoDTO();
+      dto.setCodigo(codigo);
+      contraNueva = MD5.encriptar(contraNueva);
+      dto.setContraseña(contraNueva);
+      DAOEmpleado dao = new DAOEmpleado();
+      return dao.cambiarContraseña(dto);
+    }
+
     public boolean registrarEmpleado(String codigo, String dni, String nombre, String apellido,
-            String telefono, String celular, String contraseña, String email, String direccion,
+            String telefono, String celular, String email, String direccion,
             String fIngreso, String cargo, String sucursal) throws Exception {
-        String contraseñaE = MD5.encriptar(contraseña);
+        String contraseñaE= "NULL";
+        if(!cargo.equals("Vendedor")){
+          contraseñaE = "123456";
+          contraseñaE = MD5.encriptar(contraseñaE);
+        }
         EmpleadoDTO dto = new EmpleadoDTO(codigo, dni, nombre, apellido, contraseñaE, email,
                 direccion, cargo, sucursal, telefono, celular, fIngreso);
         DAOEmpleado dao = new DAOEmpleado();
@@ -198,7 +221,7 @@ public class Fachada implements Serializable {
         DAOUbicacion dao = new DAOUbicacion();
         return dao.obtenerCiudades(pais);
     }
-    
+
     /**
      * Metodo que envia los datos del cliente a DAOCliente para que sean
      * actualizados en la base de datos.
@@ -218,7 +241,7 @@ public class Fachada implements Serializable {
         DAOCliente dao = new DAOCliente();
         return dao.actualizarCliente(dto);
     }
-    
+
     /**
      * Metodo que envia la peticion a DAOProveedor para actualizar un proveedor.
      *
@@ -245,7 +268,7 @@ public class Fachada implements Serializable {
         DAOProveedor dao = new DAOProveedor();
         return dao.actualizarProveedor(dto);
     }
-    
+
     /**
      * Este método llama crea un ArticuloDTO y llama al DAOArticulo para que él se encargue
      * de guardar el articulo
@@ -259,6 +282,16 @@ public class Fachada implements Serializable {
         ArticuloDTO dto=new ArticuloDTO(referencia,nombre,tipoArticulo);
         DAOArticulo dao=new DAOArticulo();
         return dao.registrarArticulo(dto);
-                
+
+    }
+    public boolean registrarArticuloExtra(String codigo,String sucursal,String nombre,int cantidad,
+    String fEntrada, int costo,int valor,String notas)throws Exception{
+      ArticuloExtraDTO dto = new ArticuloExtraDTO(codigo, nombre, fEntrada, notas, cantidad, costo, valor, sucursal);
+      DAOArticuloExtra dao = new DAOArticuloExtra();
+      return dao.registrarArticuloExtra(dto);
+    }
+    public ArrayList<ArticuloExtraDTO> consultarArticuloExtra(String sucursal,String buscarPor, String info) throws Exception {
+        DAOArticuloExtra dao = new DAOArticuloExtra();
+        return dao.consultarArticuloExtra(sucursal,buscarPor,info);
     }
 }

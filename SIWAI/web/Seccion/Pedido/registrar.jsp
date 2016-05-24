@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : registrar
     Created on : 17-mar-2016, 14:44:37
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -19,6 +19,7 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -35,14 +36,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Codigo:</p>  
+                            <p>Codigo:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="codigo0" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Proveedor:</p> 
+                            <p>Proveedor:</p>
                         </div>
                         <div class="col-md-3">
                             <select name="sel1" class="form-control" id="sel1" required>
@@ -56,14 +57,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Fecha:</p>  
+                            <p>Fecha:</p>
                         </div>
                         <div class="col-md-3">
                             <input required  name="fecha" type="date" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Notas:</p> 
+                            <p>Notas:</p>
                         </div>
                         <div class="col-md-3">
                             <textarea name="notas" class="form-control" ></textarea>

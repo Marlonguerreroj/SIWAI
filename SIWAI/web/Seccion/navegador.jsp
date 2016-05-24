@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : navegador
     Created on : 17-mar-2016, 15:49:01
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -11,17 +11,17 @@
         <div class="container">
             <!-- Cabecera de la barra de navegacion -->
             <div class="navbar-header">
-                <!-- Boton que aparece en pantallas pequeñas, llama al id navigacion -->
+                <!-- Boton que aparece en pantallas pequeï¿½as, llama al id navigacion -->
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navegacion">
                     <!-- Span para dispositivos de lectura -->
                     <span class="sr-only">Desplegar/Ocultar Menu</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
-                    <!-- Cierre del Boton que aparece en pantallas pequeñas -->
-                </button> 
+                    <!-- Cierre del Boton que aparece en pantallas pequeï¿½as -->
+                </button>
                 <!-- Imagen que direcciona al menu.jsp-->
-                <a class="navbar-brand" href="../Menu/menu.jsp"> 
+                <a class="navbar-brand" href="../Menu/menu.jsp">
                     <img class = "logoBarraNav" src="../../Imagenes/Logo.png">
                 </a>
                 <!-- Cierre de la cabecera de la barra de navegacion -->
@@ -93,9 +93,14 @@
                 <!-- Mensaje de Bienvenida y Boton para cerrar Sesion -->
                 <ul class="nav navbar-nav navbar-right">
                     <li><p class="navbar-text">Bienvenido <%=request.getSession().getAttribute("usuario") %></p></li>
-                    <li><a href="/SIWAI/ControladorEmpleado?cerrarSesion=true">
-                            <span class="glyphicon glyphicone glyphicon-off"></span>
-                        </a></li>
+                    <li class="dropdown">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"><span class=" glyphicon glyphicone glyphicon-cog"></span></a>
+                      <ul class="dropdown-menu">
+                          <li><a href="../Empleado/cambiarContrasena.jsp">Cambiar Contrase&ntildea</a></li>
+                          <li><a href="/SIWAI/ControladorEmpleado?cerrarSesion=true">Cerrar Sesion</a></li>
+                      </ul>
+
+                    </li>
                     <!-- Cierre del Mensaje de Bienvenida y Boton para cerrar Sesion -->
                 </ul>
             </div><!-- /.navbar-collapse -->

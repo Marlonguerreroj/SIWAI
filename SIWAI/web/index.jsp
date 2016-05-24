@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : index
     Created on : 17-mar-2016, 14:24:44
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -20,6 +20,7 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <link rel="shortcut icon" type="image/x-icon" href="Imagenes/icono.ico">
         <script src="Ajax/ajax.js"></script>
+        <script src="Js/blockUI.js"></script>
     </head>
     <body>
         <!--Inicio - Div que contiene la imagen corporativa-->
@@ -41,6 +42,7 @@
                 </div><br>
                 <button class="btn btn-danger espaciado" onclick="" >Ingresar</button>
                 </form>
+                <a href="#">¿Olvidaste tu contraseña?</a>
             </div>
         </div>
         <!-- Pie, no se incluye pie.jsp por diferencia de rutas en la imagen.-->

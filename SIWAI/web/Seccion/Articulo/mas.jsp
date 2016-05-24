@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : mas
     Created on : 17-mar-2016, 14:32:59
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -18,6 +18,7 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -109,7 +110,7 @@
                     <div class="col-md-2">
                         <a href="consultar.jsp" class="btn btn-success btn-lg">Volver</a>
                     </div>
-                </div>  
+                </div>
             </div>
             <!-- Fin del contenido principal-->
         </section>

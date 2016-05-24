@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : mas
     Created on : 17-mar-2016, 14:49:24
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -19,6 +19,7 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -35,14 +36,14 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Codigo:</p>  
+                        <p>Codigo:</p>
                     </div>
                     <div class="col-md-3">
                         <input required readOnly name="codigo" value="<%=request.getParameter("codigo")%>" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
-                        <p>NIT:</p> 
+                        <p>NIT:</p>
                     </div>
                     <div class="col-md-3">
                         <input required readOnly name="nit" value="<%=request.getParameter("nit")%>" type="text" class="form-control ">
@@ -53,14 +54,14 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Nombre:</p>  
+                        <p>Nombre:</p>
                     </div>
                     <div class="col-md-3">
                         <input required readOnly value="<%=request.getParameter("nombre")%>" name="nombre" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
-                        <p>Pagina web:</p> 
+                        <p>Pagina web:</p>
                     </div>
                     <div class="col-md-3">
                         <input name="pagina" readOnly value="<%=request.getParameter("web")%>" type="text" class="form-control ">
@@ -71,14 +72,14 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Telefono:</p>  
+                        <p>Telefono:</p>
                     </div>
                     <div class="col-md-3">
                         <input required readOnly value="<%=request.getParameter("telefono")%>" name="telefono" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
-                        <p>E-mail:</p> 
+                        <p>E-mail:</p>
                     </div>
                     <div class="col-md-3">
                         <input required readOnly value="<%=request.getParameter("email")%>" name="email" type="text" class="form-control ">
@@ -89,7 +90,7 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Tipo cuenta bancaria:</p>  
+                        <p>Tipo cuenta bancaria:</p>
                     </div>
                     <div class="col-md-3">
                         <br>
@@ -97,7 +98,7 @@
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
-                        <p>N&ordm; cuenta bancaria:</p> 
+                        <p>N&ordm; cuenta bancaria:</p>
                     </div>
                     <div class="col-md-3">
                         <br>
@@ -109,20 +110,20 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Cuenta Bancaria:</p>  
+                        <p>Cuenta Bancaria:</p>
                     </div>
                     <div class="col-md-3">
                         <input required readOnly value="<%=request.getParameter("cuenta")%>" name="cuentaBancaria" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
-                        <p>Nombre contacto:</p> 
+                        <p>Nombre contacto:</p>
                     </div>
                     <div class="col-md-3">
                         <input required readOnly value="<%=request.getParameter("contacto")%>" name="nombreContacto" type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
-                </div>     
+                </div>
                 <br>
                 <div class="row">
                     <div class="col-md-10"></div>
@@ -130,9 +131,9 @@
                     <div class="col-md-2">
                         <a href="consultar.jsp" class="btn btn-success btn-lg">Volver</a>
                     </div>
-                </div>     
+                </div>
                 <!-- Fin del Div que contiene el formulario de solo lectura -->
-            </div>      
+            </div>
             <!-- Fin del contenido principal-->
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->

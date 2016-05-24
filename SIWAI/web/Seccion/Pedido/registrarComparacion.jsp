@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : registrar
     Created on : 17-mar-2016, 14:46:37
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -19,6 +19,7 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -32,18 +33,18 @@
             <br>
             <!-- Inicio del formulario para registrar una comparacion -->
             <form  action="" method="post" name="form2">
-                <div class="container"> 
+                <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Codigo:</p>  
+                            <p>Codigo:</p>
                         </div>
                         <div class="col-md-3">
                             <input readOnly  required name ="codigo" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Sucursal:</p> 
+                            <p>Sucursal:</p>
                         </div>
                         <div class="col-md-3">
                             <select name="sel1" class="form-control" id="sel1" required>
@@ -57,14 +58,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Fecha:</p>  
+                            <p>Fecha:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="fecha" type="date" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Cantidad articulos:</p> 
+                            <p>Cantidad articulos:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="articulos" type="number" class="form-control ">
@@ -75,14 +76,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Cantidad unidades:</p>  
+                            <p>Cantidad unidades:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="unidades" type="number" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Notas:</p> 
+                            <p>Notas:</p>
                         </div>
                         <div class="col-md-3">
                             <textarea name="notas" class="form-control" ></textarea>
@@ -151,7 +152,7 @@
                 </div>
             </form>
             <!-- Fin del formulario para registrar una comparacion-->
-            <!-- Inicio modal para añadir seriales -->  
+            <!-- Inicio modal para añadir seriales -->
             <div class="modal fade" id="myModal" role="dialog">
                 <div class="modal-dialog">
                     <!-- Modal content-->
@@ -166,13 +167,13 @@
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-1">
-                                            <p>Codigo:</p>  
+                                            <p>Codigo:</p>
                                         </div>
                                         <div class="col-md-2">
                                             <input  required  name="cod" id="cod" type="text" class="form-control ">
                                         </div>
                                         <div class="col-md-1">
-                                            <p>Referencia:</p> 
+                                            <p>Referencia:</p>
                                         </div>
                                         <div class="col-md-2">
                                             <select name="ref" class="form-control" id="ref" required>
@@ -184,7 +185,7 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-1">
-                                            <p>Sucursal:</p>  
+                                            <p>Sucursal:</p>
                                         </div>
                                         <div class="col-md-2">
                                             <select name="suc" class="form-control" id="suc" required>
@@ -193,7 +194,7 @@
                                             </select>
                                         </div>
                                         <div class="col-md-1">
-                                            <p>Pedido:</p> 
+                                            <p>Pedido:</p>
                                         </div>
                                         <div class="col-md-2">
                                             <input readOnly name="pedi" value="" id="pedi" type="text" class="form-control ">
@@ -203,14 +204,14 @@
                                     <br>
                                     <div class="row">
                                         <div class="col-md-1">
-                                            <p>Descripcion:</p>  
+                                            <p>Descripcion:</p>
                                         </div>
                                         <div class="col-md-5">
                                             <input required name="desc" id="desc" type="text" class="form-control ">
                                         </div>
 
                                     </div>
-                                </div>                    
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <a class="btn btn-success" >Registrar</a>
@@ -219,8 +220,8 @@
                     </div>
 
                 </div>
-            </div>   
-            <!-- Fin modal para añadir seriales -->     
+            </div>
+            <!-- Fin modal para añadir seriales -->
             <!-- Fin del contenido principal-->
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->

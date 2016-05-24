@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : registrar
     Created on : 17-mar-2016, 14:59:31
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="../../Css/estilos.css">
         <link rel="shortcut icon" type="image/x-icon" href="../../Imagenes/icono.ico">
         <script src="../../Js/javascript.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->

@@ -24,6 +24,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/javascript.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -177,7 +178,7 @@
                 <input type="hidden" id="fIngreso" name="fIngreso">
                 <input type="hidden" id="fSalida" name="fSalida">
                 <input type="hidden" id="habilitado" name="habilitado">
-                <input type="hidden" id="contraseña" name="contraseña">   
+                <input type="hidden" id="contraseña" name="contraseña">
             </form>
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->

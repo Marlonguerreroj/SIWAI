@@ -112,7 +112,7 @@
 		// override these in your code to change the default behavior and style
 		$.blockUI.defaults = {
 			// message displayed when blocking (use null for no message)
-			message:  '<h1>Please wait...</h1>',
+			message:  '<img src="/SIWAI/Imagenes/loader.gif" height="70" width="70" alt="Cargando..."></img>',
 
 			title: null,		// title string; only used when theme == true
 			draggable: true,	// only used when theme == true (requires jquery-ui.js to be loaded)
@@ -126,12 +126,11 @@
 				padding:	0,
 				margin:		0,
 				width:		'30%',
+				height: '10%',
 				top:		'40%',
 				left:		'35%',
 				textAlign:	'center',
 				color:		'#000',
-				border:		'3px solid #aaa',
-				backgroundColor:'#fff',
 				cursor:		'wait'
 			},
 

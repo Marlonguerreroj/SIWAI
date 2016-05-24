@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : registrar
     Created on : 17-mar-2016, 14:47:36
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -22,6 +22,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Ajax/ajax.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -38,14 +39,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Código:</p> 
+                            <p>Código:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="codigo" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>NIT:</p> 
+                            <p>NIT:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="nit" type="number" class="form-control ">
@@ -56,14 +57,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Nombre:</p>  
+                            <p>Nombre:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="nombre" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Sitio Web:</p> 
+                            <p>Sitio Web:</p>
                         </div>
                         <div class="col-md-3">
                             <input name="web" type="text" class="form-control ">
@@ -74,7 +75,7 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Tipo cuenta bancaria:</p>  
+                            <p>Tipo cuenta bancaria:</p>
                         </div>
                         <div class="col-md-3">
                             <br>
@@ -82,7 +83,7 @@
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>N&ordm; cuenta bancaria:</p> 
+                            <p>N&ordm; cuenta bancaria:</p>
                         </div>
                         <div class="col-md-3">
                             <br>
@@ -94,14 +95,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Cuenta Bancaria:</p>  
+                            <p>Cuenta Bancaria:</p>
                         </div>
                         <div class="col-md-3">
                             <input name="cuentaBancaria" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Nombre contacto:</p> 
+                            <p>Nombre contacto:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="nombreContacto" type="text" class="form-control ">
@@ -112,14 +113,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Teléfono:</p>  
+                            <p>Teléfono:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="telefono" type="number" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>E-mail:</p> 
+                            <p>E-mail:</p>
                         </div>
                         <div class="col-md-3">
                             <input name="email" type="email" class="form-control ">

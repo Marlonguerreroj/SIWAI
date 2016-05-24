@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : actualizar
     Created on : 17-mar-2016, 14:39:01
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -26,6 +26,7 @@
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/javascript.js"></script>
         <script src="../../Ajax/ajax.js"></script>
+        <script src="../../Js/blockUI.js"></script>
         <script>
             window.onload = function () {
                 document.getElementById("sel2").options.namedItem("<%=request.getParameter("cargo")%>").selected = true;

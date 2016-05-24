@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : actualizar
     Created on : 17-mar-2016, 14:36:35
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -21,6 +21,7 @@
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/ubicacion.js"></script>
         <script src="../../Ajax/ajax.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->

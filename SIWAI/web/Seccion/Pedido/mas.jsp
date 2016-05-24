@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : mas
     Created on : 17-mar-2016, 14:45:27
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -19,6 +19,7 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -31,18 +32,18 @@
             <br>
             <br>
             <!-- Inicio Div que contiene el formulario de solo lectura -->
-            <div class="container"> 
+            <div class="container">
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Codigo:</p>  
+                        <p>Codigo:</p>
                     </div>
                     <div class="col-md-3">
                         <input readOnly  required  type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
-                        <p>Proveedor:</p> 
+                        <p>Proveedor:</p>
                     </div>
                     <div class="col-md-3">
                         <input readOnly required type="text" class="form-control ">
@@ -53,14 +54,14 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Fecha:</p>  
+                        <p>Fecha:</p>
                     </div>
                     <div class="col-md-3">
                         <input  readOnly  required  type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
-                        <p>Referencia:</p> 
+                        <p>Referencia:</p>
                     </div>
                     <div class="col-md-3">
                         <input readOnly  required  type="text" class="form-control ">
@@ -71,14 +72,14 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Cantidad:</p>  
+                        <p>Cantidad:</p>
                     </div>
                     <div class="col-md-3">
                         <input readOnly   type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
-                        <p>Notas:</p> 
+                        <p>Notas:</p>
                     </div>
                     <div class="col-md-3">
                         <textarea readOnly  name="notas" class="form-control" ></textarea>

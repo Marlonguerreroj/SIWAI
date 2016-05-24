@@ -37,7 +37,7 @@ public class DAOSucursal {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO tbl_sucursal "
                     + "(cod_sucursal, nom_sucursal, tel_sucursal, email_sucursal, "
                     + "pag_sucursal, dir_sucursal, ciudad_sucursal)"
-                    + " values (?, ?, ?, ?, ?, ?, ?, ?)");
+                    + " values (?, ?, ?, ?, ?, ?, ?)");
             stmt.setString(1, dto.getCodigo());
             stmt.setString(2, dto.getNombre());
             stmt.setInt(3, dto.getTelefono());
@@ -49,7 +49,7 @@ public class DAOSucursal {
             try {
                 exito = stmt.executeUpdate() > 0;
             } catch (SQLException ex) {
-                return false;
+
             } finally {
                 conn.close();
                 stmt.close();

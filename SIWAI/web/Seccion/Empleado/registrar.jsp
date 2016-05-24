@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : registrar
     Created on : 17-mar-2016, 14:37:27
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -42,7 +42,7 @@
             <!-- Inicio del formulario -->
             <form onSubmit="registrarEmpleado(document.forms[0]);
                     return false" id="form">
-                <div class="container"> 
+                <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
@@ -63,7 +63,7 @@
                                 <option value="Administrador">Administrador</option>
                                 <option value="Vendedor">Vendedor</option>
 
-                            </select>    
+                            </select>
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -71,14 +71,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Codigo:</p>  
+                            <p>Codigo:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name ="codigo" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>DNI:</p> 
+                            <p>DNI:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="dni" type="number" class="form-control ">
@@ -89,14 +89,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Nombre:</p>  
+                            <p>Nombre:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="nombre" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Apellido:</p> 
+                            <p>Apellido:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="apellido" type="text" class="form-control ">
@@ -107,14 +107,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Telefono:</p>  
+                            <p>Telefono:</p>
                         </div>
                         <div class="col-md-3">
                             <input name="telefono" type="number" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Celular:</p> 
+                            <p>Celular:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="celular" type="number" class="form-control ">
@@ -125,17 +125,17 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Contraseña:</p>  
+                            <p>Email:</p>
                         </div>
                         <div class="col-md-3">
-                            <input pattern=".{6,14}" required title="6 a 14 caracteres"  name="contrasena" type="text" class="form-control ">
+                          <input required name="email" type="email" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>E-mail:</p> 
+                            <p>Direccion:</p>
                         </div>
                         <div class="col-md-3">
-                            <input required name="email" type="email" class="form-control ">
+                          <input  required name="direccion" type="text" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -143,17 +143,15 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Direccion:</p>  
+                            <p>Fecha ingreso:</p>
                         </div>
                         <div class="col-md-3">
-                            <input  required name="direccion" type="text" class="form-control ">
+                          <input required  name="fIngreso" type="date" class="form-control">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Fecha ingreso:</p> 
                         </div>
                         <div class="col-md-3">
-                            <input required  name="fIngreso" type="date" class="form-control">
                         </div>
                         <div class="col-md-1"></div>
                     </div>

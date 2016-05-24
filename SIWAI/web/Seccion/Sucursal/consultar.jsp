@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : consultar
     Created on : 17-mar-2016, 14:58:14
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -24,6 +24,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/javascript.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -34,7 +35,7 @@
             <%
                 if (session.getAttribute("msjAS") != null) {
                     String mensaje = "" + session.getAttribute("msjAS");
-            %> 
+            %>
             <div id="alert" class="alert alert-success centrarDiv">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
                 <%=mensaje%>
@@ -59,7 +60,7 @@
             <div class="alert alert-warning centrar-texto" role="alert" arial >
                 <%=mensaje%>
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-            </div>            
+            </div>
             <%      }
                     session.removeAttribute("msjCS");
                 }
@@ -74,7 +75,6 @@
                 <div class="container">
                     <div class="row ">
                         <div class="col-md-1"></div>
-
                         <div class="col-md-4">
                             <label for="sel" >Buscar por: </label>
                             <select name="sel" id="sel" class="tamañoConsultar"  onchange="capturar()" required>
@@ -85,7 +85,7 @@
                             </select>
                         </div>
                         <div class="col-md-1"></div>
-                        <div class="col-md-4">  
+                        <div class="col-md-4">
                             <label for="informacion">Informacion: </label>
                             <input required id="informacion" name="informacion" type="text" class="tamañoConsultar">
                         </div>
@@ -129,7 +129,7 @@
                                 </thead>
                                 <%
                                     for (int i = 0; i < lista.size(); i++) {
-                                %> 
+                                %>
                                 <tr>
                                     <td><%= lista.get(i).getCodigo()%></td>
                                     <td><%= lista.get(i).getNombre()%></td>
@@ -138,13 +138,13 @@
                                     <td><%= lista.get(i).getPaginaWeb()%></td>
                                     <td><%= lista.get(i).getDireccion()%></td>
                                     <td><%= lista.get(i).getUbicacion().getNomCiudad() %></td>
-                                    <td><%= lista.get(i).getUbicacion().getNomPais() %></td>                          
+                                    <td><%= lista.get(i).getUbicacion().getNomPais() %></td>
                                     <td>
                                         <a onclick="enviarFormOcultoSucursal(document,<%=i%>)" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-edit asd "></span>
                                         </a>
                                     </td>
-                                </tr> 
+                                </tr>
                                 <% }
                                     session.setAttribute("sucursales", null);
                                 %>

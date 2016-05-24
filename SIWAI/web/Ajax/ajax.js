@@ -1,25 +1,21 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 
-/* Crea el objeto AJAX. Esta funcion es generica para cualquier utilidad de este tipo, por
- lo que se puede copiar tal como esta aqui */
-
 function iniciarSesion(campo1, campo2) {
     usuario = campo1.value;
     contra = campo2.value;
-
-
+    $.blockUI();
     var xhttp = new XMLHttpRequest();
     var text = "/SIWAI/ControladorEmpleado?usuario=" + usuario + "&contra=" + contra + "&iniciarSesion=true";
     xhttp.open("POST", text, true);
     xhttp.send();
-
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
+            $.unblockUI();
             if ((sub.indexOf('nulo') >= 0)) {
                 campo1.parentNode.className = " form-group has-error has-feedback";
                 campo2.parentNode.className = "form-group espaciado has-error has-feedback";
@@ -32,10 +28,52 @@ function iniciarSesion(campo1, campo2) {
                 }
             } else {
                 window.location = 'Seccion/Menu/menu.jsp';
-
             }
         }
     };
+}
+
+function cambiarContraseña(document){
+  contraActual= document.elements[0];
+  contraNueva= document.elements[1];
+  contraNueva2= document.elements[2];
+  var xhttp = new XMLHttpRequest();
+  $.blockUI();
+  var url = "/SIWAI/ControladorEmpleado?cambiarContra=true&contraActual=" + contraActual.value + "&contraNueva=" +
+          contraNueva.value + "&contraNueva2=" + contraNueva2.value;
+  xhttp.open("POST", url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+          var sub = xhttp.responseText;
+          $.unblockUI();
+          if(sub.indexOf("incorrecta")>=0){
+            $("div").remove("#alert");
+            $("body").prepend("<div id='alert' class='alert alert-warning centrarDiv'>"+sub+"</div>");
+            contraActual.parentNode.className = "col-md-4 has-error has-feedback";
+            contraNueva.parentNode.className = "col-md-4";
+            contraNueva2.parentNode.className = "col-md-4";
+          }else if(sub.indexOf("coincide")>=0){
+            $("div").remove("#alert");
+            $("body").prepend("<div id='alert' class='alert alert-warning centrarDiv'>"+sub+"</div>");
+            contraActual.parentNode.className = "col-md-4";
+            contraNueva.parentNode.className = "col-md-4 has-error has-feedback";
+            contraNueva2.parentNode.className = "col-md-4 has-error has-feedback";
+          }else if(sub.indexOf("true")>=0){
+            $("div").remove("#alert");
+            $("body").prepend("<div id='alert' class='alert alert-success centrarDiv'>"+
+            "Se realizaron los cambios satisfactoriamente"+"</div>");
+            contraNueva.parentNode.className = "col-md-4";
+            contraNueva2.parentNode.className = "col-md-4";
+            contraActual.parentNode.className = "col-md-4";
+            $("#form")[0].reset();
+          }else if(sub.indexOf("false")>=0){
+            $("div").remove("#alert");
+            $("body").prepend("<div id='alert' class='alert alert-danger centrarDiv'>"+
+            "No se pudo realizar la modificación"+"</div>");
+          }
+        }
+      };
 }
 
 function registrarSucursal(document) {
@@ -47,6 +85,7 @@ function registrarSucursal(document) {
     direccion = document.elements[5].value;
     pais = document.elements[6].value;
     ciudad = document.elements[7].value;
+    $.blockUI();
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorSucursal?registrarSucursal=true&codigo=" + codigo.value + "&nombre=" +
             nombre + "&telefono=" + telefono + "&email=" + email + "&paginaWeb=" + paginaWeb +
@@ -57,6 +96,7 @@ function registrarSucursal(document) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
+            $.unblockUI();
             if (sub.indexOf("false") >= 0) {
                 $("div").remove("#alert");
                 $("body").prepend("<div id='alert' class='alert alert-warning centrarDiv'>Existe otra sucursal registrada con el codigo ingresado</div>");
@@ -86,14 +126,14 @@ function registrarEmpleado(document) {
     apellido = document.elements[5].value;
     telefono = document.elements[6].value;
     celular = document.elements[7].value;
-    contrasena = document.elements[8].value;
-    email = document.elements[9].value;
-    direccion = document.elements[10].value;
-    fIngreso = document.elements[11].value;
+    email = document.elements[8].value;
+    direccion = document.elements[9].value;
+    fIngreso = document.elements[10].value;
+    $.blockUI();
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorEmpleado?registrarEmpleado=true&sucursal=" + sucursal + "&cargo=" + cargo +
             "&codigo=" + codigo + "&dni=" + dni + "&nombre=" + nombre + "&apellido=" + apellido + "&telefono=" + telefono +
-            "&celular=" + celular + "&contrasena=" + contrasena + "&email=" + email + "&direccion=" + direccion +
+            "&celular=" + celular + "&email=" + email + "&direccion=" + direccion +
             "&fIngreso=" + fIngreso;
     xhttp.open("POST", url, true);
     xhttp.send();
@@ -101,6 +141,7 @@ function registrarEmpleado(document) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
+            $.unblockUI();
             if (sub.indexOf("false") >= 0) {
                 $("div").remove("#alert");
                 $("body").prepend("<div id='alert' class='alert alert-warning centrarDiv'>Existe otro empleado registrado con el DNI ingresado</div>");
@@ -131,6 +172,7 @@ function registrarCliente(document) {
     direccion = document.elements[5].value;
     telefono = document.elements[6].value;
     email = document.elements[7].value;
+    $.blockUI();
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorCliente?registrarCliente=true&dni=" + dni + "&nombre=" +
             nombres + "&apellido=" + apellidos + "&telefono=" + telefono +
@@ -140,6 +182,7 @@ function registrarCliente(document) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
+            $.unblockUI();
             if (sub.indexOf("Fallo") >= 0) {
                 $("div").remove("#alert");
                 $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
@@ -174,7 +217,8 @@ function registrarArticulo(document) {
     ref = document.elements[0].value;
     nombre = document.elements[1].value;
     tipo = document.elements[2].value;
-    var xhttp = new XMLHttpRequest();   
+    $.blockUI();
+    var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorArticulo?registrarArticulo=true&referencia=" + ref + "&nombre=" +
             nombre + "&tipo=" + tipo;
     xhttp.open("POST", url, true);
@@ -182,6 +226,7 @@ function registrarArticulo(document) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
+            $.unblockUI();
             if (sub.indexOf("Fallo") >= 0) {
                 $("div").remove("#alert");
                 $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
@@ -223,6 +268,7 @@ function registrarProveedor(document) {
     nombreContacto = document.elements[7].value;
     telefono = document.elements[8].value;
     email = document.elements[9].value;
+    $.blockUI();
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorProveedor?registrarProveedor=true&codigo=" + codigo + "&nit=" +
             nit + "&nombre=" + nombre + "&web=" + web + "&telefono=" + telefono +
@@ -233,6 +279,7 @@ function registrarProveedor(document) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
+            $.unblockUI();
             if (sub.indexOf("Fallo") >= 0) {
                 mensaje = "Existe otro proveedor con el ";
                 if (sub.indexOf("codigo") >= 0)
@@ -273,6 +320,7 @@ function actualizarSucursal(documento) {
     direccion = documento.elements[5].value;
     pais = documento.elements[6].value;
     ciudad = documento.elements[7].value;
+    $.blockUI();
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorSucursal?actualizarSucursal=true&codigo=" + codigo + "&nombre=" + nombre +
             "&telefono=" + telefono + "&email=" + email + "&paginaWeb=" + paginaWeb + "&direccion=" + direccion + "&ciudad=" + ciudad +
@@ -282,6 +330,7 @@ function actualizarSucursal(documento) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
+            $.unblockUI();
             if (sub.indexOf("Error") >= 0) {
                 $("div").remove("#alert");
                 $("body").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" + sub + "</div>");
@@ -309,6 +358,7 @@ function actualizarCliente(document) {
     direccion = document.elements[5].value;
     telefono = document.elements[6].value;
     email = document.elements[7].value;
+    $.blockUI();
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorCliente?actualizarCliente=true&dni=" + dni + "&nombre=" +
             nombres + "&apellido=" + apellidos + "&telefono=" + telefono +
@@ -318,6 +368,7 @@ function actualizarCliente(document) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
+            $.unblockUI();
             if (sub.indexOf("Fallo") >= 0) {
                 $("div").remove("#alert");
                 $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
@@ -356,7 +407,7 @@ function actualizarProveedor(document) {
     nCuentaBancaria = document.elements[7].value;
     cuentaBancaria = document.elements[8].value;
     nombreContacto = document.elements[9].value;
-
+    $.blockUI();
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorProveedor?actualizarProveedor=true&codigo=" + codigo + "&nit=" +
             nit + "&nombre=" + nombre + "&web=" + web + "&telefono=" + telefono +
@@ -367,6 +418,7 @@ function actualizarProveedor(document) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
+            $.unblockUI();
             if (sub.indexOf("Fallo") >= 0) {
                 mensaje = "Existe otro proveedor con el ";
                 if (sub.indexOf("codigo") >= 0)
@@ -410,6 +462,7 @@ function actualizarEmpleado(document) {
     } else {
         habilitado = document.getElementById("r2").value;
     }
+    $.blockUI();
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorEmpleado?actualizarEmpleado=true&sucursal=" + sucursal + "&cargo=" + cargo +
             "&dni=" + dni + "&nombre=" + nombre + "&apellido=" + apellido + "&codigo=" + codigo + "&celular=" + celular +
@@ -420,6 +473,7 @@ function actualizarEmpleado(document) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
+            $.unblockUI();
             if (sub.indexOf("Error") >= 0) {
                 $("div").remove("#alert");
                 $("body").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" + sub + "</div>");

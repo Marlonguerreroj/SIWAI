@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : mas
     Created on : 17-mar-2016, 14:40:16
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -21,6 +21,7 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -32,7 +33,7 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <div class="container"> 
+            <div class="container">
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-4">
@@ -44,7 +45,7 @@
                     <div class="col-md-4">
                         <select name="sel2" class="form-control" id="sel2" required onchange="habilitar()" disabled>
                             <option value=""><%=request.getParameter("cargo")%></option>
-                        </select>    
+                        </select>
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -153,7 +154,7 @@
                     </div>
                     <div class="col-md-4"></div>
                 </div>
-            </div>            
+            </div>
             <!-- Fin del contenido principal-->
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->

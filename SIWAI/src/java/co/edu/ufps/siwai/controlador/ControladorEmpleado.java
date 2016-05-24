@@ -83,7 +83,6 @@ public class ControladorEmpleado extends HttpServlet {
         String apellido = request.getParameter("apellido");
         String telefono = request.getParameter("telefono");
         String celular = request.getParameter("celular");
-        String contrasena = request.getParameter("contrasena");
         String email = request.getParameter("email");
         String direccion = request.getParameter("direccion");
         String fIngreso = request.getParameter("fIngreso");
@@ -93,8 +92,46 @@ public class ControladorEmpleado extends HttpServlet {
         boolean exito;
         PrintWriter out = response.getWriter();
         try {
-            exito = fachada.registrarEmpleado(codigo, dni, nombre, apellido, telefono, celular, contrasena, email, direccion, fIngreso, cargo, sucursal);
+            exito = fachada.registrarEmpleado(codigo, dni, nombre, apellido, telefono, celular, email, direccion, fIngreso, cargo, sucursal);
             out.print(exito);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            out.print("Error en la conexion a la base de datos");
+        }
+
+    }
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void cambiarContraseña(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String codigo = ""+request.getSession().getAttribute("cod");
+        String contraActual = request.getParameter("contraActual");
+        String contraNueva = request.getParameter("contraNueva");
+        String contraNueva2 = request.getParameter("contraNueva2");
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        boolean exito;
+        PrintWriter out = response.getWriter();
+        try {
+            boolean validarContraseñaActual = fachada.validarContraseña(codigo,contraActual);
+            if(validarContraseñaActual){
+              if(contraNueva.equals(contraNueva2)){
+                  exito = fachada.cambiarContraseña(codigo,contraNueva);
+                  out.print(exito);
+              }else{
+                out.print("Las contraseñas no coinciden");
+              }
+            }else{
+                out.print("Tu contraseña está incorrecta");
+            }
         } catch (Exception ex) {
             ex.printStackTrace();
             out.print("Error en la conexion a la base de datos");
@@ -159,6 +196,7 @@ public class ControladorEmpleado extends HttpServlet {
                 if (ingreso2[2].equals("1")) {
                     request.getSession().setAttribute("usuario", ingreso2[0]);
                     request.getSession().setAttribute("cargo", ingreso2[1]);
+                    request.getSession().setAttribute("cod",ingreso2[3]);
                 } else {
                     ingreso = "nulo";
                 }
@@ -216,6 +254,9 @@ public class ControladorEmpleado extends HttpServlet {
         }
         if (request.getParameter("actualizarEmpleado") != null) {
             actualizarEmpleado(request, response);
+        }
+        if (request.getParameter("cambiarContra") != null) {
+            cambiarContraseña(request, response);
         }
 
     }

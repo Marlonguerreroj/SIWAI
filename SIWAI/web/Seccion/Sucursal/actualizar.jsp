@@ -1,4 +1,4 @@
-<%-- 
+<%--
     Document   : actualizar
     Created on : 17-mar-2016, 14:57:40
     Author     : Alejandro Ramirez; Marlon Guerrero.
@@ -24,7 +24,7 @@
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Ajax/ajax.js"></script>
         <script src="../../Js/ubicacion.js"></script>
-        
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -42,14 +42,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Codigo:</p>  
+                            <p>Codigo:</p>
                         </div>
                         <div class="col-md-3">
                             <input required readOnly value="<%=request.getParameter("codigo")%>" name="codigo" type="text" class="form-control">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Nombre:</p> 
+                            <p>Nombre:</p>
                         </div>
                         <div class="col-md-3">
                             <input  required value="<%=request.getParameter("nombre")%>" name="nombre" type="text" class="form-control " >
@@ -60,14 +60,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Telefono:</p>  
+                            <p>Telefono:</p>
                         </div>
                         <div class="col-md-3">
                             <input name="telefono" value="<%=Integer.parseInt(request.getParameter("telefono")) %>" type="number" class="form-control " >
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>E-mail:</p> 
+                            <p>E-mail:</p>
                         </div>
                         <div class="col-md-3">
                             <input name="email" value="<%=request.getParameter("email")%>" type="email" class="form-control "  >
@@ -78,14 +78,14 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Pagina web:</p>  
+                            <p>Pagina web:</p>
                         </div>
                         <div class="col-md-3">
                             <input name="pagina" value="<%=request.getParameter("paginaWeb")%>" type="text" class="form-control "  >
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Direccion:</p> 
+                            <p>Direccion:</p>
                         </div>
                         <div class="col-md-3">
                             <input required name="direccion" value="<%=request.getParameter("direccion")%>" type="text" class="form-control " >
@@ -96,7 +96,7 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Pais:</p>  
+                            <p>Pais:</p>
                         </div>
                         <div class="col-md-3">
                             <select name="sel1" class="form-control" id="selPais" required onchange="cargarCiudades()">
@@ -104,7 +104,7 @@
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
-                            <p>Ciudad:</p> 
+                            <p>Ciudad:</p>
                         </div>
                         <div class="col-md-3">
                             <select name="sel2" class="form-control" id="selCiudad" required>

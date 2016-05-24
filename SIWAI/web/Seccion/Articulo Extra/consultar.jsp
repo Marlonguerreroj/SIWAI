@@ -1,10 +1,16 @@
-<%-- 
+<%--
     Document   : consultar
     Created on : 17-mar-2016, 14:34:19
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
-
+<%@page import="co.edu.ufps.siwai.modelo.mysql.dto.ArticuloExtraDTO"%>
+<%@page import="co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="co.edu.ufps.siwai.modelo.fachada.Fachada"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("../../index.jsp");
+    }%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -18,8 +24,13 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
+      <%
+          Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+          ArrayList<SucursalDTO> lista = fachada.consultarSucursal("Todos", "");
+      %>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
@@ -32,35 +43,30 @@
             <form name="form" action="" method="post">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-1">
-                            <p>Sucursal:</p>  
+                        <div class="col-md-3">
+                          <label for="sel1">Sucursal:</label>
+                          <select name="sel1" class="tamañoConsultar" id="sel1" required>
+                              <option value="">Seleccione</option>
+                              <% for (int i = 0; i < lista.size(); i++) {%>
+                              <option><%=lista.get(i).getNombre()%></option>
+                              <% }
+                              %>
+                          </select>
                         </div>
-                        <div class="col-md-2">
-                            <select required name="sel0" class="form-control" id="sel0" onchange="capturar()">
-                                <option value="" >Seleccione</option>
-                                <option value="Todos" >Todas</option>
-                                <option value="">Sucursal 1</option>
-                            </select>
-                        </div>
-
-                        <div class="col-md-2">
-                            <p>Buscar por:</p>  
-                        </div>
-                        <div class="col-md-2">
-                            <select required name="sel" class="form-control" id="sel" onchange="capturar()">
+                        <div class="col-md-4">
+                          <label for="sel">Buscar por:</label>
+                            <select required name="sel" class="tamañoConsultar" id="sel" onchange="capturar()">
                                 <option value="" >Seleccione</option>
                                 <option value="Todos" >Todos</option>
                                 <option value="Codigo" >Codigo</option>
                                 <option value="Nombre">Nombre</option>
                             </select>
                         </div>
+                        <div class="col-md-4">
+                            <label for="informacion">Información:</label>
+                            <input required id="informacion" name="informacion" type="text" class="tamañoConsultar">
+                        </div>
                         <div class="col-md-1">
-                            <p>Informacion:</p>  
-                        </div>
-                        <div class="col-md-2">
-                            <input required id="informacion" name="informacion" type="text" class="form-control ">
-                        </div>
-                        <div class="col-md-2">
                             <button name="buscarExtra" type="submit" class="btn btn-success  letra">
                                 <span class="glyphicon glyphicons glyphicon-search"></span>
                             </button>
@@ -71,6 +77,11 @@
             </form>
             <br>
             <br>
+              <%
+                  if (session.getAttribute("articulosExtra") != null) {
+                      ArrayList<ArticuloExtraDTO> lista2 = (ArrayList) session.getAttribute("articulosExtra");
+                      if (!lista2.isEmpty()) {
+              %>
             <div class="container">
                 <div class="row">
                     <div class="col-md-1"></div>
@@ -78,6 +89,9 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
+                                  <%
+                                      for (int i = 0; i < lista.size(); i++) {
+                                  %>
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Sucursal</th>
@@ -88,25 +102,29 @@
                                     </tr>
                                 </thead>
                                 <tr>
-                                    <td>1</td>
-                                    <td>Sucursal 1</td>
-                                    <td>Adorno Musical</td>
-                                    <td>15.000</td>
-                                    <td>8</td>
+                                  <td><%=lista2.get(i).getCodigo()%></td>
+                                  <td><%=lista2.get(i).getSucursal().getNombre()%></td>
+                                  <td><%=lista2.get(i).getNombre()%></td>
+                                  <td><%=lista2.get(i).getValor()%></td>
+                                  <td><%=lista2.get(i).getCantidad()%></td>
                                     <td>
 
                                         <a href="mas.jsp" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-info-sign asd "></span>
                                         </a>
                                     </td>
-
                                 </tr>
+                                <% }
+                                    session.setAttribute("empleados", null);
+                                %>
                             </table>
                         </div>
                     </div>
                     <div class="col-md-1"></div>
                 </div>
             </div>
+            <% }
+                }%>
             <!-- Fin del contenido principal-->
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->
