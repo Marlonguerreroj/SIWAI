@@ -54,23 +54,28 @@ public class DAOArticuloExtra {
         PreparedStatement stmt = null;
         if (conn != null) {
             String sentencia = "WHERE";
+            int numero = 1;
             String sql = "SELECT A.cod_articulo_extra,S.nom_sucursal,A.nombre_articulo_extra,A.valor_articulo_extra,A.cantidad_articulo_extra,A.notas_articulo_extra,A.fEntrada_articulo_extra,A.costo_articulo_extra FROM tbl_articuloExtra as A INNER JOIN tbl_sucursal as S ON A.cod_sucu_articulo_extra = S.cod_sucursal ";
             if(!sucursal.equalsIgnoreCase("Todas")){
               sql += " WHERE cod_sucu_articulo_extra = ? ";
               sentencia = "AND";
+              numero++;
             }
             if (buscarPor.equalsIgnoreCase("Codigo")) {
-                sql += sentencia+" cod_sucu_articulo_extra = ?";
+                sql += sentencia+" cod_articulo_extra = ?";
                 stmt = conn.prepareStatement(sql);
-                stmt.setString(1, informacion);
+                stmt.setString(numero, informacion);
             } else if (buscarPor.equalsIgnoreCase("Nombre")) {
                 sql += sentencia+" nombre_articulo_extra LIKE ?";
                 stmt = conn.prepareStatement(sql);
-                stmt.setString(1, "%"+informacion+"%");
+                stmt.setString(numero, "%"+informacion+"%");
             } else if (buscarPor.equalsIgnoreCase("Todos")) {
                 stmt = conn.prepareStatement(sql);
             }
-
+            if(!sucursal.equalsIgnoreCase("Todas")){
+              numero--;
+              stmt.setString(numero, sucursal);
+            }
             try {
                 ResultSet rs = stmt.executeQuery();
                 lista = new ArrayList<>();

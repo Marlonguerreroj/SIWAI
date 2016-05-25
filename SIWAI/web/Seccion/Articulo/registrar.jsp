@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="co.edu.ufps.siwai.modelo.fachada.Fachada"%>
+<%@page import="co.edu.ufps.siwai.modelo.Fachada"%>
 <% if (session.getAttribute("usuario") == null) {
         response.sendRedirect("../../index.jsp");
     }%>

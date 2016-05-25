@@ -4,7 +4,7 @@
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
 
-<%@page import="co.edu.ufps.siwai.modelo.fachada.Fachada"%>
+<%@page import="co.edu.ufps.siwai.modelo.Fachada"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% if (session.getAttribute("usuario") == null) {
         response.sendRedirect("../../index.jsp");

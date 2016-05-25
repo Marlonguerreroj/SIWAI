@@ -3,9 +3,9 @@
     Created on : 17-mar-2016, 14:34:36
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
-<%@page import="co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO"%>
+<%@page import="co.edu.ufps.siwai.modelo.dto.SucursalDTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="co.edu.ufps.siwai.modelo.fachada.Fachada"%>
+<%@page import="co.edu.ufps.siwai.modelo.Fachada"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">

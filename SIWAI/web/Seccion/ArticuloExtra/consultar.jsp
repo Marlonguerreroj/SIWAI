@@ -3,10 +3,10 @@
     Created on : 17-mar-2016, 14:34:19
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
-<%@page import="co.edu.ufps.siwai.modelo.mysql.dto.ArticuloExtraDTO"%>
-<%@page import="co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO"%>
+<%@page import="co.edu.ufps.siwai.modelo.dto.ArticuloExtraDTO"%>
+<%@page import="co.edu.ufps.siwai.modelo.dto.SucursalDTO"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="co.edu.ufps.siwai.modelo.fachada.Fachada"%>
+<%@page import="co.edu.ufps.siwai.modelo.Fachada"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% if (session.getAttribute("usuario") == null) {
         response.sendRedirect("../../index.jsp");
@@ -69,9 +69,9 @@
                           <label for="sel1">Sucursal:</label>
                           <select name="sucursal" class="tamañoConsultar" id="sel1" required>
                               <option value="">Seleccione</option>
-                              <option value="todas">Todas</option>
+                              <option value="Todas">Todas</option>
                               <% for (int i = 0; i < lista.size(); i++) {%>
-                              <option><%=lista.get(i).getNombre()%></option>
+                              <option value="<%=lista.get(i).getCodigo()%>"><%=lista.get(i).getNombre()%></option>
                               <% }
                               %>
                           </select>

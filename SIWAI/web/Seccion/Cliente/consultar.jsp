@@ -4,7 +4,7 @@
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
 
-<%@page import="co.edu.ufps.siwai.modelo.mysql.dto.ClienteDTO"%>
+<%@page import="co.edu.ufps.siwai.modelo.dto.ClienteDTO"%>
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% if (session.getAttribute("usuario") == null) {
