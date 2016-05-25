@@ -31,7 +31,6 @@ public class ControladorArticulo extends HttpServlet {
     protected void registrarArticulo(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        System.out.println("llego aqui0");
         /* TODO output your page here. You may use following sample code. */
         String referencia = request.getParameter("referencia");
         String nombre = request.getParameter("nombre");
@@ -46,7 +45,6 @@ public class ControladorArticulo extends HttpServlet {
         String mensaje = "";
         try {
             boolean exito=fachada.registrarAriculo(referencia, nombre, tipo);
-            System.out.println("Llego despues de registrar articulo: "+exito);
             if (exito)
                mensaje = "Exito";
             else
@@ -58,7 +56,6 @@ public class ControladorArticulo extends HttpServlet {
     }
     private String validarCampos(String referencia, String nombre, String tipoArticulo){
         String msj="Exito";
-        System.out.println("");
         if(referencia.trim().isEmpty()|| nombre.trim().isEmpty()||tipoArticulo.trim().isEmpty())
             msj = "referencia, nombre y tipo son obligatorios.";
         return msj;
@@ -89,6 +86,7 @@ public class ControladorArticulo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         if(request.getParameter("registrarArticulo")!=null){
             this.registrarArticulo(request, response);
         }

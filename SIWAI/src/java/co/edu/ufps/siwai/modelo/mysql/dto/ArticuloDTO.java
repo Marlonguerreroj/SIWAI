@@ -11,8 +11,10 @@ import java.io.Serializable;
  *
  * @author Lenovo
  */
-public class ArticuloDTO implements Serializable{
+public class ArticuloDTO implements Serializable, Comparable<ArticuloDTO>{
+    
     private String referencia, nombre, tipoArticulo;
+    private int cantidad;
 
     public ArticuloDTO() {
     }
@@ -21,6 +23,14 @@ public class ArticuloDTO implements Serializable{
         this.referencia = referencia;
         this.nombre = nombre;
         this.tipoArticulo = tipoArticulo;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+
+    public int getCantidad() {
+        return cantidad;
     }
 
     public String getReferencia() {
@@ -45,6 +55,16 @@ public class ArticuloDTO implements Serializable{
 
     public void setTipoArticulo(String tipoArticulo) {
         this.tipoArticulo = tipoArticulo;
+    }
+
+    /**
+     * Implementacion de compareTo, compara en base a las referencias de los articulos.
+     * @param dto ArticuloDTO a comparar.
+     * @return 0 si son iguales, 1 si la cadena uno es mayor que la dos o 2 si la cadena uno es menor que la dos.
+     */
+    @Override
+    public int compareTo(ArticuloDTO dto) {
+        return this.getReferencia().compareTo(dto.getReferencia());
     }
     
 }
