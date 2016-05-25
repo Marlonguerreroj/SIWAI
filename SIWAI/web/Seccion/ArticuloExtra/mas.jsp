@@ -75,7 +75,6 @@
                         <p>Fecha de entrada:</p>
                     </div>
                     <div class="col-md-3">
-                        <br>
                         <input readOnly value="" name="fEntrada" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
@@ -83,7 +82,6 @@
                         <p>Costo por unidad:</p>
                     </div>
                     <div class="col-md-3">
-                        <br>
                         <input readOnly value="" name="costo" type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>

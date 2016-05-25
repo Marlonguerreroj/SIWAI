@@ -14,13 +14,23 @@ import java.io.Serializable;
  */
 public class EmpleadoDTO implements Serializable {
 
-    private String codigo, dni, nombre, apellido, contraseña, email, direccion, cargo, sucursal;
+    private String codigo, dni, nombre, apellido, contraseña, email, direccion, cargo;
     private String telefono;
     private String celular;
     private String fIngreso,fSalida;
     private short habilitado;
+    private SucursalDTO sucursal;
 
     public EmpleadoDTO() {
+        this.sucursal = new SucursalDTO();
+    }
+
+    public SucursalDTO getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(SucursalDTO sucursal) {
+        this.sucursal = sucursal;
     }
 
     public String getfSalida() {
@@ -48,7 +58,8 @@ public class EmpleadoDTO implements Serializable {
         this.email = email;
         this.direccion = direccion;
         this.cargo = cargo;
-        this.sucursal = sucursal;
+        this.sucursal = new SucursalDTO();
+        this.sucursal.setCodigo(sucursal);
         this.telefono = telefono;
         this.celular = celular;
         this.fIngreso = fIngreso;
@@ -60,14 +71,6 @@ public class EmpleadoDTO implements Serializable {
 
     public void setCargo(String cargo) {
         this.cargo = cargo;
-    }
-
-    public String getSucursal() {
-        return sucursal;
-    }
-
-    public void setSucursal(String sucursal) {
-        this.sucursal = sucursal;
     }
 
     public String getCodigo() {

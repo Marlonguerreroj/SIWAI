@@ -71,8 +71,8 @@
                         <ul class="dropdown-menu">
                             <li><a href="../Articulo/registrar.jsp">Registrar Articulo</a></li>
                             <li><a href="../Articulo/consultar.jsp">Consultar Articulo</a></li>
-                            <li><a href="../Articulo Extra/registrar.jsp">Registrar Articulo Extra</a></li>
-                            <li><a href="../Articulo Extra/consultar.jsp">Consultar Articulo Extra</a></li>
+                            <li><a href="../ArticuloExtra/registrar.jsp">Registrar Articulo Extra</a></li>
+                            <li><a href="../ArticuloExtra/consultar.jsp">Consultar Articulo Extra</a></li>
                             <li><a href="../Pedido/registrar.jsp">Registrar Pedido</a></li>
                             <li><a href="../Pedido/consultar.jsp">Consultar Pedido</a></li>
                             <li><a href="#">Registrar Traslado</a></li>

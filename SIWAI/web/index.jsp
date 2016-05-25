@@ -16,8 +16,8 @@
         <!-- Procurar llamar los archivos .min porque pesan menos -->
         <link rel="stylesheet" href="Bootstrap/css/bootstrap.min.css">
         <link rel="stylesheet" href="Css/estilos.css">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script src="Bootstrap/js/jquery.js"></script>
+        <script src="Bootstrap/js/bootstrap.min.js"></script>
         <link rel="shortcut icon" type="image/x-icon" href="Imagenes/icono.ico">
         <script src="Ajax/ajax.js"></script>
         <script src="Js/blockUI.js"></script>

@@ -25,6 +25,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Ajax/ajax.js"></script>
+        <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
         <%
@@ -49,7 +50,7 @@
                             <select name="sel1" class="form-control" id="sel1" required>
                                 <option value="">Seleccione</option>
                                 <% for (int i = 0; i < lista.size(); i++) {%>
-                                <option><%=lista.get(i).getNombre()%></option>
+                                <option value="<%=lista.get(i).getCodigo()%>"><%=lista.get(i).getNombre()%></option>
                                 <% }
                                 %>
                             </select>
@@ -128,14 +129,14 @@
                             <p>Email:</p>
                         </div>
                         <div class="col-md-3">
-                          <input required name="email" type="email" class="form-control ">
+                            <input required name="email" type="email" class="form-control ">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">
                             <p>Direccion:</p>
                         </div>
                         <div class="col-md-3">
-                          <input  required name="direccion" type="text" class="form-control ">
+                            <input  required name="direccion" type="text" class="form-control ">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -146,7 +147,7 @@
                             <p>Fecha ingreso:</p>
                         </div>
                         <div class="col-md-3">
-                          <input required  name="fIngreso" type="date" class="form-control">
+                            <input required  name="fIngreso" type="date" class="form-control">
                         </div>
                         <div class="col-md-2"></div>
                         <div class="col-md-1">

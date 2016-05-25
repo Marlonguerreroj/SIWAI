@@ -95,7 +95,7 @@ public class Fachada implements Serializable {
         Calendar c = Calendar.getInstance();
         c.setTimeZone(TimeZone.getTimeZone("GMT-5"));
         EmpleadoDTO dto = new EmpleadoDTO();
-        dto.setSucursal(sucursal);
+        dto.getSucursal().setCodigo(sucursal);
         dto.setCargo(cargo);
         dto.setDni(dni);
         dto.setNombre(nombre);

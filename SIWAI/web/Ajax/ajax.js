@@ -483,3 +483,42 @@ function actualizarEmpleado(document) {
         }
     };
 }
+
+function registrarArticuloExtra(document){
+  codigo = document.elements[0];
+  sucursal = document.elements[1].value;
+  nombre = document.elements[2].value;
+  cantidad = document.elements[3].value;
+  fEntrada = document.elements[4].value;
+  costo = document.elements[5].value;
+  valor = document.elements[6].value;
+  notas = document.elements[7].value;
+  alert("a");
+  var xhttp = new XMLHttpRequest();
+  var url = "/SIWAI/ControladorArticuloExtra?registrarArticuloExtra=true&codigo=" + codigo.value + "&sucursal=" +
+          sucursal + "&nombre=" + nombre + "&cantidad=" + cantidad + "&fEntrada=" + fEntrada +
+          "&costo=" + costo + "&valor=" + valor + "&notas=" + notas;
+  xhttp.open("POST", url, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function () {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+          var sub = xhttp.responseText;
+          alert(sub);
+          if (sub.indexOf("false") >= 0) {
+              $("div").remove("#alert");
+              $("body").prepend("<div id='alert' class='alert alert-warning centrarDiv'>Existe otro articulo extra registrado con el codigo ingresado</div>");
+              codigo.parentNode.className = " col-md-3 has-error has-feedback";
+          } else if (sub.indexOf("Error") >= 0) {
+              $("div").remove("#alert");
+              $("body").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" + sub + "</div>");
+          } else if (sub.indexOf("true") >= 0) {
+              $("div").remove("#alert");
+              $("body").prepend("<div id='alert' class='alert alert-success centrarDiv'>Articulo extra registrado exitosamente</div>");
+              $("#form")[0].reset();
+          } else if (sub.indexOf("Por favor") >= 0) {
+              $("div").remove("#alert");
+              $("body").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" + sub + "</div>");
+          }
+        }
+    };
+}

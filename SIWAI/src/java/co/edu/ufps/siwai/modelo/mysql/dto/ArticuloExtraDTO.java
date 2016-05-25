@@ -17,6 +17,7 @@ public class ArticuloExtraDTO implements Serializable{
     private SucursalDTO sucursal;
 
     public ArticuloExtraDTO() {
+        sucursal = new SucursalDTO();
     }
 
     public ArticuloExtraDTO(String codigo, String nombre, String fEntrada, String notas, int cantidad, int costo, int valor,String codSucursal) {
@@ -27,6 +28,7 @@ public class ArticuloExtraDTO implements Serializable{
         this.cantidad = cantidad;
         this.costo = costo;
         this.valor = valor;
+        this.sucursal = new SucursalDTO();
         this.sucursal.setCodigo(codSucursal);
     }
 

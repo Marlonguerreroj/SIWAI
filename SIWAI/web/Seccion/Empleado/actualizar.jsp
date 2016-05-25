@@ -56,8 +56,8 @@
                             <select name="sel1" class="form-control" id="sel1" required>
                                 <option value="">Seleccione</option>
                                 <% for (int i = 0; i < lista.size(); i++) {%>
-                                <option <% if (request.getParameter("sucursal").equals(lista.get(i).getNombre())) { %> selected<%}%> >
-                                    <%=lista.get(i).getNombre()%></option>
+                                <option <% if (request.getParameter("sucursal").equals(lista.get(i).getNombre())) { %> selected<%}%>
+                                 value="<%=lista.get(i).getCodigo()%>" > <%=lista.get(i).getNombre()%></option>
                                     <% }
                                     %>
                             </select>

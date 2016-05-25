@@ -133,7 +133,7 @@
                                 <tr>
                                     <td><%=lista.get(i).getDni()%></td>
                                     <td><%=lista.get(i).getNombre()%></td>
-                                    <td><%=lista.get(i).getSucursal()%></td>
+                                    <td><%=lista.get(i).getSucursal().getNombre() %></td>
                                     <td><%=lista.get(i).getCargo()%></td>
                                     <td><%=lista.get(i).getfIngreso()%></td>
                                     <td><%=lista.get(i).getfSalida()%></td>

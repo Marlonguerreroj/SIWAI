@@ -36,8 +36,8 @@ body{
 }
 /* Modifica la imagen corporativa en el login */
 .imagen{
-    width: 17%;
-    height: 17%;
+    width: 16%;
+    height: 16%;
 }
 /*Modifica el Div que contiene la imagen corporativa*/
 .centrarDiv{

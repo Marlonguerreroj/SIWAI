@@ -25,6 +25,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/blockUI.js"></script>
+        <script src="../../Js/javascript.js"></script>
     </head>
     <body>
       <%
@@ -33,6 +34,27 @@
       %>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
         <jsp:include page="../navegador.jsp" />
+        <!-- Inicio del alert -->
+        <%
+            String mensaje = session.getAttribute("msjCAE") + "";
+            if (!mensaje.equals("null")) {
+                if (mensaje.contains("Error")) {
+        %>
+        <div class="alert alert-danger centrar-texto" role="alert" arial >
+            <%=mensaje%>
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+        <%
+        } else {%>
+        <div class="alert alert-warning centrar-texto" role="alert" arial >
+            <%=mensaje%>
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+        <%      }
+                session.removeAttribute("msjCAE");
+            }
+        %>
+        <!-- Fin del alert-->
         <!-- Contenido principal contiene el formulario -->
         <section>
             <div>
@@ -40,13 +62,14 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form name="form" action="" method="post">
+            <form action="/SIWAI/ControladorArticuloExtra" method="post" name="form">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-3">
                           <label for="sel1">Sucursal:</label>
-                          <select name="sel1" class="tamañoConsultar" id="sel1" required>
+                          <select name="sucursal" class="tamañoConsultar" id="sel1" required>
                               <option value="">Seleccione</option>
+                              <option value="todas">Todas</option>
                               <% for (int i = 0; i < lista.size(); i++) {%>
                               <option><%=lista.get(i).getNombre()%></option>
                               <% }
@@ -67,7 +90,7 @@
                             <input required id="informacion" name="informacion" type="text" class="tamañoConsultar">
                         </div>
                         <div class="col-md-1">
-                            <button name="buscarExtra" type="submit" class="btn btn-success  letra">
+                            <button name="consultarArticuloExtra" type="submit" class="btn btn-success  letra">
                                 <span class="glyphicon glyphicons glyphicon-search"></span>
                             </button>
                         </div>
@@ -89,9 +112,6 @@
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
-                                  <%
-                                      for (int i = 0; i < lista.size(); i++) {
-                                  %>
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Sucursal</th>
@@ -101,6 +121,9 @@
                                         <th></th>
                                     </tr>
                                 </thead>
+                                <%
+                                    for (int i = 0; i < lista2.size(); i++) {
+                                %>
                                 <tr>
                                   <td><%=lista2.get(i).getCodigo()%></td>
                                   <td><%=lista2.get(i).getSucursal().getNombre()%></td>
@@ -115,7 +138,7 @@
                                     </td>
                                 </tr>
                                 <% }
-                                    session.setAttribute("empleados", null);
+                                    session.setAttribute("articulosExtra", null);
                                 %>
                             </table>
                         </div>

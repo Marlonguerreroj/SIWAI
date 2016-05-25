@@ -52,7 +52,7 @@ public class DAOEmpleado {
             stmt.setString(8, dto.getEmail());
             stmt.setString(9, dto.getDireccion());
             stmt.setString(10, dto.getfIngreso());
-            stmt.setString(11, dto.getSucursal());
+            stmt.setString(11, dto.getSucursal().getCodigo());
             stmt.setString(12, dto.getCargo());
 
             try {
@@ -72,24 +72,20 @@ public class DAOEmpleado {
         ArrayList<EmpleadoDTO> lista = null;
         PreparedStatement stmt = null;
         if (conn != null) {
-
+          String sql ="SELECT tbl_empleado.cod_empleado, tbl_empleado.dni_empleado,tbl_empleado.nom_empleado,tbl_empleado.ape_empleado,tbl_empleado.tel_empleado,tbl_empleado.cel_empleado,tbl_empleado.cont_empleado, tbl_empleado.email_empleado,tbl_empleado.dir_empleado,tbl_empleado.fIngreso_empleado,tbl_sucursal.nom_sucursal,tbl_empleado.cargo_empleado,tbl_empleado.fSalida_empleado,tbl_empleado.hab_empleado FROM tbl_empleado INNER JOIN tbl_sucursal ON tbl_empleado.suc_empleado = tbl_sucursal.cod_sucursal";
             if (buscarPor.equalsIgnoreCase("Codigo")) {
-                stmt = conn.prepareStatement("SELECT * FROM tbl_empleado "
-                        + "WHERE cod_empleado = ?");
+                stmt = conn.prepareStatement(sql+= " WHERE cod_empleado = ?");
                 stmt.setString(1, informacion);
             } else if (buscarPor.equalsIgnoreCase("Sucursal")) {
-                stmt = conn.prepareStatement("SELECT * FROM tbl_empleado "
-                        + "WHERE suc_empleado = ?");
+                stmt = conn.prepareStatement(sql+=" WHERE suc_empleado = ?");
                 stmt.setString(1, informacion);
             } else if (buscarPor.equalsIgnoreCase("Todos")) {
-                stmt = conn.prepareStatement("SELECT * FROM tbl_empleado");
+                stmt = conn.prepareStatement(sql);
             } else if (buscarPor.equalsIgnoreCase("Nombre")) {
-                stmt = conn.prepareStatement("SELECT * FROM tbl_empleado "
-                        + "WHERE nom_empleado = ?");
-                stmt.setString(1, informacion);
+                stmt = conn.prepareStatement(sql+=" WHERE CONCAT(nom_empleado, ' ', ape_empleado) LIKE ?");
+                stmt.setString(1, "%"+informacion+"%");
             } else if (buscarPor.equalsIgnoreCase("Dni")) {
-                stmt = conn.prepareStatement("SELECT * FROM tbl_empleado "
-                        + "WHERE dni_empleado = ?");
+                stmt = conn.prepareStatement(sql+=" WHERE dni_empleado = ?");
                 stmt.setString(1, informacion);
             }
 
@@ -108,7 +104,7 @@ public class DAOEmpleado {
                     dto.setEmail(rs.getString(8));
                     dto.setDireccion(rs.getString(9));
                     dto.setfIngreso(rs.getString(10));
-                    dto.setSucursal(rs.getString(11));
+                    dto.getSucursal().setNombre(rs.getString(11));
                     dto.setCargo(rs.getString(12));
                     dto.setfSalida(rs.getString(13));
                     dto.setHabilitado(rs.getShort(14));
@@ -160,7 +156,7 @@ public class DAOEmpleado {
                     + "cod_empleado = ?, cel_empleado = ?,tel_empleado = ?,email_empleado = ?,"
                     + "dir_empleado = ?, fIngreso_empleado = ?,fSalida_empleado = ?,hab_empleado = ? where dni_empleado = ?";
             stmt = conn.prepareStatement(update);
-            stmt.setString(1, dto.getSucursal());
+            stmt.setString(1, dto.getSucursal().getCodigo());
             stmt.setString(2, dto.getCargo());
             stmt.setString(3, dto.getNombre());
             stmt.setString(4, dto.getApellido());

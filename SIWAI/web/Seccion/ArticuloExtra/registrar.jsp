@@ -21,6 +21,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/blockUI.js"></script>
+        <script src="../../Ajax/ajax.js"></script>
     </head>
     <body>
       <%
@@ -36,7 +37,8 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form action="" method="post">
+            <form onSubmit="registrarArticuloExtra(document.forms[0]);
+                    return false" id="form">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>
@@ -54,7 +56,7 @@
                           <select name="sel1" class="form-control" id="sel1" required>
                               <option value="">Seleccione</option>
                               <% for (int i = 0; i < lista.size(); i++) {%>
-                              <option><%=lista.get(i).getNombre()%></option>
+                              <option value="<%=lista.get(i).getCodigo()%>"><%=lista.get(i).getNombre()%></option>
                               <% }
                               %>
                           </select>
@@ -115,13 +117,12 @@
                         </div>
                         <div class="col-md-1"></div>
                     </div>
-
                     <br>
                     <br>
                     <div class="row centrar-texto">
                         <div class="col-md-4"></div>
                         <div class="col-md-2">
-                            <button name="enviarExtra" type="submit" class="btn btn-success btn-lg letra">Registrar
+                            <button name="enviarExtra" class="btn btn-success btn-lg letra">Registrar
                             </button>
                         </div>
                         <div class="col-md-2">
