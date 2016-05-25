@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.ufps.siwai.modelo.utilidades.fabrica;
+package co.edu.ufps.siwai.modelo.dao.fabrica;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

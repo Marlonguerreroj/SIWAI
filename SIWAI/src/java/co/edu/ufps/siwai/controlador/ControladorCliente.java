@@ -5,8 +5,8 @@
  */
 package co.edu.ufps.siwai.controlador;
 
-import co.edu.ufps.siwai.modelo.fachada.Fachada;
-import co.edu.ufps.siwai.modelo.mysql.dto.ClienteDTO;
+import co.edu.ufps.siwai.modelo.Fachada;
+import co.edu.ufps.siwai.modelo.dto.ClienteDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;

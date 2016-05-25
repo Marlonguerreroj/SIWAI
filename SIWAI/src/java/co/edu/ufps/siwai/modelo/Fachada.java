@@ -3,23 +3,23 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.ufps.siwai.modelo.fachada;
+package co.edu.ufps.siwai.modelo;
 
-import co.edu.ufps.siwai.modelo.mysql.dao.DAOArticulo;
-import co.edu.ufps.siwai.modelo.mysql.dao.DAOArticuloExtra;
-import co.edu.ufps.siwai.modelo.mysql.dto.ClienteDTO;
-import co.edu.ufps.siwai.modelo.mysql.dao.DAOCliente;
-import co.edu.ufps.siwai.modelo.mysql.dao.DAOEmpleado;
-import co.edu.ufps.siwai.modelo.mysql.dao.DAOProveedor;
-import co.edu.ufps.siwai.modelo.mysql.dao.DAOSucursal;
-import co.edu.ufps.siwai.modelo.mysql.dao.DAOUbicacion;
-import co.edu.ufps.siwai.modelo.mysql.dto.ArticuloDTO;
-import co.edu.ufps.siwai.modelo.mysql.dto.ArticuloExtraDTO;
-import co.edu.ufps.siwai.modelo.mysql.dto.EmpleadoDTO;
-import co.edu.ufps.siwai.modelo.mysql.dto.ProveedorDTO;
-import co.edu.ufps.siwai.modelo.mysql.dto.SucursalDTO;
-import co.edu.ufps.siwai.modelo.mysql.dto.UbicacionDTO;
-import co.edu.ufps.siwai.modelo.utilidades.seguridad.MD5;
+import co.edu.ufps.siwai.modelo.dao.DAOArticulo;
+import co.edu.ufps.siwai.modelo.dao.DAOArticuloExtra;
+import co.edu.ufps.siwai.modelo.dto.ClienteDTO;
+import co.edu.ufps.siwai.modelo.dao.DAOCliente;
+import co.edu.ufps.siwai.modelo.dao.DAOEmpleado;
+import co.edu.ufps.siwai.modelo.dao.DAOProveedor;
+import co.edu.ufps.siwai.modelo.dao.DAOSucursal;
+import co.edu.ufps.siwai.modelo.dao.DAOUbicacion;
+import co.edu.ufps.siwai.modelo.dto.ArticuloDTO;
+import co.edu.ufps.siwai.modelo.dto.ArticuloExtraDTO;
+import co.edu.ufps.siwai.modelo.dto.EmpleadoDTO;
+import co.edu.ufps.siwai.modelo.dto.ProveedorDTO;
+import co.edu.ufps.siwai.modelo.dto.SucursalDTO;
+import co.edu.ufps.siwai.modelo.dto.UbicacionDTO;
+import co.edu.ufps.siwai.modelo.seguridad.MD5;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;

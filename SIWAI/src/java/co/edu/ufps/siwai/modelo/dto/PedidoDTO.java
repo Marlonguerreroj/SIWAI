@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.ufps.siwai.modelo.mysql.dto;
+package co.edu.ufps.siwai.modelo.dto;
 
 import java.io.Serializable;
 import java.util.Calendar;

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.ufps.siwai.modelo.mysql.dto;
+package co.edu.ufps.siwai.modelo.dto;
 
 /**
  * Clase que contiene el pais y la ciudad en la que se encuentra ubicada la entidad que instancia esta clase.

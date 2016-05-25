@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package co.edu.ufps.siwai.modelo.utilidades.seguridad;
+package co.edu.ufps.siwai.modelo.seguridad;
 
 import java.security.MessageDigest;
 import java.util.Arrays;
