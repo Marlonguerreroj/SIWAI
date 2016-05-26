@@ -13,6 +13,7 @@ import co.edu.ufps.siwai.modelo.dao.DAOEmpleado;
 import co.edu.ufps.siwai.modelo.dao.DAOProveedor;
 import co.edu.ufps.siwai.modelo.dao.DAOSucursal;
 import co.edu.ufps.siwai.modelo.dao.DAOUbicacion;
+import co.edu.ufps.siwai.modelo.dao.asistente.Pedido;
 import co.edu.ufps.siwai.modelo.dto.ArticuloDTO;
 import co.edu.ufps.siwai.modelo.dto.ArticuloExtraDTO;
 import co.edu.ufps.siwai.modelo.dto.EmpleadoDTO;
@@ -32,6 +33,8 @@ import java.util.TimeZone;
  */
 public class Fachada implements Serializable {
 
+    private Pedido pedido;
+    
     /**
      * Metodo que envia los datos del cliente a DAOCliente para que sean
      * registrados en la base de datos.
@@ -294,4 +297,61 @@ public class Fachada implements Serializable {
         DAOArticuloExtra dao = new DAOArticuloExtra();
         return dao.consultarArticuloExtra(sucursal,buscarPor,info);
     }
+    
+    /**
+     * Metodo que crea el pedido.
+     * @param fecha Calendar con la fecha en la que se realizo el pedido.
+     * @param proveedor String con el codigo del proveedor al que se le realizo el pedido.
+     */
+    public void crearPedido (Calendar fecha, String proveedor) {
+        pedido = new Pedido(fecha, proveedor);
+    }
+    
+    /**
+     * Metodo que añade un articulo a la lista de articulos del pedido.
+     * @param referencia String con la referencia del articulo a añadir, debe ser unica.
+     * @param cantidad Cantidad de articulos que se solicitan con el pedido.
+     * @return true si se añadio, false si no.
+     */
+    public boolean aniadirArticuloPedido(String referencia, int cantidad) {
+        ArticuloDTO dto = new ArticuloDTO();
+        dto.setReferencia(referencia);
+        dto.setCantidad(cantidad);
+        return pedido.aniadirArticulo(dto);
+    }
+    
+    /**
+     * Metodo que elimina un articulo de la lista de articulos del pedido.
+     * @param referencia String con la referencia del articulo a añadir.
+     * @return true si se elimino, false si no.
+     */
+    public boolean eliminarArticuloPedido(String referencia) {
+        ArticuloDTO dto = new ArticuloDTO();
+        dto.setReferencia(referencia);
+        return pedido.eliminarArticulo(dto);
+    }
+    
+    /**
+     * Metodo que notifica a pedido para que este notifique a DAOPedido.
+     * @return True si se registro, false si no.
+     * @throws Exception Excepcion al conectarse a la base de datos.
+     */
+    public boolean registrarPedido() throws Exception {
+        return pedido.registrarPedido();
+    }
+    
+    /**
+     * Metodo que obtiene el nombre de un articulo para un añadirlo a un pedido.
+     * @param referencia String con la referencia del articulo.
+     * @return String con el nombre del articulo o String con la cadena ArticuloNombre si el articulo ya esta en el pedido.
+     * @throws Exception Si existe un error en la conexion.
+     */
+    public String cargarNombreArticuloPedido(String referencia) throws Exception {
+        if(!pedido.articuloExiste(referencia)) {
+            DAOArticulo dao = new DAOArticulo();
+            return dao.obtenerNombreArticulo(referencia);
+        }
+        return "ArticuloNombre";
+    }
+    
 }

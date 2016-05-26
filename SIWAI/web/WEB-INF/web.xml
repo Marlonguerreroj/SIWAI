@@ -28,6 +28,10 @@
         <servlet-name>ControladorArticuloExtra</servlet-name>
         <servlet-class>co.edu.ufps.siwai.controlador.ControladorArticuloExtra</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorPedido</servlet-name>
+        <servlet-class>co.edu.ufps.siwai.controlador.ControladorPedido</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorCliente</servlet-name>
         <url-pattern>/ControladorCliente</url-pattern>
@@ -55,6 +59,10 @@
     <servlet-mapping>
         <servlet-name>ControladorArticuloExtra</servlet-name>
         <url-pattern>/ControladorArticuloExtra</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorPedido</servlet-name>
+        <url-pattern>/ControladorPedido</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

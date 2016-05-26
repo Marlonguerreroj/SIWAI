@@ -7,9 +7,9 @@ package co.edu.ufps.siwai.controlador;
 
 import co.edu.ufps.siwai.modelo.Fachada;
 import co.edu.ufps.siwai.modelo.dto.ProveedorDTO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -144,6 +144,31 @@ public class ControladorProveedor extends HttpServlet {
         }
     }
     
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void cargarProveedores(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        ArrayList<ProveedorDTO> dtos;
+        try {
+            dtos = fachada.consultarProveedores("Todos", "");
+            Gson gson = new Gson();
+            String listado = gson.toJson(dtos);
+            response.getWriter().print(listado);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            response.getWriter().print("Error");
+        }
+    }
+    
     private String validarCampos(String codigo, String nit, String nombre,
             String telefono, String email, String nomContacto, String numCuenta){
         String msj = "Exito";
@@ -203,6 +228,8 @@ public class ControladorProveedor extends HttpServlet {
             consultarProveedor(request, response);
         } else if (request.getParameter("actualizarProveedor") != null) {
             actualizarProveedor(request, response);
+        } else if (request.getParameter("cargarProveedores") != null) {
+            cargarProveedores(request, response);
         }
     }
 

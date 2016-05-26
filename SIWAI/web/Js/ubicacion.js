@@ -4,7 +4,9 @@
  * and open the template in the editor.
  */
 
+
 $(document).ready(function() {
+    $.blockUI();
     $.ajax({
         url: '/SIWAI/ControladorUbicacion?cargarPaises=true',
         type: 'post',
@@ -16,19 +18,17 @@ $(document).ready(function() {
             for (var i = 0; i < json.length; i++) {
                 combo.options[combo.length] = new Option(json[i].nomPais, json[i].codPais);
             }
+            $.unblockUI();
         }
     });
 });
-
-function seleccionarPais(){
-    alert("A");
-}
 
 /**
  * Metodo que cargar en el combo selCiudad las ciudades del pais que se selecciona
  * @returns {undefined}
  */
 function cargarCiudades(){
+    $.blockUI();
     var posicion = document.getElementById("selPais").options.selectedIndex;
     var valor = document.getElementById("selPais").options[posicion].value;
     $.ajax({
@@ -45,6 +45,7 @@ function cargarCiudades(){
             for (var i = 0; i < json.length; i++) {
                 combo.options[combo.length] = new Option(json[i].nomCiudad, json[i].idCiudad);
             }
+            $.unblockUI();
         }
     });
 }

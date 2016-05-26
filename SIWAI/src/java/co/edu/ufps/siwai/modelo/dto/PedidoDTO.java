@@ -98,4 +98,15 @@ public class PedidoDTO implements Serializable {
         return total;
     }
     
+    /**
+     * Metodo que verifica si un articulo ya esta en la lista de articulos.
+     * @param referencia String con la referencia del articulo.
+     * @return True si esta, false si no.
+     */
+    public boolean articuloExiste(String referencia) {
+        ArticuloDTO articulo = new ArticuloDTO();
+        articulo.setReferencia(referencia);
+        return articulos.contains(articulo);
+    }
+    
 }

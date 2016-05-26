@@ -9,6 +9,7 @@ import co.edu.ufps.siwai.modelo.dto.ArticuloDTO;
 import co.edu.ufps.siwai.modelo.dao.fabrica.Conexion;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -19,7 +20,7 @@ public class DAOArticulo {
     private Connection conn;
     
     /**
-     * Este metodo se conecta con la ase de datos para registrar los 
+     * Este metodo se conecta con la base de datos para registrar los 
      * articulos
      * @param dto DTO del articulo
      * @return true si pudo registrar el articulo ó false sino se pudo registrar
@@ -45,5 +46,24 @@ public class DAOArticulo {
             }
         }
         return exito;
+    }
+    
+    /**
+     * Metodo que obtiene el nombre de un articulo.
+     * @param referencia String con la referencia del articulo.
+     * @return String con el nombre del articulo.
+     * @throws Exception Si existe un error en la conexion.
+     */
+    public String obtenerNombreArticulo(String referencia) throws Exception{
+        conn = Conexion.generarConexion();
+        String nombre = "";
+        PreparedStatement stmt = conn.prepareStatement("SELECT nom_articulo"
+                + " FROM tbl_articulo WHERE refe_articulo = ?");
+        stmt.setString(1, referencia);
+        ResultSet rs = stmt.executeQuery();
+        while(rs.next()){
+            nombre = rs.getString(1);
+        }
+        return nombre;
     }
 }
