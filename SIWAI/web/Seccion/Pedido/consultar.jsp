@@ -26,6 +26,27 @@
         <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
+      <!-- Inicio del alert -->
+      <%
+          String mensaje = session.getAttribute("msjCP") + "";
+          if (!mensaje.equals("null")) {
+              if (mensaje.contains("Error")) {
+      %>
+      <div class="alert alert-danger centrar-texto" role="alert" arial >
+          <%=mensaje%>
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      </div>
+      <%
+      } else {%>
+      <div class="alert alert-warning centrar-texto" role="alert" arial >
+          <%=mensaje%>
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      </div>
+      <%      }
+              session.removeAttribute("msjCP");
+          }
+      %>
+      <!-- Fin del alert-->
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
@@ -35,7 +56,7 @@
             </div>
             <br>
             <!-- Inicio del formulario para consultar el pedido-->
-            <form action="../Script/ScriptPedido.php" method="post" name="form">
+            <form action="/SIWAI/ControladorPedido" method="post" name="form">
                 <div class="container">
                     <div class="row">
                       <div class="col-md-1"></div>
@@ -45,17 +66,16 @@
                                 <option value="">Seleccione</option>
                                 <option value="Todos">Todos</option>
                                 <option value="codProveedor">Codigo del proveedor</option>
-                                <option value="codPedido">Codigo del pedido</option>
                                 <option value="fecha">Fecha del pedido</option>
                             </select>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
                           <label for="informacion">Información:</label>
-                          <input required name="informacion" type="text" class="tamañoConsultar">
+                          <input required name="informacion" id="informacion" type="text" class="tamañoConsultar">
                         </div>
                         <div class="col-md-2">
-                            <button name="buscar" type="submit" class="btn btn-success  letra">
+                            <button name="consultarPedido" type="submit" class="btn btn-success  letra">
                                 <span class="glyphicon glyphicons glyphicon-search"></span>
                             </button>
                         </div>
@@ -76,13 +96,12 @@
                     <div class="col-md-1"></div>
                     <div class="col-md-10">
                         <div class="table-responsive">
-                            <table class="table table-hover">
+                            <table id="tabla" class="table table-hover">
                                 <thead>
                                     <tr>
                                         <th>Codigo</th>
                                         <th>Proveedor</th>
                                         <th>Fecha</th>
-                                        <th>Notas</th>
                                         <th></th>
                                     </tr>
                                 </thead>
@@ -91,14 +110,14 @@
                                 %>
                                 <tr>
                                     <td><%=lista.get(i).getCodigo()%></td>
-                                    <td><%=lista.get(i).getProveedor()%></td>
-                                    <td><%=lista.get(i).getFecha() %></td>
+                                    <td><%=lista.get(i).getProveedor().getNombre()%></td>
+                                    <td><%=lista.get(i).getFechaFormateada() %></td>
                                     <td>
 
                                         <a href="registrarComparacion.jsp" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-download-alt"></span>
                                         </a>
-                                        <a href="mas.jsp" style="cursor:pointer;">
+                                        <a onclick="enviarFormOcultoMasPedido(document,<%=i %>)" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-info-sign"></span>
                                         </a>
                                     </td>
@@ -116,6 +135,13 @@
                 }%>
             <!-- Fin del div que contiene la tabla de pedidos -->
             <!-- Fin del contenido principal-->
+            <!-- Inicio del form oculto -->
+            <form id="formOculto" action="mas.jsp" method="post">
+                <input type="hidden" id="codigo" name="codigo">
+                <input type="hidden" id="proveedor" name="proveedor">
+                <input type="hidden" id="fecha" name="fecha">
+            </form>
+            <!--- Fin del form oculto -->
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->
         <jsp:include page="../pie.jsp" />

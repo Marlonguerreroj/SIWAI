@@ -6,11 +6,16 @@
 package co.edu.ufps.siwai.controlador;
 
 import co.edu.ufps.siwai.modelo.Fachada;
+import co.edu.ufps.siwai.modelo.dto.ArticuloDTO;
+import co.edu.ufps.siwai.modelo.dto.PedidoDTO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.TreeSet;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,7 +51,7 @@ public class ControladorPedido extends HttpServlet {
             response.getWriter().print("Error");
         }
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -62,7 +67,7 @@ public class ControladorPedido extends HttpServlet {
         try {
             String referencia = request.getParameter("referencia");
             int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-            if(cantidad > 0) {
+            if (cantidad > 0) {
                 Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
                 response.getWriter().print(fachada.aniadirArticuloPedido(referencia, cantidad));
             } else {
@@ -71,12 +76,12 @@ public class ControladorPedido extends HttpServlet {
             }
         } catch (NumberFormatException ex) {
             response.getWriter().print("Numero");
-        }   catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             response.getWriter().print("Error");
         }
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -97,7 +102,7 @@ public class ControladorPedido extends HttpServlet {
             response.getWriter().print("Error");
         }
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -117,6 +122,63 @@ public class ControladorPedido extends HttpServlet {
             out.print(fachada.registrarPedido());
         } catch (Exception ex) {
             out.print("Error");
+        }
+    }
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void consultarPedido(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String buscarPor = request.getParameter("sel");
+        String informacion = request.getParameter("informacion");
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        ArrayList<PedidoDTO> lista = null;
+        try {
+            lista = fachada.consultarPedido(buscarPor, informacion);
+            if (lista.isEmpty()) {
+                request.getSession().setAttribute("msjCP", "No se encontro ningún pedido");
+            }
+        } catch (Exception e) {
+            request.getSession().setAttribute("msjCP", "Error en la conexion a la base de datos");
+            response.sendRedirect("/SIWAI/Seccion/Pedido/consultar.jsp");
+        }
+
+        request.getSession().setAttribute("pedidos", lista);
+        response.sendRedirect("/SIWAI/Seccion/Pedido/consultar.jsp");
+    }
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void cargarPedidos(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        int codigoPedido = Integer.parseInt(request.getParameter("codigo"));
+        TreeSet<ArticuloDTO> dtos;
+        try {
+            dtos = fachada.cargarArticuloPedidos(codigoPedido);
+            Gson gson = new Gson();
+            String listado = gson.toJson(dtos);
+            response.getWriter().print(listado);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            response.getWriter().print("Error");
         }
     }
 
@@ -152,6 +214,10 @@ public class ControladorPedido extends HttpServlet {
             aniadirArticulo(request, response);
         } else if (request.getParameter("eliminarArticulo") != null) {
             eliminarArticulo(request, response);
+        } else if (request.getParameter("consultarPedido") != null) {
+            consultarPedido(request, response);
+        }else if (request.getParameter("cargarPedidos") != null) {
+            cargarPedidos(request, response);
         }
     }
 

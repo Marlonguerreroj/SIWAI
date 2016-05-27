@@ -14,6 +14,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 /**
  * Clase de acceso a los datos de la tabla pedido y articulo_pedido
@@ -61,17 +63,14 @@ public class DAOPedido {
         ArrayList<PedidoDTO> lista = null;
         PreparedStatement stmt = null;
         if (conn != null) {
-            String sql = "SELECT * FROM tbl_pedido ";
-            if (buscarPor.equalsIgnoreCase("codPedido")) {
-                sql += " WHERE cod_pedido = ?";
-                stmt = conn.prepareStatement(sql);
-                stmt.setString(1, informacion);
-            } else if (buscarPor.equalsIgnoreCase("codProveedor")) {
-                sql += " WHERE cod_proveedor = ?";
+            String sql = "SELECT pe.cod_pedido,pro.nom_proveedor,pe.fecha_pedido FROM tbl_pedido as pe"+
+            " INNER JOIN tbl_proveedor as pro ON pe.cod_proveedor = pro.cod_proveedor ";
+            if (buscarPor.equalsIgnoreCase("codProveedor")) {
+                sql += " WHERE pe.cod_proveedor = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, informacion);
             }else if (buscarPor.equalsIgnoreCase("fecha")) {
-                sql += " WHERE fecha_pedido = ?";
+                sql += " WHERE pe.fecha_pedido = ?";
                 stmt = conn.prepareStatement(sql);
                 stmt.setString(1, informacion);
             } else if (buscarPor.equalsIgnoreCase("Todos")) {
@@ -83,9 +82,12 @@ public class DAOPedido {
                 lista = new ArrayList<>();
                 while (rs.next()) {
                     PedidoDTO dto = new PedidoDTO();
-                    
+                    dto.setCodigo(rs.getInt(1));
+                    dto.getProveedor().setNombre(rs.getString(2));
+                    Calendar cal = new GregorianCalendar();
+                    cal.setTime(rs.getDate(3));
+                    dto.setFecha(cal);
                     lista.add(dto);
-
                 }
                 stmt.close();
 
@@ -100,5 +102,39 @@ public class DAOPedido {
             }
         }
         return lista;
+    }
+
+    public PedidoDTO cargarArticuloPedidos(PedidoDTO dto) throws Exception {
+        conn = Conexion.generarConexion();
+        ArrayList<ArticuloDTO> lista = null;
+        PreparedStatement stmt = null;
+        if (conn != null) {
+            String sql = "SELECT a.nom_articulo,ap.cantidad_articulo_pedido,ap.refe_articulo FROM tbl_articulo_pedido as ap"+
+            " INNER JOIN tbl_articulo as a ON a.refe_articulo = ap.refe_articulo WHERE ap.cod_pedido = ? ";
+            stmt = conn.prepareStatement(sql);
+            stmt.setInt(1, dto.getCodigo());
+            try {
+                ResultSet rs = stmt.executeQuery();
+                lista = new ArrayList<>();
+                while (rs.next()) {
+                  ArticuloDTO articuloDTO = new ArticuloDTO();
+                  articuloDTO.setNombre(rs.getString(1));
+                  articuloDTO.setCantidad(rs.getInt(2));
+                  articuloDTO.setReferencia(rs.getString(3));
+                  dto.aniadirArticulo(articuloDTO);
+                }
+                stmt.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+
+                }
+            }
+        }
+        return dto;
     }
 }

@@ -270,10 +270,33 @@ function capturar() {
     var posicion = document.getElementById("sel").options.selectedIndex;
     var valor = document.getElementById("sel").options[posicion].text;
     if (valor == "Todos") {
+        if ($('#sucursales').length != 0) {
+          $('#sucursales').hide();
+        }
+        document.form.informacion.type="text";
         document.form.informacion.readOnly = true;
         document.form.informacion.required = false;
         document.form.informacion.value = "";
-    } else {
+    }else if(valor.indexOf("Fecha")>=0){
+      if ($('#sucursales').length != 0) {
+        $('#sucursales').hide();
+      }
+      document.form.informacion.type="date";
+      document.form.informacion.readOnly = false;
+      document.form.informacion.required = true;
+    }else if(valor.indexOf("Sucursal")>=0){
+      document.form.informacion.type="hidden";
+      if ($('#sucursales').length == 0) {
+        $("<select name='sucursales' id='sucursales' class='tamañoConsultar' required></select>").insertAfter(document.form.informacion);
+        cargarSucursales();
+      }else{
+        $('#sucursales').show();
+      }
+    }else {
+        if ($('#sucursales').length != 0) {
+         $('#sucursales').hide();
+        }
+        document.form.informacion.type="text";
         document.form.informacion.readOnly = false;
         document.form.informacion.required = true;
     }
@@ -283,4 +306,53 @@ function capturar() {
 function anular(e) {
     tecla = (document.all) ? e.keyCode : e.which;
     return (tecla != 13);
+}
+
+function cargarArticulosPedido(codigo) {
+    $.blockUI();
+    $.ajax({
+        url: '/SIWAI/ControladorPedido?cargarPedidos=true&codigo='+codigo,
+        type: 'post',
+        datatype: 'json',
+        success: function(pedidos) {
+            var json = eval('(' + pedidos + ')');
+            var tabla = document.getElementById("tabla");
+            for (var i = 0; i < json.length; i++) {
+                var row = tabla.insertRow(i+1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell1.innerHTML = json[i].nombre;
+                cell2.innerHTML = json[i].cantidad;
+            }
+            $.unblockUI();
+        }
+    });
+}
+
+function enviarFormOcultoMasPedido(document,i) {
+  codigo = document.getElementById("tabla").rows[i + 1].cells[0].innerHTML;
+  proveedor = document.getElementById("tabla").rows[i + 1].cells[1].innerHTML;
+  fecha = document.getElementById("tabla").rows[i + 1].cells[2].innerHTML;
+  document.getElementById("codigo").value = codigo;
+  document.getElementById("proveedor").value = proveedor;
+  document.getElementById("fecha").value = fecha;
+  document.getElementById("formOculto").submit();
+}
+
+function cargarSucursales() {
+    $.blockUI();
+    $.ajax({
+        url: '/SIWAI/ControladorSucursal?cargarSucursales=true',
+        type: 'post',
+        datatype: 'json',
+        success: function(sucursales) {
+            var json = eval('(' + sucursales + ')');
+            var combo = document.getElementById("sucursales");
+            combo.options[0] = new Option('Seleccione', '');
+            for (var i = 0; i < json.length; i++) {
+              combo.options[combo.length] = new Option(json[i].nombre, json[i].codigo);
+            }
+            $.unblockUI();
+        }
+    });
 }

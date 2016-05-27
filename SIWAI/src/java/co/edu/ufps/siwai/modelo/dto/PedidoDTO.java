@@ -6,6 +6,7 @@
 package co.edu.ufps.siwai.modelo.dto;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TreeSet;
 
@@ -14,7 +15,7 @@ import java.util.TreeSet;
  * @author Alejandro Ramírez
  */
 public class PedidoDTO implements Serializable {
-    
+
     private Calendar fecha;
     private int codigo;
     private ProveedorDTO proveedor;
@@ -76,16 +77,16 @@ public class PedidoDTO implements Serializable {
     public boolean aniadirArticulo(ArticuloDTO dto) {
         return this.articulos.add(dto);
     }
-    
+
     /**
      * Metodo que remueve un articulo del TreeSet de ArticuloDTO
      * @param dto ArticuloDTO con los datos del articulo.
      * @return True si se removio, false si no lo hizo.
      */
-    public boolean eliminarArticulo(ArticuloDTO dto) { 
+    public boolean eliminarArticulo(ArticuloDTO dto) {
         return this.articulos.remove(dto);
     }
-    
+
     /**
      * Metodo que obtiene la cantidad total que se pide de todos los articulos.
      * @return Integer con la cantidad total de articulos.
@@ -97,7 +98,7 @@ public class PedidoDTO implements Serializable {
         }
         return total;
     }
-    
+
     /**
      * Metodo que verifica si un articulo ya esta en la lista de articulos.
      * @param referencia String con la referencia del articulo.
@@ -108,5 +109,14 @@ public class PedidoDTO implements Serializable {
         articulo.setReferencia(referencia);
         return articulos.contains(articulo);
     }
-    
+    /**
+     * Metodo que formatea la fecha
+     * @return String con la fecha formateada
+     */
+    public String getFechaFormateada(){
+      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+      String fechaFormateada = sdf.format(this.fecha.getTime());
+
+      return fechaFormateada;
+    }
 }

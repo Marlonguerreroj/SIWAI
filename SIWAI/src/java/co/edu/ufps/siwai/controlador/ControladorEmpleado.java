@@ -153,7 +153,12 @@ public class ControladorEmpleado extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String buscarPor = request.getParameter("sel");
-        String informacion = request.getParameter("informacion");
+        String informacion;
+        if(buscarPor.equalsIgnoreCase("Sucursal")){
+          informacion = request.getParameter("sucursales");
+        }else{
+          informacion = request.getParameter("informacion");
+        }
         Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         ArrayList<EmpleadoDTO> lista = null;
         try {

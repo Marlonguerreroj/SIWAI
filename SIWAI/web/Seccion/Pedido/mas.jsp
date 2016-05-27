@@ -3,12 +3,17 @@
     Created on : 17-mar-2016, 14:45:27
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
-
+<% if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("../../index.jsp");
+    }else if(request.getParameter("codigo")==null){
+        response.sendRedirect("consultar.jsp");
+    }
+%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <title>Registrar Pedido</title>
+        <title>Informacion Pedido</title>
         <meta charset="UTF-8">
         <!-- Procurar llamar los archivos .min porque pesan menos -->
         <link rel="stylesheet" href="../../Bootstrap/css/bootstrap.min.css">
@@ -20,8 +25,10 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/blockUI.js"></script>
+        <script src="../../Js/javascript.js"></script>
+
     </head>
-    <body>
+    <body onload="cargarArticulosPedido(<%=request.getParameter("codigo")%>)">
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
@@ -36,62 +43,41 @@
                 <div class="row">
                     <div class="col-md-1"></div>
                     <div class="col-md-1">
-                        <p>Codigo:</p>
-                    </div>
-                    <div class="col-md-3">
-                        <input readOnly  required  type="text" class="form-control ">
-                    </div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-1">
                         <p>Proveedor:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly required type="text" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("proveedor")%>" required  type="text" class="form-control ">
                     </div>
-                    <div class="col-md-1"></div>
-                </div>
-                <br>
-                <div class="row">
-                    <div class="col-md-1"></div>
+                    <div class="col-md-2"></div>
                     <div class="col-md-1">
                         <p>Fecha:</p>
                     </div>
                     <div class="col-md-3">
-                        <input  readOnly  required  type="text" class="form-control ">
-                    </div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-1">
-                        <p>Referencia:</p>
-                    </div>
-                    <div class="col-md-3">
-                        <input readOnly  required  type="text" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("fecha")%>" required type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
                 </div>
                 <br>
-                <div class="row">
-                    <div class="col-md-1"></div>
-                    <div class="col-md-1">
-                        <p>Cantidad:</p>
-                    </div>
-                    <div class="col-md-3">
-                        <input readOnly   type="text" class="form-control ">
-                    </div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-1">
-                        <p>Notas:</p>
-                    </div>
-                    <div class="col-md-3">
-                        <textarea readOnly  name="notas" class="form-control" ></textarea>
-
-                    </div>
-                    <div class="col-md-1"></div>
-                </div>
-                <br>
+                  <div class="row">
+                      <div class="col-md-1"></div>
+                      <div class="col-md-10">
+                          <div class="table-responsive">
+                              <table id="tabla" class="table table-hover">
+                                  <thead>
+                                      <tr>
+                                          <th>Articulo</th>
+                                          <th>Cantidad</th>
+                                      </tr>
+                                  </thead>
+                              </table>
+                          </div>
+                      </div>
+                      <div class="col-md-1"></div>
+                  </div>
                 <div class="row">
                     <div class="col-md-10"></div>
                     <div class="col-md-2">
-                        <a href="consultar.jsp" class="btn btn-success btn-lg ">Volver
+                        <a href="consultar.jsp" class="btn btn-success ">Volver
                         </a>
                     </div>
                     <div class="col-md-4"></div>

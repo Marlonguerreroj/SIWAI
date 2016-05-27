@@ -7,6 +7,7 @@ package co.edu.ufps.siwai.controlador;
 
 import co.edu.ufps.siwai.modelo.Fachada;
 import co.edu.ufps.siwai.modelo.dto.SucursalDTO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -145,6 +146,7 @@ public class ControladorSucursal extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String buscarPor = request.getParameter("sel");
         String informacion = request.getParameter("informacion");
+        System.out.println(informacion);
         Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         ArrayList<SucursalDTO> lista = new ArrayList<>();
         try {
@@ -158,6 +160,31 @@ public class ControladorSucursal extends HttpServlet {
         }
         request.getSession().setAttribute("sucursales", lista);
         response.sendRedirect("/SIWAI/Seccion/Sucursal/consultar.jsp");
+    }
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void cargarSucursales(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        ArrayList<SucursalDTO> dtos;
+        try {
+            dtos = fachada.consultarSucursal("Todos", "");
+            Gson gson = new Gson();
+            String listado = gson.toJson(dtos);
+            response.getWriter().print(listado);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            response.getWriter().print("Error");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -188,12 +215,14 @@ public class ControladorSucursal extends HttpServlet {
             throws ServletException, IOException {
         if (request.getParameter("consultarSucursal") != null) {
             consultarSucursal(request, response);
-        }
+        }else
         if (request.getParameter("registrarSucursal") != null) {
             registrarSucursal(request, response);
-        }
+        }else
         if (request.getParameter("actualizarSucursal") != null) {
             actualizarSucursal(request, response);
+        } else if (request.getParameter("cargarSucursales") != null) {
+            cargarSucursales(request, response);
         }
     }
 

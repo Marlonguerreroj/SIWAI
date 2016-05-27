@@ -10,6 +10,7 @@ import co.edu.ufps.siwai.modelo.dao.DAOArticuloExtra;
 import co.edu.ufps.siwai.modelo.dto.ClienteDTO;
 import co.edu.ufps.siwai.modelo.dao.DAOCliente;
 import co.edu.ufps.siwai.modelo.dao.DAOEmpleado;
+import co.edu.ufps.siwai.modelo.dao.DAOPedido;
 import co.edu.ufps.siwai.modelo.dao.DAOProveedor;
 import co.edu.ufps.siwai.modelo.dao.DAOSucursal;
 import co.edu.ufps.siwai.modelo.dao.DAOUbicacion;
@@ -17,6 +18,7 @@ import co.edu.ufps.siwai.modelo.dao.asistente.Pedido;
 import co.edu.ufps.siwai.modelo.dto.ArticuloDTO;
 import co.edu.ufps.siwai.modelo.dto.ArticuloExtraDTO;
 import co.edu.ufps.siwai.modelo.dto.EmpleadoDTO;
+import co.edu.ufps.siwai.modelo.dto.PedidoDTO;
 import co.edu.ufps.siwai.modelo.dto.ProveedorDTO;
 import co.edu.ufps.siwai.modelo.dto.SucursalDTO;
 import co.edu.ufps.siwai.modelo.dto.UbicacionDTO;
@@ -25,6 +27,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.TimeZone;
+import java.util.TreeSet;
 
 /**
  * Clase que sirve como fachada del negocio.
@@ -34,7 +37,7 @@ import java.util.TimeZone;
 public class Fachada implements Serializable {
 
     private Pedido pedido;
-    
+
     /**
      * Metodo que envia los datos del cliente a DAOCliente para que sean
      * registrados en la base de datos.
@@ -297,7 +300,7 @@ public class Fachada implements Serializable {
         DAOArticuloExtra dao = new DAOArticuloExtra();
         return dao.consultarArticuloExtra(sucursal,buscarPor,info);
     }
-    
+
     /**
      * Metodo que crea el pedido.
      * @param fecha Calendar con la fecha en la que se realizo el pedido.
@@ -306,7 +309,7 @@ public class Fachada implements Serializable {
     public void crearPedido (Calendar fecha, String proveedor) {
         pedido = new Pedido(fecha, proveedor);
     }
-    
+
     /**
      * Metodo que añade un articulo a la lista de articulos del pedido.
      * @param referencia String con la referencia del articulo a añadir, debe ser unica.
@@ -319,7 +322,7 @@ public class Fachada implements Serializable {
         dto.setCantidad(cantidad);
         return pedido.aniadirArticulo(dto);
     }
-    
+
     /**
      * Metodo que elimina un articulo de la lista de articulos del pedido.
      * @param referencia String con la referencia del articulo a añadir.
@@ -330,7 +333,7 @@ public class Fachada implements Serializable {
         dto.setReferencia(referencia);
         return pedido.eliminarArticulo(dto);
     }
-    
+
     /**
      * Metodo que notifica a pedido para que este notifique a DAOPedido.
      * @return True si se registro, false si no.
@@ -339,7 +342,7 @@ public class Fachada implements Serializable {
     public boolean registrarPedido() throws Exception {
         return pedido.registrarPedido();
     }
-    
+
     /**
      * Metodo que obtiene el nombre de un articulo para un añadirlo a un pedido.
      * @param referencia String con la referencia del articulo.
@@ -353,5 +356,16 @@ public class Fachada implements Serializable {
         }
         return "ArticuloNombre";
     }
-    
+
+    public ArrayList<PedidoDTO> consultarPedido(String buscarPor,String informacion)throws Exception{
+        DAOPedido dao = new DAOPedido();
+        return dao.consultarPedido(buscarPor,informacion);
+    }
+
+    public TreeSet<ArticuloDTO> cargarArticuloPedidos(int codigoPedido) throws Exception {
+        DAOPedido dao = new DAOPedido();
+        PedidoDTO dto = new PedidoDTO();
+        dto.setCodigo(codigoPedido);
+        return dao.cargarArticuloPedidos(dto).getArticulos();
+    }
 }
