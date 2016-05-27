@@ -11,15 +11,18 @@ import co.edu.ufps.siwai.modelo.dao.fabrica.Conexion;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Clase de acceso a los datos de la tabla pedido y articulo_pedido
  * @author Alejandro Ramírez
  */
 public class DAOPedido {
-    
+
     private Connection conn;
-    
+
     /**
      * Metodo que registra un pedido junto con los articulos del pedido.
      * @param dto PedidoDTO con los datos del pedido y los articulos del pedido.
@@ -51,5 +54,51 @@ public class DAOPedido {
         stmt.close();
         conn.close();
         return exito;
+    }
+
+    public ArrayList<PedidoDTO> consultarPedido(String buscarPor, String informacion) throws Exception {
+        conn = Conexion.generarConexion();
+        ArrayList<PedidoDTO> lista = null;
+        PreparedStatement stmt = null;
+        if (conn != null) {
+            String sql = "SELECT * FROM tbl_pedido ";
+            if (buscarPor.equalsIgnoreCase("codPedido")) {
+                sql += " WHERE cod_pedido = ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1, informacion);
+            } else if (buscarPor.equalsIgnoreCase("codProveedor")) {
+                sql += " WHERE cod_proveedor = ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1, informacion);
+            }else if (buscarPor.equalsIgnoreCase("fecha")) {
+                sql += " WHERE fecha_pedido = ?";
+                stmt = conn.prepareStatement(sql);
+                stmt.setString(1, informacion);
+            } else if (buscarPor.equalsIgnoreCase("Todos")) {
+                stmt = conn.prepareStatement(sql);
+            }
+
+            try {
+                ResultSet rs = stmt.executeQuery();
+                lista = new ArrayList<>();
+                while (rs.next()) {
+                    PedidoDTO dto = new PedidoDTO();
+                    
+                    lista.add(dto);
+
+                }
+                stmt.close();
+
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            } finally {
+                try {
+                    conn.close();
+                } catch (SQLException ex) {
+
+                }
+            }
+        }
+        return lista;
     }
 }

@@ -3,8 +3,12 @@
     Created on : 17-mar-2016, 14:45:05
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
-
+<%@page import="java.util.ArrayList"%>
+<%@page import="co.edu.ufps.siwai.modelo.dto.PedidoDTO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("../../index.jsp");
+    }%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -34,30 +38,26 @@
             <form action="../Script/ScriptPedido.php" method="post" name="form">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-2">
-                            <p>Buscar por:</p>
-                        </div>
-                        <div class="col-md-2">
-                            <select name="sel" class="form-control" id="sel" required onchange="capturar()">
+                      <div class="col-md-1"></div>
+                        <div class="col-md-4">
+                          <label for="sel">Buscar por:</label>
+                            <select name="sel" class="tamañoConsultar" id="sel" required onchange="capturar()">
                                 <option value="">Seleccione</option>
-                                <option value="Fecha">Fecha</option>
-                                <option value="CodigoProv">Codigo Proveedor</option>
-                                <option value="CodigoPedi">Codigo Pedido</option>
+                                <option value="Todos">Todos</option>
+                                <option value="codProveedor">Codigo del proveedor</option>
+                                <option value="codPedido">Codigo del pedido</option>
+                                <option value="fecha">Fecha del pedido</option>
                             </select>
                         </div>
                         <div class="col-md-1"></div>
-                        <div class="col-md-2">
-                            <p>Informacion:</p>
-                        </div>
-                        <div class="col-md-2">
-                            <input required name="informacion" type="text" class="form-control ">
+                        <div class="col-md-4">
+                          <label for="informacion">Información:</label>
+                          <input required name="informacion" type="text" class="tamañoConsultar">
                         </div>
                         <div class="col-md-2">
                             <button name="buscar" type="submit" class="btn btn-success  letra">
                                 <span class="glyphicon glyphicons glyphicon-search"></span>
                             </button>
-                        </div>
-                        <div class="col-md-1">
                         </div>
                     </div>
                 </div>
@@ -65,6 +65,11 @@
                 <br>
             </form>
             <!-- Fin del formulario para consultar el pedido-->
+            <%
+                if (session.getAttribute("pedidos") != null) {
+                    ArrayList<PedidoDTO> lista = (ArrayList) session.getAttribute("pedidos");
+                    if (!lista.isEmpty()) {
+            %>
             <!-- Inicio del div que contiene la tabla de pedidos -->
             <div class="container">
                 <div class="row">
@@ -77,18 +82,17 @@
                                         <th>Codigo</th>
                                         <th>Proveedor</th>
                                         <th>Fecha</th>
-                                        <th>Referencia</th>
-                                        <th>Cantidad</th>
+                                        <th>Notas</th>
                                         <th></th>
                                     </tr>
                                 </thead>
-
+                                <%
+                                    for (int i = 0; i < lista.size(); i++) {
+                                %>
                                 <tr>
-                                    <td>1234</td>
-                                    <td>Yamaha</td>
-                                    <td>13/02/16</td>
-                                    <td>G001</td>
-                                    <td>20</td>
+                                    <td><%=lista.get(i).getCodigo()%></td>
+                                    <td><%=lista.get(i).getProveedor()%></td>
+                                    <td><%=lista.get(i).getFecha() %></td>
                                     <td>
 
                                         <a href="registrarComparacion.jsp" style="cursor:pointer;">
@@ -99,14 +103,17 @@
                                         </a>
                                     </td>
                                 </tr>
-                                <?php endfor; ?>
-
+                                <% }
+                                    session.setAttribute("pedidos", null);
+                                %>
                             </table>
                         </div>
                     </div>
                     <div class="col-md-1"></div>
                 </div>
             </div>
+            <%}
+                }%>
             <!-- Fin del div que contiene la tabla de pedidos -->
             <!-- Fin del contenido principal-->
         </section>

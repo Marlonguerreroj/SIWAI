@@ -163,7 +163,7 @@
             <%}
                 }%>
             <!-- Fin del contenido principal-->
-
+            <!-- Inicio del form oculto -->
             <form id="formOculto" method="post">
                 <input type="hidden" id="sucursal" name="sucursal">
                 <input type="hidden" id="codigo" name="codigo">
@@ -180,6 +180,7 @@
                 <input type="hidden" id="habilitado" name="habilitado">
                 <input type="hidden" id="contraseña" name="contraseña">
             </form>
+            <!--- Fin del form oculto -->
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->
         <jsp:include page="../pie.jsp" />

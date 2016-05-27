@@ -3,7 +3,7 @@
     Created on : 17-mar-2016, 14:35:04
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
-
+<%@page import="java.text.DecimalFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
@@ -21,6 +21,7 @@
         <script src="../../Js/blockUI.js"></script>
     </head>
     <body>
+      <% DecimalFormat formatea = new DecimalFormat("###,###"); %>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
         <jsp:include page="../navegador.jsp" />
         <!-- Contenido principal contiene el formulario -->
@@ -37,7 +38,7 @@
                         <p>Codigo:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value="" name="codigo" type="text" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("codigo")%>" name="codigo" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
@@ -45,7 +46,7 @@
                     </div>
                     <div class="col-md-3">
                         <select name="sel1" class="form-control" id="sel1" required disabled>
-                            <option value="">Seleccione</option>
+                            <option value=""><%=request.getParameter("sucursal")%></option>
                         </select>
                     </div>
                     <div class="col-md-1"></div>
@@ -57,14 +58,14 @@
                         <p>Nombre:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value="" name="nombre" type="text" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("nombre")%>" name="nombre" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
                         <p>Cantidad:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value="" name="cantidad" type="text" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("cantidad")%>" name="cantidad" type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -75,14 +76,14 @@
                         <p>Fecha de entrada:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value="" name="fEntrada" type="text" class="form-control ">
+                        <input readOnly value="<%=request.getParameter("fEntrada")%>" name="fEntrada" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
-                        <p>Costo por unidad:</p>
+                        <p>Costo:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value="" name="costo" type="text" class="form-control ">
+                        <input readOnly value="<%=formatea.format(Integer.parseInt(request.getParameter("costo")))%>" name="costo" type="text" class="form-control ">
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -93,14 +94,14 @@
                         <p>Valor:</p>
                     </div>
                     <div class="col-md-3">
-                        <input readOnly value="" name="valor" type="text" class="form-control ">
+                        <input readOnly value="<%=formatea.format(Integer.parseInt(request.getParameter("valor")))%>" name="valor" type="text" class="form-control ">
                     </div>
                     <div class="col-md-2"></div>
                     <div class="col-md-1">
                         <p>Notas:</p>
                     </div>
                     <div class="col-md-3">
-                        <textarea readOnly  name="notas" class="form-control" ></textarea>
+                        <textarea readOnly name="notas" class="form-control" ><%=request.getParameter("notas")%></textarea>
                     </div>
                     <div class="col-md-1"></div>
                 </div>
@@ -109,7 +110,7 @@
                 <div class="row">
                     <div class="col-md-10"></div>
                     <div class="col-md-2">
-                        <a href="consultar.jsp" class="btn btn-success btn-lg ">Volver
+                        <a href="consultar.jsp" class="btn btn-success ">Volver
                         </a>
                     </div>
                     <div class="col-md-4"></div>

@@ -132,7 +132,11 @@
                                   <td><%=lista2.get(i).getCantidad()%></td>
                                     <td>
 
-                                        <a href="mas.jsp" style="cursor:pointer;">
+                                        <a onclick="enviarFormOcultoArticuloExMas(document,<%=i %>,'<%=lista2.get(i).getCodigo() %>',
+                                        '<%=lista2.get(i).getSucursal().getNombre() %>','<%=lista2.get(i).getNombre() %>',
+                                        '<%=lista2.get(i).getCantidad() %>','<%=lista2.get(i).getfEntrada() %>',
+                                        '<%=lista2.get(i).getCosto() %>','<%=lista2.get(i).getValor() %>',
+                                        '<%=lista2.get(i).getNotas() %>')" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-info-sign asd "></span>
                                         </a>
                                     </td>
@@ -149,6 +153,17 @@
             <% }
                 }%>
             <!-- Fin del contenido principal-->
+
+            <form id="formOculto" method="post">
+                <input type="hidden" id="codigo" name="codigo">
+                <input type="hidden" id="sucursal" name="sucursal">
+                <input type="hidden" id="nombre" name="nombre">
+                <input type="hidden" id="cantidad" name="cantidad">
+                <input type="hidden" id="fEntrada" name="fEntrada">
+                <input type="hidden" id="costo" name="costo">
+                <input type="hidden" id="valor" name="valor">
+                <input type="hidden" id="notas" name="notas">
+            </form>
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->
         <jsp:include page="../pie.jsp" />

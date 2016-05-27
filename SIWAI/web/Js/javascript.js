@@ -42,6 +42,20 @@ function enviarFormOcultoEmpleadoMas(document, i, apellido, telefono, email, dir
     document.getElementById("formOculto").submit();
 }
 
+function enviarFormOcultoArticuloExMas(document,i,codigo,sucursal,nombre,cantidad,fEntrada,costo,valor,notas){
+    document.getElementById("formOculto").action="mas.jsp";
+    document.getElementById("codigo").value = codigo;
+    document.getElementById("sucursal").value = sucursal;
+    document.getElementById("nombre").value = nombre;
+    document.getElementById("cantidad").value = cantidad;
+    document.getElementById("fEntrada").value = fEntrada;
+    document.getElementById("costo").value = costo;
+    document.getElementById("valor").value = valor;
+    document.getElementById("notas").value = notas;
+    document.getElementById("formOculto").submit();
+
+}
+
 function enviarFormOcultoEmpleadoActualizar(document, i, codigo,apellido, telefono, email, direccion, habilitado, contraseña) {
     sucursal = document.getElementById("tablaE").rows[i + 1].cells[2].innerHTML;
     cargo = document.getElementById("tablaE").rows[i + 1].cells[3].innerHTML;
