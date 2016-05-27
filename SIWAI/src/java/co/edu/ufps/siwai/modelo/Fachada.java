@@ -351,7 +351,7 @@ public class Fachada implements Serializable {
             DAOArticulo dao = new DAOArticulo();
             return dao.obtenerNombreArticulo(referencia);
         }
-        return "ArticuloNombre";
+        return "ArticuloDuplicado";
     }
     
 }

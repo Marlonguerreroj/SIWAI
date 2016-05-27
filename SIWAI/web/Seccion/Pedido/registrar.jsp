@@ -65,7 +65,7 @@
                     </div>
                 </div>
             </form>
-            <div id="nuevo-formulario"></div>
+            <div id="nuevo-formulario"><div id="formulario-borrar"></div></div>
             <!-- Fin del contenido principal-->
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->
