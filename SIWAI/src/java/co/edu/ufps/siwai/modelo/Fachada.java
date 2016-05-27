@@ -309,7 +309,7 @@ public class Fachada implements Serializable {
     public void crearPedido (Calendar fecha, String proveedor) {
         pedido = new Pedido(fecha, proveedor);
     }
-
+    
     /**
      * Metodo que añade un articulo a la lista de articulos del pedido.
      * @param referencia String con la referencia del articulo a añadir, debe ser unica.
@@ -322,7 +322,7 @@ public class Fachada implements Serializable {
         dto.setCantidad(cantidad);
         return pedido.aniadirArticulo(dto);
     }
-
+    
     /**
      * Metodo que elimina un articulo de la lista de articulos del pedido.
      * @param referencia String con la referencia del articulo a añadir.
@@ -333,7 +333,7 @@ public class Fachada implements Serializable {
         dto.setReferencia(referencia);
         return pedido.eliminarArticulo(dto);
     }
-
+    
     /**
      * Metodo que notifica a pedido para que este notifique a DAOPedido.
      * @return True si se registro, false si no.
@@ -342,7 +342,7 @@ public class Fachada implements Serializable {
     public boolean registrarPedido() throws Exception {
         return pedido.registrarPedido();
     }
-
+    
     /**
      * Metodo que obtiene el nombre de un articulo para un añadirlo a un pedido.
      * @param referencia String con la referencia del articulo.
@@ -354,9 +354,9 @@ public class Fachada implements Serializable {
             DAOArticulo dao = new DAOArticulo();
             return dao.obtenerNombreArticulo(referencia);
         }
-        return "ArticuloNombre";
+        return "ArticuloDuplicado";
     }
-
+    
     public ArrayList<PedidoDTO> consultarPedido(String buscarPor,String informacion)throws Exception{
         DAOPedido dao = new DAOPedido();
         return dao.consultarPedido(buscarPor,informacion);
@@ -368,4 +368,5 @@ public class Fachada implements Serializable {
         dto.setCodigo(codigoPedido);
         return dao.cargarArticuloPedidos(dto).getArticulos();
     }
+    
 }

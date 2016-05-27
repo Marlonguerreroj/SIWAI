@@ -51,7 +51,7 @@ public class ControladorPedido extends HttpServlet {
             response.getWriter().print("Error");
         }
     }
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -67,7 +67,7 @@ public class ControladorPedido extends HttpServlet {
         try {
             String referencia = request.getParameter("referencia");
             int cantidad = Integer.parseInt(request.getParameter("cantidad"));
-            if (cantidad > 0) {
+            if(cantidad > 0) {
                 Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
                 response.getWriter().print(fachada.aniadirArticuloPedido(referencia, cantidad));
             } else {
@@ -76,12 +76,12 @@ public class ControladorPedido extends HttpServlet {
             }
         } catch (NumberFormatException ex) {
             response.getWriter().print("Numero");
-        } catch (Exception ex) {
+        }   catch (Exception ex) {
             ex.printStackTrace();
             response.getWriter().print("Error");
         }
     }
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -102,7 +102,7 @@ public class ControladorPedido extends HttpServlet {
             response.getWriter().print("Error");
         }
     }
-
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -117,10 +117,11 @@ public class ControladorPedido extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         /* TODO output your page here. You may use following sample code. */
         PrintWriter out = response.getWriter();
-        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         try {
+            Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
             out.print(fachada.registrarPedido());
         } catch (Exception ex) {
+            ex.printStackTrace();
             out.print("Error");
         }
     }
