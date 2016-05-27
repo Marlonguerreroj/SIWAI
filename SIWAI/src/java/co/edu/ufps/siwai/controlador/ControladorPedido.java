@@ -117,10 +117,11 @@ public class ControladorPedido extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         /* TODO output your page here. You may use following sample code. */
         PrintWriter out = response.getWriter();
-        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         try {
+            Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
             out.print(fachada.registrarPedido());
         } catch (Exception ex) {
+            ex.printStackTrace();
             out.print("Error");
         }
     }
@@ -214,6 +215,8 @@ public class ControladorPedido extends HttpServlet {
             aniadirArticulo(request, response);
         } else if (request.getParameter("eliminarArticulo") != null) {
             eliminarArticulo(request, response);
+        } else if (request.getParameter("registrarPedido") != null) {
+            registrarPedido(request, response);
         } else if (request.getParameter("consultarPedido") != null) {
             consultarPedido(request, response);
         }else if (request.getParameter("cargarPedidos") != null) {
