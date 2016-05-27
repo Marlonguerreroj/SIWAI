@@ -239,6 +239,10 @@ function añadirFilaVentas()
 
 }
 
+function reiniciarTablaPedido(){
+    a = 0;
+}
+
 function myDeleteFunction(fila, num) {
     document.getElementById("table").deleteRow(fila);
     if (num === 1) {

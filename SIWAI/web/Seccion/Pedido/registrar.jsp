@@ -52,20 +52,20 @@
                             <p>Fecha:</p>
                         </div>
                         <div class="col-md-3">
-                            <input required  name="fecha" type="date" class="form-control">
+                            <input required id="fecha" name="fecha" type="date" class="form-control">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
                     <div class="row">
                         <br>
-                        <div class="text-center">
+                        <div class="text-center" id="boton">
                             <button id="crear" class="btn btn-success btn-lg letra">Crear Pedido</button>
                         </div>
                         <br>
                     </div>
                 </div>
             </form>
-            <div id="nuevo-formulario"><div id="formulario-borrar"></div></div>
+            <div id="nuevo-formulario"></div>
             <!-- Fin del contenido principal-->
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->

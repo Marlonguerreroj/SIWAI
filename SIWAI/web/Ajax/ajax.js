@@ -545,7 +545,7 @@ function crearPedido(documento) {
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                         "Error en la conexion a la base de datos</div>");
             } else {
-                $("#formulario-borrar").prepend("<h2 class='text-center'>Articulos</h2>"+
+                $("#nuevo-formulario").prepend("<div id='formulario-borrar'><h2 class='text-center'>Articulos</h2>"+
                         "<div class='container'>" +
                         "<div class='row'>" +
                         "<div class='col-md-1'></div>" +
@@ -583,7 +583,7 @@ function crearPedido(documento) {
                         "</div>" +
                         "</div>" +
                         "<br>" +
-                        "<br>");
+                        "<br></div>");
                 documento.elements[0].disabled = true;
                 documento.elements[1].readOnly = true;
                 $("#crear").remove();
@@ -747,7 +747,12 @@ function registrarPedido() {
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                         "Pedido registrado exitosamente</div>");
                 $("div").remove("#formulario-borrar");
-                $("#nuevo-formulario").prepend("<div class='formulario-borrar'></div>");
+                document.getElementById("proveedor").value = "";
+                document.getElementById("proveedor").disabled = false;
+                document.getElementById("fecha").readOnly = false;
+                document.getElementById("fecha").value = "";
+                $("#boton").prepend("<button id='crear' class='btn btn-success btn-lg letra'>Crear Pedido</button>");
+                reiniciarTablaPedido();
             }
         }
     };
