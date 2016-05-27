@@ -26,7 +26,7 @@ function enviarFormOcultoEmpleadoMas(document, i, apellido, telefono, email, dir
     celular = document.getElementById("tablaE").rows[i + 1].cells[6].innerHTML;
     fIngreso = document.getElementById("tablaE").rows[i + 1].cells[4].innerHTML;
     fSalida = document.getElementById("tablaE").rows[i + 1].cells[5].innerHTML;
-    document.getElementById("formOculto").action="mas.jsp";
+    document.getElementById("formOculto").action = "mas.jsp";
     document.getElementById("sucursal").value = sucursal;
     document.getElementById("cargo").value = cargo;
     document.getElementById("dni").value = dni;
@@ -63,7 +63,7 @@ function enviarFormOcultoEmpleadoActualizar(document, i, codigo,apellido, telefo
     nombre = document.getElementById("tablaE").rows[i + 1].cells[1].innerHTML;
     celular = document.getElementById("tablaE").rows[i + 1].cells[6].innerHTML;
     fIngreso = document.getElementById("tablaE").rows[i + 1].cells[4].innerHTML;
-    document.getElementById("formOculto").action="actualizar.jsp";
+    document.getElementById("formOculto").action = "actualizar.jsp";
     document.getElementById("sucursal").value = sucursal;
     document.getElementById("cargo").value = cargo;
     document.getElementById("codigo").value = codigo;
@@ -91,7 +91,7 @@ function enviarFormOcultoCliente(dni, nombre, apellido, telefono, email, direcci
 }
 
 function enviarFormOcultoProveedorMas(codigo, nit, nombre, contacto, telefono, email, web, cuenta, tipo, numero) {
-    document.getElementById("form-oculto").action="mas.jsp";
+    document.getElementById("form-oculto").action = "mas.jsp";
     document.getElementById("codigo").value = codigo;
     document.getElementById("nit").value = nit;
     document.getElementById("nombre").value = nombre;
@@ -106,7 +106,7 @@ function enviarFormOcultoProveedorMas(codigo, nit, nombre, contacto, telefono, e
 }
 
 function enviarFormOcultoProveedorActualizar(codigo, nit, nombre, contacto, telefono, email, web, cuenta, tipo, numero) {
-    document.getElementById("form-oculto").action="actualizar.jsp";
+    document.getElementById("form-oculto").action = "actualizar.jsp";
     document.getElementById("codigo").value = codigo;
     document.getElementById("nit").value = nit;
     document.getElementById("nombre").value = nombre;
@@ -133,13 +133,14 @@ function chequearEnter2(event) {
 }
 
 /** Metodo para añadir una fila en registrar pedido*/
-var a = 2;
-function añadirFila()
-{
+var a = 0;
+function añadirFilaPedidos() {
+    a++;
     var table = document.getElementById("table");
     var codigo = "codigo" + a;
     var nombre = "nombre" + a;
     var cantidad = "cantidad" + a;
+    var fila = "" + a;
     var row = table.insertRow(a);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
@@ -148,7 +149,7 @@ function añadirFila()
     var campo1 = document.createElement("input");
     campo1.type = "text";
     campo1.required = true;
-    campo1.setAttribute("onkeypress", "chequearEnter2(event, document.getElementById('" + nombre + "'), this,document.getElementById('" + cantidad + "'))");
+    campo1.setAttribute("onchange", "cargarNombreArticuloPedido(this, document.getElementById('" + nombre + "'),document.getElementById('" + cantidad + "'))");
     campo1.id = codigo;
     campo1.name = "codigo[]";
     campo1.className = "form-control";
@@ -168,23 +169,27 @@ function añadirFila()
     campo3.readOnly = true;
     campo3.required = true;
     campo3.name = "cantidad[]";
-    campo3.setAttribute("onkeypress", "chequearEnter(event)");
+    campo3.setAttribute("onchange", "aniadirArticuloPedido(this, document.getElementById('" + codigo + "'))");
     campo3.id = cantidad;
     campo3.className = "form-control";
     cell3.appendChild(campo3);
-
     var campo4 = document.createElement("button");
     campo4.innerHTML = "Borrar";
-    campo4.className = "btn btn-success";
-    campo4.onclick = function ()
-    {
-        myDeleteFunction(table, this.parentNode.parentNode.rowIndex, 1);
-    };
+    campo4.className = "btn btn-danger";
+    if (campo4.addEventListener) {
+        campo4.addEventListener('click', function (){
+            eliminarArticuloPedido(campo1.value, fila);
+        }, false);
+    } else {
+        campo4.attachEvent('onclick', function (){
+            eliminarArticuloPedido(campo1.value, fila);
+        });
+    }
     cell4.appendChild(campo4);
-    a++;
+    return a;
 }
 var b = 2;
-function añadirFila2()
+function añadirFilaVentas()
 {
     var table = document.getElementById("table");
 
@@ -239,7 +244,7 @@ function añadirFila2()
     var campo5 = document.createElement("button");
     campo5.innerHTML = "Borrar";
     campo5.className = "btn btn-success";
-    campo5.onclick = function ()
+    campo5.onclick = "";
     {
         myDeleteFunction(table, this.parentNode.parentNode.rowIndex, 2)
     };
@@ -248,8 +253,9 @@ function añadirFila2()
 
 }
 
-function myDeleteFunction(element, c, num) {
-    //element.deleteRow(c);
+function myDeleteFunction(fila, num) {
+    alert("borrando fila: " + fila);
+    document.getElementById("table").deleteRow(fila);
     if (num === 1) {
         a--;
     } else {
@@ -271,4 +277,10 @@ function capturar() {
         document.form.informacion.readOnly = false;
         document.form.informacion.required = true;
     }
+
+}
+
+function anular(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+    return (tecla != 13);
 }

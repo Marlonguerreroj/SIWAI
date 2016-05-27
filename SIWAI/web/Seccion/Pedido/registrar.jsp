@@ -19,7 +19,11 @@
         <script src="../../Bootstrap/js/jquery.js"></script>
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
+        <!-- Script del Ajax-->
+        <script src="../../Ajax/ajax.js"></script>
         <script src="../../Js/blockUI.js"></script>
+        <!-- Script que carga los proveedores en el select -->
+        <script src="../../Js/proveedores.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
@@ -30,96 +34,38 @@
                 <h1 class="centrar-texto">Registrar Pedido</h1>
             </div>
             <br>
-            <!-- Inicio del formulario -->
-            <form action="" method="post" id="form" name="form" onkeypress="return anular(event)">
+            <!-- Inicio del formulario para crear el pedido -->
+            <form id="formPedido" onSubmit="crearPedido(document.forms[0]);
+                    return false">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-1">
-                            <p>Codigo:</p>
-                        </div>
-                        <div class="col-md-3">
-                            <input required name="codigo0" type="text" class="form-control ">
-                        </div>
-                        <div class="col-md-2"></div>
-                        <div class="col-md-1">
                             <p>Proveedor:</p>
                         </div>
                         <div class="col-md-3">
-                            <select name="sel1" class="form-control" id="sel1" required>
-                                <option value="">Seleccione</option>
-                                <option>Yamaha</option>
+                            <select name="proveedor" class="form-control" id="proveedor" required>
                             </select>
                         </div>
-                        <div class="col-md-1"></div>
-                    </div>
-                    <br>
-                    <div class="row">
-                        <div class="col-md-1"></div>
+                        <div class="col-md-2"></div>
                         <div class="col-md-1">
                             <p>Fecha:</p>
                         </div>
                         <div class="col-md-3">
-                            <input required  name="fecha" type="date" class="form-control ">
-                        </div>
-                        <div class="col-md-2"></div>
-                        <div class="col-md-1">
-                            <p>Notas:</p>
-                        </div>
-                        <div class="col-md-3">
-                            <textarea name="notas" class="form-control" ></textarea>
+                            <input required  name="fecha" type="date" class="form-control">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
-                    <br>
                     <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-10">
-                            <div class="table-responsive">
-                                <table class="table" id="table">
-                                    <thead>
-                                        <tr>
-                                            <th>Referencia</th>
-                                            <th>Nombre</th>
-                                            <th>Cantidad</th>
-                                        </tr>
-                                    </thead>
-                                    <tr>
-                                        <td>
-                                            <input id="codigo1" required name="codigo[]" type="text" class="form-control ">
-                                        </td>
-                                        <td>
-                                            <input readOnly id="nombre1" name="nombre" type="text" class="form-control ">
-                                        </td>
-                                        <td>
-                                            <input  onkeypress="chequearEnter(event)"  required name="cantidad[]" id='cantidad1' type="number" class="form-control ">
-                                        </td>
-
-                                    </tr>
-                                </table>
-                            </div>
+                        <br>
+                        <div class="text-center">
+                            <button id="crear" class="btn btn-success btn-lg letra">Crear Pedido</button>
                         </div>
-                        <div class="col-md-1"></div>
-                    </div>
-                    <br>
-                    <br>
-                    <div class="row centrar-texto">
-                        <div class="col-md-4"></div>
-                        <div class="col-md-2">
-                            <button  name="enviarPedido" type="submit" class="btn btn-success btn-lg letra">Registrar
-                            </button>
-                        </div>
-                        <div class="col-md-2">
-                            <a href="../Menu/menu.jsp" class="btn btn-danger btn-lg letra">Cancelar
-                            </a>
-                        </div>
-                        <div class="col-md-4"></div>
-
+                        <br>
                     </div>
                 </div>
-                <br>
-                <br>
             </form>
+            <div id="nuevo-formulario"></div>
             <!-- Fin del contenido principal-->
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->
