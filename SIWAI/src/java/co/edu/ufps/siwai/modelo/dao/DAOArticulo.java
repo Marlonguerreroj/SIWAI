@@ -58,7 +58,7 @@ public class DAOArticulo {
         conn = Conexion.generarConexion();
         String nombre = "";
         PreparedStatement stmt = conn.prepareStatement("SELECT nom_articulo"
-                + " FROM tbl_articulo WHERE refe_articulo COLLATE utf8_bin=?");
+                + " FROM tbl_articulo WHERE refe_articulo = ?");
         stmt.setString(1, referencia);
         ResultSet rs = stmt.executeQuery();
         while(rs.next()){

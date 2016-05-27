@@ -493,6 +493,7 @@ function registrarArticuloExtra(document) {
     costo = document.elements[5].value;
     valor = document.elements[6].value;
     notas = document.elements[7].value;
+    alert("a");
     var xhttp = new XMLHttpRequest();
     var url = "/SIWAI/ControladorArticuloExtra?registrarArticuloExtra=true&codigo=" + codigo.value + "&sucursal=" +
             sucursal + "&nombre=" + nombre + "&cantidad=" + cantidad + "&fEntrada=" + fEntrada +
@@ -502,6 +503,7 @@ function registrarArticuloExtra(document) {
     xhttp.onreadystatechange = function () {
         if (xhttp.readyState == 4 && xhttp.status == 200) {
             var sub = xhttp.responseText;
+            alert(sub);
             if (sub.indexOf("false") >= 0) {
                 $("div").remove("#alert");
                 $("body").prepend("<div id='alert' class='alert alert-warning centrarDiv'>Existe otro articulo extra registrado con el codigo ingresado</div>");
@@ -545,7 +547,7 @@ function crearPedido(documento) {
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                         "Error en la conexion a la base de datos</div>");
             } else {
-                $("#nuevo-formulario").prepend("<div id='formulario-borrar'><h2 class='text-center'>Articulos</h2>"+
+                $("#nuevo-formulario").prepend("<h2 class='text-center'>Articulos</h2>"+
                         "<div class='container'>" +
                         "<div class='row'>" +
                         "<div class='col-md-1'></div>" +
@@ -571,8 +573,7 @@ function crearPedido(documento) {
                         "<div class='row centrar-texto'>" +
                         "<div class='col-md-4'></div>" +
                         "<div class='col-md-2'>" +
-                        "<button  name='enviarPedido' type='submit' onclick='registrarPedido()'" +
-                        "class='btn btn-success btn-lg letra'>Registrar" +
+                        "<button  name='enviarPedido' type='submit' class='btn btn-success btn-lg letra'>Registrar" +
                         "</button>" +
                         "</div>" +
                         "<div class='col-md-2'>" +
@@ -583,11 +584,12 @@ function crearPedido(documento) {
                         "</div>" +
                         "</div>" +
                         "<br>" +
-                        "<br></div>");
+                        "<br>");
                 documento.elements[0].disabled = true;
                 documento.elements[1].readOnly = true;
                 $("#crear").remove();
                 a = añadirFilaPedidos();
+                alert(a);
                 document.getElementById("codigo"+a).focus();
             }
         }
@@ -615,17 +617,11 @@ function cargarNombreArticuloPedido(campo, nombre, cantidad) {
                 $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-danger centrarDiv'>" +
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                         "Error en la conexion a la base de datos</div></div></div></div>");
-            } else if (sub.indexOf("ArticuloDuplicado") >= 0) {
+            } else if (sub.indexOf("ArticuloNombre") >= 0) {
                 $("div").remove("#alert");
                 $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                        "El artículo con referencia " + referencia + " ya esta en el pedido</div></div></div></div>");
-                nombre.value = "";
-            } else if (sub.indexOf("ArticuloReferencia") >= 0) {
-                $("div").remove("#alert");
-                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
-                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                        "No se encontro un artículo con la referencia: " + referencia + "</div></div></div></div>");
+                        "El artículo con referencia: " + referencia + " ya esta en el pedido</div></div></div></div>");
                 nombre.value = "";
             } else {
                 $("div").remove("#alert");
@@ -707,52 +703,11 @@ function eliminarArticuloPedido(referencia, fila) {
                 $("div").remove("#alert");
                 $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                        "No se pudo eliminar el artículo</div></div></div></div>");
+                        "No se pudo eliminar el articulo</div></div></div></div>");
                 nombre.value = "";
             } else if (sub.indexOf("true") >= 0) {
                 $("div").remove("#alert");
                 myDeleteFunction(fila, 1);
-            }
-        }
-    };
-}
-
-/**
- * Metodo que recibe la peticion de registro de un pedido y la envia a ControladorPedido.
- * @returns {undefined}
- */
-function registrarPedido() {
-    $.blockUI();
-    var xhttp = new XMLHttpRequest();
-    var url = "/SIWAI/ControladorPedido?registrarPedido=true";
-    xhttp.open("POST", url, true);
-    xhttp.send();
-    xhttp.onreadystatechange = function () {
-        if (xhttp.readyState == 4 && xhttp.status == 200) {
-            var sub = xhttp.responseText;
-            $.unblockUI();
-            if (sub.indexOf("false") >= 0) {
-                $("div").remove("#alert");
-                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
-                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                        "Ocurrio un error al intentar registrar el pedido</div>");
-            } else if (sub.indexOf("Error") >= 0) {
-                $("div").remove("#alert");
-                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
-                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                        "Error en la conexion a la base de datos</div>");
-            } else if (sub.indexOf("true") >= 0) {
-                $("div").remove("#alert");
-                $("section").prepend("<div id='alert' class='alert alert-success centrarDiv'>" +
-                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
-                        "Pedido registrado exitosamente</div>");
-                $("div").remove("#formulario-borrar");
-                document.getElementById("proveedor").value = "";
-                document.getElementById("proveedor").disabled = false;
-                document.getElementById("fecha").readOnly = false;
-                document.getElementById("fecha").value = "";
-                $("#boton").prepend("<button id='crear' class='btn btn-success btn-lg letra'>Crear Pedido</button>");
-                reiniciarTablaPedido();
             }
         }
     };

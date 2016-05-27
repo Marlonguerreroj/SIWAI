@@ -76,7 +76,7 @@ public class ControladorArticulo extends HttpServlet {
             if(!nombre.isEmpty())
                 out.print(nombre);
             else
-                out.print("ArticuloReferencia");
+                out.print("ArticuloNombre");
         } catch (Exception ex) {
             out.print("Error");
         }

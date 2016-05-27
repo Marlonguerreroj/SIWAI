@@ -254,6 +254,7 @@ function añadirFilaVentas()
 }
 
 function myDeleteFunction(fila, num) {
+    alert("borrando fila: " + fila);
     document.getElementById("table").deleteRow(fila);
     if (num === 1) {
         a--;
