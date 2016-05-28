@@ -4,11 +4,19 @@
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
 
+<%@page import="co.edu.ufps.siwai.modelo.dto.ArticuloDTO"%>
+<%@page import="co.edu.ufps.siwai.modelo.dto.SucursalDTO"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="co.edu.ufps.siwai.modelo.Fachada"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <% if (session.getAttribute("usuario") == null) {
         response.sendRedirect("../../index.jsp");
     }%>
+<%
+    Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+    ArrayList<SucursalDTO> lista = fachada.consultarSucursal("Todos", "");
+%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -34,19 +42,20 @@
             </div>
             <br>
             <!-- Inicio del formulario -->
-            <form name="form" action="../Script/ScriptArticulo.php" method="post">
+            <form name="form" action="/SIWAI/ControladorArticulo" method="post">
                 <div class="container">
                     <div class="row">
                         <div class="col-md-1">
                             <p>Sucursal:</p>
                         </div>
                         <div class="col-md-2">
-                            <select required name="sel0" class="form-control" id="sel" onchange="capturar()">
+                            <select required name="sucursal" class="form-control" id="sel" >
                                 <option value="" >Seleccione</option>
                                 <option value="Todos" >Todas</option>
-                                <?php for($a=0;$a<count($valor2);$a++): ?>
-                                <option value="<?php echo  $valor2[$a][0] ?>"><?php echo $valor2[$a][1]?></option>
-                                <?php endfor; ?>
+                                <% for (int i = 0; i < lista.size(); i++) {%>
+                                <option value="<%=lista.get(i).getCodigo()%>"><%=lista.get(i).getNombre()%></option>
+                                <% }
+                                %>
                             </select>
                         </div>
 
@@ -68,7 +77,7 @@
                             <input required id="informacion" name="informacion" type="text" class="form-control ">
                         </div>
                         <div class="col-md-2">
-                            <button name="buscar" type="submit" class="btn btn-success  letra">
+                            <button name="consultarArticulo" type="submit" class="btn btn-success  letra">
                                 <span class="glyphicon glyphicons glyphicon-search"></span>
                             </button>
                         </div>
@@ -78,8 +87,11 @@
             </form>
             <br>
             <br>
-            <?php if( $valor !=null): ?>
-
+            <%
+                if (request.getSession().getAttribute("articulos") != null) {
+                    ArrayList<ArticuloDTO> lis = (ArrayList<ArticuloDTO>) request.getSession().getAttribute("articulos");
+                    System.out.println(lis.size());
+            %>
             <div class="container">
                 <div class="row">
                     <div class="col-md-1"></div>
@@ -97,13 +109,20 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <tr>
-                                    <td>Sucursal 1</td>
-                                    <td>G001</td>
-                                    <td>Guitarra Fender</td>
-                                    <td>Cuerdas</td>
-                                    <td>6</td>
-                                    <td>150.000</td>
+                                <%for (int i = 0; i < lis.size(); i++) {
+                                    System.out.print("entro 0");
+                                    String ref=lis.get(i).getReferencia();
+                                    String nom=lis.get(i).getNombre();
+                                    String tipo=lis.get(i).getTipoArticulo();
+                                %>
+                                    <tr>
+
+                                    <td>Sucursal xxx</td>
+                                    <td><%=ref%></td>
+                                    <td><%=nom%></td>
+                                    <td><%=tipo%></td>
+                                    <td>0</td>
+                                    <td>0000000</td>
                                     <td>
                                         <a href="actualizar.jsp" style="cursor: pointer;">
                                             <span class="glyphicon glyphicon-edit asd "></span>
@@ -113,13 +132,22 @@
                                         </a>
                                     </td>
 
-                                </tr>
+                                    </tr>
+                                <%
+                                    }
+                                %>
+                                
                             </table>
                         </div>
                     </div>
                     <div class="col-md-1"></div>
                 </div>
             </div>
+            <%
+                }
+            %>
+
+
             <!-- Fin del contenido principal-->
         </section>
         <!-- Inluye el footer de la pagina a traves de pie.jsp-->

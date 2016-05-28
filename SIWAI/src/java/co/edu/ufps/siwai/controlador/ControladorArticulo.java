@@ -6,8 +6,12 @@
 package co.edu.ufps.siwai.controlador;
 
 import co.edu.ufps.siwai.modelo.Fachada;
+import co.edu.ufps.siwai.modelo.dto.ArticuloDTO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -54,7 +58,31 @@ public class ControladorArticulo extends HttpServlet {
         }
         out.print(mensaje);
     }
-    
+    protected void consultarArticulo(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        String sucursal = request.getParameter("sucursal");
+        String buscarPor = request.getParameter("sel");
+        String info = request.getParameter("informacion");
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        ArrayList<ArticuloDTO> lis=null;
+        PrintWriter out = response.getWriter();
+         try{
+             
+             lis=fachada.consultarArticulo(sucursal, buscarPor, info);
+             if (lis.isEmpty()) {
+                request.getSession().setAttribute("msjCAE", "No se encontro ningún articulo extra");
+            }
+            request.getSession().setAttribute("articulos", lis);
+            response.sendRedirect("/SIWAI/Seccion/Articulo/consultar.jsp");
+         } catch (Exception ex) {
+           //request.getSession().setAttribute("msjCAE", "Error en la conexion a la base de datos");
+            //response.sendRedirect("/SIWAI/Seccion/Articulo/consultar.jsp");
+            ex.printStackTrace();
+             System.out.println("error");
+        }
+    }
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -115,11 +143,16 @@ public class ControladorArticulo extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
+        System.out.println("llego aqui 1");
         if(request.getParameter("registrarArticulo")!=null){
             this.registrarArticulo(request, response);
         } else if(request.getParameter("cargarNombreArticuloPedido")!=null){
             this.cargarNombreArticuloPedido(request, response);
+        }else if(request.getParameter("consultarArticulo")!=null){
+            System.out.println("entro aqui 2");
+            this.consultarArticulo(request, response);
         }
+        
     }
 
     /**

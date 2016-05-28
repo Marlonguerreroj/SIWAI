@@ -300,7 +300,10 @@ public class Fachada implements Serializable {
         DAOArticuloExtra dao = new DAOArticuloExtra();
         return dao.consultarArticuloExtra(sucursal,buscarPor,info);
     }
-
+    public ArrayList<ArticuloDTO> consultarArticulo(String sucursal, String buscarPor, String info)throws Exception{
+        DAOArticulo dao=new DAOArticulo();
+        return dao.consultarArticulo(sucursal, buscarPor, info);
+    }
     /**
      * Metodo que crea el pedido.
      * @param fecha Calendar con la fecha en la que se realizo el pedido.
