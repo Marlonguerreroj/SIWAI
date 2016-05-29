@@ -188,6 +188,7 @@ function añadirFilaPedidos() {
     cell4.appendChild(campo4);
     return a;
 }
+
 var b = 2;
 function añadirFilaVentas()
 {
@@ -261,6 +262,7 @@ function myDeleteFunction(fila, num) {
         b--;
     }
 }
+
 /**
  * Este metodo deshabilita la casilla informacion de las secciones de consultar
  * @returns {undefined}

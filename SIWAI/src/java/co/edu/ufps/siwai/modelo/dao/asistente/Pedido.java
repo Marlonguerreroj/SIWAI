@@ -19,7 +19,7 @@ import java.util.Calendar;
 public class Pedido implements Serializable {
 
     private PedidoDTO dto;
-
+    
     /**
      * Metodo que iguala a null el atributo pedido.
      */

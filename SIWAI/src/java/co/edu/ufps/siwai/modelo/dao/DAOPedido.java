@@ -16,7 +16,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import javax.naming.spi.DirStateFactory;
 
 /**
  * Clase de acceso a los datos de la tabla pedido y articulo_pedido
@@ -26,7 +25,7 @@ public class DAOPedido {
     
     private Connection conn;
     
-    /**
+   /**
      * Metodo que registra un pedido junto con los articulos del pedido.
      * @param dto PedidoDTO con los datos del pedido y los articulos del pedido.
      * @return True si se registro todo, false si algo no se registro.

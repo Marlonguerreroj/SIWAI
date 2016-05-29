@@ -219,6 +219,8 @@ public class ControladorPedido extends HttpServlet {
             consultarPedido(request, response);
         }else if (request.getParameter("cargarPedidos") != null) {
             cargarPedidos(request, response);
+        } else if (request.getParameter("registrarPedido") != null) {
+            registrarPedido(request, response);
         }
     }
 
