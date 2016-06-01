@@ -11,75 +11,88 @@ import java.util.Calendar;
 import java.util.TreeSet;
 
 /**
- * Clase de transferencia de datos de los pedidos.
- * @author Alejandro Ramírez
+ * Clase de transferencia de datos de una comparacion de un pedido.
+ * @author Alejandro Ramirez
  */
-public class PedidoDTO implements Serializable {
-
-    private Calendar fecha;
-    private int codigo;
-    private ProveedorDTO proveedor;
-    private final TreeSet<ArticuloDTO> articulos;
-    private ComparacionDTO comparacion;
-
-    /**
-     * Constructor, inicializa los atributos comparacion, proveedor y articulos.
-     * @param fecha Calendar con la fecha en la que se realizo el pedido.
-     * @param codProveedor Codigo del proveedor al que se le realizo el pedido.
-     */
-    public PedidoDTO(Calendar fecha, String codProveedor) {
-        proveedor = new ProveedorDTO();
-        articulos = new TreeSet<>();
-        this.fecha = fecha;
-        proveedor.setCodigo(codProveedor);
-        comparacion = new ComparacionDTO();
-    }
-
-    /**
-     * Constructor, inicializa los atributos comparacion, proveedor y articulos.
-     */
-    public PedidoDTO() {
-        proveedor = new ProveedorDTO();
-        articulos = new TreeSet<>();
-        comparacion = new ComparacionDTO();
-    }
-
-    public void crearComparacion(Calendar fecha, String notas, String sucursal, int transporte){
-        comparacion = new ComparacionDTO(this.codigo, fecha, notas, sucursal, transporte);
-    }
-
-    public ComparacionDTO getComparacion() {
-        return comparacion;
-    }
+public class ComparacionDTO implements Serializable{
     
-    public Calendar getFecha() {
-        return fecha;
+    private int pedido;
+    private String notas;
+    private final TreeSet<ArticuloDTO> articulos;
+    private int transporte;
+    private Calendar fecha;
+    private SucursalDTO sucursal;
+
+    /**
+     * Constructor, incializa el atributo TreeSet de ArticuloDTO
+     * @param pedido Integer con el codigo del pedido al que pertenece la comparacion.
+     * @param fecha Calendar con la fecha en la que llego el pedido.
+     * @param notas
+     * @param sucursal
+     * @param transporte
+     */
+    public ComparacionDTO(int pedido, Calendar fecha, String notas, String sucursal, int transporte) {
+        this.pedido = pedido;
+        this.articulos = new TreeSet<>();
+        this.sucursal = new SucursalDTO();
+        this.sucursal.setCodigo(sucursal);
+        this.fecha = fecha;
+        this.transporte = transporte;
+        this.notas = notas;
+    }
+
+    /**
+     * Constructor, incializa los atributos PedidoDTO y TreeSet de ArticuloDTO
+     */
+    public ComparacionDTO() {
+        this.articulos = new TreeSet<>();
+        sucursal = new SucursalDTO();
+    }
+
+    public int getTransporte() {
+        return transporte;
+    }
+
+    public SucursalDTO getSucursal() {
+        return sucursal;
+    }
+
+    public void setTransporte(int transporte) {
+        this.transporte = transporte;
+    }
+
+    public void setSucursal(SucursalDTO sucursal) {
+        this.sucursal = sucursal;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
     }
 
     public void setFecha(Calendar fecha) {
         this.fecha = fecha;
     }
 
-    public int getCodigo() {
-        return codigo;
-    }
-
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
-    }
-
-    public ProveedorDTO getProveedor() {
-        return proveedor;
-    }
-
-    public void setProveedor(ProveedorDTO proveedor) {
-        this.proveedor = proveedor;
+    public Calendar getFecha() {
+        return fecha;
     }
 
     public TreeSet<ArticuloDTO> getArticulos() {
         return articulos;
     }
 
+    public int getPedido() {
+        return pedido;
+    }
+
+    public void setPedido(int pedido) {
+        this.pedido = pedido;
+    }
+    
     /**
      * Metodo que añade un articulo al TreeSet de ArticuloDTO
      * @param dto ArticuloDTO con los datos del articulo.
@@ -127,12 +140,7 @@ public class PedidoDTO implements Serializable {
     public String getFechaFormateada(){
       SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
       String fechaFormateada = sdf.format(this.fecha.getTime());
-
       return fechaFormateada;
-    }
-    
-    public boolean aniadirArticuloComparacion(ArticuloDTO dto) {
-        return comparacion.aniadirArticulo(dto);
     }
     
 }

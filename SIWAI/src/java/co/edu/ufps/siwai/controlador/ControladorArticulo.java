@@ -110,6 +110,33 @@ public class ControladorArticulo extends HttpServlet {
         }
     }
     
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void cargarNombreArticuloComparacion(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        /* TODO output your page here. You may use following sample code. */
+        String referencia = request.getParameter("referencia");
+        PrintWriter out = response.getWriter();
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        try {
+            String nombre = fachada.cargarNombreArticuloComparacion(referencia);
+            if(!nombre.isEmpty())
+                out.print(nombre);
+            else
+                out.print("ArticuloReferencia");
+        } catch (Exception ex) {
+            out.print("Error");
+        }
+    }
+    
     private String validarCampos(String referencia, String nombre, String tipoArticulo){
         String msj="Exito";
         if(referencia.trim().isEmpty()|| nombre.trim().isEmpty()||tipoArticulo.trim().isEmpty())
@@ -149,6 +176,8 @@ public class ControladorArticulo extends HttpServlet {
             this.cargarNombreArticuloPedido(request, response);
         }else if(request.getParameter("consultarArticulo")!=null){
             this.consultarArticulo(request, response);
+        } else if(request.getParameter("cargarNombreArticuloComparacion")!=null){
+            this.cargarNombreArticuloComparacion(request, response);
         }
         
     }

@@ -9,6 +9,7 @@ import co.edu.ufps.siwai.modelo.dao.DAOArticulo;
 import co.edu.ufps.siwai.modelo.dao.DAOArticuloExtra;
 import co.edu.ufps.siwai.modelo.dto.ClienteDTO;
 import co.edu.ufps.siwai.modelo.dao.DAOCliente;
+import co.edu.ufps.siwai.modelo.dao.DAOComparacion;
 import co.edu.ufps.siwai.modelo.dao.DAOEmpleado;
 import co.edu.ufps.siwai.modelo.dao.DAOPedido;
 import co.edu.ufps.siwai.modelo.dao.DAOProveedor;
@@ -17,6 +18,7 @@ import co.edu.ufps.siwai.modelo.dao.DAOUbicacion;
 import co.edu.ufps.siwai.modelo.dao.asistente.Pedido;
 import co.edu.ufps.siwai.modelo.dto.ArticuloDTO;
 import co.edu.ufps.siwai.modelo.dto.ArticuloExtraDTO;
+import co.edu.ufps.siwai.modelo.dto.ComparacionDTO;
 import co.edu.ufps.siwai.modelo.dto.EmpleadoDTO;
 import co.edu.ufps.siwai.modelo.dto.PedidoDTO;
 import co.edu.ufps.siwai.modelo.dto.ProveedorDTO;
@@ -122,30 +124,31 @@ public class Fachada implements Serializable {
         return dao.actualizarEmpleado(dto);
     }
 
-    public boolean validarContraseña(String codigo,String contraseña) throws Exception{
-      EmpleadoDTO dto = new EmpleadoDTO();
-      dto.setCodigo(codigo);
-      contraseña = MD5.encriptar(contraseña);
-      dto.setContraseña(contraseña);
-      DAOEmpleado dao = new DAOEmpleado();
-      return dao.validarContraseña(dto);
+    public boolean validarContraseña(String codigo, String contraseña) throws Exception {
+        EmpleadoDTO dto = new EmpleadoDTO();
+        dto.setCodigo(codigo);
+        contraseña = MD5.encriptar(contraseña);
+        dto.setContraseña(contraseña);
+        DAOEmpleado dao = new DAOEmpleado();
+        return dao.validarContraseña(dto);
     }
-    public boolean cambiarContraseña(String codigo,String contraNueva)throws Exception{
-      EmpleadoDTO dto = new EmpleadoDTO();
-      dto.setCodigo(codigo);
-      contraNueva = MD5.encriptar(contraNueva);
-      dto.setContraseña(contraNueva);
-      DAOEmpleado dao = new DAOEmpleado();
-      return dao.cambiarContraseña(dto);
+
+    public boolean cambiarContraseña(String codigo, String contraNueva) throws Exception {
+        EmpleadoDTO dto = new EmpleadoDTO();
+        dto.setCodigo(codigo);
+        contraNueva = MD5.encriptar(contraNueva);
+        dto.setContraseña(contraNueva);
+        DAOEmpleado dao = new DAOEmpleado();
+        return dao.cambiarContraseña(dto);
     }
 
     public boolean registrarEmpleado(String codigo, String dni, String nombre, String apellido,
             String telefono, String celular, String email, String direccion,
             String fIngreso, String cargo, String sucursal) throws Exception {
-        String contraseñaE= "NULL";
-        if(!cargo.equals("Vendedor")){
-          contraseñaE = "123456";
-          contraseñaE = MD5.encriptar(contraseñaE);
+        String contraseñaE = "NULL";
+        if (!cargo.equals("Vendedor")) {
+            contraseñaE = "123456";
+            contraseñaE = MD5.encriptar(contraseñaE);
         }
         EmpleadoDTO dto = new EmpleadoDTO(codigo, dni, nombre, apellido, contraseñaE, email,
                 direccion, cargo, sucursal, telefono, celular, fIngreso);
@@ -276,46 +279,55 @@ public class Fachada implements Serializable {
     }
 
     /**
-     * Este método llama crea un ArticuloDTO y llama al DAOArticulo para que él se encargue
-     * de guardar el articulo
+     * Este método llama crea un ArticuloDTO y llama al DAOArticulo para que él
+     * se encargue de guardar el articulo
+     *
      * @param referencia referencia del articulo
      * @param nombre nombre del articulo
      * @param tipoArticulo tipo del articulo
-     * @return retorna lo que le retorne el método registrarArticulo de la clase DAOArticulo
+     * @return retorna lo que le retorne el método registrarArticulo de la clase
+     * DAOArticulo
      */
-    public boolean registrarAriculo(String referencia, String nombre, String tipoArticulo) throws Exception
-    {
-        ArticuloDTO dto=new ArticuloDTO(referencia,nombre,tipoArticulo);
-        DAOArticulo dao=new DAOArticulo();
+    public boolean registrarAriculo(String referencia, String nombre, String tipoArticulo) throws Exception {
+        ArticuloDTO dto = new ArticuloDTO(referencia, nombre, tipoArticulo);
+        DAOArticulo dao = new DAOArticulo();
         return dao.registrarArticulo(dto);
 
     }
-    public boolean registrarArticuloExtra(String codigo,String sucursal,String nombre,int cantidad,
-    String fEntrada, int costo,int valor,String notas)throws Exception{
-      ArticuloExtraDTO dto = new ArticuloExtraDTO(codigo, nombre, fEntrada, notas, cantidad, costo, valor, sucursal);
-      DAOArticuloExtra dao = new DAOArticuloExtra();
-      return dao.registrarArticuloExtra(dto);
-    }
-    public ArrayList<ArticuloExtraDTO> consultarArticuloExtra(String sucursal,String buscarPor, String info) throws Exception {
+
+    public boolean registrarArticuloExtra(String codigo, String sucursal, String nombre, int cantidad,
+            String fEntrada, int costo, int valor, String notas) throws Exception {
+        ArticuloExtraDTO dto = new ArticuloExtraDTO(codigo, nombre, fEntrada, notas, cantidad, costo, valor, sucursal);
         DAOArticuloExtra dao = new DAOArticuloExtra();
-        return dao.consultarArticuloExtra(sucursal,buscarPor,info);
+        return dao.registrarArticuloExtra(dto);
     }
-    public ArrayList<ArticuloDTO> consultarArticulo(String sucursal, String buscarPor, String info)throws Exception{
-        DAOArticulo dao=new DAOArticulo();
+
+    public ArrayList<ArticuloExtraDTO> consultarArticuloExtra(String sucursal, String buscarPor, String info) throws Exception {
+        DAOArticuloExtra dao = new DAOArticuloExtra();
+        return dao.consultarArticuloExtra(sucursal, buscarPor, info);
+    }
+
+    public ArrayList<ArticuloDTO> consultarArticulo(String sucursal, String buscarPor, String info) throws Exception {
+        DAOArticulo dao = new DAOArticulo();
         return dao.consultarArticulo(sucursal, buscarPor, info);
     }
+
     /**
      * Metodo que crea el pedido.
+     *
      * @param fecha Calendar con la fecha en la que se realizo el pedido.
-     * @param proveedor String con el codigo del proveedor al que se le realizo el pedido.
+     * @param proveedor String con el codigo del proveedor al que se le realizo
+     * el pedido.
      */
-    public void crearPedido (Calendar fecha, String proveedor) {
+    public void crearPedido(Calendar fecha, String proveedor) {
         pedido = new Pedido(fecha, proveedor);
     }
-    
+
     /**
      * Metodo que añade un articulo a la lista de articulos del pedido.
-     * @param referencia String con la referencia del articulo a añadir, debe ser unica.
+     *
+     * @param referencia String con la referencia del articulo a añadir, debe
+     * ser unica.
      * @param cantidad Cantidad de articulos que se solicitan con el pedido.
      * @return true si se añadio, false si no.
      */
@@ -325,9 +337,10 @@ public class Fachada implements Serializable {
         dto.setCantidad(cantidad);
         return pedido.aniadirArticulo(dto);
     }
-    
+
     /**
      * Metodo que elimina un articulo de la lista de articulos del pedido.
+     *
      * @param referencia String con la referencia del articulo a añadir.
      * @return true si se elimino, false si no.
      */
@@ -336,33 +349,36 @@ public class Fachada implements Serializable {
         dto.setReferencia(referencia);
         return pedido.eliminarArticulo(dto);
     }
-    
+
     /**
      * Metodo que notifica a pedido para que este notifique a DAOPedido.
+     *
      * @return True si se registro, false si no.
      * @throws Exception Excepcion al conectarse a la base de datos.
      */
     public boolean registrarPedido() throws Exception {
         return pedido.registrarPedido();
     }
-    
+
     /**
      * Metodo que obtiene el nombre de un articulo para un añadirlo a un pedido.
+     *
      * @param referencia String con la referencia del articulo.
-     * @return String con el nombre del articulo o String con la cadena ArticuloNombre si el articulo ya esta en el pedido.
+     * @return String con el nombre del articulo o String con la cadena
+     * ArticuloNombre si el articulo ya esta en el pedido.
      * @throws Exception Si existe un error en la conexion.
      */
     public String cargarNombreArticuloPedido(String referencia) throws Exception {
-        if(!pedido.articuloExiste(referencia)) {
+        if (!pedido.articuloExiste(referencia)) {
             DAOArticulo dao = new DAOArticulo();
             return dao.obtenerNombreArticulo(referencia);
         }
         return "ArticuloDuplicado";
     }
-    
-    public ArrayList<PedidoDTO> consultarPedido(String buscarPor,String informacion)throws Exception{
+
+    public ArrayList<PedidoDTO> consultarPedido(String buscarPor, String informacion) throws Exception {
         DAOPedido dao = new DAOPedido();
-        return dao.consultarPedido(buscarPor,informacion);
+        return dao.consultarPedido(buscarPor, informacion);
     }
 
     public TreeSet<ArticuloDTO> cargarArticuloPedidos(int codigoPedido) throws Exception {
@@ -371,5 +387,33 @@ public class Fachada implements Serializable {
         dto.setCodigo(codigoPedido);
         return dao.cargarArticuloPedidos(dto).getArticulos();
     }
+
+    public boolean registrarComparacion(int pedido, ArrayList<ArticuloDTO> dtos, Calendar fecha, 
+            String notas, String sucursal, int transporte) throws Exception {
+        PedidoDTO dto = new PedidoDTO();
+        dto.setCodigo(pedido);
+        dto.crearComparacion(fecha, notas, sucursal, transporte);
+        for (ArticuloDTO articulo : dtos) {
+            if (!dto.aniadirArticuloComparacion(articulo)) {
+                return false;
+            }
+        }
+        DAOComparacion dao = new DAOComparacion();
+        return dao.registrarComparacion(dto.getComparacion());
+    }
+
+    public String cargarNombreArticuloComparacion(String referencia) throws Exception {
+        DAOArticulo dao = new DAOArticulo();
+        return dao.obtenerNombreArticulo(referencia);
+    }
     
+    public boolean existeComparacion(int codigo) throws Exception{
+        DAOComparacion dao = new DAOComparacion();
+        return dao.existeComparacion(codigo);
+    }
+    
+    public ComparacionDTO consultarComparacion(int codigo) throws Exception {
+        DAOComparacion dao = new DAOComparacion();
+        return dao.consultarComparacion(codigo);
+    }
 }

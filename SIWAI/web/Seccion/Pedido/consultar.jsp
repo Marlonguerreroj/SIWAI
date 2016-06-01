@@ -8,7 +8,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <% if (session.getAttribute("usuario") == null) {
         response.sendRedirect("../../index.jsp");
-    }%>
+    }
+%>
 <!DOCTYPE html>
 <html lang="es">
     <head>
@@ -24,6 +25,7 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/blockUI.js"></script>
+        <script src="../../Ajax/ajax.js"></script>
     </head>
     <body>
       <!-- Inicio del alert -->
@@ -37,7 +39,12 @@
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
       </div>
       <%
-      } else {%>
+      } else if (mensaje.contains("Comparación")){ %>
+      <div class="alert alert-success centrar-texto" role="alert" arial >
+          <%=mensaje%>
+          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+      </div>
+      <% }else {%>
       <div class="alert alert-warning centrar-texto" role="alert" arial >
           <%=mensaje%>
           <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -62,17 +69,17 @@
                       <div class="col-md-1"></div>
                         <div class="col-md-4">
                           <label for="sel">Buscar por:</label>
-                            <select name="sel" class="tamañoConsultar" id="sel" required onchange="capturar()">
+                            <select name="sel" class="tamañoConsultar form-control" id="sel" required onchange="capturar()">
                                 <option value="">Seleccione</option>
                                 <option value="Todos">Todos</option>
-                                <option value="codProveedor">Codigo del proveedor</option>
+                                <option value="codProveedor">Código del proveedor</option>
                                 <option value="fecha">Fecha del pedido</option>
                             </select>
                         </div>
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
                           <label for="informacion">Información:</label>
-                          <input required name="informacion" id="informacion" type="text" class="tamañoConsultar">
+                          <input required name="informacion" id="informacion" type="text" class="tamañoConsultar form-control">
                         </div>
                         <div class="col-md-2">
                             <button name="consultarPedido" type="submit" class="btn btn-success  letra">
@@ -114,7 +121,7 @@
                                     <td><%=lista.get(i).getFechaFormateada() %></td>
                                     <td>
 
-                                        <a href="registrarComparacion.jsp" style="cursor:pointer;">
+                                        <a onclick="verificarComparacion(<%=lista.get(i).getCodigo()%>)" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-download-alt"></span>
                                         </a>
                                         <a onclick="enviarFormOcultoMasPedido(document,<%=i %>)" style="cursor:pointer;">
@@ -140,6 +147,9 @@
                 <input type="hidden" id="codigo" name="codigo">
                 <input type="hidden" id="proveedor" name="proveedor">
                 <input type="hidden" id="fecha" name="fecha">
+            </form>
+            <form id="formOcultoComparacion" action="registrarComparacion.jsp" method="post">
+                <input type="hidden" id="codigoComparacion" name="codigoComparacion">
             </form>
             <!--- Fin del form oculto -->
         </section>

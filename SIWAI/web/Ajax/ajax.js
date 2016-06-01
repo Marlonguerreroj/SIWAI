@@ -545,7 +545,7 @@ function crearPedido(documento) {
                         "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
                         "Error en la conexion a la base de datos</div>");
             } else {
-                $("#nuevo-formulario").prepend("<div id='formulario-borrar'><h2 class='text-center'>Articulos</h2>"+
+                $("#nuevo-formulario").prepend("<div id='formulario-borrar'><h2 class='text-center'>Articulos</h2>" +
                         "<div class='container'>" +
                         "<div class='row'>" +
                         "<div class='col-md-1'></div>" +
@@ -588,7 +588,7 @@ function crearPedido(documento) {
                 documento.elements[1].readOnly = true;
                 $("#crear").remove();
                 a = añadirFilaPedidos();
-                document.getElementById("codigo"+a).focus();
+                document.getElementById("codigo" + a).focus();
             }
         }
     };
@@ -648,7 +648,7 @@ function aniadirArticuloPedido(campo1, campo2) {
     cantidad = campo1.value;
     $.blockUI();
     var xhttp = new XMLHttpRequest();
-    var url = "/SIWAI/ControladorPedido?aniadirArticulo=true&referencia=" + referencia + 
+    var url = "/SIWAI/ControladorPedido?aniadirArticulo=true&referencia=" + referencia +
             "&cantidad=" + cantidad;
     xhttp.open("POST", url, true);
     xhttp.send();
@@ -677,7 +677,7 @@ function aniadirArticuloPedido(campo1, campo2) {
                 $("div").remove("#alert");
                 campo1.readOnly = true;
                 a = añadirFilaPedidos();
-                document.getElementById("codigo"+a).focus();
+                document.getElementById("codigo" + a).focus();
             }
         }
     };
@@ -711,7 +711,7 @@ function eliminarArticuloPedido(referencia, fila) {
                 nombre.value = "";
             } else if (sub.indexOf("true") >= 0) {
                 $("div").remove("#alert");
-                myDeleteFunction(fila, 1);
+                $("#" + fila).remove();
             }
         }
     };
@@ -753,6 +753,89 @@ function registrarPedido() {
                 document.getElementById("fecha").value = "";
                 $("#boton").prepend("<button id='crear' class='btn btn-success btn-lg letra'>Crear Pedido</button>");
                 reiniciarTablaPedido();
+            }
+        }
+    };
+}
+
+/**
+ * Metodo que carga el nombre de un articulo en la comparacion.
+ * @param {type} referencia Referencia del articulo.
+ * @returns {undefined}
+ */
+function cargarNombreArticuloComparacion(campo, nombre, cantidad) {
+    for (var i = 1; i < ($('#table >thead >tr').length - 1); i++) {
+        if (campo.value == document.getElementById("referencia" + (i)).value) {
+            $("div").remove("#alert");
+            $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "El artículo ya esta en la comparacion</div>");
+            return;
+        }
+    }
+    $.blockUI();
+    referencia = campo.value;
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorArticulo?cargarNombreArticuloComparacion=true&referencia=" + referencia;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            $.unblockUI();
+            if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Error en la conexion a la base de datos</div>");
+            } else if (sub.indexOf("ArticuloReferencia") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "No se encontro un artículo con la referencia " + referencia + "</div>");
+                nombre.value = "";
+            } else {
+                $("div").remove("#alert");
+                var fila = $('#table >thead >tr').length - 1;
+                document.getElementById("precio" + (fila)).required = true;
+                document.getElementById("costo" + (fila)).required = true;
+                nombre.value = sub;
+                campo.readOnly = true;
+                campo.required = true;
+                cantidad.required = true;
+                cantidad.focus();
+            }
+        }
+    };
+}
+
+/**
+ * Metodo que recibe la peticion de registro de una comparacion  y la envia a ControladorComparacion.
+ * @param {type} document Formulario con los datos de la comparacion.
+ * @returns {undefined}
+ */
+function verificarComparacion(codigo) {
+    $.blockUI();
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorComparacion?verificarComparacion=true&codigo=" + codigo;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            $.unblockUI();
+            if (sub.indexOf("false") >= 0) {
+                enviarFormOcultoComparacion(document, codigo);
+            } else if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Error en la conexion a la base de datos</div>");
+            } else if (sub.indexOf("true") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "El pedido ya tiene una comparación registrada</div>");
             }
         }
     };

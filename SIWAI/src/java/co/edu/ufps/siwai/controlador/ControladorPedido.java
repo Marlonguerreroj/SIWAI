@@ -42,7 +42,7 @@ public class ControladorPedido extends HttpServlet {
         String fechaSt = request.getParameter("fecha");
         String codProveedor = request.getParameter("codProveedor");
         try {
-            DateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             Calendar fecha = Calendar.getInstance();
             fecha.setTime(df.parse(fechaSt));
             Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
@@ -178,7 +178,6 @@ public class ControladorPedido extends HttpServlet {
             String listado = gson.toJson(dtos);
             response.getWriter().print(listado);
         } catch (Exception ex) {
-            ex.printStackTrace();
             response.getWriter().print("Error");
         }
     }

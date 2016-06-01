@@ -3,7 +3,9 @@
     Created on : 17-mar-2016, 14:44:37
     Author     : Alejandro Ramirez; Marlon Guerrero.
 --%>
-
+<% if (session.getAttribute("usuario") == null) {
+        response.sendRedirect("../../index.jsp");
+    }%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="es">
