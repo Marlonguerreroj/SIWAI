@@ -6,6 +6,7 @@
 package co.edu.ufps.siwai.modelo.dto;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.TreeSet;
 
@@ -20,7 +21,7 @@ public class VentaDTO implements Serializable {
     private EmpleadoDTO cajero;
     private EmpleadoDTO vendedor;
     private Calendar fecha;
-    private int subTotal;
+    private int subTotal=0;
     private double iva,total;
     private final TreeSet<ArticuloDTO> articulos;
 
@@ -121,5 +122,11 @@ public class VentaDTO implements Serializable {
         ArticuloDTO articulo = new ArticuloDTO();
         articulo.setReferencia(referencia);
         return articulos.contains(articulo);
+    }
+    public String getFechaFormateada(){
+      SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+      String fechaFormateada = sdf.format(this.fecha.getTime());
+
+      return fechaFormateada;
     }
 }

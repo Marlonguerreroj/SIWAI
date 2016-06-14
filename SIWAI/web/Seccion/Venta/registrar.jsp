@@ -78,6 +78,13 @@
                     <div class="col-md-1"></div>
                 </div>
                 <br>
+                  <div class="row">
+                      <div class="col-md-8"></div>
+                      <div id="total" class="col-md-3 well">
+                          <strong>Total: </strong><input readonly value="0" type="number" id="totalI" name="totalI" class="form-control">
+                      </div>
+                      <div class="col-md-1"></div>
+                  </div>
                 <div class="row centrar-texto">
                     <div class="col-md-4"></div>
                     <div class="col-md-2">

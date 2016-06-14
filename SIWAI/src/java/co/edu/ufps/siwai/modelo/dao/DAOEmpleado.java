@@ -230,7 +230,6 @@ public class DAOEmpleado {
             stmt.setString(1, dto.getContraseña());
             stmt.setString(2, dto.getCodigo());
             int total = stmt.executeUpdate();
-            System.out.println(total);
             if (total > 0) {
                 exito = true;
             }

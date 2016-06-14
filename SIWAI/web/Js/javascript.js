@@ -227,7 +227,7 @@ function añadirFilaVentas()
     campo3.readOnly = true;
     campo3.required = true;
     campo3.name = "cantidad[]"
-    campo3.setAttribute("onchange", "aniadirArticuloVenta(this, document.getElementById('" + referencia + "'),document.getElementById('" + total + "'))");
+    campo3.setAttribute("onchange", "aniadirArticuloVenta(this, document.getElementById('" + referencia + "'),document.getElementById('" + total + "'), document.getElementById('totalI'))");
     campo3.id = cantidad;
     campo3.className = "form-control";
     cell3.appendChild(campo3);
@@ -261,7 +261,6 @@ function añadirFilaVentas()
 }
 
 function myDeleteFunction(fila, num) {
-    alert(fila);
     document.getElementById("table").deleteRow(fila);
     if (num === 1) {
         a--;
@@ -654,6 +653,47 @@ function cargarArticulosTraslado(codigo) {
                 cell1.innerHTML = json[i].nombre;
                 cell2.innerHTML = json[i].cantidad;
             }
+            $.unblockUI();
+        }
+    });
+}
+
+function enviarFormOcultoMasVenta(document, i, codigo) {
+    sucursal = document.getElementById("tabla").rows[i + 1].cells[0].innerHTML;
+    cliente = document.getElementById("tabla").rows[i + 1].cells[1].innerHTML;
+    cajero = document.getElementById("tabla").rows[i + 1].cells[2].innerHTML;
+    vendedor = document.getElementById("tabla").rows[i + 1].cells[3].innerHTML;
+    fecha = document.getElementById("tabla").rows[i + 1].cells[4].innerHTML;
+    document.getElementById("sucursal").value = sucursal;
+    document.getElementById("cliente").value = cliente;
+    document.getElementById("cajero").value = cajero;
+    document.getElementById("vendedor").value = vendedor;
+    document.getElementById("fecha").value = fecha;
+    document.getElementById("codigo").value=codigo;
+    document.getElementById("formOculto").submit();
+}
+
+function cargarArticulosVenta(codigo) {
+    $.blockUI();
+    $.ajax({
+        url: '/SIWAI/ControladorVenta?cargarVenta=true&codigo=' + codigo,
+        type: 'post',
+        datatype: 'json',
+        success: function (venta) {
+            var json = eval('(' + venta + ')');
+            var total=0;
+            var tabla = document.getElementById("tabla");
+            for (var i = 0; i < json.length; i++) {
+                var row = tabla.insertRow(i + 1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                var cell3 = row.insertCell(2);
+                cell1.innerHTML = json[i].nombre;
+                cell2.innerHTML = json[i].cantidad;
+                cell3.innerHTML = json[i].valor;
+                total+= json[i].valor;
+            }
+            $( "#total" ).append( "  " + total + "");
             $.unblockUI();
         }
     });

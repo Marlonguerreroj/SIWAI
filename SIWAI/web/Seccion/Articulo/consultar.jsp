@@ -124,7 +124,6 @@
                                         <th>Tipo</th>
                                         <th>Cantidad</th>
                                         <th>Valor</th>
-                                        <th></th>
                                     </tr>
                                 </thead>
                                 <%
@@ -132,19 +131,12 @@
                                 %>
                                 <tr>
 
-                                    <td>Sucursal</td>
+                                    <td><%=lis.get(i).getSucursal().getNombre()%></td>
                                     <td><%=lis.get(i).getReferencia()%></td>
                                     <td><%=lis.get(i).getNombre()%></td>
                                     <td><%=lis.get(i).getTipoArticulo()%></td>
-                                    <td>0</td>
-                                    <td>0000000</td>
-                                    <td>
-
-                                        <a href="mas.jsp" style="cursor:pointer;">
-                                            <span class="glyphicon glyphicon-info-sign asd "></span>
-                                        </a>
-                                    </td>
-
+                                    <td><%=lis.get(i).getCantidad()%></td>
+                                    <td><%=lis.get(i).getValor()%></td>
                                 </tr>
                                 <% }
                                     session.setAttribute("articulos", null);

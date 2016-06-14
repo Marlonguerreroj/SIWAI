@@ -135,11 +135,9 @@ public class ControladorTraslado extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
         String buscarPor = request.getParameter("sel");
-        System.out.println(buscarPor);
         String informacion;
         if(buscarPor.startsWith("s")){
           informacion = request.getParameter("sucursales");
-          System.out.println(informacion);
         }else{
           informacion = request.getParameter("informacion");
         }
@@ -173,10 +171,8 @@ public class ControladorTraslado extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         int codigo = Integer.parseInt(request.getParameter("codigo"));
-        System.out.println(codigo);
         TreeSet<ArticuloDTO> dtos;
         try {
-            System.out.println("aca");
             dtos = fachada.cargarArticulosTraslado(codigo);
             Gson gson = new Gson();
             String listado = gson.toJson(dtos);

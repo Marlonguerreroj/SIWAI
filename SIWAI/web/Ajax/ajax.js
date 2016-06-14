@@ -1023,7 +1023,6 @@ function crearVenta(document){
             $('#ok').hide();
             $('#tabla').show();
             c = añadirFilaVentas();
-            alert(c);
             $("#referencia"+c).focus();
           }
       }
@@ -1071,7 +1070,7 @@ function cargarNombreArticuloVenta(campo, nombre, cantidad,total) {
     };
 }
 
-function aniadirArticuloVenta(campo1, campo2,total) {
+function aniadirArticuloVenta(campo1, campo2,total,totalI) {
     referencia = campo2.value;
     cantidad = campo1.value;
     $.blockUI();
@@ -1105,6 +1104,9 @@ function aniadirArticuloVenta(campo1, campo2,total) {
                 $("div").remove("#alert");
                 campo1.readOnly = true;
                 total.value = (total.value)*cantidad;
+                a1 = parseInt(totalI.value);
+                b1 = parseInt(total.value);
+                totalI.value = a1+b1;
                 c = añadirFilaVentas();
                 document.getElementById("referencia"+c).focus();
             }else if (sub.indexOf("cantidad") >= 0) {

@@ -53,7 +53,6 @@ public class ControladorComparacion extends HttpServlet {
             fecha.setTime(df.parse(fechaSt));
             Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
             ArrayList<ArticuloDTO> dtos = new ArrayList<>();
-            System.out.println(fechaSt);
             for(int i = 0; i < referencia.length - 1; i++){
                 ArticuloDTO dto = new ArticuloDTO();
                 dto.setReferencia(referencia[i]);
@@ -94,7 +93,7 @@ public class ControladorComparacion extends HttpServlet {
             response.getWriter().print("Error");
         }
     }
-    
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -116,7 +115,7 @@ public class ControladorComparacion extends HttpServlet {
             response.getWriter().print("Error");
         }
     }
-    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.

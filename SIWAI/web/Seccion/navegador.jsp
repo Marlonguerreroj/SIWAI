@@ -85,7 +85,7 @@
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ventas<span class="caret"></span></a>
                         <ul class="dropdown-menu">
                             <li><a href="../Venta/registrar.jsp">Registrar Venta</a></li>
-                            <li><a href="#">Consultar Ventas</a></li>
+                            <li><a href="../Venta/consultar.jsp">Consultar Ventas</a></li>
                         </ul>
                         <!-- Cierre del Dropdown para Venta -->
                     </li>

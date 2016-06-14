@@ -146,7 +146,6 @@ public class ControladorSucursal extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String buscarPor = request.getParameter("sel");
         String informacion = request.getParameter("informacion");
-        System.out.println(informacion);
         Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         ArrayList<SucursalDTO> lista = new ArrayList<>();
         try {

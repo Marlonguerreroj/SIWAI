@@ -12,15 +12,25 @@ import java.io.Serializable;
  * @author Lenovo
  */
 public class ArticuloDTO implements Serializable, Comparable<ArticuloDTO>{
-    
+
     private String referencia, nombre, tipoArticulo;
-    private int cantidad, costo, precio,valor;
+    private int cantidad, costo, precio,valor,total;
+    private SucursalDTO sucursal;
 
     public ArticuloDTO() {
+        sucursal = new SucursalDTO();
     }
 
     public int getValor() {
         return valor;
+    }
+
+    public SucursalDTO getSucursal() {
+        return sucursal;
+    }
+
+    public void setSucursal(SucursalDTO sucursal) {
+        this.sucursal = sucursal;
     }
 
     public void setValor(int valor) {
@@ -90,5 +100,5 @@ public class ArticuloDTO implements Serializable, Comparable<ArticuloDTO>{
     public int compareTo(ArticuloDTO dto) {
         return this.getReferencia().compareTo(dto.getReferencia());
     }
-    
+
 }

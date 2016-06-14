@@ -99,7 +99,7 @@ public class DAOArticulo {
           stmt = conn.prepareStatement(sql);
           stmt.setString(numero, informacion);
       }else if (buscarPor.equalsIgnoreCase("Nombre")) {
-          sql += sentencia+" art.nom_articulo = ?";
+          sql += sentencia+" art.nom_articulo like ?";
           stmt = conn.prepareStatement(sql);
           stmt.setString(numero, "%"+informacion+"%");
       } else if (buscarPor.equalsIgnoreCase("Todos")) {
@@ -113,11 +113,13 @@ public class DAOArticulo {
         ResultSet rs = stmt.executeQuery();
         lista = new ArrayList<>();
         while (rs.next()) {
-          System.out.println("as");
           ArticuloDTO art = new ArticuloDTO();
-          art.setReferencia(rs.getString(2));
-          art.setNombre(rs.getString(3));
-          art.setTipoArticulo(rs.getString(4));
+          art.setReferencia(rs.getString(1));
+          art.setNombre(rs.getString(2));
+          art.setTipoArticulo(rs.getString(3));
+          art.getSucursal().setNombre(rs.getString(4));
+          art.setCantidad(rs.getInt(5));
+          art.setValor(rs.getInt(6));
           lista.add(art);
         }
       } catch (SQLException ex) {

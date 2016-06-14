@@ -16,6 +16,7 @@ import co.edu.ufps.siwai.modelo.dao.DAOProveedor;
 import co.edu.ufps.siwai.modelo.dao.DAOSucursal;
 import co.edu.ufps.siwai.modelo.dao.DAOTraslado;
 import co.edu.ufps.siwai.modelo.dao.DAOUbicacion;
+import co.edu.ufps.siwai.modelo.dao.DAOVenta;
 import co.edu.ufps.siwai.modelo.dao.asistente.Pedido;
 import co.edu.ufps.siwai.modelo.dao.asistente.Traslado;
 import co.edu.ufps.siwai.modelo.dao.asistente.Venta;
@@ -28,6 +29,7 @@ import co.edu.ufps.siwai.modelo.dto.ProveedorDTO;
 import co.edu.ufps.siwai.modelo.dto.SucursalDTO;
 import co.edu.ufps.siwai.modelo.dto.TrasladoDTO;
 import co.edu.ufps.siwai.modelo.dto.UbicacionDTO;
+import co.edu.ufps.siwai.modelo.dto.VentaDTO;
 import co.edu.ufps.siwai.modelo.seguridad.MD5;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -313,6 +315,10 @@ public class Fachada implements Serializable {
         return dao.consultarArticuloExtra(sucursal, buscarPor, info);
     }
 
+    public Venta getVenta() {
+        return venta;
+    }
+
     public ArrayList<ArticuloDTO> consultarArticulo(String sucursal, String buscarPor, String info) throws Exception {
         DAOArticulo dao = new DAOArticulo();
         return dao.consultarArticulo(sucursal, buscarPor, info);
@@ -394,7 +400,7 @@ public class Fachada implements Serializable {
         return dao.cargarArticuloPedidos(dto).getArticulos();
     }
 
-    public boolean registrarComparacion(int pedido, ArrayList<ArticuloDTO> dtos, Calendar fecha, 
+    public boolean registrarComparacion(int pedido, ArrayList<ArticuloDTO> dtos, Calendar fecha,
             String notas, String sucursal, int transporte) throws Exception {
         PedidoDTO dto = new PedidoDTO();
         dto.setCodigo(pedido);
@@ -412,17 +418,17 @@ public class Fachada implements Serializable {
         DAOArticulo dao = new DAOArticulo();
         return dao.obtenerNombreArticulo(referencia);
     }
-    
+
     public boolean existeComparacion(int codigo) throws Exception{
         DAOComparacion dao = new DAOComparacion();
         return dao.existeComparacion(codigo);
     }
-    
+
     public ComparacionDTO consultarComparacion(int codigo) throws Exception {
         DAOComparacion dao = new DAOComparacion();
         return dao.consultarComparacion(codigo);
     }
-    
+
     public void crearTraslado(String sOrigen, String sDestino) {
         traslado = new Traslado(sOrigen, sDestino);
     }
@@ -493,4 +499,15 @@ public class Fachada implements Serializable {
         return dao.cargarArticuloTraslado(dto).getArticulos();
     }
 
+    public ArrayList<VentaDTO> consultarVenta(String buscarPor, String informacion) throws Exception {
+        DAOVenta dao = new DAOVenta();
+        return dao.consultarVenta(buscarPor, informacion);
+    }
+
+    public TreeSet<ArticuloDTO> cargarArticulosVenta(int codigo) throws Exception {
+        DAOVenta dao = new DAOVenta();
+        VentaDTO dto = new VentaDTO();
+        dto.setCodigo(codigo);
+        return dao.cargarArticuloVenta(dto).getArticulos();
+    }
 }
