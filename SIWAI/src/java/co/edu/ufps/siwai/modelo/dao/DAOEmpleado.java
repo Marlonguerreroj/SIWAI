@@ -87,6 +87,10 @@ public class DAOEmpleado {
             } else if (buscarPor.equalsIgnoreCase("Dni")) {
                 stmt = conn.prepareStatement(sql+=" WHERE dni_empleado = ?");
                 stmt.setString(1, informacion);
+            } else if (buscarPor.equalsIgnoreCase("Vendedor")) {
+                stmt = conn.prepareStatement(sql+=" WHERE tbl_empleado.cargo_empleado = ? and tbl_empleado.suc_empleado = ?");
+                stmt.setString(1, buscarPor);
+                stmt.setString(2,informacion);
             }
 
             try {

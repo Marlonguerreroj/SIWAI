@@ -31,10 +31,32 @@
         <!-- Script de Bootstrap, agrega funcionalidad a la barra de navegacion -->
         <script src="../../Bootstrap/js/bootstrap.min.js"></script>
         <script src="../../Js/blockUI.js"></script>
+        <script src="../../Js/javascript.js"></script>
     </head>
     <body>
         <!-- Incluye la barra de navegacion que se encuentra en navegador.jsp -->
         <jsp:include page="../navegador.jsp" />
+        <!-- Inicio del alert -->
+        <%
+            String mensaje = session.getAttribute("msjCA") + "";
+            if (!mensaje.equals("null")) {
+                if (mensaje.contains("Error")) {
+        %>
+        <div class="alert alert-danger centrar-texto" role="alert" arial >
+            <%=mensaje%>
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+        <%
+        } else {%>
+        <div class="alert alert-warning centrar-texto" role="alert" arial >
+            <%=mensaje%>
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        </div>
+        <%      }
+                session.removeAttribute("msjCA");
+            }
+        %>
+        <!-- Fin del alert-->
         <!-- Contenido principal contiene el formulario -->
         <section>
             <div>
@@ -45,13 +67,11 @@
             <form name="form" action="/SIWAI/ControladorArticulo" method="post">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-1">
-                            <p>Sucursal:</p>
-                        </div>
-                        <div class="col-md-2">
-                            <select required name="sucursal" class="form-control" id="sel" >
+                        <div class="col-md-3">
+                          <label for="sucursal">Sucursal:</label>
+                            <select required name="sucursal" class="tamañoConsultar" id="sel1" >
                                 <option value="" >Seleccione</option>
-                                <option value="Todos" >Todas</option>
+                                <option value="Todas" >Todas</option>
                                 <% for (int i = 0; i < lista.size(); i++) {%>
                                 <option value="<%=lista.get(i).getCodigo()%>"><%=lista.get(i).getNombre()%></option>
                                 <% }
@@ -59,24 +79,22 @@
                             </select>
                         </div>
 
-                        <div class="col-md-2">
-                            <p>Buscar por:</p>
-                        </div>
-                        <div class="col-md-2">
-                            <select required name="sel" class="form-control" id="sel" onchange="capturar()">
+                        <div class="col-md-4">
+                          <label for="sel">Buscar por:</label>
+                            <select required name="sel" class="tamañoConsultar" id="sel" onchange="capturar()">
                                 <option value="" >Seleccione</option>
+                                <option value="Todos">Todos</option>
                                 <option value="Tipo" >Tipo</option>
                                 <option value="Referencia" >Referencia</option>
                                 <option value="Nombre">Nombre</option>
                             </select>
                         </div>
+
+                        <div class="col-md-4">
+                          <label for="informacion">Informacion:</label>
+                            <input required id="informacion" name="informacion" type="text" class="tamañoConsultar">
+                        </div>
                         <div class="col-md-1">
-                            <p>Informacion:</p>
-                        </div>
-                        <div class="col-md-2">
-                            <input required id="informacion" name="informacion" type="text" class="form-control ">
-                        </div>
-                        <div class="col-md-2">
                             <button name="consultarArticulo" type="submit" class="btn btn-success  letra">
                                 <span class="glyphicon glyphicons glyphicon-search"></span>
                             </button>
@@ -88,9 +106,9 @@
             <br>
             <br>
             <%
-                if (request.getSession().getAttribute("articulos") != null) {
-                    ArrayList<ArticuloDTO> lis = (ArrayList<ArticuloDTO>) request.getSession().getAttribute("articulos");
-                    System.out.println(lis.size());
+                if (session.getAttribute("articulos") != null) {
+                    ArrayList<ArticuloDTO> lis = (ArrayList) session.getAttribute("articulos");
+                    if (!lis.isEmpty()) {
             %>
             <div class="container">
                 <div class="row">
@@ -109,34 +127,28 @@
                                         <th></th>
                                     </tr>
                                 </thead>
-                                <%for (int i = 0; i < lis.size(); i++) {
-                                    System.out.print("entro 0");
-                                    String ref=lis.get(i).getReferencia();
-                                    String nom=lis.get(i).getNombre();
-                                    String tipo=lis.get(i).getTipoArticulo();
+                                <%
+                                    for (int i = 0; i < lis.size(); i++) {
                                 %>
-                                    <tr>
+                                <tr>
 
-                                    <td>Sucursal xxx</td>
-                                    <td><%=ref%></td>
-                                    <td><%=nom%></td>
-                                    <td><%=tipo%></td>
+                                    <td>Sucursal</td>
+                                    <td><%=lis.get(i).getReferencia()%></td>
+                                    <td><%=lis.get(i).getNombre()%></td>
+                                    <td><%=lis.get(i).getTipoArticulo()%></td>
                                     <td>0</td>
                                     <td>0000000</td>
                                     <td>
-                                        <a href="actualizar.jsp" style="cursor: pointer;">
-                                            <span class="glyphicon glyphicon-edit asd "></span>
-                                        </a>
+
                                         <a href="mas.jsp" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-info-sign asd "></span>
                                         </a>
                                     </td>
 
-                                    </tr>
-                                <%
-                                    }
+                                </tr>
+                                <% }
+                                    session.setAttribute("articulos", null);
                                 %>
-                                
                             </table>
                         </div>
                     </div>
@@ -144,6 +156,7 @@
                 </div>
             </div>
             <%
+                    }
                 }
             %>
 

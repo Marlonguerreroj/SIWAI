@@ -36,6 +36,14 @@
         <servlet-name>ControladorComparacion</servlet-name>
         <servlet-class>co.edu.ufps.siwai.controlador.ControladorComparacion</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ControladorTraslado</servlet-name>
+        <servlet-class>co.edu.ufps.siwai.controlador.ControladorTraslado</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ControladorVenta</servlet-name>
+        <servlet-class>co.edu.ufps.siwai.controlador.ControladorVenta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ControladorCliente</servlet-name>
         <url-pattern>/ControladorCliente</url-pattern>
@@ -71,6 +79,14 @@
     <servlet-mapping>
         <servlet-name>ControladorComparacion</servlet-name>
         <url-pattern>/ControladorComparacion</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorTraslado</servlet-name>
+        <url-pattern>/ControladorTraslado</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ControladorVenta</servlet-name>
+        <url-pattern>/ControladorVenta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

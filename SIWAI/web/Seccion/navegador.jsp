@@ -75,8 +75,8 @@
                             <li><a href="../ArticuloExtra/consultar.jsp">Consultar Articulo Extra</a></li>
                             <li><a href="../Pedido/registrar.jsp">Registrar Pedido</a></li>
                             <li><a href="../Pedido/consultar.jsp">Consultar Pedido</a></li>
-                            <li><a href="#">Registrar Traslado</a></li>
-                            <li><a href="#">Consultar Traslado</a></li>
+                            <li><a href="../Traslado/registrar.jsp">Registrar Traslado</a></li>
+                            <li><a href="../Traslado/consultar.jsp">Consultar Traslado</a></li>
                         </ul>
                         <!-- Cierre del Dropdown para Articulo -->
                     </li>

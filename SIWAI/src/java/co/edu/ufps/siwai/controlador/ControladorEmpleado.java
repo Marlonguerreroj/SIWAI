@@ -7,6 +7,7 @@ package co.edu.ufps.siwai.controlador;
 
 import co.edu.ufps.siwai.modelo.Fachada;
 import co.edu.ufps.siwai.modelo.dto.EmpleadoDTO;
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -100,6 +101,7 @@ public class ControladorEmpleado extends HttpServlet {
         }
 
     }
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -113,7 +115,7 @@ public class ControladorEmpleado extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         request.setCharacterEncoding("UTF-8");
-        String codigo = ""+request.getSession().getAttribute("cod");
+        String codigo = "" + request.getSession().getAttribute("cod");
         String contraActual = request.getParameter("contraActual");
         String contraNueva = request.getParameter("contraNueva");
         String contraNueva2 = request.getParameter("contraNueva2");
@@ -121,15 +123,15 @@ public class ControladorEmpleado extends HttpServlet {
         boolean exito;
         PrintWriter out = response.getWriter();
         try {
-            boolean validarContraseñaActual = fachada.validarContraseña(codigo,contraActual);
-            if(validarContraseñaActual){
-              if(contraNueva.equals(contraNueva2)){
-                  exito = fachada.cambiarContraseña(codigo,contraNueva);
-                  out.print(exito);
-              }else{
-                out.print("Las contraseñas no coinciden");
-              }
-            }else{
+            boolean validarContraseñaActual = fachada.validarContraseña(codigo, contraActual);
+            if (validarContraseñaActual) {
+                if (contraNueva.equals(contraNueva2)) {
+                    exito = fachada.cambiarContraseña(codigo, contraNueva);
+                    out.print(exito);
+                } else {
+                    out.print("Las contraseñas no coinciden");
+                }
+            } else {
                 out.print("Tu contraseña está incorrecta");
             }
         } catch (Exception ex) {
@@ -154,10 +156,10 @@ public class ControladorEmpleado extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         String buscarPor = request.getParameter("sel");
         String informacion;
-        if(buscarPor.equalsIgnoreCase("Sucursal")){
-          informacion = request.getParameter("sucursales");
-        }else{
-          informacion = request.getParameter("informacion");
+        if (buscarPor.equalsIgnoreCase("Sucursal")) {
+            informacion = request.getParameter("sucursales");
+        } else {
+            informacion = request.getParameter("informacion");
         }
         Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
         ArrayList<EmpleadoDTO> lista = null;
@@ -201,7 +203,8 @@ public class ControladorEmpleado extends HttpServlet {
                 if (ingreso2[2].equals("1")) {
                     request.getSession().setAttribute("usuario", ingreso2[0]);
                     request.getSession().setAttribute("cargo", ingreso2[1]);
-                    request.getSession().setAttribute("cod",ingreso2[3]);
+                    request.getSession().setAttribute("cod", ingreso2[3]);
+                    request.getSession().setAttribute("suc", ingreso2[4]);
                 } else {
                     ingreso = "nulo";
                 }
@@ -218,6 +221,58 @@ public class ControladorEmpleado extends HttpServlet {
         request.setCharacterEncoding("UTF-8");
         request.getSession().invalidate();
         response.sendRedirect("/SIWAI/index.jsp");
+    }
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void cargarVendedores(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        ArrayList<EmpleadoDTO> dtos;
+        String codigo = request.getParameter("codigo");
+        try {
+            dtos = fachada.consultarEmpleado("Vendedor", codigo);
+            Gson gson = new Gson();
+            String listado = gson.toJson(dtos);
+            response.getWriter().print(listado);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            response.getWriter().print("Error");
+        }
+    }
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void buscarEmpleado(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        Fachada fachada = (Fachada) request.getSession().getAttribute("fachada");
+        ArrayList<EmpleadoDTO> dtos;
+        String codigo = request.getParameter("codigo");
+        try {
+            dtos = fachada.consultarEmpleado("Codigo", codigo);
+            Gson gson = new Gson();
+            String listado = gson.toJson(dtos);
+            response.getWriter().print(listado);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            response.getWriter().print("Error");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -250,18 +305,18 @@ public class ControladorEmpleado extends HttpServlet {
             throws ServletException, IOException {
         if (request.getParameter("consultarEmpleado") != null) {
             consultarEmpleado(request, response);
-        }
-        if (request.getParameter("registrarEmpleado") != null) {
+        } else if (request.getParameter("registrarEmpleado") != null) {
             registrarEmpleado(request, response);
-        }
-        if (request.getParameter("iniciarSesion") != null) {
+        } else if (request.getParameter("iniciarSesion") != null) {
             iniciarSesion(request, response);
-        }
-        if (request.getParameter("actualizarEmpleado") != null) {
+        } else if (request.getParameter("actualizarEmpleado") != null) {
             actualizarEmpleado(request, response);
-        }
-        if (request.getParameter("cambiarContra") != null) {
+        } else if (request.getParameter("cambiarContra") != null) {
             cambiarContraseña(request, response);
+        } else if (request.getParameter("cargarVendedores") != null) {
+            cargarVendedores(request, response);
+        } else if (request.getParameter("buscarEmpleado") != null) {
+            buscarEmpleado(request, response);
         }
 
     }

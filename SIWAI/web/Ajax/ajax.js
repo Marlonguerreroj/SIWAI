@@ -840,3 +840,316 @@ function verificarComparacion(codigo) {
         }
     };
 }
+
+function crearTraslado(document){
+  sucursalOrigen = document.elements[0];
+  sucursalDestino = document.elements[1];
+  $.blockUI();
+  var xhttp = new XMLHttpRequest();
+  var url = "/SIWAI/ControladorTraslado?crearTraslado=true&sOrigen=" + sucursalOrigen.value + "&sDestino=" + sucursalDestino.value;
+  xhttp.open("POST", url, true);
+  xhttp.send();
+
+  xhttp.onreadystatechange = function () {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+          var sub = xhttp.responseText;
+          $.unblockUI();
+          if(sub.indexOf("Error")>=0){
+            $("div").remove("#alert");
+            $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "Error en la conexion a la base de datos</div>");
+          }else{
+            sucursalOrigen.disabled = true;
+            sucursalDestino.disabled = true;
+            $('#ok').hide();
+            $('#tabla').show();
+            c = añadirFilaTraslado();
+            document.getElementById("referencia"+c).focus();
+          }
+      }
+    };
+}
+
+function cargarNombreArticuloTraslado(campo, nombre, cantidad) {
+    $.blockUI();
+    referencia = campo.value;
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorArticulo?cargarNombreArticuloTraslado=true&referencia=" + referencia;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            $.unblockUI();
+            if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Error en la conexion a la base de datos</div></div></div></div>");
+            } else if (sub.indexOf("ArticuloDuplicado") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "El artículo con referencia " + referencia + " ya esta en el traslado</div></div></div></div>");
+                nombre.value = "";
+            } else if (sub.indexOf("ArticuloReferencia") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "No se encontro un artículo con la referencia: " + referencia + " en la sucursal de origen</div></div></div></div>");
+                nombre.value = "";
+            } else {
+                $("div").remove("#alert");
+                nombre.value = sub;
+                campo.readOnly = true;
+                cantidad.readOnly = false;
+                cantidad.focus();
+            }
+        }
+    };
+}
+
+function aniadirArticuloTraslado(campo1, campo2) {
+    referencia = campo2.value;
+    cantidad = campo1.value;
+    $.blockUI();
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorTraslado?aniadirArticulo=true&referencia=" + referencia +
+            "&cantidad=" + cantidad;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            $.unblockUI();
+            if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Error, intente de nuevo por favor</div></div></div></div>");
+            } else if (sub.indexOf("Numero") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "El campo cantidad solo recibe un numero entero mayor que 0</div></div></div></div>");
+                nombre.value = "";
+            } else if (sub.indexOf("false") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Existe otro articulo con esa referencia en el traslado</div></div></div></div>");
+                nombre.value = "";
+            } else if (sub.indexOf("true") >= 0) {
+                $("div").remove("#alert");
+                campo1.readOnly = true;
+                c = añadirFilaTraslado();
+                document.getElementById("referencia"+c).focus();
+            }else if (sub.indexOf("cantidad") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "No dispone de la cantidad del articulo ingresada</div></div></div></div>");
+                nombre.value = "";
+            }
+        }
+    };
+}
+
+function registrarTraslado() {
+    $.blockUI();
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorTraslado?registrarTraslado=true";
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            $.unblockUI();
+            if (sub.indexOf("false") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Ocurrio un error al intentar registrar el traslado</div>");
+            } else if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Error en la conexion a la base de datos</div>");
+            } else if (sub.indexOf("true") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-success centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Traslado registrado exitosamente</div>");
+                document.getElementById("sucursalOrigen").disabled = false;
+                document.getElementById("sucursalDestino").disabled= false;
+                $('#sucursalOrigen').prop('selectedIndex',0);
+                $('#sucursalDestino').prop('selectedIndex',0);
+                $("#ok").show();
+                eliminarTablaTraslado();
+                $("#tabla").hide();
+            }
+        }
+    };
+}
+
+function crearVenta(document){
+  dniCliente = document.elements[0];
+  vendedor = document.elements[1];
+  $.blockUI();
+  var xhttp = new XMLHttpRequest();
+  var url = "/SIWAI/ControladorVenta?crearVenta=true&cliente=" + dniCliente.value + "&vendedor=" + vendedor.value;
+  xhttp.open("POST", url, true);
+  xhttp.send();
+
+  xhttp.onreadystatechange = function () {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+          var sub = xhttp.responseText;
+          $.unblockUI();
+          if(sub.indexOf("Error")>=0){
+            $("div").remove("#alert");
+            $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "Error en la conexion a la base de datos</div>");
+          }else if(sub.indexOf("false")>=0){
+            $("div").remove("#alert");
+            $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
+                    "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                    "No se encontro el cliente con el dni ingresado</div>");
+          }else{
+            $("div").remove("#alert");
+            dniCliente.disabled = true;
+            vendedor.disabled = true;
+            $('#ok').hide();
+            $('#tabla').show();
+            c = añadirFilaVentas();
+            alert(c);
+            $("#referencia"+c).focus();
+          }
+      }
+    };
+}
+
+function cargarNombreArticuloVenta(campo, nombre, cantidad,total) {
+    $.blockUI();
+    referencia = campo.value;
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorArticulo?cargarNombreArticuloVenta=true&referencia=" + referencia;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            $.unblockUI();
+            if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Error en la conexion a la base de datos</div></div></div></div>");
+            } else if (sub.indexOf("ArticuloDuplicado") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "El artículo con referencia " + referencia + " ya esta en la venta</div></div></div></div>");
+                nombre.value = "";
+            } else if (sub.indexOf("ArticuloReferencia") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "No se encontro un artículo con la referencia: " + referencia + "</div></div></div></div>");
+                nombre.value = "";
+            } else {
+                $("div").remove("#alert");
+                var res = sub.split("-");
+                nombre.value = res[0];
+                campo.readOnly = true;
+                total.value =res[1];
+                cantidad.readOnly = false;
+                cantidad.focus();
+            }
+        }
+    };
+}
+
+function aniadirArticuloVenta(campo1, campo2,total) {
+    referencia = campo2.value;
+    cantidad = campo1.value;
+    $.blockUI();
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorVenta?aniadirArticulo=true&referencia=" + referencia +
+            "&cantidad=" + cantidad+"&valor="+(total.value)*cantidad;
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            $.unblockUI();
+            if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Error, intente de nuevo por favor</div></div></div></div>");
+            } else if (sub.indexOf("Numero") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "El campo cantidad solo recibe un numero entero mayor que 0</div></div></div></div>");
+                nombre.value = "";
+            } else if (sub.indexOf("false") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Existe otro articulo con esa referencia en el traslado</div></div></div></div>");
+                nombre.value = "";
+            } else if (sub.indexOf("true") >= 0) {
+                $("div").remove("#alert");
+                campo1.readOnly = true;
+                total.value = (total.value)*cantidad;
+                c = añadirFilaVentas();
+                document.getElementById("referencia"+c).focus();
+            }else if (sub.indexOf("cantidad") >= 0) {
+                $("div").remove("#alert");
+                $("#nuevo-formulario").prepend("<div class='container'><div class='row'><div class='col-md-10 col-md-offset-1'><div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "No dispone de la cantidad del articulo ingresada</div></div></div></div>");
+                nombre.value = "";
+            }
+        }
+    };
+}
+
+function registrarVenta() {
+    $.blockUI();
+    var xhttp = new XMLHttpRequest();
+    var url = "/SIWAI/ControladorVenta?registrarVenta=true";
+    xhttp.open("POST", url, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function () {
+        if (xhttp.readyState == 4 && xhttp.status == 200) {
+            var sub = xhttp.responseText;
+            $.unblockUI();
+            if (sub.indexOf("false") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-warning centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Ocurrio un error al intentar registrar el traslado</div>");
+            } else if (sub.indexOf("Error") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-danger centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Error en la conexion a la base de datos</div>");
+            } else if (sub.indexOf("true") >= 0) {
+                $("div").remove("#alert");
+                $("section").prepend("<div id='alert' class='alert alert-success centrarDiv'>" +
+                        "<a href='#' class='close' data-dismiss='alert' aria-label='close'>&times;</a>" +
+                        "Se realizo la venta exitosamente</div>");
+                document.getElementById("dniCliente").disabled = false;
+                document.getElementById("vendedores").disabled= false;
+                $('#vendedores').prop('selectedIndex',0);
+                $("#ok").show();
+                eliminarTablaVenta();
+                $("#tabla").hide();
+            }
+        }
+    };
+}

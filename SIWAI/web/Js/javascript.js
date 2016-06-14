@@ -125,9 +125,9 @@ function chequearEnter(event) {
         añadirFila();
     }
 }
-function chequearEnter2(event) {
+function chequearEnterTraslado(event) {
     if (event.keyCode === 13) {
-        añadirFila2();
+        añadirFilaTraslado();
     }
 }
 
@@ -187,11 +187,13 @@ function añadirFilaPedidos() {
     return a;
 }
 
-var b = 2;
+var b = 0;
 function añadirFilaVentas()
 {
+    b++;
     var table = document.getElementById("table");
-    var codigo = "codigo" + b;
+
+    var referencia = "referencia" + b;
     var nombre = "nombre" + b;
     var cantidad = "cantidad" + b;
     var total = "total" + b;
@@ -201,14 +203,16 @@ function añadirFilaVentas()
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
     var cell5 = row.insertCell(4);
+
     var campo1 = document.createElement("input");
     campo1.type = "text";
     campo1.required = true;
-    campo1.setAttribute("onkeypress", "chequearEnter2(event, document.getElementById('" + nombre + "'), this,document.getElementById('" + cantidad + "'),document.getElementById('" + total + "'))");
-    campo1.id = codigo;
-    campo1.name = "codigo[]";
+    campo1.setAttribute("onchange", "cargarNombreArticuloVenta(this, document.getElementById('" + nombre + "'),document.getElementById('" + cantidad + "'),document.getElementById('" + total + "'))");
+    campo1.id = referencia;
+    campo1.name = "referencia[]";
     campo1.className = "form-control";
     cell1.appendChild(campo1);
+
     var campo2 = document.createElement("input");
     campo2.type = "text";
     campo2.id = nombre;
@@ -217,16 +221,17 @@ function añadirFilaVentas()
     campo2.readOnly = true;
     campo2.className = "form-control";
     cell2.appendChild(campo2);
+
     var campo3 = document.createElement("input");
     campo3.type = "text";
     campo3.readOnly = true;
     campo3.required = true;
     campo3.name = "cantidad[]"
-    campo3.setAttribute("onkeypress", "chequearEnter(event)");
+    campo3.setAttribute("onchange", "aniadirArticuloVenta(this, document.getElementById('" + referencia + "'),document.getElementById('" + total + "'))");
     campo3.id = cantidad;
     campo3.className = "form-control";
     cell3.appendChild(campo3);
-    a++;
+
     var campo4 = document.createElement("input");
     campo4.type = "text";
     campo4.readOnly = true;
@@ -234,16 +239,25 @@ function añadirFilaVentas()
     campo4.id = total;
     campo4.className = "form-control";
     cell4.appendChild(campo4);
-    var campo5 = document.createElement("button");
-    campo5.innerHTML = "Borrar";
-    campo5.className = "btn btn-success";
-    campo5.onclick = "";
-    {
-        myDeleteFunction(table, this.parentNode.parentNode.rowIndex, 2)
+
+    var campo5 = document.createElement("a");
+    campo5.className = "btn btn-danger";
+    campo5.id = "borrar";
+    $(campo5).append("<span class='glyphicon glyphicon-remove'></span>");
+    if (campo5.addEventListener) {
+        campo5.addEventListener('click', function () {
+            $(cell5).parent().remove();
+            b--;
+        }, false);
+    } else {
+        campo5.attachEvent('onclick', function () {
+            $(cell5).parent().remove();
+            b--;
+        });
     }
-    ;
     cell5.appendChild(campo5);
-    b++;
+
+    return b;
 }
 
 function myDeleteFunction(fila, num) {
@@ -251,8 +265,10 @@ function myDeleteFunction(fila, num) {
     document.getElementById("table").deleteRow(fila);
     if (num === 1) {
         a--;
-    } else {
+    } else if (num === 2) {
         b--;
+    } else {
+        c--;
     }
 }
 
@@ -265,7 +281,7 @@ function capturar() {
     var valor = document.getElementById("sel").options[posicion].text;
     if (valor == "Todos") {
         if ($('#sucursales').length != 0) {
-            $('#sucursales').hide();
+            $('#sucursales').remove();
         }
         document.form.informacion.type = "text";
         document.form.informacion.readOnly = true;
@@ -273,7 +289,7 @@ function capturar() {
         document.form.informacion.value = "";
     } else if (valor.indexOf("Fecha") >= 0) {
         if ($('#sucursales').length != 0) {
-            $('#sucursales').hide();
+            $('#sucursales').remove();
         }
         document.form.informacion.type = "date";
         document.form.informacion.readOnly = false;
@@ -288,7 +304,7 @@ function capturar() {
         }
     } else {
         if ($('#sucursales').length != 0) {
-            $('#sucursales').hide();
+            $('#sucursales').remove();
         }
         document.form.informacion.type = "text";
         document.form.informacion.readOnly = false;
@@ -366,7 +382,7 @@ function cargarArticulosPedido(codigo) {
             $.unblockUI();
         }
     });
-    
+
 }
 
 function cargarArticulosComparacion(codigo) {
@@ -450,6 +466,9 @@ function enviarFormOcultoComparacion(document, codigo) {
 }
 
 function cargarSucursales() {
+    if ($('#tabla').length > 0) {
+        $('#tabla').hide();
+    }
     $.blockUI();
     $.ajax({
         url: '/SIWAI/ControladorSucursal?cargarSucursales=true',
@@ -457,10 +476,183 @@ function cargarSucursales() {
         datatype: 'json',
         success: function (sucursales) {
             var json = eval('(' + sucursales + ')');
-            var combo = document.getElementById("sucursales");
+            if ($('#sucursalOrigen').length > 0) {
+                var combo1 = document.getElementById("sucursalOrigen");
+                var combo2 = document.getElementById("sucursalDestino");
+                combo1.options[0] = new Option('Seleccione', '');
+                combo2.options[0] = new Option('Seleccione', '');
+                for (var i = 0; i < json.length; i++) {
+                    combo1.options[combo1.length] = new Option(json[i].nombre, json[i].codigo);
+                }
+            } else {
+                var combo = document.getElementById("sucursales");
+                combo.options[0] = new Option('Seleccione', '');
+                for (var i = 0; i < json.length; i++) {
+                    combo.options[combo.length] = new Option(json[i].nombre, json[i].codigo);
+                }
+            }
+
+            $.unblockUI();
+        }
+    });
+}
+
+var c = 0;
+function añadirFilaTraslado()
+{
+    c++;
+    var table = document.getElementById("tablaT");
+    var referencia = "referencia" + c;
+    var nombre = "nombre" + c;
+    var cantidad = "cantidad" + c;
+    var fila = "" + c;
+    var row = table.insertRow(c);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+
+    var campo1 = document.createElement("input");
+    campo1.type = "text";
+    campo1.required = true;
+    campo1.setAttribute("onchange", "cargarNombreArticuloTraslado(this, document.getElementById('" + nombre + "'),document.getElementById('" + cantidad + "'))");
+    campo1.id = referencia;
+    campo1.name = "referencia[]";
+    campo1.className = "form-control";
+    cell1.appendChild(campo1);
+
+    var campo2 = document.createElement("input");
+    campo2.type = "text";
+    campo2.id = nombre;
+    campo2.name = "nombre[]";
+    campo2.required = true;
+    campo2.readOnly = true;
+    campo2.className = "form-control";
+    cell2.appendChild(campo2);
+
+    var campo3 = document.createElement("input");
+    campo3.type = "number";
+    campo3.readOnly = true;
+    campo3.required = true;
+    campo3.name = "cantidad[]"
+    campo3.setAttribute("onchange", "aniadirArticuloTraslado(this, document.getElementById('" + referencia + "'))");
+    campo3.id = cantidad;
+    campo3.className = "form-control";
+    cell3.appendChild(campo3);
+
+    var campo4 = document.createElement("a");
+    campo4.className = "btn btn-danger";
+    campo4.id = "borrar";
+    $(campo4).append("<span class='glyphicon glyphicon-remove'></span>");
+    if (campo4.addEventListener) {
+        campo4.addEventListener('click', function () {
+            $(cell4).parent().remove();
+            c--;
+        }, false);
+    } else {
+        campo4.attachEvent('onclick', function () {
+            $(cell4).parent().remove();
+            c--;
+        });
+    }
+    cell4.appendChild(campo4);
+    return c;
+}
+
+function añadirSucursalesDestino(val) {
+    var x = document.getElementById("sucursalOrigen").value;
+    $('#sucursalDestino').empty();
+    $.blockUI();
+    $.ajax({
+        url: '/SIWAI/ControladorSucursal?cargarSucursales=true',
+        type: 'post',
+        datatype: 'json',
+        success: function (sucursales) {
+            var json = eval('(' + sucursales + ')');
+            var combo = document.getElementById("sucursalDestino");
+            combo.options[0] = new Option('Seleccione', '');
+            for (var i = 0; i < json.length; i++) {
+                if (x != json[i].codigo) {
+                    combo.options[combo.length] = new Option(json[i].nombre, json[i].codigo);
+                }
+            }
+            $.unblockUI();
+        }
+    });
+}
+
+function eliminarTablaTraslado() {
+    $("#uno").siblings().remove();
+    c = 0;
+}
+
+function cargarVendedores(codigo) {
+    if ($('#tabla').length > 0) {
+        $('#tabla').hide();
+    }
+    $.blockUI();
+    $.ajax({
+        url: '/SIWAI/ControladorEmpleado?cargarVendedores=true&codigo=' + codigo,
+        type: 'post',
+        datatype: 'json',
+        success: function (vendedores) {
+            var json = eval('(' + vendedores + ')');
+            var combo = document.getElementById("vendedores");
             combo.options[0] = new Option('Seleccione', '');
             for (var i = 0; i < json.length; i++) {
                 combo.options[combo.length] = new Option(json[i].nombre, json[i].codigo);
+            }
+            $.unblockUI();
+
+        }
+    });
+}
+
+function buscarEmpleado(codigo) {
+    $.ajax({
+        url: '/SIWAI/ControladorEmpleado?buscarEmpleado=true&codigo=' + codigo,
+        type: 'post',
+        datatype: 'json',
+        success: function (empleado) {
+            var json = eval('(' + empleado + ')');
+            sucursal = json[0].sucursal.codigo;
+            cargarVendedores(sucursal);
+
+        }
+    });
+}
+
+function eliminarTablaVenta() {
+    $("#uno").siblings().remove();
+    b = 0;
+}
+
+function enviarFormOcultoMasTraslado(document, i, codigo) {
+    sOrigen = document.getElementById("tabla").rows[i + 1].cells[0].innerHTML;
+    sDestino = document.getElementById("tabla").rows[i + 1].cells[1].innerHTML;
+    fecha = document.getElementById("tabla").rows[i + 1].cells[2].innerHTML;
+    document.getElementById("sOrigen").value = sOrigen;
+    document.getElementById("sDestino").value = sDestino;
+    document.getElementById("codigo").value = codigo;
+    document.getElementById("fecha").value = fecha;
+    document.getElementById("formOculto").submit();
+}
+
+function cargarArticulosTraslado(codigo) {
+    $.blockUI();
+    $.ajax({
+        url: '/SIWAI/ControladorTraslado?cargarTraslados=true&codigo=' + codigo,
+        type: 'post',
+        datatype: 'json',
+        success: function (traslado) {
+            var json = eval('(' + traslado + ')');
+            var tabla = document.getElementById("tabla");
+            for (var i = 0; i < json.length; i++) {
+                var row = tabla.insertRow(i + 1);
+                var cell1 = row.insertCell(0);
+                var cell2 = row.insertCell(1);
+                cell1.innerHTML = json[i].nombre;
+                cell2.innerHTML = json[i].cantidad;
             }
             $.unblockUI();
         }

@@ -14,8 +14,11 @@ import co.edu.ufps.siwai.modelo.dao.DAOEmpleado;
 import co.edu.ufps.siwai.modelo.dao.DAOPedido;
 import co.edu.ufps.siwai.modelo.dao.DAOProveedor;
 import co.edu.ufps.siwai.modelo.dao.DAOSucursal;
+import co.edu.ufps.siwai.modelo.dao.DAOTraslado;
 import co.edu.ufps.siwai.modelo.dao.DAOUbicacion;
 import co.edu.ufps.siwai.modelo.dao.asistente.Pedido;
+import co.edu.ufps.siwai.modelo.dao.asistente.Traslado;
+import co.edu.ufps.siwai.modelo.dao.asistente.Venta;
 import co.edu.ufps.siwai.modelo.dto.ArticuloDTO;
 import co.edu.ufps.siwai.modelo.dto.ArticuloExtraDTO;
 import co.edu.ufps.siwai.modelo.dto.ComparacionDTO;
@@ -23,6 +26,7 @@ import co.edu.ufps.siwai.modelo.dto.EmpleadoDTO;
 import co.edu.ufps.siwai.modelo.dto.PedidoDTO;
 import co.edu.ufps.siwai.modelo.dto.ProveedorDTO;
 import co.edu.ufps.siwai.modelo.dto.SucursalDTO;
+import co.edu.ufps.siwai.modelo.dto.TrasladoDTO;
 import co.edu.ufps.siwai.modelo.dto.UbicacionDTO;
 import co.edu.ufps.siwai.modelo.seguridad.MD5;
 import java.io.Serializable;
@@ -39,6 +43,8 @@ import java.util.TreeSet;
 public class Fachada implements Serializable {
 
     private Pedido pedido;
+    private Traslado traslado;
+    private Venta venta;
 
     /**
      * Metodo que envia los datos del cliente a DAOCliente para que sean
@@ -416,4 +422,75 @@ public class Fachada implements Serializable {
         DAOComparacion dao = new DAOComparacion();
         return dao.consultarComparacion(codigo);
     }
+    
+    public void crearTraslado(String sOrigen, String sDestino) {
+        traslado = new Traslado(sOrigen, sDestino);
+    }
+
+    public ArticuloDTO cargarNombreArticuloTraslado(String referencia) throws Exception {
+        if (!traslado.articuloExiste(referencia)) {
+            DAOArticulo dao = new DAOArticulo();
+            return dao.obtenerNombreArticuloTraslado(referencia, traslado.getDto().getOrigen().getCodigo());
+        }
+        ArticuloDTO dto = new ArticuloDTO();
+        dto.setNombre("ArticuloDuplicado");
+        return dto;
+    }
+
+    public boolean aniadirArticuloTraslado(String referencia, int cantidad) {
+        ArticuloDTO dto = new ArticuloDTO();
+        dto.setReferencia(referencia);
+        dto.setCantidad(cantidad);
+        return traslado.aniadirArticulo(dto);
+    }
+
+    public boolean registrarTraslado() throws Exception {
+        return traslado.registrarTraslado();
+    }
+
+    public ArrayList<TrasladoDTO> consultarTraslado(String buscarPor, String informacion) throws Exception {
+        DAOTraslado dao = new DAOTraslado();
+        return dao.consultarTraslado(buscarPor, informacion);
+    }
+
+    public boolean crearVenta(String cliente, String vendedor, String sucursal, String cajero) throws Exception {
+        DAOCliente dao = new DAOCliente();
+        ArrayList<ClienteDTO> list = dao.consultarClientes("dni", cliente);
+        if (!list.isEmpty()) {
+            venta = new Venta(cliente, vendedor, sucursal, cajero);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public ArticuloDTO cargarNombreArticuloVenta(String referencia,String sucursal) throws Exception {
+        if (!venta.articuloExiste(referencia)) {
+            DAOArticulo dao = new DAOArticulo();
+            return dao.obtenerNombreArticuloTraslado(referencia, sucursal);
+        }
+        ArticuloDTO dto = new ArticuloDTO();
+        dto.setNombre("ArticuloDuplicado");
+        return dto;
+    }
+
+    public boolean aniadirArticuloVenta(String referencia, int cantidad,int valor) {
+        ArticuloDTO dto = new ArticuloDTO();
+        dto.setReferencia(referencia);
+        dto.setCantidad(cantidad);
+        dto.setValor(valor);
+        return venta.aniadirArticulo(dto);
+    }
+
+    public boolean registrarVenta() throws Exception {
+        return venta.registrarVenta();
+    }
+
+    public TreeSet<ArticuloDTO> cargarArticulosTraslado(int codigo) throws Exception {
+        DAOTraslado dao = new DAOTraslado();
+        TrasladoDTO dto = new TrasladoDTO();
+        dto.setCodigo(codigo);
+        return dao.cargarArticuloTraslado(dto).getArticulos();
+    }
+
 }

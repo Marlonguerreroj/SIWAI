@@ -14,9 +14,17 @@ import java.io.Serializable;
 public class ArticuloDTO implements Serializable, Comparable<ArticuloDTO>{
     
     private String referencia, nombre, tipoArticulo;
-    private int cantidad, costo, precio;
+    private int cantidad, costo, precio,valor;
 
     public ArticuloDTO() {
+    }
+
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
     }
 
     public ArticuloDTO(String referencia, String nombre, String tipoArticulo) {

@@ -34,19 +34,19 @@
             <%
                 String mensaje = session.getAttribute("msjCC") + "";
                 if (!mensaje.equals("null")) {
-                    if(mensaje.contains("Error")){
+                    if (mensaje.contains("Error")) {
             %>
             <div class="alert alert-danger centrar-texto" role="alert" arial >
                 <%=mensaje%>
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
             <%
-                    } else if (mensaje.contains("Exito")) { %>
+            } else if (mensaje.contains("Exito")) { %>
             <div class="alert alert-success centrar-texto" role="alert" arial >
                 Cliente actualizado exitosamente
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
             </div>
-            <% } else { %>
+            <% } else {%>
             <div class="alert alert-warning centrar-texto" role="alert" arial >
                 <%=mensaje%>
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -65,7 +65,7 @@
                     <div class="row">
                         <div class="col-md-1"></div>
                         <div class="col-md-4">
-                           <label for="sel" >Buscar por:</label>
+                            <label for="sel" >Buscar por:</label>
                             <select name="sel" class="tamañoConsultar" id="sel" required onchange="capturar()" >
                                 <option value="" >Seleccione</option>
                                 <option value="Todos" >Todos</option>
@@ -123,10 +123,10 @@
                                     <td class="centrar-texto"><%=dtos.get(i).getDireccion()%></td>
                                     <td class="centrar-texto">
                                         <a onclick="enviarFormOcultoCliente('<%=dtos.get(i).getDni()%>',
-                                                    '<%=dtos.get(i).getNombre()%>', '<%=dtos.get(i).getApellido()%>',
-                                                    '<%=dtos.get(i).getTelefono()%>', '<%=dtos.get(i).getEmail()%>',
-                                                    '<%=dtos.get(i).getDireccion()%>', '<%=dtos.get(i).getUbicacion().getCodPais()%>',
-                                                    <%=dtos.get(i).getUbicacion().getIdCiudad()%>)" style="cursor:pointer;">
+                                                        '<%=dtos.get(i).getNombre()%>', '<%=dtos.get(i).getApellido()%>',
+                                                        '<%=dtos.get(i).getTelefono()%>', '<%=dtos.get(i).getEmail()%>',
+                                                        '<%=dtos.get(i).getDireccion()%>', '<%=dtos.get(i).getUbicacion().getCodPais()%>',
+                                           <%=dtos.get(i).getUbicacion().getIdCiudad()%>)" style="cursor:pointer;">
                                             <span class="glyphicon glyphicon-edit asd"></span>
                                         </a>
                                     </td>
@@ -139,7 +139,7 @@
                 </div>
             </div>
             <%  session.removeAttribute("clientes");
-                } %>
+                }%>
             <form id="form-oculto" method="post" action="actualizar.jsp">
                 <input type="hidden" name="dni" id="dni">
                 <input type="hidden" name="nombre" id="nombre">
